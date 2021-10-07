@@ -90,6 +90,7 @@ ga_metaepoch <- function(config_ga) {
     params$lower = lower
     params$upper = upper
     params$suggestions = suggestions
+    params@type = "real-valued"
     params$monitor = FALSE
 
     # TODO Always better to have more data :)
@@ -107,8 +108,8 @@ local_stopping_condition <- function(deme) {
   best_fitness_metaepoch < metaepoch_count - max_metaepochs_without_improvement
 }
 
-global_stopping_condition <- function(metaepochs,  execution_time) {
-
+global_stopping_condition <- function(metaepochs, fitness_evaluations, execution_time) {
+    metaepochs > 100
 }
 
 hms <- function(
@@ -121,13 +122,14 @@ hms <- function(
     run_metaepoch = ga_metaepoch(list(list(), list(), list(), list(), list())), # TODO :)
     global_stopping_condition = global_stopping_condition,
     local_stopping_condition = local_stopping_condition,
-    sprouting_condition = max_euclidean_distance_sprouting_condition(0.5),
+    sprouting_condition = max_euclidean_distance_sprouting_condition(0.5)
 ){
   root <- create_deme(lower, upper, NULL, population_size)
   active_demes <- c(root)
   best_solution <- -Inf
   best_fitness <- -Inf
-  for(i in 1:1000) {
+  metaepochs_count <- 0
+  while(!global_stopping_condition(metaepochs_count, 0, 0)) {
     new_demes <- c()
     for(deme in active_demes) {
       metaepoch_result <- run_metaepoch(fitness, deme@population, lower, upper)
@@ -136,8 +138,8 @@ hms <- function(
       metaepoch_best <- metaepoch_result$value
       deme@population <- metaepoch_result$population
       deme@best_fitnesses_per_metaepoch <- c(deme@best_fitnesses_per_metaepoch, metaepoch_best)
-      deme@best_solutions_per_metaepoch <- c(deme@best_solutions_per_metaepoch, parent)
-      deme_best <- ifelse(length(deme@best_fitness)==0), -Inf, deme@best_fitness)
+      deme@best_solutions_per_metaepoch <- c(deme@best_solutions_per_metaepoch, potential_sprout)
+      deme_best <- ifelse(length(deme@best_fitness)==0, -Inf, deme@best_fitness)
       if(metaepoch_best > deme_best) {
         deme@best_fitness <- metaepoch_best
         deme@best_solution <- potential_sprout
@@ -153,14 +155,15 @@ hms <- function(
       new_demes <- c(new_demes, deme)
 
       if(deme@level > max_tree_height) next
-      
+
       level_demes <- Filter(function(d) { d@level == deme@level }, active_demes)
-      if(sprouting_condition(potential_sprout, level_demes))
+      if(sprouting_condition(potential_sprout, level_demes)) {
         new_deme <- create_deme(lower, upper, population_size, deme@level, initial_points=potential_parent)
         new_demes <- c(new_demes, new_deme)
       }
     }   
     active_demes <- new_demes
+    metaepochs_count <- metaepochs_count + 1
   }
   for(deme in active_demes){
     if(length(deme@best_fitness) != 0 && deme@best_fitness > best_fitness) {
