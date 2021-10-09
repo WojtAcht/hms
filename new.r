@@ -3,13 +3,6 @@ library("purrr")
 library("msm")
 library("magrittr")
 
-lbound <- c(0, 0, 0)
-ubound <- c(5, 5, 5)
-deme_population_size <- 50
-sigma <- c(1,1,1,1,1)
-accuracy <- c(2,2,2,2,2)
-# We need to handle vector of objects representing GA params like: maxiter, mutationType etc
-
 setClassUnion("DemeOrNULL", members = c("Deme", "NULL"))
 setClassUnion("numericOrNULL", members = c("numeric", "NULL"))
 
@@ -45,7 +38,7 @@ runif_population <- function(lower, upper, population_size){
 }
 
 
-create_deme <- function(lower, upper, parent, population_size) {
+create_deme <- function(lower, upper, parent, population_size, sigma) {
   new_population <- c()
   new_deme_level <- ifelse(is.null(parent), 1, parent@level + 1)
   if(is.null(parent)) {
@@ -111,7 +104,7 @@ default_local_stopping_condition <- function(deme) {
 }
 
 default_global_stopping_condition <- function(metaepochs, fitness_evaluations, execution_time) {
-    metaepochs > 100
+    metaepochs > 10
 }
 
 hms <- function(
@@ -126,12 +119,12 @@ hms <- function(
     local_stopping_condition = default_local_stopping_condition,
     sprouting_condition = max_euclidean_distance_sprouting_condition(0.5)
 ){
-  root <- create_deme(lower, upper, NULL, population_size)
+  root <- create_deme(lower, upper, NULL, population_size, sigma)
   active_demes <- c(root)
   best_solution <- -Inf
   best_fitness <- -Inf
   metaepochs_count <- 0
-  while(!global_stopping_condition(metaepochs_count, 0, 0)) {
+  while(!global_stopping_condition(metaepochs_count, 0, 0) && length(active_demes) > 0) {
     new_demes <- c()
     for(deme in active_demes) {
       metaepoch_result <- run_metaepoch(fitness, deme@population, lower, upper)
@@ -160,7 +153,7 @@ hms <- function(
 
       level_demes <- Filter(function(d) { d@level == deme@level }, active_demes)
       if(sprouting_condition(potential_sprout, level_demes)) {
-        new_deme <- create_deme(lower, upper, deme, population_size)
+        new_deme <- create_deme(lower, upper, deme, population_size, sigma)
         new_demes <- c(new_demes, new_deme)
       }
     }   
