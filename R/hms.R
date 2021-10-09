@@ -1,17 +1,17 @@
 #' Title
 #'
-#' @param max_tree_height
-#' @param fitness
-#' @param lower
-#' @param upper
-#' @param sigma
-#' @param population_size
-#' @param run_metaepoch
-#' @param global_stopping_condition
-#' @param local_stopping_condition
-#' @param sprouting_condition
+#' @param max_tree_height - numeric - default value: 5
+#' @param fitness - fitness function
+#' @param lower - numeric - lower bound
+#' @param upper - numeric - upper bound
+#' @param sigma - numeric - vector of standard deviations for each tree level
+#' @param population_size - numeric
+#' @param run_metaepoch - function - returns list with named fields: solution, population, value
+#' @param global_stopping_condition - function
+#' @param local_stopping_condition - function
+#' @param sprouting_condition - function
 #'
-#' @return
+#' @return numeric best solution
 #' @export
 #'
 #' @examples

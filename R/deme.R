@@ -12,7 +12,7 @@ setClass("Deme", slots = c(
 
 rnorm_population <- function(mean, sd, lower, upper, population_size) {
   random_coordinate <- function(i) {
-    rtnorm(
+    msm::rtnorm(
       mean = mean[[i]],
       sd = sd[[i]],
       lower = lower[[i]],
@@ -25,7 +25,7 @@ rnorm_population <- function(mean, sd, lower, upper, population_size) {
 
 runif_population <- function(lower, upper, population_size) {
   random_coordinate <- function(i) {
-    runif(population_size,
+    stats::runif(population_size,
       min = lower[[i]],
       max = upper[[i]]
     )
@@ -33,7 +33,6 @@ runif_population <- function(lower, upper, population_size) {
   mapply(random_coordinate, seq_along(lower))
 }
 
-#' @export
 create_deme <- function(lower, upper, parent, population_size, sigma) {
   new_population <- c()
   new_deme_level <- ifelse(is.null(parent), 1, parent@level + 1)
@@ -55,16 +54,15 @@ create_deme <- function(lower, upper, parent, population_size, sigma) {
   new_sprout <- if (is.null(parent)) {
     NULL
   } else {
-    tail(parent@best_solutions_per_metaepoch, n = 1)
+    utils::tail(parent@best_solutions_per_metaepoch, n = 1)
   }
-  new("Deme",
+  methods::new("Deme",
     population = new_population,
     level = new_deme_level,
     sprout = new_sprout
   )
 }
 
-#' @export
 update_deme <- function(metaepoch_result, deme) {
   potential_sprout <- metaepoch_result$solution
   metaepoch_best <- metaepoch_result$value

@@ -2,16 +2,18 @@
 % Please edit documentation in R/ga_metaepoch.R
 \name{ga_metaepoch}
 \alias{ga_metaepoch}
-\title{Title}
+\title{Function that runs one GA metaepoch.}
 \usage{
 ga_metaepoch(config_ga)
 }
 \arguments{
-\item{config_ga}{}
+\item{config_ga}{\itemize{
+\item list of GA::ga params
+}}
 }
 \value{
-
+list with named fields: solution, population, value
 }
 \description{
-Title
+Function that runs one GA metaepoch.
 }

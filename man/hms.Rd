@@ -18,10 +18,48 @@ hms(
 )
 }
 \arguments{
-\item{sprouting_condition}{}
+\item{max_tree_height}{\itemize{
+\item numeric - default value: 5
+}}
+
+\item{fitness}{\itemize{
+\item fitness function
+}}
+
+\item{lower}{\itemize{
+\item numeric - lower bound
+}}
+
+\item{upper}{\itemize{
+\item numeric - upper bound
+}}
+
+\item{sigma}{\itemize{
+\item numeric - vector of standard deviations for each tree level
+}}
+
+\item{population_size}{\itemize{
+\item numeric
+}}
+
+\item{run_metaepoch}{\itemize{
+\item function - returns list with named fields: solution, population, value
+}}
+
+\item{global_stopping_condition}{\itemize{
+\item function
+}}
+
+\item{local_stopping_condition}{\itemize{
+\item function
+}}
+
+\item{sprouting_condition}{\itemize{
+\item function
+}}
 }
 \value{
-
+numeric best solution
 }
 \description{
 Title

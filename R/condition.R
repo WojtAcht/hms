@@ -1,4 +1,11 @@
+#' Default sprouting condition basing on euclidean distance.
+#'
+#' @param max_distance - numeric
+#'
+#' @return logical
 #' @export
+#'
+#' @examples
 max_euclidean_distance_sprouting_condition <- function(max_distance) {
   function(potential_sprout, level_demes) {
     single_deme_condition <- function(deme) {
