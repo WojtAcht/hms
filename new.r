@@ -63,6 +63,9 @@ create_deme <- function(lower, upper, parent, population_size, sigma) {
         parent = new_parent)
 }
 
+euclidean_distance <- function(x, y){
+  sum((x-y)^2)
+}
 
 max_euclidean_distance_sprouting_condition <- function(max_distance) {
     function(potential_sprout, level_demes) {
