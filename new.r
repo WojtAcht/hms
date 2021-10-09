@@ -46,26 +46,27 @@ runif_population <- function(lower, upper, population_size){
 
 
 create_deme <- function(lower, upper, parent, population_size) {
-  population <- c()
+  new_population <- c()
   new_deme_level <- ifelse(is.null(parent), 1, parent@level + 1)
   if(is.null(parent)) {
-    population <- runif_population(lower = lower,
+    new_population <- runif_population(lower = lower,
                                    upper = upper,
                                    population_size = population_size)
   } 
   else {
-    population <- rnorm_population(mean = parent@best_solution,
+    new_population <- rnorm_population(mean = parent@best_solution,
                                    sd = sigma[[new_deme_level]],
                                    lower = lower,
                                    upper = upper,
                                    population_size = population_size)
   }
-  sprout <- if(is.null(parent)) NULL else {parent@best_solution}
+  new_sprout <- if(is.null(parent)) NULL else {parent@best_solution}
+  new_parent <- parent
   new("Deme", 
-        population = population, 
+        population = new_population, 
         level = new_deme_level,
-        sprout = sprout,
-        parent = parent)
+        sprout = new_sprout,
+        parent = new_parent)
 }
 
 
@@ -91,25 +92,25 @@ ga_metaepoch <- function(config_ga) {
     params$lower = lower
     params$upper = upper
     params$suggestions = suggestions
-    params@type = "real-valued"
+    params$type = "real-valued"
     params$monitor = FALSE
 
     # TODO Always better to have more data :)
     params$keepBest = TRUE
 
     GA <- do.call(GA::ga, params)
-    list("solution" = GA@solution, "population" = GA@population, "value" = GA@fitnessValue)
+    list("solution" = c(GA@solution), "population" = GA@population, "value" = GA@fitnessValue)
   }
 }
 
-local_stopping_condition <- function(deme) {
+default_local_stopping_condition <- function(deme) {
   max_metaepochs_without_improvement <- 5
-  best_fitness_metaepoch <- match(deme@best_fintess, deme@best_fitnesses_per_metaepoch)
+  best_fitness_metaepoch <- match(deme@best_fitness, deme@best_fitnesses_per_metaepoch)
   metaepoch_count <- length(deme@best_fitnesses_per_metaepoch)
   best_fitness_metaepoch < metaepoch_count - max_metaepochs_without_improvement
 }
 
-global_stopping_condition <- function(metaepochs, fitness_evaluations, execution_time) {
+default_global_stopping_condition <- function(metaepochs, fitness_evaluations, execution_time) {
     metaepochs > 100
 }
 
@@ -121,8 +122,8 @@ hms <- function(
     sigma,
     population_size,
     run_metaepoch = ga_metaepoch(list(list(), list(), list(), list(), list())), # TODO :)
-    global_stopping_condition = global_stopping_condition,
-    local_stopping_condition = local_stopping_condition,
+    global_stopping_condition = default_global_stopping_condition,
+    local_stopping_condition = default_local_stopping_condition,
     sprouting_condition = max_euclidean_distance_sprouting_condition(0.5)
 ){
   root <- create_deme(lower, upper, NULL, population_size)
@@ -159,7 +160,7 @@ hms <- function(
 
       level_demes <- Filter(function(d) { d@level == deme@level }, active_demes)
       if(sprouting_condition(potential_sprout, level_demes)) {
-        new_deme <- create_deme(lower, upper, population_size, deme@level, initial_points=potential_parent)
+        new_deme <- create_deme(lower, upper, deme, population_size)
         new_demes <- c(new_demes, new_deme)
       }
     }   
