@@ -21,7 +21,7 @@ setClass("Deme", slots = c(
   parent = "DemeOrNULL",
   best_solutions_per_metaepoch = "numeric",
   best_fitnesses_per_metaepoch = "numeric",
-  sprout = "numeric"
+  sprout = "numericOrNULL"
 ))
 
 rnorm_population <- function(mean, sd, lower, upper, population_size){
