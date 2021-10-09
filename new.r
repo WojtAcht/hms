@@ -53,7 +53,8 @@ create_deme <- function(lower, upper, parent, population_size, sigma) {
                                    upper = upper,
                                    population_size = population_size)
   }
-  new_sprout <- if(is.null(parent)) NULL else {parent@best_solution}
+  # TODO/Review: Is this correct?
+  new_sprout <- if(is.null(parent)) NULL else {tail(parent@best_solutions_per_metaepoch, n=1)}
   new_parent <- parent
   new("Deme", 
         population = new_population, 
@@ -107,6 +108,20 @@ default_global_stopping_condition <- function(metaepochs, fitness_evaluations, e
     metaepochs > 10
 }
 
+update_deme <- function(metaepoch_result, deme){
+  potential_sprout <- metaepoch_result$solution
+  metaepoch_best <- metaepoch_result$value
+  deme@population <- metaepoch_result$population
+  deme@best_fitnesses_per_metaepoch <- c(deme@best_fitnesses_per_metaepoch, metaepoch_best)
+  deme@best_solutions_per_metaepoch <- c(deme@best_solutions_per_metaepoch, potential_sprout)
+  deme_best <- ifelse(length(deme@best_fitness)==0, -Inf, deme@best_fitness)
+  if(metaepoch_best > deme_best) {
+    deme@best_fitness <- metaepoch_best
+    deme@best_solution <- potential_sprout
+  }
+  deme
+}
+
 hms <- function(
     max_tree_height = 5,
     fitness,
@@ -128,18 +143,7 @@ hms <- function(
     new_demes <- c()
     for(deme in active_demes) {
       metaepoch_result <- run_metaepoch(fitness, deme@population, lower, upper)
-      ### UPDATE DEME:
-      potential_sprout <- metaepoch_result$solution
-      metaepoch_best <- metaepoch_result$value
-      deme@population <- metaepoch_result$population
-      deme@best_fitnesses_per_metaepoch <- c(deme@best_fitnesses_per_metaepoch, metaepoch_best)
-      deme@best_solutions_per_metaepoch <- c(deme@best_solutions_per_metaepoch, potential_sprout)
-      deme_best <- ifelse(length(deme@best_fitness)==0, -Inf, deme@best_fitness)
-      if(metaepoch_best > deme_best) {
-        deme@best_fitness <- metaepoch_best
-        deme@best_solution <- potential_sprout
-      }
-      
+      deme <- update_deme(metaepoch_result, deme)
       if(local_stopping_condition(deme)){
         if(deme@best_fitness > best_fitness) {
           best_fitness <- deme@best_fitness
@@ -148,11 +152,9 @@ hms <- function(
         next
       }
       new_demes <- c(new_demes, deme)
-
       if(deme@level > max_tree_height) next
-
       level_demes <- Filter(function(d) { d@level == deme@level }, active_demes)
-      if(sprouting_condition(potential_sprout, level_demes)) {
+      if(sprouting_condition(metaepoch_result$solution, level_demes)) {
         new_deme <- create_deme(lower, upper, deme, population_size, sigma)
         new_demes <- c(new_demes, new_deme)
       }
