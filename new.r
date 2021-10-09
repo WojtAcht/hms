@@ -60,10 +60,11 @@ create_deme <- function(lower, upper, parent, population_size) {
                                    upper = upper,
                                    population_size = population_size)
   }
+  sprout <- if(is.null(parent)) NULL else {parent@best_solution}
   new("Deme", 
         population = population, 
         level = new_deme_level,
-        sprout = ifelse(is.null(parent), NULL, parent@best_solution)
+        sprout = sprout,
         parent = parent)
 }
 
