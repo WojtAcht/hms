@@ -33,7 +33,7 @@ hms <- function(max_tree_height = 5,
   while (!global_stopping_condition(metaepochs_count, 0, 0) && length(active_demes) > 0) {
     new_demes <- c()
     for (deme in active_demes) {
-      metaepoch_result <- run_metaepoch(fitness, deme@population, lower, upper)
+      metaepoch_result <- run_metaepoch(fitness, deme@population, population_size, lower, upper)
       deme <- update_deme(metaepoch_result, deme)
       if (local_stopping_condition(deme)) {
         if (deme@best_fitness > best_fitness) {
