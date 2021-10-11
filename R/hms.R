@@ -49,7 +49,7 @@ hms <- function(max_tree_height = 5,
   while (!global_stopping_condition(metaepochs_count, 0, 0) && length(active_demes) > 0) {
     new_demes <- c()
     for (deme in active_demes) {
-      metaepoch_result <- run_metaepoch(fitness, deme@population, population_size, lower, upper)
+      metaepoch_result <- run_metaepoch(fitness, deme@population, lower, upper, deme@level)
       deme <- update_deme(metaepoch_result, deme)
       if (local_stopping_condition(deme)) {
         if (deme@best_fitness > best_fitness) {
@@ -79,10 +79,10 @@ hms <- function(max_tree_height = 5,
     }
   }
   new("hms",
-      root_id = root@id,
-      demes = c(active_demes, inactive_demes),
-      best_fitness = best_fitness,
-      best_solution = best_solution
+    root_id = root@id,
+    demes = c(active_demes, inactive_demes),
+    best_fitness = best_fitness,
+    best_solution = best_solution
   )
 }
 
@@ -101,7 +101,7 @@ setMethod("printTree", "hms", function(object) {
 
 plot.hms <- function(x, y, ylim, cex.points = 0.7,
                      col = c("green3", "dodgerblue3", adjustcolor("green3", alpha.f = 0.1)),
-                     pch = c(16, 1), lty = c(1,2), legend = TRUE,
+                     pch = c(16, 1), lty = c(1, 2), legend = TRUE,
                      grid = graphics:::grid, ...) {
   cat("TODO")
 }

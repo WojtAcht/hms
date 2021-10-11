@@ -2,7 +2,7 @@
 % Please edit documentation in R/condition.R
 \name{max_euclidean_distance_sprouting_condition}
 \alias{max_euclidean_distance_sprouting_condition}
-\title{Default sprouting condition basing on euclidean distance.}
+\title{Default sprouting condition based on euclidean distance.}
 \usage{
 max_euclidean_distance_sprouting_condition(max_distance)
 }
@@ -15,5 +15,5 @@ max_euclidean_distance_sprouting_condition(max_distance)
 logical
 }
 \description{
-Default sprouting condition basing on euclidean distance.
+Default sprouting condition based on euclidean distance.
 }
