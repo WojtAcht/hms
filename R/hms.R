@@ -80,8 +80,7 @@ hms <- function(max_tree_height = 5,
   }
   new("hms",
       root_id = root@id,
-      active_demes = active_demes,
-      inactive_demes = inactive_demes,
+      demes = c(active_demes, inactive_demes),
       best_fitness = best_fitness,
       best_solution = best_solution
   )
@@ -89,8 +88,7 @@ hms <- function(max_tree_height = 5,
 
 setClass("hms", slots = c(
   root_id = "character",
-  active_demes = "list",
-  inactive_demes = "list",
+  demes = "list",
   best_fitness = "numeric",
   best_solution = "numeric"
 ))
