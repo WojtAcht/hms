@@ -7,12 +7,12 @@
 #'
 #' @examples
 ga_metaepoch <- function(config_ga) {
-  function(fitness, suggestions, population_size, lower, upper, tree_level) {
+  function(fitness, suggestions, lower, upper, tree_level) {
     config <- config_ga[tree_level]
     legal_passed_param_names <- Filter(function(name) {
       name %in% methods::formalArgs(GA::ga)
     }, config)
-    params <- list("maxiter" = 10, "popSize" = population_size)
+    params <- list("maxiter" = 10, "popSize" = nrow(suggestions))
     for (param_name in legal_passed_param_names) {
       params[param_name] <- config[param_name]
     }
