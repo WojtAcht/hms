@@ -12,7 +12,7 @@ ga_metaepoch <- function(config_ga) {
     legal_passed_param_names <- Filter(function(name) {
       name %in% methods::formalArgs(GA::ga)
     }, config)
-    params <- list("maxiter" = 10)
+    params <- list("maxiter" = 10, "popSize" = nrow(suggestions))
     for (param_name in legal_passed_param_names) {
       params[param_name] <- config[param_name]
     }
@@ -25,7 +25,6 @@ ga_metaepoch <- function(config_ga) {
 
     # TODO Always better to have more data :)
     params$keepBest <- TRUE
-
     GA <- do.call(GA::ga, params)
     list("solution" = c(GA@solution), "population" = GA@population, "value" = GA@fitnessValue)
   }

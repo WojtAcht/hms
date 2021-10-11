@@ -10,7 +10,7 @@ hms(
   lower,
   upper,
   sigma,
-  population_size,
+  population_size = 20,
   run_metaepoch = ga_metaepoch(list(list(), list(), list(), list(), list())),
   global_stopping_condition = default_global_stopping_condition,
   local_stopping_condition = default_local_stopping_condition,
