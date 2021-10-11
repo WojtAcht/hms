@@ -3,9 +3,13 @@ test_that("HMS works - trivial 1D function:", {
     x
   }
   sigma <- c(1, 1, 1, 1, 1, 1)
-  result <- hms(fitness = f, lower = -5, upper = 5, sigma = sigma, population_size = 10)
+  result <- hms(fitness = f,
+                lower = -5,
+                upper = 5,
+                sigma = sigma,
+                population_size = 10)
   expected_result <- 5
-  expect_true(euclidean_distance(expected_result, result) < 1e5)
+  expect_true(euclidean_distance(expected_result, result@best_fitness) < 1e5)
 })
 
 test_that("HMS works - Rastrigin:", {
@@ -18,9 +22,13 @@ test_that("HMS works - Rastrigin:", {
   sigma <- list(default_sd, default_sd, default_sd, default_sd, default_sd, default_sd)
   lower <- c(-5.12, -5.12)
   upper <- c(5.12, 5.12)
-  result <- hms(fitness = Rastrigin, lower = lower, upper = upper, sigma = sigma, population_size = 10)
+  result <- hms(fitness = Rastrigin,
+                lower = lower,
+                upper = upper,
+                sigma = sigma,
+                population_size = 10)
   expected_result <- c(0, 0)
-  expect_true(euclidean_distance(expected_result, result) < 1e5)
+  expect_true(euclidean_distance(expected_result, result@best_fitness) < 1e5)
 })
 
 test_that("HMS works - Ackley:", {
@@ -33,9 +41,13 @@ test_that("HMS works - Ackley:", {
   sigma <- list(default_sd, default_sd, default_sd, default_sd, default_sd, default_sd)
   lower <- c(-32.768, -32.768)
   upper <- c(32.768, 32.768)
-  result <- hms(fitness = Ackley, lower = lower, upper = upper, sigma = sigma, population_size = 10)
+  result <- hms(fitness = Ackley,
+                lower = lower,
+                upper = upper,
+                sigma = sigma,
+                population_size = 10)
   expected_result <- c(0, 0)
-  expect_true(euclidean_distance(expected_result, result) < 1e5)
+  expect_true(euclidean_distance(expected_result, result@best_fitness) < 1e5)
 })
 
 test_that("HMS works - Baele:", {
@@ -48,9 +60,13 @@ test_that("HMS works - Baele:", {
   sigma <- list(default_sd, default_sd, default_sd, default_sd, default_sd, default_sd)
   lower <- c(-4.5, -4.5)
   upper <- c(4.5, 4.5)
-  result <- hms(fitness = Baele, lower = lower, upper = upper, sigma = sigma, population_size = 10)
+  result <- hms(fitness = Baele,
+                lower = lower,
+                upper = upper,
+                sigma = sigma,
+                population_size = 10)
   expected_result <- c(3, 0.5)
-  expect_true(euclidean_distance(expected_result, result) < 1e5)
+  expect_true(euclidean_distance(expected_result, result@best_fitness) < 1e5)
 })
 
 test_that("HMS works - Eggholder:", {
@@ -63,8 +79,12 @@ test_that("HMS works - Eggholder:", {
   sigma <- list(default_sd, default_sd, default_sd, default_sd, default_sd, default_sd)
   lower <- c(-512, -512)
   upper <- c(512, 512)
-  result <- hms(fitness = Eggholder, lower = lower, upper = upper, sigma = sigma, population_size = 10)
+  result <- hms(fitness = Eggholder,
+                lower = lower,
+                upper = upper,
+                sigma = sigma,
+                population_size = 10)
   expected_result <- c(512, 404.2319)
-  expect_true(euclidean_distance(expected_result, result) < 1e5)
+  expect_true(euclidean_distance(expected_result, result@best_fitness) < 1e5)
 })
 

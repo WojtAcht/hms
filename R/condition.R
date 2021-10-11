@@ -1,4 +1,4 @@
-#' Default sprouting condition basing on euclidean distance.
+#' Default sprouting condition based on euclidean distance.
 #'
 #' @param max_distance - numeric
 #'
