@@ -1,13 +1,16 @@
 setClassUnion("numericOrNULL", members = c("numeric", "NULL"))
+setClassUnion("characterOrNULL", members = c("character", "NULL"))
 
 setClass("Deme", slots = c(
+  id = "character",
   population = "matrix",
   level = "numeric",
   best_fitness = "numeric",
   best_solution = "numeric",
   best_solutions_per_metaepoch = "numeric",
   best_fitnesses_per_metaepoch = "numeric",
-  sprout = "numericOrNULL"
+  sprout = "numericOrNULL",
+  parent_id = "characterOrNULL"
 ))
 
 rnorm_population <- function(mean, sd, lower, upper, population_size) {
@@ -59,7 +62,9 @@ create_deme <- function(lower, upper, parent, population_size, sigma) {
   methods::new("Deme",
     population = new_population,
     level = new_deme_level,
-    sprout = new_sprout
+    sprout = new_sprout,
+    id = uuid::UUIDgenerate(),
+    parent_id = if (is.null(parent)) NULL else parent@id
   )
 }
 

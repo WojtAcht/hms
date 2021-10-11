@@ -20,13 +20,29 @@ hms <- function(max_tree_height = 5,
                 lower,
                 upper,
                 sigma,
-                population_size,
+                population_size = 20,
                 run_metaepoch = ga_metaepoch(list(list(), list(), list(), list(), list())), # TODO :)
                 global_stopping_condition = default_global_stopping_condition,
                 local_stopping_condition = default_local_stopping_condition,
                 sprouting_condition = max_euclidean_distance_sprouting_condition(0.5)) {
+  if (max_tree_height < 2) {
+    stop("Max tree height has to be greater or equal 2.")
+  }
+  if (!is.function(fitness)) {
+    stop("Fitness function must be provided.")
+  }
+  if (missing(lower) | missing(upper)) {
+    stop("A lower and upper range of values must be provided.")
+  }
+  if (!is.vector(sigma) & !is.list(sigma)) {
+    stop("A list of standard deviations (sigma) must be provided.")
+  }
+  if (!length(sigma) >= max_tree_height) {
+    stop("The list of standard deviations (sigma) must have max_tree_height elements.")
+  }
   root <- create_deme(lower, upper, NULL, population_size, sigma)
   active_demes <- c(root)
+  inactive_demes <- c()
   best_solution <- -Inf
   best_fitness <- -Inf
   metaepochs_count <- 0
@@ -40,6 +56,7 @@ hms <- function(max_tree_height = 5,
           best_fitness <- deme@best_fitness
           best_solution <- deme@best_solution
         }
+        inactive_demes <- c(inactive_demes, deme)
         next
       }
       new_demes <- c(new_demes, deme)
@@ -61,5 +78,32 @@ hms <- function(max_tree_height = 5,
       best_solution <- deme@best_solution
     }
   }
-  best_solution
+  new("hms",
+      root_id = root@id,
+      demes = c(active_demes, inactive_demes),
+      best_fitness = best_fitness,
+      best_solution = best_solution
+  )
 }
+
+setClass("hms", slots = c(
+  root_id = "character",
+  demes = "list",
+  best_fitness = "numeric",
+  best_solution = "numeric"
+))
+
+setGeneric("printTree", function(object) standardGeneric("printTree"))
+
+setMethod("printTree", "hms", function(object) {
+  cat("A tree :)")
+})
+
+plot.hms <- function(x, y, ylim, cex.points = 0.7,
+                     col = c("green3", "dodgerblue3", adjustcolor("green3", alpha.f = 0.1)),
+                     pch = c(16, 1), lty = c(1,2), legend = TRUE,
+                     grid = graphics:::grid, ...) {
+  cat("TODO")
+}
+
+setMethod("plot", "hms", plot.hms)
