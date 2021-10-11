@@ -96,7 +96,45 @@ setClass("hms", slots = c(
 setGeneric("printTree", function(object) standardGeneric("printTree"))
 
 setMethod("printTree", "hms", function(object) {
-  cat("A tree :)")
+  get_deme_by_id <- function(id) {
+    list.search(object@demes, .@id == id)[[1]]
+  }
+  get_children <- function(deme) {
+    list.search(object@demes, .@parent_id == deme@id)
+  }
+  print_deme <- function(deme) {
+    cat("f(")
+    for(x in deme@best_solution) {
+      if (x != deme@best_solution[[1]]) {
+        cat(", ")
+      }
+      cat(sprintf(x, fmt = '%#.2f'))
+    }
+    cat(paste(") = ", sprintf(deme@best_fitness, fmt = '%#.2f'), "\n", sep = ""))
+  }
+
+  print_tree_from_deme <- function(deme, prefix = "") {
+    children <- get_children(deme)
+    for(child in children) {
+      if (length(child@best_solution) == 0) {
+        # This deme did not participate in any metaepoch
+        next
+      }
+      is_last <- child@id == children[[length(children)]]@id
+      cat(prefix)
+      if (is_last) {
+        cat("└")
+      } else {
+        cat("├")
+      }
+      cat("-- ")
+      print_deme(child)
+      print_tree_from_deme(child, prefix = paste(prefix, if(is_last) " " else "|", "   ", sep = ""))
+    }
+  }
+  root <- get_deme_by_id(object@root_id)
+  print_deme(root)
+  print_tree_from_deme(root)
 })
 
 plot.hms <- function(x, y, ylim, cex.points = 0.7,
