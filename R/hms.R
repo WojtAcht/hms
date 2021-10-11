@@ -103,14 +103,15 @@ setMethod("printTree", "hms", function(object) {
     list.search(object@demes, .@parent_id == deme@id)
   }
   print_deme <- function(deme) {
-    cat("f(")
+    color <- if (deme@best_solution == object@best_solution) red else identity
+    cat(color("f("))
     for(x in deme@best_solution) {
       if (x != deme@best_solution[[1]]) {
         cat(", ")
       }
-      cat(sprintf(x, fmt = '%#.2f'))
+      cat(color(sprintf(x, fmt = '%#.2f')))
     }
-    cat(paste(") = ", sprintf(deme@best_fitness, fmt = '%#.2f'), "\n", sep = ""))
+    cat(color(paste(") = ", sprintf(deme@best_fitness, fmt = '%#.2f'), "\n", sep = "")))
   }
 
   print_tree_from_deme <- function(deme, prefix = "") {
