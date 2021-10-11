@@ -1,18 +1,21 @@
 Package: hms
-Title: What the Package Does (One Line, Title Case)
+Title: Hierarchic Memetic Strategy
 Version: 0.0.0.9000
-Authors@R: 
-    person(given = "First",
-           family = "Last",
-           role = c("aut", "cre"),
-           email = "first.last@example.com",
-           comment = c(ORCID = "YOUR-ORCID-ID"))
+Authors@R: c(
+    person(given = "Marcin",
+           family = "Kozubek",
+           role = "aut",
+           email = "first.last@example.com"),
+    person(given = "Wojciech",
+           family = "Achtelik",
+           role = "cre",
+           email = "wachtelik@gmail.com"))
 Description: What the package does (one paragraph).
-License: GPL (>= 3)
+License: GPL (>= 2)
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.1.1
+RoxygenNote: 7.1.2
 Imports:
     GA,
     purrr,
