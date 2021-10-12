@@ -40,6 +40,8 @@ hms <- function(max_tree_height = 5,
   if (!length(sigma) >= max_tree_height) {
     stop("The list of standard deviations (sigma) must have max_tree_height elements.")
   }
+  total_metaepoch_time <- 0
+  start_time <- Sys.time()
   root <- create_deme(lower, upper, NULL, population_size, sigma)
   active_demes <- c(root)
   inactive_demes <- c()
@@ -49,7 +51,10 @@ hms <- function(max_tree_height = 5,
   while (!global_stopping_condition(metaepochs_count, 0, 0) && length(active_demes) > 0) {
     new_demes <- c()
     for (deme in active_demes) {
+      start_metaepoch_time <- Sys.time()
       metaepoch_result <- run_metaepoch(fitness, deme@population, lower, upper, deme@level)
+      end_metaepoch_time <- Sys.time()
+      total_metaepoch_time <- total_metaepoch_time + (end_metaepoch_time - start_metaepoch_time)
       deme <- update_deme(metaepoch_result, deme)
       if (local_stopping_condition(deme)) {
         if (deme@best_fitness > best_fitness) {
@@ -78,11 +83,14 @@ hms <- function(max_tree_height = 5,
       best_solution <- deme@best_solution
     }
   }
+  total_time <- Sys.time() - start_time
   new("hms",
     root_id = root@id,
     demes = c(active_demes, inactive_demes),
     best_fitness = best_fitness,
-    best_solution = best_solution
+    best_solution = best_solution,
+    total_time = total_time,
+    total_metaepoch_time = total_metaepoch_time
   )
 }
 
@@ -90,7 +98,9 @@ setClass("hms", slots = c(
   root_id = "character",
   demes = "list",
   best_fitness = "numeric",
-  best_solution = "numeric"
+  best_solution = "numeric",
+  total_time = "difftime",
+  total_metaepoch_time = "difftime"
 ))
 
 setGeneric("printTree", function(object) standardGeneric("printTree"))
