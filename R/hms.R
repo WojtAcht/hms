@@ -89,8 +89,13 @@ hms <- function(max_tree_height = 5,
     demes = c(active_demes, inactive_demes),
     best_fitness = best_fitness,
     best_solution = best_solution,
-    total_time = total_time,
-    total_metaepoch_time = total_metaepoch_time
+    total_time_in_seconds = as.numeric(total_time, units = "secs"),
+    total_metaepoch_time_in_seconds = as.numeric(total_metaepoch_time, units = "secs"),
+    metaepochs_count = metaepochs_count,
+    deme_population_size = population_size,
+    lower = lower,
+    upper = upper,
+    call = match.call()
   )
 }
 
@@ -99,9 +104,23 @@ setClass("hms", slots = c(
   demes = "list",
   best_fitness = "numeric",
   best_solution = "numeric",
-  total_time = "difftime",
-  total_metaepoch_time = "difftime"
+  total_time_in_seconds = "numeric",
+  total_metaepoch_time_in_seconds = "numeric",
+  metaepochs_count = "numeric",
+  deme_population_size = "numeric",
+  lower = "numeric",
+  upper = "numeric",
+  call = "language"
 ))
+
+setMethod("print", "hms", function(x, ...) utils::str(x))
+
+setMethod("show", "hms", function(object) {
+  cat("An object of class \"hms\"\n")
+  cat("\nCall:\n", deparse(object@call), "\n\n", sep="")
+  cat("Available slots:\n")
+  print(methods::slotNames(object))
+})
 
 setGeneric("printTree", function(object) standardGeneric("printTree"))
 
@@ -148,6 +167,30 @@ setMethod("printTree", "hms", function(object) {
   print_deme(root)
   print_tree_from_deme(root)
 })
+
+
+summary.hms <- function(object, ...) {
+  domain_element_to_string <- function(x) {
+    rounded_params <- mapply(function(x) { sprintf(x, fmt = '%#.2f') }, x)
+    comma_separated_params <- do.call(paste, c(as.list(rounded_params), sep = ", "))
+    if(length(x) > 1) {
+      paste("(", comma_separated_params, ")", sep = "")
+    } else {
+      comma_separated_params
+    }
+  }
+  out <- list(fitness = object@best_fitness,
+              solution = domain_element_to_string(object@best_solution),
+              metaepochs = object@metaepochs_count,
+              deme_population_size = object@deme_population_size,
+              lower_bound = domain_element_to_string(object@lower),
+              upper_bound = domain_element_to_string(object@upper),
+              computation_time = paste(as.numeric(object@total_time_in_seconds), " seconds", sep = ""))
+  class(out) <- "summary.hms"
+  return(out)
+}
+
+setMethod("summary", "hms", summary.hms)
 
 plot.hms <- function(x) {
   cat("TODO")
