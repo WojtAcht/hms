@@ -174,6 +174,11 @@ plot.hms <- function(x) {
     type = "b",
     col = adjustcolor("blue4", alpha.f = 0.1)
   )
+  legend("bottomright",
+    inset = 0.02,
+    legend = c("Best", "Global best"),
+    fill = c("blue", "green")
+  )
 }
 
 setMethod("plot", "hms", plot.hms)
