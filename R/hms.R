@@ -78,7 +78,7 @@ hms <- function(max_tree_height = 5,
       best_solution <- deme@best_solution
     }
   }
-  new("hms",
+  methods::new("hms",
     root_id = root@id,
     demes = c(active_demes, inactive_demes),
     best_fitness = best_fitness,
@@ -96,13 +96,50 @@ setClass("hms", slots = c(
 setGeneric("printTree", function(object) standardGeneric("printTree"))
 
 setMethod("printTree", "hms", function(object) {
-  cat("A tree :)")
+  get_deme_by_id <- function(id) {
+    Filter(function(deme) { deme@id == id }, object@demes)[[1]]
+
+  }
+  get_children <- function(deme) {
+    Filter(function(d) { identical(d@parent_id, deme@id) }, object@demes)
+  }
+  print_deme <- function(deme) {
+    color <- if (deme@best_solution == object@best_solution) crayon::red else identity
+    cat(color("f("))
+    for(x in deme@best_solution) {
+      if (x != deme@best_solution[[1]]) {
+        cat(", ")
+      }
+      cat(color(sprintf(x, fmt = '%#.2f')))
+    }
+    cat(color(paste(") = ", sprintf(deme@best_fitness, fmt = '%#.2f'), "\n", sep = "")))
+  }
+
+  print_tree_from_deme <- function(deme, prefix = "") {
+    children <- get_children(deme)
+    for(child in children) {
+      if (length(child@best_solution) == 0) {
+        # This deme did not participate in any metaepoch
+        next
+      }
+      is_last <- child@id == children[[length(children)]]@id
+      cat(prefix)
+      if (is_last) {
+        cat("\u2514")
+      } else {
+        cat("\u251C")
+      }
+      cat("-- ")
+      print_deme(child)
+      print_tree_from_deme(child, prefix = paste(prefix, if(is_last) " " else "|", "   ", sep = ""))
+    }
+  }
+  root <- get_deme_by_id(object@root_id)
+  print_deme(root)
+  print_tree_from_deme(root)
 })
 
-plot.hms <- function(x, y, ylim, cex.points = 0.7,
-                     col = c("green3", "dodgerblue3", adjustcolor("green3", alpha.f = 0.1)),
-                     pch = c(16, 1), lty = c(1, 2), legend = TRUE,
-                     grid = graphics:::grid, ...) {
+plot.hms <- function(x) {
   cat("TODO")
 }
 

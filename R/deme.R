@@ -69,6 +69,15 @@ create_deme <- function(lower, upper, parent, population_size, sigma) {
 }
 
 update_deme <- function(metaepoch_result, deme) {
+  if(is.null(metaepoch_result$solution) |
+     is.null(metaepoch_result$value) |
+     is.null(metaepoch_result$population) |
+     !is.numeric(metaepoch_result$solution) |
+     !is.numeric(metaepoch_result$value) |
+     !is.numeric(metaepoch_result$population)) {
+    stop("The run_metaepoch function must return a list with following named parameters of type numeric: solution, value, population")
+  }
+
   potential_sprout <- metaepoch_result$solution
   metaepoch_best <- metaepoch_result$value
   deme@population <- metaepoch_result$population
