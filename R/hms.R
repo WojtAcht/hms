@@ -162,19 +162,19 @@ plot.hms <- function(x) {
     ylab = "fitness",
     type = "n"
   )
-  lines(metaepochs,
+  graphics::lines(metaepochs,
     object@global_best_fitness_per_metaepoch,
     pch = 16,
     type = "b",
     col = "green3"
   )
-  lines(metaepochs,
+  graphics::lines(metaepochs,
     object@best_fitness_per_metaepoch,
     pch = 16,
     type = "b",
-    col = adjustcolor("blue4", alpha.f = 0.1)
+    col = grDevices::adjustcolor("blue4", alpha.f = 0.1)
   )
-  legend("bottomright",
+  graphics::legend("bottomright",
     inset = 0.02,
     legend = c("Best", "Global best"),
     fill = c("blue", "green")
