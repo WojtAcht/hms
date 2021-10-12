@@ -22,7 +22,6 @@ Imports:
     msm,
     methods,
     uuid,
-    rlist,
     crayon
 Suggests: 
     testthat (>= 3.0.0)

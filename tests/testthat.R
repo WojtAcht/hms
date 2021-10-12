@@ -4,7 +4,6 @@ library(GA)
 library(purrr)
 library(msm)
 library(uuid)
-library(rlist)
 library(crayon)
 
 test_check("hms")

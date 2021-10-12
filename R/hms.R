@@ -78,7 +78,7 @@ hms <- function(max_tree_height = 5,
       best_solution <- deme@best_solution
     }
   }
-  new("hms",
+  methods::new("hms",
     root_id = root@id,
     demes = c(active_demes, inactive_demes),
     best_fitness = best_fitness,
@@ -93,17 +93,18 @@ setClass("hms", slots = c(
   best_solution = "numeric"
 ))
 
-setGeneric("printTree", function(object) standardGeneric("printTree"))
+setGeneric("print_tree", function(object) standardGeneric("print_tree"))
 
-setMethod("printTree", "hms", function(object) {
+setMethod("print_tree", "hms", function(object) {
   get_deme_by_id <- function(id) {
-    list.search(object@demes, .@id == id)[[1]]
+    Filter(function(deme) { deme@id == id }, object@demes)[[1]]
+
   }
   get_children <- function(deme) {
-    list.search(object@demes, .@parent_id == deme@id)
+    Filter(function(d) { identical(d@parent_id, deme@id) }, object@demes)
   }
   print_deme <- function(deme) {
-    color <- if (deme@best_solution == object@best_solution) red else identity
+    color <- if (deme@best_solution == object@best_solution) crayon::red else identity
     cat(color("f("))
     for(x in deme@best_solution) {
       if (x != deme@best_solution[[1]]) {
@@ -124,9 +125,9 @@ setMethod("printTree", "hms", function(object) {
       is_last <- child@id == children[[length(children)]]@id
       cat(prefix)
       if (is_last) {
-        cat("└")
+        cat("\u2514")
       } else {
-        cat("├")
+        cat("\u251C")
       }
       cat("-- ")
       print_deme(child)
@@ -138,10 +139,7 @@ setMethod("printTree", "hms", function(object) {
   print_tree_from_deme(root)
 })
 
-plot.hms <- function(x, y, ylim, cex.points = 0.7,
-                     col = c("green3", "dodgerblue3", adjustcolor("green3", alpha.f = 0.1)),
-                     pch = c(16, 1), lty = c(1, 2), legend = TRUE,
-                     grid = graphics:::grid, ...) {
+plot.hms <- function(x) {
   cat("TODO")
 }
 
