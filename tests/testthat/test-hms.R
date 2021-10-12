@@ -106,4 +106,3 @@ test_that("HMS works - Eggholder:", {
   expected_fitness <- Eggholder(c(512, 404.2319))
   expect_true(abs(result@best_fitness - expected_fitness) < 100)
 })
-
