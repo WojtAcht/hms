@@ -93,9 +93,9 @@ setClass("hms", slots = c(
   best_solution = "numeric"
 ))
 
-setGeneric("print_tree", function(object) standardGeneric("print_tree"))
+setGeneric("printTree", function(object) standardGeneric("printTree"))
 
-setMethod("print_tree", "hms", function(object) {
+setMethod("printTree", "hms", function(object) {
   get_deme_by_id <- function(id) {
     Filter(function(deme) { deme@id == id }, object@demes)[[1]]
 
