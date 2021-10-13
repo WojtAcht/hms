@@ -187,7 +187,7 @@ summary.hms <- function(object, ...) {
               upper_bound = domain_element_to_string(object@upper),
               computation_time = paste(as.numeric(object@total_time_in_seconds), " seconds", sep = ""))
   class(out) <- "summary.hms"
-  return(out)
+  out
 }
 
 setMethod("summary", "hms", summary.hms)
