@@ -27,7 +27,7 @@ hms <- function(tree_height = 5,
                 global_stopping_condition = default_global_stopping_condition,
                 local_stopping_condition = default_local_stopping_condition,
                 sprouting_condition = max_metric_sprouting_condition(euclidean_distance, 0.5),
-                create_population = default_create_population,
+                create_population,
                 suggestions = NULL) {
   if (tree_height < 2) {
     stop("Max tree height has to be greater or equal 2.")
@@ -50,15 +50,22 @@ hms <- function(tree_height = 5,
   if (!missing(suggestions) & any(dim(suggestions) != c(population_size, length(lower)))) {
     stop("Provided suggestions have wrong dimensions.")
   }
-  root <- if (is.null(suggestions)){
-    create_deme(lower, upper, NULL, population_size, sigma, create_population)
+  if (missing(create_population) & missing(sigma)){
+    stop("A list of standard deviations (sigma) or a function to create population must be provided.")
+  }
+  if(missing(create_population)){
+    create_population <- default_create_population(sigma)
+  }
+  root <- if (is.null(suggestions)) {
+    create_deme(lower, upper, NULL, population_size, create_population)
   } else {
     methods::new("Deme",
-                 population = suggestions,
-                 level = 1,
-                 sprout = NULL,
-                 id = uuid::UUIDgenerate(),
-                 parent_id = NULL)
+      population = suggestions,
+      level = 1,
+      sprout = NULL,
+      id = uuid::UUIDgenerate(),
+      parent_id = NULL
+    )
   }
   total_metaepoch_time <- 0
   start_time <- Sys.time()
@@ -89,7 +96,7 @@ hms <- function(tree_height = 5,
         d@level == deme@level
       }, active_demes)
       if (sprouting_condition(metaepoch_result$solution, level_demes)) {
-        new_deme <- create_deme(lower, upper, deme, population_size, sigma, create_population)
+        new_deme <- create_deme(lower, upper, deme, population_size, create_population)
         new_demes <- c(new_demes, new_deme)
       }
     }
@@ -137,7 +144,7 @@ setMethod("print", "hms", function(x, ...) utils::str(x))
 
 setMethod("show", "hms", function(object) {
   cat("An object of class \"hms\"\n")
-  cat("\nCall:\n", deparse(object@call), "\n\n", sep="")
+  cat("\nCall:\n", deparse(object@call), "\n\n", sep = "")
   cat("Available slots:\n")
   print(methods::slotNames(object))
 })
@@ -146,27 +153,30 @@ setGeneric("printTree", function(object) standardGeneric("printTree"))
 
 setMethod("printTree", "hms", function(object) {
   get_deme_by_id <- function(id) {
-    Filter(function(deme) { deme@id == id }, object@demes)[[1]]
-
+    Filter(function(deme) {
+      deme@id == id
+    }, object@demes)[[1]]
   }
   get_children <- function(deme) {
-    Filter(function(d) { identical(d@parent_id, deme@id) }, object@demes)
+    Filter(function(d) {
+      identical(d@parent_id, deme@id)
+    }, object@demes)
   }
   print_deme <- function(deme) {
     color <- if (deme@best_solution == object@best_solution) crayon::red else identity
     cat(color("f("))
-    for(x in deme@best_solution) {
+    for (x in deme@best_solution) {
       if (x != deme@best_solution[[1]]) {
         cat(", ")
       }
-      cat(color(sprintf(x, fmt = '%#.2f')))
+      cat(color(sprintf(x, fmt = "%#.2f")))
     }
-    cat(color(paste(") = ", sprintf(deme@best_fitness, fmt = '%#.2f'), "\n", sep = "")))
+    cat(color(paste(") = ", sprintf(deme@best_fitness, fmt = "%#.2f"), "\n", sep = "")))
   }
 
   print_tree_from_deme <- function(deme, prefix = "") {
     children <- get_children(deme)
-    for(child in children) {
+    for (child in children) {
       if (length(child@best_solution) == 0) {
         # This deme did not participate in any metaepoch
         next
@@ -180,7 +190,7 @@ setMethod("printTree", "hms", function(object) {
       }
       cat("-- ")
       print_deme(child)
-      print_tree_from_deme(child, prefix = paste(prefix, if(is_last) " " else "|", "   ", sep = ""))
+      print_tree_from_deme(child, prefix = paste(prefix, if (is_last) " " else "|", "   ", sep = ""))
     }
   }
   root <- get_deme_by_id(object@root_id)
@@ -191,21 +201,25 @@ setMethod("printTree", "hms", function(object) {
 
 summary.hms <- function(object, ...) {
   domain_element_to_string <- function(x) {
-    rounded_params <- mapply(function(x) { sprintf(x, fmt = '%#.2f') }, x)
+    rounded_params <- mapply(function(x) {
+      sprintf(x, fmt = "%#.2f")
+    }, x)
     comma_separated_params <- do.call(paste, c(as.list(rounded_params), sep = ", "))
-    if(length(x) > 1) {
+    if (length(x) > 1) {
       paste("(", comma_separated_params, ")", sep = "")
     } else {
       comma_separated_params
     }
   }
-  out <- list(fitness = object@best_fitness,
-              solution = domain_element_to_string(object@best_solution),
-              metaepochs = object@metaepochs_count,
-              deme_population_size = object@deme_population_size,
-              lower_bound = domain_element_to_string(object@lower),
-              upper_bound = domain_element_to_string(object@upper),
-              computation_time = paste(as.numeric(object@total_time_in_seconds), " seconds", sep = ""))
+  out <- list(
+    fitness = object@best_fitness,
+    solution = domain_element_to_string(object@best_solution),
+    metaepochs = object@metaepochs_count,
+    deme_population_size = object@deme_population_size,
+    lower_bound = domain_element_to_string(object@lower),
+    upper_bound = domain_element_to_string(object@upper),
+    computation_time = paste(as.numeric(object@total_time_in_seconds), " seconds", sep = "")
+  )
   class(out) <- "summary.hms"
   out
 }

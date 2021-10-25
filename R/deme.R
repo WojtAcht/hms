@@ -13,7 +13,7 @@ setClass("Deme", slots = c(
   parent_id = "characterOrNULL"
 ))
 
-rnorm_population <- function(mean, sigma, lower, upper, population_size, tree_level) {
+rnorm_population <- function(mean, lower, upper, population_size, tree_level, sigma) {
   sd <- sigma[[tree_level]]
   random_coordinate <- function(i) {
     msm::rtnorm(
@@ -27,7 +27,7 @@ rnorm_population <- function(mean, sigma, lower, upper, population_size, tree_le
   mapply(random_coordinate, seq_along(lower))
 }
 
-runif_population <- function(mean, sigma, lower, upper, population_size, tree_level) {
+runif_population <- function(mean, lower, upper, population_size, tree_level, sigma) {
   random_coordinate <- function(i) {
     stats::runif(population_size,
       min = lower[[i]],
@@ -37,27 +37,26 @@ runif_population <- function(mean, sigma, lower, upper, population_size, tree_le
   mapply(random_coordinate, seq_along(lower))
 }
 
-default_create_population <- function(mean, sigma, lower, upper, population_size, tree_level) {
-  if(tree_level == 1){
-    runif_population(mean, sigma, lower, upper, population_size, tree_level)
-  }
-  else{
-    rnorm_population(mean, sigma, lower, upper, population_size, tree_level)
+default_create_population <- function(sigma) {
+  function(mean, lower, upper, population_size, tree_level) {
+    if (tree_level == 1) {
+      runif_population(mean, lower, upper, population_size, tree_level, sigma)
+    } else {
+      rnorm_population(mean, lower, upper, population_size, tree_level, sigma)
+    }
   }
 }
 
-create_deme <- function(lower, upper, parent, population_size, sigma, create_population) {
+create_deme <- function(lower, upper, parent, population_size, create_population) {
   new_deme_level <- ifelse(is.null(parent), 1, parent@level + 1)
   new_population <- create_population(
     mean = parent@best_solution,
-    sigma = sigma,
     lower = lower,
     upper = upper,
     population_size = population_size,
     tree_level = new_deme_level
   )
-  if (dim(new_population)[[1]] != population_size |
-      dim(new_population)[[2]] !=  length(lower)){
+  if (any(dim(new_population) != c(population_size, length(lower)))) {
     stop("Created population is invalid - wrong dimensions.")
   }
   new_sprout <- if (is.null(parent)) {
@@ -75,12 +74,12 @@ create_deme <- function(lower, upper, parent, population_size, sigma, create_pop
 }
 
 update_deme <- function(metaepoch_result, deme) {
-  if(is.null(metaepoch_result$solution) |
-     is.null(metaepoch_result$value) |
-     is.null(metaepoch_result$population) |
-     !is.numeric(metaepoch_result$solution) |
-     !is.numeric(metaepoch_result$value) |
-     !is.numeric(metaepoch_result$population)) {
+  if (is.null(metaepoch_result$solution) |
+    is.null(metaepoch_result$value) |
+    is.null(metaepoch_result$population) |
+    !is.numeric(metaepoch_result$solution) |
+    !is.numeric(metaepoch_result$value) |
+    !is.numeric(metaepoch_result$population)) {
     stop("The run_metaepoch function must return a list with following named parameters of type numeric: solution, value, population")
   }
 
