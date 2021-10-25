@@ -1,4 +1,4 @@
-#' Default sprouting condition based on euclidean distance.
+#' Default sprouting condition based on given metric.
 #'
 #' @param max_distance - numeric
 #'
@@ -6,13 +6,13 @@
 #' @export
 #'
 #' @examples
-max_euclidean_distance_sprouting_condition <- function(max_distance) {
+max_metric_sprouting_condition <- function(metric, max_distance) {
   function(potential_sprout, level_demes) {
     single_deme_condition <- function(deme) {
       if (is.null(deme@sprout)) {
         FALSE
       } else {
-        euclidean_distance(deme@sprout, potential_sprout) < max_distance
+        metric(deme@sprout, potential_sprout) < max_distance
       }
     }
     length(Filter(single_deme_condition, level_demes)) == 0

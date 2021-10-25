@@ -1,6 +1,6 @@
 #' Title
 #'
-#' @param max_tree_height - numeric - default value: 5
+#' @param tree_height - numeric - default value: 5
 #' @param fitness - fitness function
 #' @param lower - numeric - lower bound
 #' @param upper - numeric - upper bound
@@ -10,12 +10,14 @@
 #' @param global_stopping_condition - function
 #' @param local_stopping_condition - function
 #' @param sprouting_condition - function
+#' @param create_population - function
+#' @param suggestions - matrix
 #'
 #' @return numeric best solution
 #' @export
 #'
 #' @examples
-hms <- function(max_tree_height = 5,
+hms <- function(tree_height = 5,
                 fitness,
                 lower,
                 upper,
@@ -24,8 +26,10 @@ hms <- function(max_tree_height = 5,
                 run_metaepoch = ga_metaepoch(list(list(), list(), list(), list(), list())), # TODO :)
                 global_stopping_condition = default_global_stopping_condition,
                 local_stopping_condition = default_local_stopping_condition,
-                sprouting_condition = max_euclidean_distance_sprouting_condition(0.5)) {
-  if (max_tree_height < 2) {
+                sprouting_condition = max_metric_sprouting_condition(euclidean_distance, 0.5),
+                create_population,
+                suggestions = NULL) {
+  if (tree_height < 2) {
     stop("Max tree height has to be greater or equal 2.")
   }
   if (!is.function(fitness)) {
@@ -37,12 +41,34 @@ hms <- function(max_tree_height = 5,
   if (!is.vector(sigma) & !is.list(sigma)) {
     stop("A list of standard deviations (sigma) must be provided.")
   }
-  if (!length(sigma) >= max_tree_height) {
-    stop("The list of standard deviations (sigma) must have max_tree_height elements.")
+  if (!length(sigma) >= tree_height) {
+    stop("The list of standard deviations (sigma) must have tree_height elements.")
+  }
+  if (!missing(suggestions) & !is.matrix(suggestions)) {
+    stop("Invalid object for argument \"suggestions\": should be or extend class matrix.")
+  }
+  if (!missing(suggestions) & any(dim(suggestions) != c(population_size, length(lower)))) {
+    stop("Provided suggestions have wrong dimensions.")
+  }
+  if (missing(create_population) & missing(sigma)){
+    stop("A list of standard deviations (sigma) or a function to create population must be provided.")
+  }
+  if(missing(create_population)){
+    create_population <- default_create_population(sigma)
+  }
+  root <- if (is.null(suggestions)) {
+    create_deme(lower, upper, NULL, population_size, create_population)
+  } else {
+    methods::new("Deme",
+      population = suggestions,
+      level = 1,
+      sprout = NULL,
+      id = uuid::UUIDgenerate(),
+      parent_id = NULL
+    )
   }
   total_metaepoch_time <- 0
   start_time <- Sys.time()
-  root <- create_deme(lower, upper, NULL, population_size, sigma)
   active_demes <- c(root)
   inactive_demes <- c()
   best_solution <- -Inf
@@ -66,12 +92,12 @@ hms <- function(max_tree_height = 5,
         next
       }
       new_demes <- c(new_demes, deme)
-      if (deme@level > max_tree_height) next
+      if (deme@level > tree_height) next
       level_demes <- Filter(function(d) {
         d@level == deme@level
       }, active_demes)
       if (sprouting_condition(metaepoch_result$solution, level_demes)) {
-        new_deme <- create_deme(lower, upper, deme, population_size, sigma)
+        new_deme <- create_deme(lower, upper, deme, population_size, create_population)
         new_demes <- c(new_demes, new_deme)
       }
     }
