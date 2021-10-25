@@ -13,7 +13,8 @@ setClass("Deme", slots = c(
   parent_id = "characterOrNULL"
 ))
 
-rnorm_population <- function(mean, sd, lower, upper, population_size) {
+rnorm_population <- function(mean, sigma, lower, upper, population_size, tree_level) {
+  sd <- sigma[[tree_level]]
   random_coordinate <- function(i) {
     msm::rtnorm(
       mean = mean[[i]],
@@ -26,7 +27,7 @@ rnorm_population <- function(mean, sd, lower, upper, population_size) {
   mapply(random_coordinate, seq_along(lower))
 }
 
-runif_population <- function(lower, upper, population_size) {
+runif_population <- function(mean, sigma, lower, upper, population_size, tree_level) {
   random_coordinate <- function(i) {
     stats::runif(population_size,
       min = lower[[i]],
@@ -36,23 +37,28 @@ runif_population <- function(lower, upper, population_size) {
   mapply(random_coordinate, seq_along(lower))
 }
 
-create_deme <- function(lower, upper, parent, population_size, sigma) {
-  new_population <- c()
+default_create_population <- function(mean, sigma, lower, upper, population_size, tree_level) {
+  if(tree_level == 1){
+    runif_population(mean, sigma, lower, upper, population_size, tree_level)
+  }
+  else{
+    rnorm_population(mean, sigma, lower, upper, population_size, tree_level)
+  }
+}
+
+create_deme <- function(lower, upper, parent, population_size, sigma, create_population) {
   new_deme_level <- ifelse(is.null(parent), 1, parent@level + 1)
-  if (is.null(parent)) {
-    new_population <- runif_population(
-      lower = lower,
-      upper = upper,
-      population_size = population_size
-    )
-  } else {
-    new_population <- rnorm_population(
-      mean = parent@best_solution,
-      sd = sigma[[new_deme_level]],
-      lower = lower,
-      upper = upper,
-      population_size = population_size
-    )
+  new_population <- create_population(
+    mean = parent@best_solution,
+    sigma = sigma,
+    lower = lower,
+    upper = upper,
+    population_size = population_size,
+    tree_level = new_deme_level
+  )
+  if (dim(new_population)[[1]] != population_size |
+      dim(new_population)[[2]] !=  length(lower)){
+    stop("Created population is invalid - wrong dimensions.")
   }
   new_sprout <- if (is.null(parent)) {
     NULL
