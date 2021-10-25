@@ -26,7 +26,7 @@ hms <- function(tree_height = 5,
                 run_metaepoch = ga_metaepoch(list(list(), list(), list(), list(), list())), # TODO :)
                 global_stopping_condition = default_global_stopping_condition,
                 local_stopping_condition = default_local_stopping_condition,
-                sprouting_condition = max_euclidean_distance_sprouting_condition(0.5),
+                sprouting_condition = max_metric_sprouting_condition(euclidean_distance, 0.5),
                 create_population = default_create_population,
                 suggestions = NULL) {
   if (tree_height < 2) {
