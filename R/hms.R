@@ -190,15 +190,15 @@ setMethod("printTree", "hms", function(object) {
     }, demes)
   }
   print_deme <- function(deme) {
-    color <- if (deme@best_solution == object@best_solution) crayon::red else identity
-    cat(color("f("))
+    deme_distinguisher <- if (deme@best_solution == object@best_solution) "***" else ""
+    cat(paste(deme_distinguisher, "f(", sep = ""))
     for (x in deme@best_solution) {
       if (x != deme@best_solution[[1]]) {
         cat(", ")
       }
-      cat(color(sprintf(x, fmt = "%#.2f")))
+      cat(sprintf(x, fmt = "%#.2f"))
     }
-    cat(color(paste(") = ", sprintf(deme@best_fitness, fmt = "%#.2f"), "\n", sep = "")))
+    cat(paste(") = ", sprintf(deme@best_fitness, fmt = "%#.2f"), deme_distinguisher, "\n", sep = ""))
   }
 
   print_tree_from_deme <- function(deme, prefix = "") {
