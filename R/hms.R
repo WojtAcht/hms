@@ -60,6 +60,8 @@ hms <- function(tree_height = 5,
                  id = uuid::UUIDgenerate(),
                  parent_id = NULL)
   }
+  total_metaepoch_time <- 0
+  start_time <- Sys.time()
   active_demes <- c(root)
   inactive_demes <- c()
   best_solution <- -Inf
@@ -68,7 +70,10 @@ hms <- function(tree_height = 5,
   while (!global_stopping_condition(metaepochs_count, 0, 0) && length(active_demes) > 0) {
     new_demes <- c()
     for (deme in active_demes) {
+      start_metaepoch_time <- Sys.time()
       metaepoch_result <- run_metaepoch(fitness, deme@population, lower, upper, deme@level)
+      end_metaepoch_time <- Sys.time()
+      total_metaepoch_time <- total_metaepoch_time + (end_metaepoch_time - start_metaepoch_time)
       deme <- update_deme(metaepoch_result, deme)
       if (local_stopping_condition(deme)) {
         if (deme@best_fitness > best_fitness) {
@@ -97,11 +102,19 @@ hms <- function(tree_height = 5,
       best_solution <- deme@best_solution
     }
   }
+  total_time <- Sys.time() - start_time
   methods::new("hms",
     root_id = root@id,
     demes = c(active_demes, inactive_demes),
     best_fitness = best_fitness,
-    best_solution = best_solution
+    best_solution = best_solution,
+    total_time_in_seconds = as.numeric(total_time, units = "secs"),
+    total_metaepoch_time_in_seconds = as.numeric(total_metaepoch_time, units = "secs"),
+    metaepochs_count = metaepochs_count,
+    deme_population_size = population_size,
+    lower = lower,
+    upper = upper,
+    call = match.call()
   )
 }
 
@@ -110,8 +123,24 @@ setClass("hms", slots = c(
   root_id = "character",
   demes = "list",
   best_fitness = "numeric",
-  best_solution = "numeric"
+  best_solution = "numeric",
+  total_time_in_seconds = "numeric",
+  total_metaepoch_time_in_seconds = "numeric",
+  metaepochs_count = "numeric",
+  deme_population_size = "numeric",
+  lower = "numeric",
+  upper = "numeric",
+  call = "language"
 ))
+
+setMethod("print", "hms", function(x, ...) utils::str(x))
+
+setMethod("show", "hms", function(object) {
+  cat("An object of class \"hms\"\n")
+  cat("\nCall:\n", deparse(object@call), "\n\n", sep="")
+  cat("Available slots:\n")
+  print(methods::slotNames(object))
+})
 
 setGeneric("printTree", function(object) standardGeneric("printTree"))
 
@@ -158,6 +187,30 @@ setMethod("printTree", "hms", function(object) {
   print_deme(root)
   print_tree_from_deme(root)
 })
+
+
+summary.hms <- function(object, ...) {
+  domain_element_to_string <- function(x) {
+    rounded_params <- mapply(function(x) { sprintf(x, fmt = '%#.2f') }, x)
+    comma_separated_params <- do.call(paste, c(as.list(rounded_params), sep = ", "))
+    if(length(x) > 1) {
+      paste("(", comma_separated_params, ")", sep = "")
+    } else {
+      comma_separated_params
+    }
+  }
+  out <- list(fitness = object@best_fitness,
+              solution = domain_element_to_string(object@best_solution),
+              metaepochs = object@metaepochs_count,
+              deme_population_size = object@deme_population_size,
+              lower_bound = domain_element_to_string(object@lower),
+              upper_bound = domain_element_to_string(object@upper),
+              computation_time = paste(as.numeric(object@total_time_in_seconds), " seconds", sep = ""))
+  class(out) <- "summary.hms"
+  out
+}
+
+setMethod("summary", "hms", summary.hms)
 
 plot.hms <- function(x) {
   cat("TODO")
