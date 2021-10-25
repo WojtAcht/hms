@@ -85,26 +85,26 @@ hms <- function(max_tree_height = 5,
       }
     }
 
-    last_metaepoch_end_time =
-      if (metaepochs_count > 0) metaepoch_snapshots[[metaepochs_count]]@time_in_seconds
-      else as.numeric(start_time, units = "secs")
-    print(last_metaepoch_end_time)
+    previous_metaepochs_time = 0
+    for (metaepoch_snapshot in metaepoch_snapshots) {
+      previous_metaepochs_time <- previous_metaepochs_time + metaepoch_snapshot@time_in_seconds
+    }
+
     snapshot <- methods::new("MetaepochSnapshot",
                              demes = c(active_demes, inactive_demes),
                              best_fitness = best_fitness,
                              best_solution = best_solution,
-                             time_in_seconds = as.numeric(Sys.time(), units = "secs") - last_metaepoch_end_time)
+                             time_in_seconds = seconds_since(start_time) - previous_metaepochs_time)
     metaepoch_snapshots <- c(metaepoch_snapshots, snapshot)
     metaepochs_count <- metaepochs_count + 1
   }
 
-  total_time <- Sys.time() - start_time
   methods::new("hms",
     root_id = root@id,
     metaepoch_snapshots = metaepoch_snapshots,
     best_fitness = best_fitness,
     best_solution = best_solution,
-    total_time_in_seconds = as.numeric(total_time, units = "secs"),
+    total_time_in_seconds = seconds_since(start_time),
     total_metaepoch_time_in_seconds = as.numeric(total_metaepoch_time, units = "secs"),
     metaepochs_count = metaepochs_count,
     deme_population_size = population_size,
