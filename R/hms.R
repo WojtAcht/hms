@@ -48,6 +48,7 @@ hms <- function(max_tree_height = 5,
   best_solution <- -Inf
   best_fitness <- -Inf
   metaepochs_count <- 0
+  metaepoch_snapshots <- list()
   while (!global_stopping_condition(metaepochs_count, 0, 0) && length(active_demes) > 0) {
     new_demes <- c()
     for (deme in active_demes) {
@@ -75,21 +76,36 @@ hms <- function(max_tree_height = 5,
       }
     }
     active_demes <- new_demes
+
+
+    for (deme in active_demes) {
+      if (length(deme@best_fitness) != 0 && deme@best_fitness > best_fitness) {
+        best_fitness <- deme@best_fitness
+        best_solution <- deme@best_solution
+      }
+    }
+
+    previous_metaepochs_time <- 0
+    for (metaepoch_snapshot in metaepoch_snapshots) {
+      previous_metaepochs_time <- previous_metaepochs_time + metaepoch_snapshot@time_in_seconds
+    }
+
+    snapshot <- methods::new("MetaepochSnapshot",
+      demes = c(active_demes, inactive_demes),
+      best_fitness = best_fitness,
+      best_solution = best_solution,
+      time_in_seconds = seconds_since(start_time) - previous_metaepochs_time
+    )
+    metaepoch_snapshots <- c(metaepoch_snapshots, snapshot)
     metaepochs_count <- metaepochs_count + 1
   }
-  for (deme in active_demes) {
-    if (length(deme@best_fitness) != 0 && deme@best_fitness > best_fitness) {
-      best_fitness <- deme@best_fitness
-      best_solution <- deme@best_solution
-    }
-  }
-  total_time <- Sys.time() - start_time
+
   methods::new("hms",
     root_id = root@id,
-    demes = c(active_demes, inactive_demes),
+    metaepoch_snapshots = metaepoch_snapshots,
     best_fitness = best_fitness,
     best_solution = best_solution,
-    total_time_in_seconds = as.numeric(total_time, units = "secs"),
+    total_time_in_seconds = seconds_since(start_time),
     total_metaepoch_time_in_seconds = as.numeric(total_metaepoch_time, units = "secs"),
     metaepochs_count = metaepochs_count,
     deme_population_size = population_size,
@@ -99,9 +115,16 @@ hms <- function(max_tree_height = 5,
   )
 }
 
+setClass("MetaepochSnapshot", slots = c(
+  demes = "list",
+  best_fitness = "numeric",
+  best_solution = "numeric",
+  time_in_seconds = "numeric"
+))
+
 setClass("hms", slots = c(
   root_id = "character",
-  demes = "list",
+  metaepoch_snapshots = "list",
   best_fitness = "numeric",
   best_solution = "numeric",
   total_time_in_seconds = "numeric",
@@ -117,7 +140,7 @@ setMethod("print", "hms", function(x, ...) utils::str(x))
 
 setMethod("show", "hms", function(object) {
   cat("An object of class \"hms\"\n")
-  cat("\nCall:\n", deparse(object@call), "\n\n", sep="")
+  cat("\nCall:\n", deparse(object@call), "\n\n", sep = "")
   cat("Available slots:\n")
   print(methods::slotNames(object))
 })
@@ -125,28 +148,37 @@ setMethod("show", "hms", function(object) {
 setGeneric("printTree", function(object) standardGeneric("printTree"))
 
 setMethod("printTree", "hms", function(object) {
-  get_deme_by_id <- function(id) {
-    Filter(function(deme) { deme@id == id }, object@demes)[[1]]
+  last_metaepoch_snapshot <- tail(object@metaepoch_snapshots, n = 1)
+  if (length(last_metaepoch_snapshot) == 0) {
+    return()
+  }
+  demes <- last_metaepoch_snapshot[[1]]@demes
 
+  get_deme_by_id <- function(id) {
+    Filter(function(deme) {
+      deme@id == id
+    }, demes)[[1]]
   }
   get_children <- function(deme) {
-    Filter(function(d) { identical(d@parent_id, deme@id) }, object@demes)
+    Filter(function(d) {
+      identical(d@parent_id, deme@id)
+    }, demes)
   }
   print_deme <- function(deme) {
     color <- if (deme@best_solution == object@best_solution) crayon::red else identity
     cat(color("f("))
-    for(x in deme@best_solution) {
+    for (x in deme@best_solution) {
       if (x != deme@best_solution[[1]]) {
         cat(", ")
       }
-      cat(color(sprintf(x, fmt = '%#.2f')))
+      cat(color(sprintf(x, fmt = "%#.2f")))
     }
-    cat(color(paste(") = ", sprintf(deme@best_fitness, fmt = '%#.2f'), "\n", sep = "")))
+    cat(color(paste(") = ", sprintf(deme@best_fitness, fmt = "%#.2f"), "\n", sep = "")))
   }
 
   print_tree_from_deme <- function(deme, prefix = "") {
     children <- get_children(deme)
-    for(child in children) {
+    for (child in children) {
       if (length(child@best_solution) == 0) {
         # This deme did not participate in any metaepoch
         next
@@ -160,7 +192,7 @@ setMethod("printTree", "hms", function(object) {
       }
       cat("-- ")
       print_deme(child)
-      print_tree_from_deme(child, prefix = paste(prefix, if(is_last) " " else "|", "   ", sep = ""))
+      print_tree_from_deme(child, prefix = paste(prefix, if (is_last) " " else "|", "   ", sep = ""))
     }
   }
   root <- get_deme_by_id(object@root_id)
@@ -171,21 +203,25 @@ setMethod("printTree", "hms", function(object) {
 
 summary.hms <- function(object, ...) {
   domain_element_to_string <- function(x) {
-    rounded_params <- mapply(function(x) { sprintf(x, fmt = '%#.2f') }, x)
+    rounded_params <- mapply(function(x) {
+      sprintf(x, fmt = "%#.2f")
+    }, x)
     comma_separated_params <- do.call(paste, c(as.list(rounded_params), sep = ", "))
-    if(length(x) > 1) {
+    if (length(x) > 1) {
       paste("(", comma_separated_params, ")", sep = "")
     } else {
       comma_separated_params
     }
   }
-  out <- list(fitness = object@best_fitness,
-              solution = domain_element_to_string(object@best_solution),
-              metaepochs = object@metaepochs_count,
-              deme_population_size = object@deme_population_size,
-              lower_bound = domain_element_to_string(object@lower),
-              upper_bound = domain_element_to_string(object@upper),
-              computation_time = paste(as.numeric(object@total_time_in_seconds), " seconds", sep = ""))
+  out <- list(
+    fitness = object@best_fitness,
+    solution = domain_element_to_string(object@best_solution),
+    metaepochs = object@metaepochs_count,
+    deme_population_size = object@deme_population_size,
+    lower_bound = domain_element_to_string(object@lower),
+    upper_bound = domain_element_to_string(object@upper),
+    computation_time = paste(as.numeric(object@total_time_in_seconds), " seconds", sep = "")
+  )
   class(out) <- "summary.hms"
   out
 }
