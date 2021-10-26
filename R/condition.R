@@ -1,5 +1,6 @@
 #' Default sprouting condition based on given metric.
 #'
+#' @param metric - Metric used for deme distance comparison
 #' @param max_distance - numeric
 #'
 #' @return logical
@@ -7,7 +8,11 @@
 #'
 #' @examples
 max_metric_sprouting_condition <- function(metric, max_distance) {
-  function(potential_sprout, level_demes) {
+  function(potential_sprout, potential_sprout_level, demes) {
+    level_demes <- Filter(function(d) {
+      identical(d@level, potential_sprout_level)
+    }, demes)
+
     single_deme_condition <- function(deme) {
       if (is.null(deme@sprout)) {
         FALSE
@@ -19,13 +24,13 @@ max_metric_sprouting_condition <- function(metric, max_distance) {
   }
 }
 
-default_local_stopping_condition <- function(deme) {
+default_local_stopping_condition <- function(deme, previous_metaepoch_snapshots) {
   max_metaepochs_without_improvement <- 5
   best_fitness_metaepoch <- match(deme@best_fitness, deme@best_fitnesses_per_metaepoch)
   metaepoch_count <- length(deme@best_fitnesses_per_metaepoch)
   best_fitness_metaepoch < metaepoch_count - max_metaepochs_without_improvement
 }
 
-default_global_stopping_condition <- function(metaepochs, fitness_evaluations, execution_time) {
-  metaepochs > 10
+default_global_stopping_condition <- function(metaepoch_snapshots) {
+  length(metaepoch_snapshots) > 10
 }

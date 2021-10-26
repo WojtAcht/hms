@@ -75,7 +75,7 @@ hms <- function(tree_height = 5,
   best_fitness <- -Inf
   metaepochs_count <- 0
   metaepoch_snapshots <- list()
-  while (!global_stopping_condition(metaepochs_count, 0, 0) && length(active_demes) > 0) {
+  while (!global_stopping_condition(metaepoch_snapshots) && length(active_demes) > 0) {
     new_demes <- c()
     for (deme in active_demes) {
       start_metaepoch_time <- Sys.time()
@@ -83,7 +83,7 @@ hms <- function(tree_height = 5,
       end_metaepoch_time <- Sys.time()
       total_metaepoch_time <- total_metaepoch_time + (end_metaepoch_time - start_metaepoch_time)
       deme <- update_deme(metaepoch_result, deme)
-      if (local_stopping_condition(deme)) {
+      if (local_stopping_condition(deme, metaepoch_snapshots)) {
         if (deme@best_fitness > best_fitness) {
           best_fitness <- deme@best_fitness
           best_solution <- deme@best_solution
@@ -93,10 +93,7 @@ hms <- function(tree_height = 5,
       }
       new_demes <- c(new_demes, deme)
       if (deme@level > tree_height) next
-      level_demes <- Filter(function(d) {
-        d@level == deme@level
-      }, active_demes)
-      if (sprouting_condition(metaepoch_result$solution, level_demes)) {
+      if (sprouting_condition(metaepoch_result$solution, deme@level, c(active_demes, inactive_demes))) {
         new_deme <- create_deme(lower, upper, deme, population_size, create_population)
         new_demes <- c(new_demes, new_deme)
       }
@@ -120,7 +117,8 @@ hms <- function(tree_height = 5,
       demes = c(active_demes, inactive_demes),
       best_fitness = best_fitness,
       best_solution = best_solution,
-      time_in_seconds = seconds_since(start_time) - previous_metaepochs_time
+      time_in_seconds = seconds_since(start_time) - previous_metaepochs_time,
+      fitness_evaluations = 0 # TODO
     )
     metaepoch_snapshots <- c(metaepoch_snapshots, snapshot)
     metaepochs_count <- metaepochs_count + 1
@@ -145,7 +143,8 @@ setClass("MetaepochSnapshot", slots = c(
   demes = "list",
   best_fitness = "numeric",
   best_solution = "numeric",
-  time_in_seconds = "numeric"
+  time_in_seconds = "numeric",
+  fitness_evaluations = "numeric"
 ))
 
 setClass("hms", slots = c(
@@ -174,7 +173,7 @@ setMethod("show", "hms", function(object) {
 setGeneric("printTree", function(object) standardGeneric("printTree"))
 
 setMethod("printTree", "hms", function(object) {
-  last_metaepoch_snapshot <- tail(object@metaepoch_snapshots, n = 1)
+  last_metaepoch_snapshot <- utils::tail(object@metaepoch_snapshots, n = 1)
   if (length(last_metaepoch_snapshot) == 0) {
     return()
   }
@@ -191,15 +190,15 @@ setMethod("printTree", "hms", function(object) {
     }, demes)
   }
   print_deme <- function(deme) {
-    color <- if (deme@best_solution == object@best_solution) crayon::red else identity
-    cat(color("f("))
+    deme_distinguisher <- if (deme@best_solution == object@best_solution) "***" else ""
+    cat(paste(deme_distinguisher, "f(", sep = ""))
     for (x in deme@best_solution) {
       if (x != deme@best_solution[[1]]) {
         cat(", ")
       }
-      cat(color(sprintf(x, fmt = "%#.2f")))
+      cat(sprintf(x, fmt = "%#.2f"))
     }
-    cat(color(paste(") = ", sprintf(deme@best_fitness, fmt = "%#.2f"), "\n", sep = "")))
+    cat(paste(") = ", sprintf(deme@best_fitness, fmt = "%#.2f"), deme_distinguisher, "\n", sep = ""))
   }
 
   print_tree_from_deme <- function(deme, prefix = "") {
