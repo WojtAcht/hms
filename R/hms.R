@@ -68,20 +68,17 @@ hms <- function(tree_height = 5,
     create_population <- default_create_population(sigma)
   }
   if (with_gradient_method & missing(run_gradient_method)) {
-    if (any(gradient_method_args$method == c("L-BFGS-B", "Brent"))) {
-      gradient_method_args$lower <- lower
-      gradient_method_args$upper <- upper
-    } else {
-      gradient_method_args$lower <- -Inf
-      gradient_method_args$upper <- Inf
+    gradient_method_args$lower <- lower
+    gradient_method_args$upper <- upper
+    if(gradient_method_args$poptim & (gradient_method_args$poptim < 0 | gradient_method_args$poptim > 1)){
+      stop("gradient_method_args: poptim value has to be within [0,1].")
     }
-    gradient_method_args$poptim <- min(max(0, gradient_method_args$poptim), 1)
-    gradient_method_args$pressel <- min(max(0, gradient_method_args$pressel), 1)
     gradient_method_args$control$maxit <- as.integer(gradient_method_args$control$maxit)
     if (is.null(gradient_method_args$control$fnscale)) {
       gradient_method_args$control$fnscale <- -1
     }
     if (gradient_method_args$control$fnscale > 0) {
+      warning("gradient_method_args: fnscale should not be positive.")
       gradient_method_args$control$fnscale <- -1 * gradient_method_args$control$fnscale
     }
     run_gradient_method <- default_run_gradient_method
