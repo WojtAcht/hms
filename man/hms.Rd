@@ -16,7 +16,11 @@ hms(
   local_stopping_condition = default_local_stopping_condition,
   sprouting_condition = max_metric_sprouting_condition(euclidean_distance, 0.5),
   create_population,
-  suggestions = NULL
+  suggestions = NULL,
+  with_gradient_method = FALSE,
+  gradient_method_args = list(method = "L-BFGS-B", poptim = 0.05, pressel = 0.5,
+    control = list(fnscale = -1, maxit = 100)),
+  run_gradient_method
 )
 }
 \arguments{
@@ -66,6 +70,18 @@ hms(
 
 \item{suggestions}{\itemize{
 \item matrix
+}}
+
+\item{with_gradient_method}{\itemize{
+\item logical
+}}
+
+\item{gradient_method_args}{\itemize{
+\item list of parameters that are passed to the gradient method
+}}
+
+\item{run_gradient_method}{\itemize{
+\item function - returns list with named fields: solution, population, value
 }}
 }
 \value{
