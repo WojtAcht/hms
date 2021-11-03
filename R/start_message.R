@@ -8,4 +8,3 @@ HMSStartupMessage <- function() {
   packageStartupMessage(msg)
   invisible()
 }
-

@@ -22,8 +22,7 @@ Imports:
     msm,
     methods,
     uuid,
-    graphics,
-    grDevices
+    graphics
 Suggests: 
     testthat (>= 3.0.0)
 Config/testthat/edition: 3

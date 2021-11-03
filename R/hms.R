@@ -50,10 +50,10 @@ hms <- function(tree_height = 5,
   if (!missing(suggestions) & any(dim(suggestions) != c(population_size, length(lower)))) {
     stop("Provided suggestions have wrong dimensions.")
   }
-  if (missing(create_population) & missing(sigma)){
+  if (missing(create_population) & missing(sigma)) {
     stop("A list of standard deviations (sigma) or a function to create population must be provided.")
   }
-  if(missing(create_population)){
+  if (missing(create_population)) {
     create_population <- default_create_population(sigma)
   }
   root <- if (is.null(suggestions)) {
@@ -72,8 +72,6 @@ hms <- function(tree_height = 5,
   active_demes <- c(root)
   inactive_demes <- c()
   best_solution <- -Inf
-  global_best_fitness_per_metaepoch <- c()
-  best_fitness_per_metaepoch <- c()
   best_fitness <- -Inf
   metaepochs_count <- 0
   metaepoch_snapshots <- list()
@@ -137,6 +135,9 @@ hms <- function(tree_height = 5,
     deme_population_size = population_size,
     lower = lower,
     upper = upper,
+    call = match.call()
+  )
+}
 
 setClass("MetaepochSnapshot", slots = c(
   demes = "list",
@@ -144,6 +145,7 @@ setClass("MetaepochSnapshot", slots = c(
   best_solution = "numeric",
   time_in_seconds = "numeric",
   fitness_evaluations = "numeric"
+))
 
 setClass("hms", slots = c(
   root_id = "character",
@@ -253,32 +255,26 @@ setMethod("summary", "hms", summary.hms)
 
 plot.hms <- function(x) {
   object <- x
-  metaepoch_count <- length(object@global_best_fitness_per_metaepoch)
-  metaepochs <- 1:metaepoch_count
-  max_fitness <- max(object@global_best_fitness_per_metaepoch)
-  min_fitness <- min(object@best_fitness_per_metaepoch)
+  metaepochs <- 1:object@metaepochs_count
+  metaepoch_fitnesses <- mapply(function(snapshot) {
+    snapshot@best_fitness
+  }, object@metaepoch_snapshots)
   plot(metaepochs,
-    ylim = c(min_fitness, max_fitness),
+    ylim = c(min(metaepoch_fitnesses), max(metaepoch_fitnesses)),
     xlab = "metaepoch",
     ylab = "fitness",
     type = "n"
   )
   graphics::lines(metaepochs,
-    object@global_best_fitness_per_metaepoch,
+    metaepoch_fitnesses,
     pch = 16,
     type = "b",
     col = "green3"
   )
-  graphics::lines(metaepochs,
-    object@best_fitness_per_metaepoch,
-    pch = 16,
-    type = "b",
-    col = grDevices::adjustcolor("blue4", alpha.f = 0.1)
-  )
   graphics::legend("bottomright",
     inset = 0.02,
-    legend = c("Best", "Global best"),
-    fill = c("blue", "green")
+    legend = "Best fitness",
+    fill = "green"
   )
 }
 
