@@ -12,6 +12,9 @@
 #' @param sprouting_condition - function
 #' @param create_population - function
 #' @param suggestions - matrix
+#' @param with_gradient_method - logical
+#' @param gradient_method_args - list of parameters that are passed to the gradient method
+#' @param run_gradient_method - function - returns list with named fields: solution, population, value
 #'
 #' @return numeric best solution
 #' @export
@@ -28,7 +31,15 @@ hms <- function(tree_height = 5,
                 local_stopping_condition = default_local_stopping_condition,
                 sprouting_condition = max_metric_sprouting_condition(euclidean_distance, 0.5),
                 create_population,
-                suggestions = NULL) {
+                suggestions = NULL,
+                with_gradient_method = FALSE,
+                gradient_method_args = list(
+                  method = "L-BFGS-B",
+                  poptim = 0.05,
+                  pressel = 0.5,
+                  control = list(fnscale = -1, maxit = 100)
+                ),
+                run_gradient_method) {
   if (tree_height < 2) {
     stop("Max tree height has to be greater or equal 2.")
   }
@@ -50,11 +61,27 @@ hms <- function(tree_height = 5,
   if (!missing(suggestions) & any(dim(suggestions) != c(population_size, length(lower)))) {
     stop("Provided suggestions have wrong dimensions.")
   }
-  if (missing(create_population) & missing(sigma)){
+  if (missing(create_population) & missing(sigma)) {
     stop("A list of standard deviations (sigma) or a function to create population must be provided.")
   }
-  if(missing(create_population)){
+  if (missing(create_population)) {
     create_population <- default_create_population(sigma)
+  }
+  if (with_gradient_method & missing(run_gradient_method)) {
+    gradient_method_args$lower <- lower
+    gradient_method_args$upper <- upper
+    if(gradient_method_args$poptim & (gradient_method_args$poptim < 0 | gradient_method_args$poptim > 1)){
+      stop("gradient_method_args: poptim value has to be within [0,1].")
+    }
+    gradient_method_args$control$maxit <- as.integer(gradient_method_args$control$maxit)
+    if (is.null(gradient_method_args$control$fnscale)) {
+      gradient_method_args$control$fnscale <- -1
+    }
+    if (gradient_method_args$control$fnscale > 0) {
+      warning("gradient_method_args: fnscale should not be positive.")
+      gradient_method_args$control$fnscale <- -1 * gradient_method_args$control$fnscale
+    }
+    run_gradient_method <- default_run_gradient_method
   }
   root <- if (is.null(suggestions)) {
     create_deme(lower, upper, NULL, population_size, create_population)
@@ -123,12 +150,42 @@ hms <- function(tree_height = 5,
       best_fitness = best_fitness,
       best_solution = best_solution,
       time_in_seconds = seconds_since(start_time) - previous_metaepochs_time,
-      fitness_evaluations = fitness_eavaluations_count
+      fitness_evaluations = fitness_eavaluations_count,
+      is_evolutionary = TRUE
     )
     metaepoch_snapshots <- c(metaepoch_snapshots, snapshot)
     metaepochs_count <- metaepochs_count + 1
   }
 
+  # Gradient methods:
+  if (with_gradient_method) {
+    last_metaepoch_snapshot <- utils::tail(metaepoch_snapshots, n = 1)
+    leaves <- last_metaepoch_snapshot[[1]]@demes
+    leaves_after_gradient_method <- c()
+    for (deme in leaves_after_gradient_method) {
+      result <- run_gradient_method(deme, fitness, gradient_method_args)
+      leaves_after_gradient_method <- c(leaves_after_gradient_method, update_deme(deme, result))
+      if (length(deme@best_fitness) != 0 && deme@best_fitness > best_fitness) {
+        best_fitness <- deme@best_fitness
+        best_solution <- deme@best_solution
+      }
+    }
+    # TODO: dodać jakąś funkcję na to
+    previous_metaepochs_time <- 0
+    for (metaepoch_snapshot in metaepoch_snapshots) {
+      previous_metaepochs_time <- previous_metaepochs_time + metaepoch_snapshot@time_in_seconds
+    }
+    snapshot <- methods::new("MetaepochSnapshot",
+      demes = leaves_after_gradient_method,
+      best_fitness = best_fitness,
+      best_solution = best_solution,
+      time_in_seconds = seconds_since(start_time) - previous_metaepochs_time,
+      fitness_evaluations = 0, # TODO
+      is_evolutionary = FALSE
+    )
+    metaepoch_snapshots <- c(metaepoch_snapshots, snapshot)
+    metaepochs_count <- metaepochs_count + 1
+  }
   methods::new("hms",
     root_id = root@id,
     metaepoch_snapshots = metaepoch_snapshots,
@@ -149,7 +206,8 @@ setClass("MetaepochSnapshot", slots = c(
   best_fitness = "numeric",
   best_solution = "numeric",
   time_in_seconds = "numeric",
-  fitness_evaluations = "numeric"
+  fitness_evaluations = "numeric",
+  is_evolutionary = "logical"
 ))
 
 setClass("hms", slots = c(
@@ -259,7 +317,28 @@ summary.hms <- function(object, ...) {
 setMethod("summary", "hms", summary.hms)
 
 plot.hms <- function(x) {
-  cat("TODO")
+  object <- x
+  metaepochs <- 1:object@metaepochs_count
+  metaepoch_fitnesses <- mapply(function(snapshot) {
+    snapshot@best_fitness
+  }, object@metaepoch_snapshots)
+  plot(metaepochs,
+    ylim = c(min(metaepoch_fitnesses), max(metaepoch_fitnesses)),
+    xlab = "metaepoch",
+    ylab = "fitness",
+    type = "n"
+  )
+  graphics::lines(metaepochs,
+    metaepoch_fitnesses,
+    pch = 16,
+    type = "b",
+    col = "green3"
+  )
+  graphics::legend("bottomright",
+    inset = 0.02,
+    legend = "Best fitness",
+    fill = "green"
+  )
 }
 
 setMethod("plot", "hms", plot.hms)
