@@ -34,3 +34,10 @@ default_local_stopping_condition <- function(deme, previous_metaepoch_snapshots)
 default_global_stopping_condition <- function(metaepoch_snapshots) {
   length(metaepoch_snapshots) > 10
 }
+
+max_fitness_evaluations_global_stopping_condition <- function(max_evaluations) {
+  function(metaepoch_snapshots) {
+    length(metaepoch_snapshots) > 0 &&
+      tail(metaepoch_snapshots, n = 1)[[1]]@fitness_evaluations > max_evaluations
+  }
+}
