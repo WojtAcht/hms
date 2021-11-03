@@ -2,4 +2,4 @@
 
 export(ga_metaepoch)
 export(hms)
-export(max_euclidean_distance_sprouting_condition)
+export(max_metric_sprouting_condition)

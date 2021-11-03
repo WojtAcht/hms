@@ -22,7 +22,6 @@ Imports:
     msm,
     methods,
     uuid,
-    crayon,
     graphics,
     grDevices
 Suggests: 

@@ -5,7 +5,7 @@
 \title{Title}
 \usage{
 hms(
-  max_tree_height = 5,
+  tree_height = 5,
   fitness,
   lower,
   upper,
@@ -14,11 +14,13 @@ hms(
   run_metaepoch = ga_metaepoch(list(list(), list(), list(), list(), list())),
   global_stopping_condition = default_global_stopping_condition,
   local_stopping_condition = default_local_stopping_condition,
-  sprouting_condition = max_euclidean_distance_sprouting_condition(0.5)
+  sprouting_condition = max_metric_sprouting_condition(euclidean_distance, 0.5),
+  create_population,
+  suggestions = NULL
 )
 }
 \arguments{
-\item{max_tree_height}{\itemize{
+\item{tree_height}{\itemize{
 \item numeric - default value: 5
 }}
 
@@ -56,6 +58,14 @@ hms(
 
 \item{sprouting_condition}{\itemize{
 \item function
+}}
+
+\item{create_population}{\itemize{
+\item function
+}}
+
+\item{suggestions}{\itemize{
+\item matrix
 }}
 }
 \value{
