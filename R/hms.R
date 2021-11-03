@@ -50,10 +50,10 @@ hms <- function(tree_height = 5,
   if (!missing(suggestions) & any(dim(suggestions) != c(population_size, length(lower)))) {
     stop("Provided suggestions have wrong dimensions.")
   }
-  if (missing(create_population) & missing(sigma)){
+  if (missing(create_population) & missing(sigma)) {
     stop("A list of standard deviations (sigma) or a function to create population must be provided.")
   }
-  if(missing(create_population)){
+  if (missing(create_population)) {
     create_population <- default_create_population(sigma)
   }
   root <- if (is.null(suggestions)) {
@@ -254,7 +254,28 @@ summary.hms <- function(object, ...) {
 setMethod("summary", "hms", summary.hms)
 
 plot.hms <- function(x) {
-  cat("TODO")
+  object <- x
+  metaepochs <- 1:object@metaepochs_count
+  metaepoch_fitnesses <- mapply(function(snapshot) {
+    snapshot@best_fitness
+  }, object@metaepoch_snapshots)
+  plot(metaepochs,
+    ylim = c(min(metaepoch_fitnesses), max(metaepoch_fitnesses)),
+    xlab = "metaepoch",
+    ylab = "fitness",
+    type = "n"
+  )
+  graphics::lines(metaepochs,
+    metaepoch_fitnesses,
+    pch = 16,
+    type = "b",
+    col = "green3"
+  )
+  graphics::legend("bottomright",
+    inset = 0.02,
+    legend = "Best fitness",
+    fill = "green"
+  )
 }
 
 setMethod("plot", "hms", plot.hms)
