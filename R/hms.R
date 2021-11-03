@@ -75,11 +75,16 @@ hms <- function(tree_height = 5,
   best_fitness <- -Inf
   metaepochs_count <- 0
   metaepoch_snapshots <- list()
+  fitness_eavaluations_count <- 0
+  f <- function(x) {
+    fitness_eavaluations_count <<- fitness_eavaluations_count + 1
+    fitness(x)
+  }
   while (!global_stopping_condition(metaepoch_snapshots) && length(active_demes) > 0) {
     new_demes <- c()
     for (deme in active_demes) {
       start_metaepoch_time <- Sys.time()
-      metaepoch_result <- run_metaepoch(fitness, deme@population, lower, upper, deme@level)
+      metaepoch_result <- run_metaepoch(f, deme@population, lower, upper, deme@level)
       end_metaepoch_time <- Sys.time()
       total_metaepoch_time <- total_metaepoch_time + (end_metaepoch_time - start_metaepoch_time)
       deme <- update_deme(metaepoch_result, deme)
@@ -118,7 +123,7 @@ hms <- function(tree_height = 5,
       best_fitness = best_fitness,
       best_solution = best_solution,
       time_in_seconds = seconds_since(start_time) - previous_metaepochs_time,
-      fitness_evaluations = 0 # TODO
+      fitness_evaluations = fitness_eavaluations_count
     )
     metaepoch_snapshots <- c(metaepoch_snapshots, snapshot)
     metaepochs_count <- metaepochs_count + 1
