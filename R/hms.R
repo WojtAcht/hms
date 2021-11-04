@@ -70,7 +70,7 @@ hms <- function(tree_height = 5,
   if (with_gradient_method & missing(run_gradient_method)) {
     gradient_method_args$lower <- lower
     gradient_method_args$upper <- upper
-    if(gradient_method_args$poptim & (gradient_method_args$poptim < 0 | gradient_method_args$poptim > 1)){
+    if (gradient_method_args$poptim & (gradient_method_args$poptim < 0 | gradient_method_args$poptim > 1)) {
       stop("gradient_method_args: poptim value has to be within [0,1].")
     }
     gradient_method_args$control$maxit <- as.integer(gradient_method_args$control$maxit)
@@ -162,12 +162,17 @@ hms <- function(tree_height = 5,
     last_metaepoch_snapshot <- utils::tail(metaepoch_snapshots, n = 1)
     leaves <- last_metaepoch_snapshot[[1]]@demes
     leaves_after_gradient_method <- c()
-    for (deme in leaves_after_gradient_method) {
-      result <- run_gradient_method(deme, fitness, gradient_method_args)
-      leaves_after_gradient_method <- c(leaves_after_gradient_method, update_deme(deme, result))
-      if (length(deme@best_fitness) != 0 && deme@best_fitness > best_fitness) {
-        best_fitness <- deme@best_fitness
-        best_solution <- deme@best_solution
+    for (deme in leaves) {
+      if (length(deme@best_fitness) != 0) {
+        result <- run_gradient_method(deme, fitness, gradient_method_args)
+        deme_after_gradient_method <- update_deme(result, deme)
+        leaves_after_gradient_method <- c(leaves_after_gradient_method, deme_after_gradient_method)
+        if (deme_after_gradient_method@best_fitness > best_fitness) {
+          best_fitness <- deme_after_gradient_method@best_fitness
+          best_solution <- deme_after_gradient_method@best_solution
+        }
+      } else {
+        leaves_after_gradient_method <- c(leaves_after_gradient_method, deme)
       }
     }
     # TODO: dodać jakąś funkcję na to
