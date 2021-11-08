@@ -59,7 +59,7 @@ hms <- function(tree_height = 5,
     stop("population_size_per_tree_level must be a list or a vector.")
   }
   if (!length(population_size_per_tree_level) >= tree_height) {
-    stop("population_size_per_tree_level have tree_height elements.")
+    stop("population_size_per_tree_level must have at least tree_height elements.")
   }
   if (!missing(suggestions) & !is.matrix(suggestions)) {
     stop("Invalid object for argument \"suggestions\": should be or extend class matrix.")
