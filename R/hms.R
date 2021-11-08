@@ -25,7 +25,7 @@ hms <- function(tree_height = 5,
                 lower,
                 upper,
                 sigma,
-                population_size = 20,
+                population_size_per_tree_level = rep(10, tree_level),
                 run_metaepoch = ga_metaepoch(list(list(), list(), list(), list(), list())), # TODO :)
                 global_stopping_condition = default_global_stopping_condition,
                 local_stopping_condition = default_local_stopping_condition,
@@ -55,10 +55,16 @@ hms <- function(tree_height = 5,
   if (!length(sigma) >= tree_height) {
     stop("The list of standard deviations (sigma) must have tree_height elements.")
   }
+  if (!is.vector(population_size_per_tree_level) & !is.list(population_size_per_tree_level)) {
+    stop("population_size_per_tree_level must be a list or a vector.")
+  }
+  if (!length(population_size_per_tree_level) >= tree_height) {
+    stop("population_size_per_tree_level must have at least tree_height elements.")
+  }
   if (!missing(suggestions) & !is.matrix(suggestions)) {
     stop("Invalid object for argument \"suggestions\": should be or extend class matrix.")
   }
-  if (!missing(suggestions) & any(dim(suggestions) != c(population_size, length(lower)))) {
+  if (!missing(suggestions) & any(dim(suggestions) != c(population_size_per_tree_level[[1]], length(lower)))) {
     stop("Provided suggestions have wrong dimensions.")
   }
   if (missing(create_population) & missing(sigma)) {
@@ -84,7 +90,7 @@ hms <- function(tree_height = 5,
     run_gradient_method <- default_run_gradient_method
   }
   root <- if (is.null(suggestions)) {
-    create_deme(lower, upper, NULL, population_size, create_population)
+    create_deme(lower, upper, NULL, population_size_per_tree_level[[1]], create_population)
   } else {
     methods::new("Deme",
       population = suggestions,
@@ -124,9 +130,9 @@ hms <- function(tree_height = 5,
         next
       }
       new_demes <- c(new_demes, deme)
-      if (deme@level > tree_height) next
+      if (deme@level >= tree_height) next
       if (sprouting_condition(metaepoch_result$solution, deme@level, c(active_demes, inactive_demes))) {
-        new_deme <- create_deme(lower, upper, deme, population_size, create_population)
+        new_deme <- create_deme(lower, upper, deme, population_size_per_tree_level[[deme@level + 1]], create_population)
         new_demes <- c(new_demes, new_deme)
       }
     }
@@ -199,7 +205,7 @@ hms <- function(tree_height = 5,
     total_time_in_seconds = seconds_since(start_time),
     total_metaepoch_time_in_seconds = as.numeric(total_metaepoch_time, units = "secs"),
     metaepochs_count = metaepochs_count,
-    deme_population_size = population_size,
+    deme_population_size = population_size_per_tree_level,
     lower = lower,
     upper = upper,
     call = match.call()
