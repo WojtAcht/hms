@@ -8,7 +8,7 @@ test_that("HMS works - trivial 1D function:", {
     lower = -5,
     upper = 5,
     sigma = sigma,
-    population_size = 100,
+    population_size_per_tree_level = c(50, 25, 15),
     tree_height = 3
   )
   expected_result <- 5
@@ -31,7 +31,7 @@ test_that("HMS works - Rastrigin:", {
     lower = lower,
     upper = upper,
     sigma = sigma,
-    population_size = 100,
+    population_size_per_tree_level = c(50, 25, 15),
     tree_height = 3
   )
   expected_result <- c(0, 0)
@@ -54,7 +54,7 @@ test_that("HMS works - Ackley:", {
     lower = lower,
     upper = upper,
     sigma = sigma,
-    population_size = 100,
+    population_size_per_tree_level = c(50, 25, 15),
     tree_height = 3
   )
   expected_result <- c(0, 0)
@@ -77,7 +77,7 @@ test_that("HMS works - Baele:", {
     lower = lower,
     upper = upper,
     sigma = sigma,
-    population_size = 50,
+    population_size_per_tree_level = c(50, 25, 15),
     tree_height = 3
   )
   expected_result <- c(3, 0.5)
@@ -100,7 +100,7 @@ test_that("HMS works - Eggholder:", {
     lower = lower,
     upper = upper,
     sigma = sigma,
-    population_size = 100,
+    population_size_per_tree_level = c(50, 25, 15),
     tree_height = 3
   )
   expected_fitness <- Eggholder(c(512, 404.2319))
