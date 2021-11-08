@@ -117,10 +117,16 @@ hms <- function(tree_height = 5,
     new_demes <- c()
     for (deme in active_demes) {
       start_metaepoch_time <- Sys.time()
-      metaepoch_result <- run_metaepoch(f, deme@population, lower, upper, deme@level)
+      deme_evaluations_count <- 0
+      deme_f <- function(x) {
+        deme_evaluations_count <<- deme_evaluations_count + 1
+        f(x)
+      }
+      metaepoch_result <- run_metaepoch(deme_f, deme@population, lower, upper, deme@level)
       end_metaepoch_time <- Sys.time()
       total_metaepoch_time <- total_metaepoch_time + (end_metaepoch_time - start_metaepoch_time)
       deme <- update_deme(metaepoch_result, deme)
+      deme@evaluations_count <- deme@evaluations_count + deme_evaluations_count
       if (local_stopping_condition(deme, metaepoch_snapshots)) {
         if (deme@best_fitness > best_fitness) {
           best_fitness <- deme@best_fitness
@@ -272,7 +278,7 @@ setMethod("printTree", "hms", function(object) {
       }
       cat(sprintf(x, fmt = "%#.2f"))
     }
-    cat(paste(") = ", sprintf(deme@best_fitness, fmt = "%#.2f"), deme_distinguisher, "\n", sep = ""))
+    cat(paste(") = ", sprintf(deme@best_fitness, fmt = "%#.2f"), deme_distinguisher, " evaluations: ", deme@evaluations_count, "\n", sep = ""))
   }
 
   print_tree_from_deme <- function(deme, prefix = "") {
