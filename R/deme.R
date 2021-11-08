@@ -21,10 +21,11 @@ rnorm_population <- function(mean, lower, upper, population_size, tree_level, si
       sd = sd[[i]],
       lower = lower[[i]],
       upper = upper[[i]],
-      n = population_size
+      n = population_size - 1
     )
   }
-  mapply(random_coordinate, seq_along(lower))
+  population <- mapply(random_coordinate, seq_along(lower))
+  rbind(population, mean)
 }
 
 runif_population <- function(mean, lower, upper, population_size, tree_level, sigma) {
