@@ -168,7 +168,7 @@ hms <- function(tree_height = 5,
     )
     if (monitor) {
       cat("Metaepoch: ", metaepochs_count, "\n")
-      prind(snapshot@demes, root@id, best_solution)
+      print_tree(snapshot@demes, root@id, best_solution)
       cat("\n\n")
     }
     metaepoch_snapshots <- c(metaepoch_snapshots, snapshot)
@@ -208,8 +208,6 @@ hms <- function(tree_height = 5,
     )
     metaepoch_snapshots <- c(metaepoch_snapshots, snapshot)
     metaepochs_count <- metaepochs_count + 1
-
-    print(length(active_demes))
   }
   methods::new("hms",
     root_id = root@id,
@@ -260,7 +258,7 @@ setMethod("show", "hms", function(object) {
 
 setGeneric("printTree", function(object) standardGeneric("printTree"))
 
-prind <- function(demes, root_id, best_solution) {
+print_tree <- function(demes, root_id, best_solution) {
   get_deme_by_id <- function(id) {
     Filter(function(deme) {
       deme@id == id
@@ -323,7 +321,7 @@ setMethod("printTree", "hms", function(object) {
     return()
   }
   demes <- last_metaepoch_snapshot[[1]]@demes
-  prind(demes, object@root_id, object@best_solution)
+  print_tree(demes, object@root_id, object@best_solution)
 })
 
 
