@@ -9,7 +9,7 @@ run_ga <- function(max_evaluations_count) {
       fitness(x)
     }
   }
-  iter <- round(max_evaluations_count / 100) + 1
+  iter <- round(max_evaluations_count / 80) + 1
   result <- ga(
     type = "real-valued",
     fitness = f,
@@ -17,13 +17,15 @@ run_ga <- function(max_evaluations_count) {
     upper = upper,
     monitor = FALSE,
     maxiter = iter,
-    popSize = 100
+    popSize = 200
   )
   result@fitnessValue
 }
 
 run_ga_n_times <- function(max_evaluations_count, n) {
+  cat("GA", max_evaluations_count, "\n")
   mapply(function(x) {
+    cat("GA: ", x, "\n")
     run_ga(max_evaluations_count)
   }, 1:n)
 }
@@ -33,10 +35,10 @@ plot_mean_ga <- function(fitness, lower, upper, evaluations, n) {
     mean(run_ga_n_times(x, n))
   }, evaluations)
   plot(evaluations,
-    results,
-    ylim = c(min(results), max(results)),
-    xlab = "evaluations",
-    ylab = "fitness"
+       results,
+       ylim = c(min(results), max(results)),
+       xlab = "evaluations",
+       ylab = "fitness"
   )
   results
 }
@@ -51,12 +53,20 @@ run_hms <- function(max_evaluations_count) {
     population_size_per_tree_level = c(50, 30, 15),
     sigma = sigma,
     global_stopping_condition = max_fitness_evaluations_global_stopping_condition(max_evaluations_count),
-    sprouting_condition = max_metric_sprouting_condition(euclidean_distance, 25)
+    sprouting_condition = max_metric_sprouting_condition(euclidean_distance, 5000),
+    local_stopping_condition = function(deme, previous_metaepoch_snapshots) {
+      max_metaepochs_without_improvement <- 10
+      best_fitness_metaepoch <- match(deme@best_fitness, deme@best_fitnesses_per_metaepoch)
+      metaepoch_count <- length(deme@best_fitnesses_per_metaepoch)
+      best_fitness_metaepoch < metaepoch_count - max_metaepochs_without_improvement
+    }
   )
   result@best_fitness
 }
 run_hms_n_times <- function(max_evaluations_count, n) {
+  cat("HMS", max_evaluations_count, "\n")
   mapply(function(x) {
+    cat("HMS: ", x, "\n")
     run_hms(max_evaluations_count)
   }, 1:n)
 }
@@ -66,10 +76,10 @@ plot_mean_hms <- function(fitness, lower, upper, sigma, evaluations, n) {
     run_hms_n_times(x, n)
   }, evaluations)
   plot(evaluations,
-    results,
-    ylim = c(min(results), max(results)),
-    xlab = "evaluations",
-    ylab = "fitness"
+       results,
+       ylim = c(min(results), max(results)),
+       xlab = "evaluations",
+       ylab = "fitness"
   )
   results
 }
@@ -88,40 +98,40 @@ plot_hms_ga <- function(fitness, lower, upper, sigma, evaluations, n = 10) {
   min_fitness <- min(c(hms_mean_results, hms_median_results, ga_mean_results, ga_median_results))
   max_fitness <- max(c(hms_mean_results, hms_median_results, ga_mean_results, ga_median_results))
   plot(evaluations,
-    xlim = c(min(evaluations), max(evaluations)),
-    ylim = c(min_fitness, max_fitness),
-    xlab = "evaluations",
-    ylab = "fitness",
-    type = "n"
+       xlim = c(min(evaluations), max(evaluations)),
+       ylim = c(min_fitness, max_fitness),
+       xlab = "evaluations",
+       ylab = "fitness",
+       type = "n"
   )
   lines(evaluations,
-    hms_mean_results,
-    pch = 16,
-    type = "p",
-    col = "green3"
+        hms_mean_results,
+        pch = 16,
+        type = "p",
+        col = "green3"
   )
   lines(evaluations,
-    hms_median_results,
-    pch = 16,
-    type = "p",
-    col = "lightgreen"
+        hms_median_results,
+        pch = 16,
+        type = "p",
+        col = "red"
   )
   lines(evaluations,
-    ga_median_results,
-    pch = 16,
-    type = "p",
-    col = "cyan3"
+        ga_median_results,
+        pch = 16,
+        type = "p",
+        col = "cyan3"
   )
   lines(evaluations,
-    ga_mean_results,
-    pch = 16,
-    type = "p",
-    col = "blue3"
+        ga_mean_results,
+        pch = 16,
+        type = "p",
+        col = "blue3"
   )
   legend("bottomright",
-    inset = 0.02,
-    legend = c("HMS mean", "HMS median", "GA mean", "GA median"),
-    fill = c("green", "lightgreen", "blue", "cyan")
+         inset = 0.02,
+         legend = c("HMS mean", "HMS median", "GA mean", "GA median"),
+         fill = c("green", "red", "blue", "cyan")
   )
 }
 
@@ -132,26 +142,26 @@ plot_hms_ga <- function(fitness, lower, upper, sigma, evaluations, n = 10) {
 # upper = rep(32.768, 10)
 # sigma = list(rep(5,10), rep(3,10), rep(2,10), rep(2,10))
 
-fitness <- Eggholder
-lower <- c(-512, -512)
-upper <- c(512, 512)
-sigma <- list(c(50, 50), c(10, 10), c(5, 5))
+fitness <- function(x) { -1 * Schwefel(x) }
+lower <- rep(-500, 5)
+upper <- rep(500, 5)
+sigma <- list(rep(50, 5), rep(20, 5), rep(5, 5))
 
 
 ga_config <- list(
   list(
     pcrossover = 0.8,
-    pmutation = 0.3,
+    pmutation = 0.4,
     mutation = rnorm_mutation(lower, upper, sigma[[1]])
   ),
   list(
     pcrossover = 0.8,
-    pmutation = 0.1,
+    pmutation = 0.2,
     mutation = rnorm_mutation(lower, upper, sigma[[2]])
   ),
   list(
     pcrossover = 0.8,
-    pmutation = 0.05,
+    pmutation = 0.2,
     mutation = rnorm_mutation(lower, upper, sigma[[3]])
   )
 )

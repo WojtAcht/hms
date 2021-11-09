@@ -165,6 +165,16 @@ hms <- function(tree_height = 5,
       fitness_evaluations = fitness_eavaluations_count,
       is_evolutionary = TRUE
     )
+    if (monitor) {
+      cat("Metaepoch: ", metaepochs_count, "\n")
+      population_size <- 0
+      for (deme in active_demes) {
+        population_size <- population_size + base::nrow(deme@population)
+      }
+      cat("Whole population size: ", population_size, "\n")
+      print_tree(snapshot@demes, root@id, best_solution)
+      cat("\n\n")
+    }
     metaepoch_snapshots <- c(metaepoch_snapshots, snapshot)
     metaepochs_count <- metaepochs_count + 1
   }
@@ -270,7 +280,17 @@ setMethod("printTree", "hms", function(object) {
     }, demes)
   }
   print_deme <- function(deme) {
-    deme_distinguisher <- if (deme@best_solution == object@best_solution) "***" else ""
+    deme_distinguisher <- if (all(deme@best_solution == best_solution)) "***" else ""
+    if (!is.null(deme@sprout)) {
+      cat("spr: (")
+      for (x in deme@sprout) {
+        if (x != deme@sprout[[1]]) {
+          cat(", ")
+        }
+        cat(sprintf(x, fmt = "%#.2f"))
+      }
+      cat("); ")
+    }
     cat(paste(deme_distinguisher, "f(", sep = ""))
     for (x in deme@best_solution) {
       if (x != deme@best_solution[[1]]) {
