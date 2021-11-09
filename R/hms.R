@@ -137,7 +137,7 @@ hms <- function(tree_height = 5,
       }
       new_demes <- c(new_demes, deme)
       if (deme@level >= tree_height) next
-      if (sprouting_condition(metaepoch_result$solution, deme@level, c(active_demes, inactive_demes))) {
+      if (sprouting_condition(metaepoch_result$solution, deme@level + 1, c(active_demes, inactive_demes))) {
         new_deme <- create_deme(lower, upper, deme, population_size_per_tree_level[[deme@level + 1]], create_population)
         new_demes <- c(new_demes, new_deme)
       }
