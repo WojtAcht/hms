@@ -17,7 +17,8 @@ run_ga <- function(max_evaluations_count) {
     upper = upper,
     monitor = FALSE,
     maxiter = iter,
-    popSize =  100)
+    popSize = 100
+  )
   result@fitnessValue
 }
 
@@ -28,7 +29,9 @@ run_ga_n_times <- function(max_evaluations_count, n) {
 }
 
 plot_mean_ga <- function(fitness, lower, upper, evaluations, n) {
-  results <- mapply(function(x){mean(run_ga_n_times(x,n))}, evaluations)
+  results <- mapply(function(x) {
+    mean(run_ga_n_times(x, n))
+  }, evaluations)
   plot(evaluations,
     results,
     ylim = c(min(results), max(results)),
@@ -59,7 +62,9 @@ run_hms_n_times <- function(max_evaluations_count, n) {
 }
 
 plot_mean_hms <- function(fitness, lower, upper, sigma, evaluations, n) {
-  results <- mapply(function(x){run_hms_n_times(x,n)}, evaluations)
+  results <- mapply(function(x) {
+    run_hms_n_times(x, n)
+  }, evaluations)
   plot(evaluations,
     results,
     ylim = c(min(results), max(results)),
@@ -69,9 +74,13 @@ plot_mean_hms <- function(fitness, lower, upper, sigma, evaluations, n) {
   results
 }
 
-plot_hms_ga <- function(fitness, lower, upper, sigma, evaluations, n=10) {
-  hms_results <- lapply(evaluations, function(x){run_hms_n_times(x,n)})
-  ga_results <- lapply(evaluations, function(x){run_ga_n_times(x,n)})
+plot_hms_ga <- function(fitness, lower, upper, sigma, evaluations, n = 10) {
+  hms_results <- lapply(evaluations, function(x) {
+    run_hms_n_times(x, n)
+  })
+  ga_results <- lapply(evaluations, function(x) {
+    run_ga_n_times(x, n)
+  })
   ga_mean_results <- mapply(mean, ga_results)
   hms_mean_results <- mapply(mean, hms_results)
   ga_median_results <- mapply(median, ga_results)
@@ -92,10 +101,10 @@ plot_hms_ga <- function(fitness, lower, upper, sigma, evaluations, n=10) {
     col = "green3"
   )
   lines(evaluations,
-        hms_median_results,
-        pch = 16,
-        type = "p",
-        col = "lightgreen"
+    hms_median_results,
+    pch = 16,
+    type = "p",
+    col = "lightgreen"
   )
   lines(evaluations,
     ga_median_results,
@@ -104,15 +113,15 @@ plot_hms_ga <- function(fitness, lower, upper, sigma, evaluations, n=10) {
     col = "cyan3"
   )
   lines(evaluations,
-        ga_mean_results,
-        pch = 16,
-        type = "p",
-        col = "blue3"
+    ga_mean_results,
+    pch = 16,
+    type = "p",
+    col = "blue3"
   )
   legend("bottomright",
-         inset = 0.02,
-         legend = c("HMS mean", "HMS median", "GA mean", "GA median"),
-         fill = c("green", "lightgreen", "blue", "cyan")
+    inset = 0.02,
+    legend = c("HMS mean", "HMS median", "GA mean", "GA median"),
+    fill = c("green", "lightgreen", "blue", "cyan")
   )
 }
 
