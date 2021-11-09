@@ -7,8 +7,8 @@ setClass("Deme", slots = c(
   level = "numeric",
   best_fitness = "numeric",
   best_solution = "numeric",
-  best_solutions_per_metaepoch = "numeric",
-  best_fitnesses_per_metaepoch = "numeric",
+  best_solutions_per_metaepoch = "list",
+  best_fitnesses_per_metaepoch = "list",
   sprout = "numericOrNULL",
   parent_id = "characterOrNULL",
   evaluations_count = "numeric"
@@ -64,7 +64,7 @@ create_deme <- function(lower, upper, parent, population_size, create_population
   new_sprout <- if (is.null(parent)) {
     NULL
   } else {
-    utils::tail(parent@best_solutions_per_metaepoch, n = 1)
+    unlist(utils::tail(parent@best_solutions_per_metaepoch, n = 1))
   }
   methods::new("Deme",
     population = new_population,
@@ -89,8 +89,8 @@ update_deme <- function(metaepoch_result, deme) {
   potential_sprout <- metaepoch_result$solution
   metaepoch_best <- metaepoch_result$value
   deme@population <- metaepoch_result$population
-  deme@best_fitnesses_per_metaepoch <- c(deme@best_fitnesses_per_metaepoch, metaepoch_best)
-  deme@best_solutions_per_metaepoch <- c(deme@best_solutions_per_metaepoch, potential_sprout)
+  deme@best_fitnesses_per_metaepoch <- c(deme@best_fitnesses_per_metaepoch, list(metaepoch_best))
+  deme@best_solutions_per_metaepoch <- c(deme@best_solutions_per_metaepoch, list(potential_sprout))
   deme_best <- ifelse(length(deme@best_fitness) == 0, -Inf, deme@best_fitness)
   if (metaepoch_best > deme_best) {
     deme@best_fitness <- metaepoch_best

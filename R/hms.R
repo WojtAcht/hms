@@ -39,9 +39,10 @@ hms <- function(tree_height = 5,
                   pressel = 0.5,
                   control = list(fnscale = -1, maxit = 100)
                 ),
-                run_gradient_method) {
-  if (tree_height < 2) {
-    stop("Max tree height has to be greater or equal 2.")
+                run_gradient_method,
+                monitor = FALSE) {
+  if (tree_height < 1) {
+    stop("Max tree height has to be greater or equal 1.")
   }
   if (!is.function(fitness)) {
     stop("Fitness function must be provided.")
@@ -137,7 +138,7 @@ hms <- function(tree_height = 5,
       }
       new_demes <- c(new_demes, deme)
       if (deme@level >= tree_height) next
-      if (sprouting_condition(metaepoch_result$solution, deme@level, c(active_demes, inactive_demes))) {
+      if (sprouting_condition(metaepoch_result$solution, deme@level + 1, c(active_demes, inactive_demes))) {
         new_deme <- create_deme(lower, upper, deme, population_size_per_tree_level[[deme@level + 1]], create_population)
         new_demes <- c(new_demes, new_deme)
       }
@@ -165,6 +166,11 @@ hms <- function(tree_height = 5,
       fitness_evaluations = fitness_eavaluations_count,
       is_evolutionary = TRUE
     )
+    if (monitor) {
+      cat("Metaepoch: ", metaepochs_count, "\n")
+      prind(snapshot@demes, root@id, best_solution)
+      cat("\n\n")
+    }
     metaepoch_snapshots <- c(metaepoch_snapshots, snapshot)
     metaepochs_count <- metaepochs_count + 1
   }
@@ -202,6 +208,8 @@ hms <- function(tree_height = 5,
     )
     metaepoch_snapshots <- c(metaepoch_snapshots, snapshot)
     metaepochs_count <- metaepochs_count + 1
+
+    print(length(active_demes))
   }
   methods::new("hms",
     root_id = root@id,
@@ -252,13 +260,7 @@ setMethod("show", "hms", function(object) {
 
 setGeneric("printTree", function(object) standardGeneric("printTree"))
 
-setMethod("printTree", "hms", function(object) {
-  last_metaepoch_snapshot <- utils::tail(object@metaepoch_snapshots, n = 1)
-  if (length(last_metaepoch_snapshot) == 0) {
-    return()
-  }
-  demes <- last_metaepoch_snapshot[[1]]@demes
-
+prind <- function(demes, root_id, best_solution) {
   get_deme_by_id <- function(id) {
     Filter(function(deme) {
       deme@id == id
@@ -270,7 +272,17 @@ setMethod("printTree", "hms", function(object) {
     }, demes)
   }
   print_deme <- function(deme) {
-    deme_distinguisher <- if (deme@best_solution == object@best_solution) "***" else ""
+    deme_distinguisher <- if (deme@best_solution == best_solution) "***" else ""
+    if (!is.null(deme@sprout)) {
+      cat("spr: (")
+      for (x in deme@sprout) {
+        if (x != deme@sprout[[1]]) {
+          cat(", ")
+        }
+        cat(sprintf(x, fmt = "%#.2f"))
+      }
+      cat("); ")
+    }
     cat(paste(deme_distinguisher, "f(", sep = ""))
     for (x in deme@best_solution) {
       if (x != deme@best_solution[[1]]) {
@@ -300,9 +312,18 @@ setMethod("printTree", "hms", function(object) {
       print_tree_from_deme(child, prefix = paste(prefix, if (is_last) " " else "|", "   ", sep = ""))
     }
   }
-  root <- get_deme_by_id(object@root_id)
+  root <- get_deme_by_id(root_id)
   print_deme(root)
   print_tree_from_deme(root)
+}
+
+setMethod("printTree", "hms", function(object) {
+  last_metaepoch_snapshot <- utils::tail(object@metaepoch_snapshots, n = 1)
+  if (length(last_metaepoch_snapshot) == 0) {
+    return()
+  }
+  demes <- last_metaepoch_snapshot[[1]]@demes
+  prind(demes, object@root_id, object@best_solution)
 })
 
 
