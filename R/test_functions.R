@@ -11,7 +11,7 @@
 Rastrigin <- function(x) {
   sum <- 10 * length(x)
   for (x_i in x) {
-    sum <- sum + (x_i^2 - 10*cos(2 * pi * x_i))
+    sum <- sum + (x_i^2 - 10 * cos(2 * pi * x_i))
   }
   sum
 }
@@ -67,12 +67,10 @@ Schwefel <- function(x) {
 }
 
 Griewank <- function(xx) {
-
   ii <- c(1:length(xx))
-  sum <- sum(xx^2/4000)
-  prod <- prod(cos(xx/sqrt(ii)))
+  sum <- sum(xx^2 / 4000)
+  prod <- prod(cos(xx / sqrt(ii)))
 
   y <- sum - prod + 1
   return(y)
 }
-

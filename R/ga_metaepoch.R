@@ -12,7 +12,7 @@ ga_metaepoch <- function(config_ga) {
     legal_passed_param_names <- Filter(function(name) {
       name %in% methods::formalArgs(GA::ga)
     }, config)
-    params <- list("maxiter" = 10, "popSize" = nrow(suggestions))
+    params <- list("maxiter" = 5, "popSize" = nrow(suggestions))
     for (param_name in legal_passed_param_names) {
       params[param_name] <- config[param_name]
     }
@@ -27,5 +27,21 @@ ga_metaepoch <- function(config_ga) {
     params$keepBest <- TRUE
     GA <- do.call(GA::ga, params)
     list("solution" = c(GA@solution), "population" = GA@population, "value" = GA@fitnessValue)
+  }
+}
+
+rnorm_mutation <- function(lower, upper, sd) {
+  function(object, parent) {
+    parent <- as.vector(object@population[parent, ])
+    random_coordinate <- function(i) {
+      msm::rtnorm(
+        mean = parent[[i]],
+        sd = sd[[i]],
+        lower = lower[[i]],
+        upper = upper[[i]],
+        n = 1
+      )
+    }
+    as.vector(mapply(random_coordinate, seq_along(lower)))
   }
 }
