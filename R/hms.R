@@ -134,7 +134,7 @@ hms <- function(tree_height = 5,
           best_fitness <- deme@best_fitness
           best_solution <- deme@best_solution
         }
-        deme$isActive <- FALSE
+        deme@isActive <- FALSE
         inactive_demes <- c(inactive_demes, deme)
         next
       }
@@ -281,7 +281,7 @@ print_tree <- function(demes, root_id, best_solution) {
     }, demes)
   }
   print_deme <- function(deme) {
-    deme_distinguisher <- if (deme@best_solution == best_solution) "***" else ""
+    deme_distinguisher <- if (all(deme@best_solution == best_solution)) "***" else ""
     if (!is.null(deme@sprout)) {
       cat("spr: (")
       for (x in deme@sprout) {
@@ -299,7 +299,8 @@ print_tree <- function(demes, root_id, best_solution) {
       }
       cat(sprintf(x, fmt = "%#.2f"))
     }
-    cat(paste(") = ", sprintf(deme@best_fitness, fmt = "%#.2f"), deme_distinguisher, " evaluations: ", deme@evaluations_count, "\n", sep = ""))
+    active = ifelse(deme@isActive, " A", "")
+    cat(paste(") = ", sprintf(deme@best_fitness, fmt = "%#.2f"), deme_distinguisher, " evaluations: ", deme@evaluations_count, active, "\n", sep = ""))
   }
 
   print_tree_from_deme <- function(deme, prefix = "") {
