@@ -25,7 +25,7 @@ hms <- function(tree_height = 5,
                 lower,
                 upper,
                 sigma,
-                population_size_per_tree_level = rep(10, tree_level),
+                population_size_per_tree_level = rep(10, tree_height),
                 run_metaepoch = ga_metaepoch(list(list(), list(), list(), list(), list())), # TODO :)
                 global_stopping_condition = default_global_stopping_condition,
                 local_stopping_condition = default_local_stopping_condition,
@@ -133,6 +133,7 @@ hms <- function(tree_height = 5,
           best_fitness <- deme@best_fitness
           best_solution <- deme@best_solution
         }
+        deme$isActive <- FALSE
         inactive_demes <- c(inactive_demes, deme)
         next
       }
@@ -378,3 +379,20 @@ plot.hms <- function(x) {
 }
 
 setMethod("plot", "hms", plot.hms)
+
+setGeneric("plotActiveDemes", function(object) standardGeneric("plotActiveDemes"))
+
+setMethod("plotActiveDemes", "hms", function(object){
+  metaepochs <- 1:object@metaepochs_count
+  active_demes_per_metaepoch <- mapply(function(snapshot) {
+    Filter(function(deme) {
+      deme@isActive
+    }, snapshot@demes)
+  }, object@metaepoch_snapshots)
+  active_demes_count_per_metaepoch <- mapply(length, active_demes_per_metaepoch)
+  barplot(active_demes_count_per_metaepoch,
+          names.arg = metaepochs,
+          main="Active demes per metaepoch.",
+          xlab="Metaepoch",
+          ylab="Active demes count")
+})
