@@ -176,6 +176,10 @@ hms <- function(tree_height = 5,
     metaepochs_count <- metaepochs_count + 1
   }
 
+  if(length(active_demes) == 0){
+    message("HMS stopped due to a lack of active demes!")
+  }
+
   # Gradient methods:
   if (with_gradient_method) {
     last_metaepoch_snapshot <- utils::tail(metaepoch_snapshots, n = 1)
