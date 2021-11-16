@@ -36,12 +36,7 @@ hms <- function(tree_height = 3,
                 create_population,
                 suggestions = NULL,
                 with_gradient_method = FALSE,
-                gradient_method_args = list(
-                  method = "L-BFGS-B",
-                  poptim = 0.05,
-                  pressel = 0.5,
-                  control = list(fnscale = -1, maxit = 100)
-                ),
+                gradient_method_args = default_gradient_method_args,
                 run_gradient_method,
                 monitor_level = "basic") {
   if (tree_height < 1) {
@@ -114,9 +109,9 @@ hms <- function(tree_height = 3,
   best_fitness <- -Inf
   metaepochs_count <- 0
   metaepoch_snapshots <- list()
-  fitness_eavaluations_count <- 0
+  fitness_evaluations_count <- 0
   f <- function(x) {
-    fitness_eavaluations_count <<- fitness_eavaluations_count + 1
+    fitness_evaluations_count <<- fitness_evaluations_count + 1
     fitness(x)
   }
   while (!global_stopping_condition(metaepoch_snapshots) && length(active_demes) > 0) {
@@ -172,7 +167,7 @@ hms <- function(tree_height = 3,
       best_fitness = best_fitness,
       best_solution = best_solution,
       time_in_seconds = seconds_since(start_time) - previous_metaepochs_time,
-      fitness_evaluations = fitness_eavaluations_count,
+      fitness_evaluations = fitness_evaluations_count,
       blocked_sprouts = blocked_sprouts,
       is_evolutionary = TRUE
     )
@@ -248,26 +243,4 @@ hms <- function(tree_height = 3,
     upper = upper,
     call = match.call()
   )
-}
-
-MONITOR_LEVEL_NONE <- 0
-MONITOR_LEVEL_BASIC <- 1
-MONITOR_LEVEL_BASIC_TREE <- 2
-MONITOR_LEVEL_VERBOSE_TREE <- 3
-
-getMonitorLevel <- function(level_name) {
-  if (level_name == "verbose_tree") {
-    return(MONITOR_LEVEL_VERBOSE_TREE)
-  }
-  if (level_name == "basic_tree") {
-    return(MONITOR_LEVEL_BASIC_TREE)
-  }
-  if (level_name == "basic") {
-    return(MONITOR_LEVEL_BASIC)
-  }
-  if (level_name == "none") {
-    return(MONITOR_LEVEL_NONE)
-  }
-  warning("Monitor level should be one of {'none', 'basic', 'basic_tree', 'verbose_tree'}")
-  MONITOR_LEVEL_NONE
 }

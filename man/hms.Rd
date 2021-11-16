@@ -20,8 +20,7 @@ hms(
   create_population,
   suggestions = NULL,
   with_gradient_method = FALSE,
-  gradient_method_args = list(method = "L-BFGS-B", poptim = 0.05, pressel = 0.5,
-    control = list(fnscale = -1, maxit = 100)),
+  gradient_method_args = default_gradient_method_args,
   run_gradient_method,
   monitor_level = "basic"
 )

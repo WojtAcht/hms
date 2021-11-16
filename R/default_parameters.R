@@ -20,3 +20,10 @@ default_sigma <- function(lower, upper, tree_height) {
   }
   sigma
 }
+
+default_gradient_method_args <- list(
+  method = "L-BFGS-B",
+  poptim = 0.05,
+  pressel = 0.5,
+  control = list(fnscale = -1, maxit = 100)
+)
