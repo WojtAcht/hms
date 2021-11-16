@@ -1,5 +1,9 @@
 euclidean_distance <- function(x, y) {
-  sum((x - y)^2)
+  sqrt(sum((x - y)^2))
+}
+
+manhattan_distance <- function(x, y) {
+  sum(mapply(abs, x-y))
 }
 
 seconds_since <- function(start_time) {

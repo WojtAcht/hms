@@ -7,7 +7,7 @@
 #' @export
 #'
 #' @examples
-max_metric_sprouting_condition <- function(metric, max_distance) {
+max_metric_sprouting_condition <- function(metric, max_distances) {
   function(potential_sprout, potential_sprout_level, demes) {
     level_demes <- Filter(function(d) {
       identical(d@level, potential_sprout_level)
@@ -17,7 +17,7 @@ max_metric_sprouting_condition <- function(metric, max_distance) {
       if (is.null(deme@sprout)) {
         FALSE
       } else {
-        metric(deme@sprout, potential_sprout) < max_distance
+        metric(deme@sprout, potential_sprout) < max_distances[[potential_sprout_level-1]]
       }
     }
     length(Filter(single_deme_condition, level_demes)) == 0

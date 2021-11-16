@@ -24,12 +24,14 @@ hms <- function(tree_height = 5,
                 fitness,
                 lower,
                 upper,
-                sigma,
+                sigma = default_sigma(lower, upper, tree_height),
                 population_size_per_tree_level = rep(10, tree_height),
                 run_metaepoch = ga_metaepoch(list(list(), list(), list(), list(), list())), # TODO :)
                 global_stopping_condition = default_global_stopping_condition,
                 local_stopping_condition = default_local_stopping_condition,
-                sprouting_condition = max_metric_sprouting_condition(euclidean_distance, 0.5),
+                sprouting_condtion_distance = euclidean_distance,
+                sprouting_condition_distance_per_tree_level = sprouting_condition_default_euclidean_distances(lower, upper, sigma),
+                sprouting_condition = max_metric_sprouting_condition(sprouting_condtion_distance, sprouting_condition_distance_per_tree_level),
                 create_population,
                 suggestions = NULL,
                 with_gradient_method = FALSE,
@@ -53,7 +55,7 @@ hms <- function(tree_height = 5,
   if (!is.vector(sigma) & !is.list(sigma)) {
     stop("A list of standard deviations (sigma) must be provided.")
   }
-  if (!length(sigma) >= tree_height) {
+  if (!missing(sigma) & !length(sigma) >= tree_height) {
     stop("The list of standard deviations (sigma) must have tree_height elements.")
   }
   if (!is.vector(population_size_per_tree_level) & !is.list(population_size_per_tree_level)) {
@@ -69,7 +71,7 @@ hms <- function(tree_height = 5,
     stop("Provided suggestions have wrong dimensions.")
   }
   if (missing(create_population) & missing(sigma)) {
-    stop("A list of standard deviations (sigma) or a function to create population must be provided.")
+    message("A list of standard deviations (sigma) or a function to create population should be provided.")
   }
   if (missing(create_population)) {
     create_population <- default_create_population(sigma)
