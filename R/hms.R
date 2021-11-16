@@ -25,7 +25,7 @@ hms <- function(tree_height = 5,
                 lower,
                 upper,
                 sigma,
-                population_size_per_tree_level = rep(10, tree_level),
+                population_size_per_tree_level = rep(10, tree_height),
                 run_metaepoch = ga_metaepoch(list(list(), list(), list(), list(), list())), # TODO :)
                 global_stopping_condition = default_global_stopping_condition,
                 local_stopping_condition = default_local_stopping_condition,
@@ -116,6 +116,7 @@ hms <- function(tree_height = 5,
   }
   while (!global_stopping_condition(metaepoch_snapshots) && length(active_demes) > 0) {
     new_demes <- c()
+    blocked_sprouts <- list()
     for (deme in active_demes) {
       start_metaepoch_time <- Sys.time()
       deme_evaluations_count <- 0
@@ -133,6 +134,7 @@ hms <- function(tree_height = 5,
           best_fitness <- deme@best_fitness
           best_solution <- deme@best_solution
         }
+        deme@isActive <- FALSE
         inactive_demes <- c(inactive_demes, deme)
         next
       }
@@ -141,6 +143,8 @@ hms <- function(tree_height = 5,
       if (sprouting_condition(metaepoch_result$solution, deme@level + 1, c(active_demes, inactive_demes))) {
         new_deme <- create_deme(lower, upper, deme, population_size_per_tree_level[[deme@level + 1]], create_population)
         new_demes <- c(new_demes, new_deme)
+      } else {
+        blocked_sprouts <- c(blocked_sprouts, list(metaepoch_result$solution))
       }
     }
     active_demes <- new_demes
@@ -164,15 +168,25 @@ hms <- function(tree_height = 5,
       best_solution = best_solution,
       time_in_seconds = seconds_since(start_time) - previous_metaepochs_time,
       fitness_evaluations = fitness_eavaluations_count,
+      blocked_sprouts = blocked_sprouts,
       is_evolutionary = TRUE
     )
     if (monitor) {
       cat("Metaepoch: ", metaepochs_count, "\n")
+      population_size <- 0
+      for (deme in active_demes) {
+        population_size <- population_size + base::nrow(deme@population)
+      }
+      cat("Whole population size: ", population_size, "\n")
       print_tree(snapshot@demes, root@id, best_solution)
       cat("\n\n")
     }
     metaepoch_snapshots <- c(metaepoch_snapshots, snapshot)
     metaepochs_count <- metaepochs_count + 1
+  }
+
+  if(length(active_demes) == 0){
+    message("HMS stopped due to a lack of active demes!")
   }
 
   # Gradient methods:
@@ -204,6 +218,7 @@ hms <- function(tree_height = 5,
       best_solution = best_solution,
       time_in_seconds = seconds_since(start_time) - previous_metaepochs_time,
       fitness_evaluations = 0, # TODO
+      blocked_sprouts = list(),
       is_evolutionary = FALSE
     )
     metaepoch_snapshots <- c(metaepoch_snapshots, snapshot)
@@ -230,6 +245,7 @@ setClass("MetaepochSnapshot", slots = c(
   best_solution = "numeric",
   time_in_seconds = "numeric",
   fitness_evaluations = "numeric",
+  blocked_sprouts = "list",
   is_evolutionary = "logical"
 ))
 
@@ -270,7 +286,7 @@ print_tree <- function(demes, root_id, best_solution) {
     }, demes)
   }
   print_deme <- function(deme) {
-    deme_distinguisher <- if (deme@best_solution == best_solution) "***" else ""
+    deme_distinguisher <- if (all(deme@best_solution == best_solution)) "***" else ""
     if (!is.null(deme@sprout)) {
       cat("spr: (")
       for (x in deme@sprout) {
@@ -288,7 +304,8 @@ print_tree <- function(demes, root_id, best_solution) {
       }
       cat(sprintf(x, fmt = "%#.2f"))
     }
-    cat(paste(") = ", sprintf(deme@best_fitness, fmt = "%#.2f"), deme_distinguisher, " evaluations: ", deme@evaluations_count, "\n", sep = ""))
+    active = ifelse(deme@isActive, " A", "")
+    cat(paste(") = ", sprintf(deme@best_fitness, fmt = "%#.2f"), deme_distinguisher, " evaluations: ", deme@evaluations_count, active, "\n", sep = ""))
   }
 
   print_tree_from_deme <- function(deme, prefix = "") {
@@ -378,3 +395,37 @@ plot.hms <- function(x) {
 }
 
 setMethod("plot", "hms", plot.hms)
+
+setGeneric("plotActiveDemes", function(object) standardGeneric("plotActiveDemes"))
+
+setMethod("plotActiveDemes", "hms", function(object){
+  metaepochs <- 1:object@metaepochs_count
+  active_demes_per_metaepoch <- mapply(function(snapshot) {
+    Filter(function(deme) {
+      deme@isActive
+    }, snapshot@demes)
+  }, object@metaepoch_snapshots)
+  active_demes_count_per_metaepoch <- mapply(length, active_demes_per_metaepoch)
+  barplot(active_demes_count_per_metaepoch,
+          names.arg = metaepochs,
+          main="Active demes per metaepoch.",
+          xlab="Metaepoch",
+          ylab="Active demes count")
+})
+
+setGeneric("printBlockedSprouts", function(object) standardGeneric("printBlockedSprouts"))
+
+setMethod("printBlockedSprouts", "hms", function(object){
+  metaepochs <- 1:object@metaepochs_count
+  blocked_sprouts_per_metaepoch <- mapply(function(snapshot) {
+    snapshot@blocked_sprouts
+  }, object@metaepoch_snapshots)
+  for(metaepoch in metaepochs){
+    blocked_sprouts <- blocked_sprouts_per_metaepoch[[metaepoch]]
+    cat(sprintf("Metaepoch %d - blocked sprouts count: %d\n", metaepoch, length(blocked_sprouts)))
+    for(blocked_sprout in blocked_sprouts){
+      print(blocked_sprout)
+    }
+    cat("\n")
+  }
+})
