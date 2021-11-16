@@ -20,7 +20,7 @@
 #' @export
 #'
 #' @examples
-hms <- function(tree_height = 5,
+hms <- function(tree_height = 3,
                 fitness,
                 lower,
                 upper,
@@ -40,7 +40,7 @@ hms <- function(tree_height = 5,
                   control = list(fnscale = -1, maxit = 100)
                 ),
                 run_gradient_method,
-                monitor = FALSE) {
+                monitor_level = 'basic') {
   if (tree_height < 1) {
     stop("Max tree height has to be greater or equal 1.")
   }
@@ -90,6 +90,8 @@ hms <- function(tree_height = 5,
     }
     run_gradient_method <- default_run_gradient_method
   }
+  monitor_level <- getMonitorLevel(monitor_level)
+
   root <- if (is.null(suggestions)) {
     create_deme(lower, upper, NULL, population_size_per_tree_level[[1]], create_population)
   } else {
@@ -171,15 +173,21 @@ hms <- function(tree_height = 5,
       blocked_sprouts = blocked_sprouts,
       is_evolutionary = TRUE
     )
-    if (monitor) {
-      cat("Metaepoch: ", metaepochs_count, "\n")
-      population_size <- 0
-      for (deme in active_demes) {
-        population_size <- population_size + base::nrow(deme@population)
+    if (monitor_level > MONITOR_LEVEL_NONE) {
+      cat("Metaepoch:", metaepochs_count, "Best fitness:", best_fitness, "\n")
+
+      if (monitor_level > MONITOR_LEVEL_BASIC) {
+        cat("Best solution:", get_solution_string(best_solution), "\n")
+        population_size <- sum(mapply(function(deme) base::nrow(deme@population), active_demes))
+        cat("Whole population size:", population_size, "\n")
+        cat("Demes count:", length(Filter(function(deme) length(deme@best_solution > 0), snapshot@demes)), "\n")
+        cat("Calculation time:", snapshot@time_in_seconds, "sec\n")
+        cat("Fitness evaluations count:", snapshot@fitness_evaluations, "\n")
+        if (monitor_level >= MONITOR_LEVEL_BASIC_TREE) {
+          print_tree(snapshot@demes, root@id, best_solution, show_details = (monitor_level > MONITOR_LEVEL_BASIC_TREE))
+        }
+        cat("\n\n")
       }
-      cat("Whole population size: ", population_size, "\n")
-      print_tree(snapshot@demes, root@id, best_solution)
-      cat("\n\n")
     }
     metaepoch_snapshots <- c(metaepoch_snapshots, snapshot)
     metaepochs_count <- metaepochs_count + 1
@@ -239,6 +247,28 @@ hms <- function(tree_height = 5,
   )
 }
 
+MONITOR_LEVEL_NONE <- 0
+MONITOR_LEVEL_BASIC <- 1
+MONITOR_LEVEL_BASIC_TREE <- 2
+MONITOR_LEVEL_VERBOSE_TREE <- 3
+
+getMonitorLevel <- function(level_name) {
+  if (level_name == 'verbose_tree') {
+    return(MONITOR_LEVEL_VERBOSE_TREE)
+  }
+  if (level_name == 'basic_tree') {
+    return(MONITOR_LEVEL_BASIC_TREE)
+  }
+  if (level_name == 'basic') {
+    return(MONITOR_LEVEL_BASIC)
+  }
+  if (level_name == 'none') {
+    return(MONITOR_LEVEL_NONE)
+  }
+  warning("Monitor level should be one of {'none', 'basic', 'basic_tree', 'verbose_tree'}")
+  MONITOR_LEVEL_NONE
+}
+
 setClass("MetaepochSnapshot", slots = c(
   demes = "list",
   best_fitness = "numeric",
@@ -274,7 +304,12 @@ setMethod("show", "hms", function(object) {
 
 setGeneric("printTree", function(object) standardGeneric("printTree"))
 
-print_tree <- function(demes, root_id, best_solution) {
+get_solution_string <- function(solution, format = "%#.2f") {
+  solution_values = mapply(function(sol) sprintf(sol, fmt = format), solution)
+  paste("(", paste(solution_values, collapse=", "), ")", sep='')
+}
+
+print_tree <- function(demes, root_id, best_solution, show_details = TRUE) {
   get_deme_by_id <- function(id) {
     Filter(function(deme) {
       deme@id == id
@@ -287,25 +322,21 @@ print_tree <- function(demes, root_id, best_solution) {
   }
   print_deme <- function(deme) {
     deme_distinguisher <- if (all(deme@best_solution == best_solution)) "***" else ""
-    if (!is.null(deme@sprout)) {
-      cat("spr: (")
-      for (x in deme@sprout) {
-        if (x != deme@sprout[[1]]) {
-          cat(", ")
-        }
-        cat(sprintf(x, fmt = "%#.2f"))
-      }
-      cat("); ")
+    is_root <- is.null(deme@sprout)
+    if (!is_root & show_details) {
+      cat("spr: ")
+      cat(get_solution_string(deme@sprout))
+      cat("; ")
     }
-    cat(paste(deme_distinguisher, "f(", sep = ""))
-    for (x in deme@best_solution) {
-      if (x != deme@best_solution[[1]]) {
-        cat(", ")
-      }
-      cat(sprintf(x, fmt = "%#.2f"))
-    }
+    cat(paste(deme_distinguisher, "f", sep = ""))
+    cat(get_solution_string(deme@best_solution))
     active = ifelse(deme@isActive, " A", "")
-    cat(paste(") = ", sprintf(deme@best_fitness, fmt = "%#.2f"), deme_distinguisher, " evaluations: ", deme@evaluations_count, active, "\n", sep = ""))
+    new_deme = ifelse(length(deme@best_fitnesses_per_metaepoch) <= 1 & show_details & !is_root, " (new_deme)", "")
+    cat(paste(" = ", sprintf(deme@best_fitness, fmt = "%#.2f"), deme_distinguisher, sep = ""))
+    if (show_details) {
+      cat(paste(" evaluations: ", deme@evaluations_count, sep=""))
+    }
+    cat(paste(active, new_deme, "\n", sep=""))
   }
 
   print_tree_from_deme <- function(deme, prefix = "") {
