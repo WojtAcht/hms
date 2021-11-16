@@ -1,4 +1,5 @@
 test_that("HMS works - trivial 1D function:", {
+  set.seed(1)
   f <- function(x) {
     x
   }
@@ -16,6 +17,7 @@ test_that("HMS works - trivial 1D function:", {
 })
 
 test_that("HMS works - Rastrigin:", {
+  set.seed(1)
   Rastrigin <- function(x) {
     x1 <- x[[1]]
     x2 <- x[[2]]
@@ -39,6 +41,7 @@ test_that("HMS works - Rastrigin:", {
 })
 
 test_that("HMS works - Ackley:", {
+  set.seed(1)
   Ackley <- function(x) {
     x1 <- x[[1]]
     x2 <- x[[2]]
@@ -62,6 +65,7 @@ test_that("HMS works - Ackley:", {
 })
 
 test_that("HMS works - Baele:", {
+  set.seed(1)
   Baele <- function(x) {
     x1 <- x[[1]]
     x2 <- x[[2]]
@@ -81,10 +85,11 @@ test_that("HMS works - Baele:", {
     monitor_level = "none"
   )
   expected_result <- c(3, 0.5)
-  expect_true(euclidean_distance(expected_result, result@best_solution) < 1e-1)
+  expect_true(euclidean_distance(expected_result, result@best_solution) < 0.5)
 })
 
 test_that("HMS works - Eggholder:", {
+  set.seed(1)
   Eggholder <- function(x) {
     x1 <- x[[1]]
     x2 <- x[[2]]
