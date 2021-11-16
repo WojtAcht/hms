@@ -9,7 +9,7 @@ test_that("HMS works - trivial 1D function:", {
     upper = 5,
     sigma = sigma,
     population_size_per_tree_level = c(50, 25, 15),
-    tree_height = 3
+    monitor_level = 'none'
   )
   expected_result <- 5
   expect_true(euclidean_distance(expected_result, result@best_solution) < 1e-1)
@@ -32,7 +32,7 @@ test_that("HMS works - Rastrigin:", {
     upper = upper,
     sigma = sigma,
     population_size_per_tree_level = c(50, 25, 15),
-    tree_height = 3
+    monitor_level = 'none'
   )
   expected_result <- c(0, 0)
   expect_true(euclidean_distance(expected_result, result@best_solution) < 1e-1)
@@ -55,7 +55,7 @@ test_that("HMS works - Ackley:", {
     upper = upper,
     sigma = sigma,
     population_size_per_tree_level = c(50, 25, 15),
-    tree_height = 3
+    monitor_level = 'none'
   )
   expected_result <- c(0, 0)
   expect_true(euclidean_distance(expected_result, result@best_solution) < 1e-1)
@@ -78,7 +78,7 @@ test_that("HMS works - Baele:", {
     upper = upper,
     sigma = sigma,
     population_size_per_tree_level = c(50, 25, 15),
-    tree_height = 3
+    monitor_level = 'none'
   )
   expected_result <- c(3, 0.5)
   expect_true(euclidean_distance(expected_result, result@best_solution) < 1e-1)
@@ -101,7 +101,7 @@ test_that("HMS works - Eggholder:", {
     upper = upper,
     sigma = sigma,
     population_size_per_tree_level = c(50, 25, 15),
-    tree_height = 3
+    monitor_level = 'none'
   )
   expected_fitness <- Eggholder(c(512, 404.2319))
   expect_true(abs(result@best_fitness - expected_fitness) < 100)

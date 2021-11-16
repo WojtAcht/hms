@@ -30,7 +30,7 @@ hms <- function(tree_height = 3,
                 global_stopping_condition = default_global_stopping_condition,
                 local_stopping_condition = default_local_stopping_condition,
                 sprouting_condtion_distance = euclidean_distance,
-                sprouting_condition_distance_per_tree_level = sprouting_condition_default_euclidean_distances(lower, upper, sigma),
+                sprouting_condition_distance_per_tree_level = sprouting_condition_default_euclidean_distances(sigma),
                 sprouting_condition = max_metric_sprouting_condition(sprouting_condtion_distance, sprouting_condition_distance_per_tree_level),
                 create_population,
                 suggestions = NULL,
@@ -180,7 +180,7 @@ hms <- function(tree_height = 3,
 
       if (monitor_level > MONITOR_LEVEL_BASIC) {
         cat("Best solution:", get_solution_string(best_solution), "\n")
-        population_size <- sum(mapply(function(deme) base::nrow(deme@population), active_demes))
+        population_size <- Reduce(`+`, mapply(function(deme) base::nrow(deme@population), active_demes))
         cat("Whole population size:", population_size, "\n")
         cat("Demes count:", length(Filter(function(deme) length(deme@best_solution > 0), snapshot@demes)), "\n")
         cat("Calculation time:", snapshot@time_in_seconds, "sec\n")
