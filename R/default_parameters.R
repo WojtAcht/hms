@@ -12,6 +12,6 @@ default_sigma <- function(lower, upper, tree_height) {
 
 sprouting_condition_default_euclidean_distances <- function(lower, upper, sigma) {
   dimensions <- length(lower)
-  sprouting_condition_distance_ratio <- 0.6
+  sprouting_condition_distance_ratio <- 1
   lapply(sigma, function(x){x * sprouting_condition_distance_ratio * dimensions})
 }
