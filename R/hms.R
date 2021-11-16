@@ -173,6 +173,11 @@ hms <- function(tree_height = 5,
     )
     if (monitor) {
       cat("Metaepoch: ", metaepochs_count, "\n")
+      population_size <- 0
+      for (deme in active_demes) {
+        population_size <- population_size + base::nrow(deme@population)
+      }
+      cat("Whole population size: ", population_size, "\n")
       print_tree(snapshot@demes, root@id, best_solution)
       cat("\n\n")
     }

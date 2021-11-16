@@ -10,7 +10,7 @@ hms(
   lower,
   upper,
   sigma,
-  population_size = 20,
+  population_size_per_tree_level = rep(10, tree_height),
   run_metaepoch = ga_metaepoch(list(list(), list(), list(), list(), list())),
   global_stopping_condition = default_global_stopping_condition,
   local_stopping_condition = default_local_stopping_condition,
@@ -20,7 +20,8 @@ hms(
   with_gradient_method = FALSE,
   gradient_method_args = list(method = "L-BFGS-B", poptim = 0.05, pressel = 0.5,
     control = list(fnscale = -1, maxit = 100)),
-  run_gradient_method
+  run_gradient_method,
+  monitor = FALSE
 )
 }
 \arguments{
@@ -42,10 +43,6 @@ hms(
 
 \item{sigma}{\itemize{
 \item numeric - vector of standard deviations for each tree level
-}}
-
-\item{population_size}{\itemize{
-\item numeric
 }}
 
 \item{run_metaepoch}{\itemize{
@@ -82,6 +79,10 @@ hms(
 
 \item{run_gradient_method}{\itemize{
 \item function - returns list with named fields: solution, population, value
+}}
+
+\item{population_size}{\itemize{
+\item numeric
 }}
 }
 \value{
