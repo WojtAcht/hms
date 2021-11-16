@@ -4,7 +4,7 @@
 \alias{max_metric_sprouting_condition}
 \title{Default sprouting condition based on given metric.}
 \usage{
-max_metric_sprouting_condition(metric, max_distance)
+max_metric_sprouting_condition(metric, max_distances)
 }
 \arguments{
 \item{metric}{\itemize{
