@@ -5,7 +5,7 @@
 #' @param lower - numeric - lower bound
 #' @param upper - numeric - upper bound
 #' @param sigma - numeric - vector of standard deviations for each tree level
-#' @param population_size - numeric
+#' @param population_size_per_tree_level - numeric
 #' @param run_metaepoch - function - returns list with named fields: solution, population, value
 #' @param global_stopping_condition - function
 #' @param local_stopping_condition - function
@@ -15,6 +15,7 @@
 #' @param with_gradient_method - logical
 #' @param gradient_method_args - list of parameters that are passed to the gradient method
 #' @param run_gradient_method - function - returns list with named fields: solution, population, value
+#' @param monitor_level - string - one of {'none', 'basic', 'basic_tree', 'verbose_tree'}
 #'
 #' @return numeric best solution
 #' @export
@@ -25,24 +26,18 @@ hms <- function(tree_height = 3,
                 lower,
                 upper,
                 sigma = default_sigma(lower, upper, tree_height),
-                population_size_per_tree_level = rep(10, tree_height),
-                run_metaepoch = ga_metaepoch(list(list(), list(), list(), list(), list())), # TODO :)
+                population_size_per_tree_level = default_population_size_per_tree_level(tree_height),
+                run_metaepoch = default_ga_metaepoch(tree_height),
                 global_stopping_condition = default_global_stopping_condition,
                 local_stopping_condition = default_local_stopping_condition,
-                sprouting_condtion_distance = euclidean_distance,
-                sprouting_condition_distance_per_tree_level = sprouting_condition_default_euclidean_distances(lower, upper, sigma),
-                sprouting_condition = max_metric_sprouting_condition(sprouting_condtion_distance, sprouting_condition_distance_per_tree_level),
+                sprouting_condition = max_metric_sprouting_condition(euclidean_distance,
+                                                                     sprouting_default_euclidean_distances(sigma)),
                 create_population,
                 suggestions = NULL,
                 with_gradient_method = FALSE,
-                gradient_method_args = list(
-                  method = "L-BFGS-B",
-                  poptim = 0.05,
-                  pressel = 0.5,
-                  control = list(fnscale = -1, maxit = 100)
-                ),
+                gradient_method_args = default_gradient_method_args,
                 run_gradient_method,
-                monitor_level = 'basic') {
+                monitor_level = "basic") {
   if (tree_height < 1) {
     stop("Max tree height has to be greater or equal 1.")
   }
@@ -113,9 +108,9 @@ hms <- function(tree_height = 3,
   best_fitness <- -Inf
   metaepochs_count <- 0
   metaepoch_snapshots <- list()
-  fitness_eavaluations_count <- 0
+  fitness_evaluations_count <- 0
   f <- function(x) {
-    fitness_eavaluations_count <<- fitness_eavaluations_count + 1
+    fitness_evaluations_count <<- fitness_evaluations_count + 1
     fitness(x)
   }
   while (!global_stopping_condition(metaepoch_snapshots) && length(active_demes) > 0) {
@@ -171,7 +166,7 @@ hms <- function(tree_height = 3,
       best_fitness = best_fitness,
       best_solution = best_solution,
       time_in_seconds = seconds_since(start_time) - previous_metaepochs_time,
-      fitness_evaluations = fitness_eavaluations_count,
+      fitness_evaluations = fitness_evaluations_count,
       blocked_sprouts = blocked_sprouts,
       is_evolutionary = TRUE
     )
@@ -180,7 +175,7 @@ hms <- function(tree_height = 3,
 
       if (monitor_level > MONITOR_LEVEL_BASIC) {
         cat("Best solution:", get_solution_string(best_solution), "\n")
-        population_size <- sum(mapply(function(deme) base::nrow(deme@population), active_demes))
+        population_size <- Reduce(`+`, mapply(function(deme) base::nrow(deme@population), active_demes))
         cat("Whole population size:", population_size, "\n")
         cat("Demes count:", length(Filter(function(deme) length(deme@best_solution > 0), snapshot@demes)), "\n")
         cat("Calculation time:", snapshot@time_in_seconds, "sec\n")
@@ -195,7 +190,7 @@ hms <- function(tree_height = 3,
     metaepochs_count <- metaepochs_count + 1
   }
 
-  if(length(active_demes) == 0){
+  if (length(active_demes) == 0) {
     message("HMS stopped due to a lack of active demes!")
   }
 
@@ -248,217 +243,3 @@ hms <- function(tree_height = 3,
     call = match.call()
   )
 }
-
-MONITOR_LEVEL_NONE <- 0
-MONITOR_LEVEL_BASIC <- 1
-MONITOR_LEVEL_BASIC_TREE <- 2
-MONITOR_LEVEL_VERBOSE_TREE <- 3
-
-getMonitorLevel <- function(level_name) {
-  if (level_name == 'verbose_tree') {
-    return(MONITOR_LEVEL_VERBOSE_TREE)
-  }
-  if (level_name == 'basic_tree') {
-    return(MONITOR_LEVEL_BASIC_TREE)
-  }
-  if (level_name == 'basic') {
-    return(MONITOR_LEVEL_BASIC)
-  }
-  if (level_name == 'none') {
-    return(MONITOR_LEVEL_NONE)
-  }
-  warning("Monitor level should be one of {'none', 'basic', 'basic_tree', 'verbose_tree'}")
-  MONITOR_LEVEL_NONE
-}
-
-setClass("MetaepochSnapshot", slots = c(
-  demes = "list",
-  best_fitness = "numeric",
-  best_solution = "numeric",
-  time_in_seconds = "numeric",
-  fitness_evaluations = "numeric",
-  blocked_sprouts = "list",
-  is_evolutionary = "logical"
-))
-
-setClass("hms", slots = c(
-  root_id = "character",
-  metaepoch_snapshots = "list",
-  best_fitness = "numeric",
-  best_solution = "numeric",
-  total_time_in_seconds = "numeric",
-  total_metaepoch_time_in_seconds = "numeric",
-  metaepochs_count = "numeric",
-  deme_population_size = "numeric",
-  lower = "numeric",
-  upper = "numeric",
-  call = "language"
-))
-
-setMethod("print", "hms", function(x, ...) utils::str(x))
-
-setMethod("show", "hms", function(object) {
-  cat("An object of class \"hms\"\n")
-  cat("\nCall:\n", deparse(object@call), "\n\n", sep = "")
-  cat("Available slots:\n")
-  print(methods::slotNames(object))
-})
-
-setGeneric("printTree", function(object) standardGeneric("printTree"))
-
-get_solution_string <- function(solution, format = "%#.2f") {
-  solution_values = mapply(function(sol) sprintf(sol, fmt = format), solution)
-  paste("(", paste(solution_values, collapse=", "), ")", sep='')
-}
-
-print_tree <- function(demes, root_id, best_solution, show_details = TRUE) {
-  get_deme_by_id <- function(id) {
-    Filter(function(deme) {
-      deme@id == id
-    }, demes)[[1]]
-  }
-  get_children <- function(deme) {
-    Filter(function(d) {
-      identical(d@parent_id, deme@id)
-    }, demes)
-  }
-  print_deme <- function(deme) {
-    deme_distinguisher <- if (all(deme@best_solution == best_solution)) "***" else ""
-    is_root <- is.null(deme@sprout)
-    if (!is_root & show_details) {
-      cat("spr: ")
-      cat(get_solution_string(deme@sprout))
-      cat("; ")
-    }
-    cat(paste(deme_distinguisher, "f", sep = ""))
-    cat(get_solution_string(deme@best_solution))
-    active = ifelse(deme@isActive, " A", "")
-    new_deme = ifelse(length(deme@best_fitnesses_per_metaepoch) <= 1 & show_details & !is_root, " (new_deme)", "")
-    cat(paste(" = ", sprintf(deme@best_fitness, fmt = "%#.2f"), deme_distinguisher, sep = ""))
-    if (show_details) {
-      cat(paste(" evaluations: ", deme@evaluations_count, sep=""))
-    }
-    cat(paste(active, new_deme, "\n", sep=""))
-  }
-
-  print_tree_from_deme <- function(deme, prefix = "") {
-    children <- get_children(deme)
-    for (child in children) {
-      if (length(child@best_solution) == 0) {
-        # This deme did not participate in any metaepoch
-        next
-      }
-      is_last <- child@id == children[[length(children)]]@id
-      cat(prefix)
-      if (is_last) {
-        cat("\u2514")
-      } else {
-        cat("\u251C")
-      }
-      cat("-- ")
-      print_deme(child)
-      print_tree_from_deme(child, prefix = paste(prefix, if (is_last) " " else "|", "   ", sep = ""))
-    }
-  }
-  root <- get_deme_by_id(root_id)
-  print_deme(root)
-  print_tree_from_deme(root)
-}
-
-setMethod("printTree", "hms", function(object) {
-  last_metaepoch_snapshot <- utils::tail(object@metaepoch_snapshots, n = 1)
-  if (length(last_metaepoch_snapshot) == 0) {
-    return()
-  }
-  demes <- last_metaepoch_snapshot[[1]]@demes
-  print_tree(demes, object@root_id, object@best_solution)
-})
-
-
-summary.hms <- function(object, ...) {
-  domain_element_to_string <- function(x) {
-    rounded_params <- mapply(function(x) {
-      sprintf(x, fmt = "%#.2f")
-    }, x)
-    comma_separated_params <- do.call(paste, c(as.list(rounded_params), sep = ", "))
-    if (length(x) > 1) {
-      paste("(", comma_separated_params, ")", sep = "")
-    } else {
-      comma_separated_params
-    }
-  }
-  out <- list(
-    fitness = object@best_fitness,
-    solution = domain_element_to_string(object@best_solution),
-    metaepochs = object@metaepochs_count,
-    deme_population_size = object@deme_population_size,
-    lower_bound = domain_element_to_string(object@lower),
-    upper_bound = domain_element_to_string(object@upper),
-    computation_time = paste(as.numeric(object@total_time_in_seconds), " seconds", sep = "")
-  )
-  class(out) <- "summary.hms"
-  out
-}
-
-setMethod("summary", "hms", summary.hms)
-
-plot.hms <- function(x) {
-  object <- x
-  metaepochs <- 1:object@metaepochs_count
-  metaepoch_fitnesses <- mapply(function(snapshot) {
-    snapshot@best_fitness
-  }, object@metaepoch_snapshots)
-  plot(metaepochs,
-    ylim = c(min(metaepoch_fitnesses), max(metaepoch_fitnesses)),
-    xlab = "metaepoch",
-    ylab = "fitness",
-    type = "n"
-  )
-  graphics::lines(metaepochs,
-    metaepoch_fitnesses,
-    pch = 16,
-    type = "b",
-    col = "green3"
-  )
-  graphics::legend("bottomright",
-    inset = 0.02,
-    legend = "Best fitness",
-    fill = "green"
-  )
-}
-
-setMethod("plot", "hms", plot.hms)
-
-setGeneric("plotActiveDemes", function(object) standardGeneric("plotActiveDemes"))
-
-setMethod("plotActiveDemes", "hms", function(object){
-  metaepochs <- 1:object@metaepochs_count
-  active_demes_per_metaepoch <- mapply(function(snapshot) {
-    Filter(function(deme) {
-      deme@isActive
-    }, snapshot@demes)
-  }, object@metaepoch_snapshots)
-  active_demes_count_per_metaepoch <- mapply(length, active_demes_per_metaepoch)
-  barplot(active_demes_count_per_metaepoch,
-          names.arg = metaepochs,
-          main="Active demes per metaepoch.",
-          xlab="Metaepoch",
-          ylab="Active demes count")
-})
-
-setGeneric("printBlockedSprouts", function(object) standardGeneric("printBlockedSprouts"))
-
-setMethod("printBlockedSprouts", "hms", function(object){
-  metaepochs <- 1:object@metaepochs_count
-  blocked_sprouts_per_metaepoch <- mapply(function(snapshot) {
-    snapshot@blocked_sprouts
-  }, object@metaepoch_snapshots)
-  for(metaepoch in metaepochs){
-    blocked_sprouts <- blocked_sprouts_per_metaepoch[[metaepoch]]
-    cat(sprintf("Metaepoch %d - blocked sprouts count: %d\n", metaepoch, length(blocked_sprouts)))
-    for(blocked_sprout in blocked_sprouts){
-      print(blocked_sprout)
-    }
-    cat("\n")
-  }
-})

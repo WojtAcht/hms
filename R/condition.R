@@ -1,13 +1,13 @@
 #' Default sprouting condition based on given metric.
 #'
 #' @param metric - Metric used for deme distance comparison
-#' @param max_distance - numeric
+#' @param max_distances_per_tree_level - numeric
 #'
 #' @return logical
 #' @export
 #'
 #' @examples
-max_metric_sprouting_condition <- function(metric, max_distances) {
+max_metric_sprouting_condition <- function(metric, max_distances_per_tree_level) {
   function(potential_sprout, potential_sprout_level, demes) {
     level_demes <- Filter(function(d) {
       identical(d@level, potential_sprout_level)
@@ -17,27 +17,41 @@ max_metric_sprouting_condition <- function(metric, max_distances) {
       if (is.null(deme@sprout)) {
         FALSE
       } else {
-        metric(deme@sprout, potential_sprout) < max_distances[[potential_sprout_level-1]]
+        metric(deme@sprout, potential_sprout) < max_distances_per_tree_level[[potential_sprout_level - 1]]
       }
     }
     length(Filter(single_deme_condition, level_demes)) == 0
   }
 }
 
-default_local_stopping_condition <- function(deme, previous_metaepoch_snapshots) {
-  max_metaepochs_without_improvement <- 5
-  best_fitness_metaepoch <- match(deme@best_fitness, deme@best_fitnesses_per_metaepoch)
-  metaepoch_count <- length(deme@best_fitnesses_per_metaepoch)
-  best_fitness_metaepoch < metaepoch_count - max_metaepochs_without_improvement
+sprouting_default_euclidean_distances <- function(sigma) {
+  sprouting_condition_distance_ratio <- 0.6
+  lapply(sigma, function(x) {
+    sum(x * sprouting_condition_distance_ratio)
+  })
 }
 
-default_global_stopping_condition <- function(metaepoch_snapshots) {
-  length(metaepoch_snapshots) > 10
+local_stopping_condition_metaepochs_without_improvement <- function(max_metaepochs_without_improvement) {
+  function(deme, previous_metaepoch_snapshots) {
+    best_fitness_metaepoch <- match(deme@best_fitness, deme@best_fitnesses_per_metaepoch)
+    metaepoch_count <- length(deme@best_fitnesses_per_metaepoch)
+    best_fitness_metaepoch < metaepoch_count - max_metaepochs_without_improvement
+  }
 }
+
+default_local_stopping_condition <- local_stopping_condition_metaepochs_without_improvement(5)
+
+global_stopping_condition_metaepochs_count <- function(metaepochs_count) {
+  function(metaepoch_snapshots) {
+    length(metaepoch_snapshots) > metaepochs_count
+  }
+}
+
+default_global_stopping_condition <- global_stopping_condition_metaepochs_count(10)
 
 max_fitness_evaluations_global_stopping_condition <- function(max_evaluations) {
   function(metaepoch_snapshots) {
     length(metaepoch_snapshots) > 0 &&
-      tail(metaepoch_snapshots, n = 1)[[1]]@fitness_evaluations > max_evaluations
+      utils::tail(metaepoch_snapshots, n = 1)[[1]]@fitness_evaluations > max_evaluations
   }
 }

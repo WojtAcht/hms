@@ -1,11 +1,10 @@
-#' Title
+#' Rastrigin
 #' f(x) = 0 at x = (0, ..., 0)
-#' x_i in  [-5.12, 5.12]
+#' x_i in  \[-5.12, 5.12\]
 #'
-#' @param x
+#' @param x - numeric
 #'
-#' @return
-#' @export
+#' @return numeric value of Rastrigin function
 #'
 #' @examples
 Rastrigin <- function(x) {
@@ -16,14 +15,13 @@ Rastrigin <- function(x) {
   sum
 }
 
-#' Title
+#' Ackley
 #' f(x) = 0 at x = (0, ..., 0)
-#' x_i in [-32.768, 32.768]
+#' x_i in \[-32.768, 32.768\]
 #'
-#' @param x
+#' @param x - numeric
 #'
-#' @return
-#' @export
+#' @return numeric value of Ackley function
 #'
 #' @examples
 Ackley <- function(x) {
@@ -45,14 +43,13 @@ Ackley <- function(x) {
   -a * exp(-b * sqrt((1 / d) * squares_sum)) - exp((1 / d) * cos_sum) + a + exp(1)
 }
 
-#' Title
+#' Schwefel
 #' Min: f(x) = 0 at x = (420.9687, ..., 420.9687)
-#' x_i in [-500, 500]
+#' x_i in \[-500, 500\]
 #'
-#' @param x
+#' @param x - numeric
 #'
-#' @return
-#' @export
+#' @return numeric value of Schwefel function
 #'
 #' @examples
 Schwefel <- function(x) {
@@ -66,10 +63,20 @@ Schwefel <- function(x) {
   418.9829 * d - sum
 }
 
-Griewank <- function(xx) {
-  ii <- c(1:length(xx))
-  sum <- sum(xx^2 / 4000)
-  prod <- prod(cos(xx / sqrt(ii)))
+
+#' Griewank
+#' Min: f(x) = 0 at x = (0, ..., 0)
+#' x_i in \[-600, 600\]
+#'
+#' @param x - numeric
+#'
+#' @return numeric value of Griewank function
+#'
+#' @examples
+Griewank <- function(x) {
+  i <- c(1:length(x))
+  sum <- sum(x^2 / 4000)
+  prod <- prod(cos(x / sqrt(i)))
 
   y <- sum - prod + 1
   return(y)

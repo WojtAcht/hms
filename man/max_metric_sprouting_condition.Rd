@@ -4,14 +4,14 @@
 \alias{max_metric_sprouting_condition}
 \title{Default sprouting condition based on given metric.}
 \usage{
-max_metric_sprouting_condition(metric, max_distances)
+max_metric_sprouting_condition(metric, max_distances_per_tree_level)
 }
 \arguments{
 \item{metric}{\itemize{
 \item Metric used for deme distance comparison
 }}
 
-\item{max_distance}{\itemize{
+\item{max_distances_per_tree_level}{\itemize{
 \item numeric
 }}
 }

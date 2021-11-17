@@ -30,18 +30,9 @@ ga_metaepoch <- function(config_ga) {
   }
 }
 
-rnorm_mutation <- function(lower, upper, sd) {
-  function(object, parent) {
-    parent <- as.vector(object@population[parent, ])
-    random_coordinate <- function(i) {
-      msm::rtnorm(
-        mean = parent[[i]],
-        sd = sd[[i]],
-        lower = lower[[i]],
-        upper = upper[[i]],
-        n = 1
-      )
-    }
-    as.vector(mapply(random_coordinate, seq_along(lower)))
-  }
+default_ga_metaepoch <- function(tree_height) {
+  empty_config_ga <- lapply(1:tree_height, function(x) {
+    list()
+  })
+  ga_metaepoch(empty_config_ga)
 }

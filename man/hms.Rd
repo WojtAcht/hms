@@ -5,28 +5,24 @@
 \title{Title}
 \usage{
 hms(
-  tree_height = 5,
+  tree_height = 3,
   fitness,
   lower,
   upper,
   sigma = default_sigma(lower, upper, tree_height),
-  population_size_per_tree_level = rep(10, tree_height),
-  run_metaepoch = ga_metaepoch(list(list(), list(), list(), list(), list())),
+  population_size_per_tree_level = default_population_size_per_tree_level(tree_height),
+  run_metaepoch = default_ga_metaepoch(tree_height),
   global_stopping_condition = default_global_stopping_condition,
   local_stopping_condition = default_local_stopping_condition,
-  sprouting_condtion_distance = euclidean_distance,
- 
-    sprouting_condition_distance_per_tree_level = sprouting_condition_default_euclidean_distances(lower,
-    upper, sigma),
-  sprouting_condition = max_metric_sprouting_condition(sprouting_condtion_distance,
-    sprouting_condition_distance_per_tree_level),
+  sprouting_distance_per_tree_level = sprouting_default_euclidean_distances(sigma),
+  sprouting_condition = max_metric_sprouting_condition(euclidean_distance,
+    sprouting_distance_per_tree_level),
   create_population,
   suggestions = NULL,
   with_gradient_method = FALSE,
-  gradient_method_args = list(method = "L-BFGS-B", poptim = 0.05, pressel = 0.5,
-    control = list(fnscale = -1, maxit = 100)),
+  gradient_method_args = default_gradient_method_args,
   run_gradient_method,
-  monitor = FALSE
+  monitor_level = "basic"
 )
 }
 \arguments{
@@ -50,6 +46,10 @@ hms(
 \item numeric - vector of standard deviations for each tree level
 }}
 
+\item{population_size_per_tree_level}{\itemize{
+\item numeric
+}}
+
 \item{run_metaepoch}{\itemize{
 \item function - returns list with named fields: solution, population, value
 }}
@@ -60,6 +60,10 @@ hms(
 
 \item{local_stopping_condition}{\itemize{
 \item function
+}}
+
+\item{sprouting_distance_per_tree_level}{\itemize{
+\item numeric - distances per level for sprouting condition
 }}
 
 \item{sprouting_condition}{\itemize{
@@ -86,8 +90,8 @@ hms(
 \item function - returns list with named fields: solution, population, value
 }}
 
-\item{population_size}{\itemize{
-\item numeric
+\item{monitor_level}{\itemize{
+\item string - one of {'none', 'basic', 'basic_tree', 'verbose_tree'}
 }}
 }
 \value{
