@@ -24,10 +24,6 @@ default_run_gradient_method <- function(deme, fitness, optim_args) {
   list("solution" = result$par, "value" = result$value, "population" = deme@population)
 }
 
-is_leaf <- function(deme, tree_height) {
-  length(deme@best_fitness) != 0 & deme@level == tree_height
-}
-
 run_gradient_metaepoch_for_leaves <- function(fitness,
                                               run_gradient_method,
                                               gradient_method_args,
