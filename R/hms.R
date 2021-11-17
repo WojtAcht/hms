@@ -9,7 +9,6 @@
 #' @param run_metaepoch - function - returns list with named fields: solution, population, value
 #' @param global_stopping_condition - function
 #' @param local_stopping_condition - function
-#' @param sprouting_distance_per_tree_level - numeric - distances per level for sprouting condition
 #' @param sprouting_condition - function
 #' @param create_population - function
 #' @param suggestions - matrix
@@ -31,8 +30,8 @@ hms <- function(tree_height = 3,
                 run_metaepoch = default_ga_metaepoch(tree_height),
                 global_stopping_condition = default_global_stopping_condition,
                 local_stopping_condition = default_local_stopping_condition,
-                sprouting_distance_per_tree_level = sprouting_default_euclidean_distances(sigma),
-                sprouting_condition = max_metric_sprouting_condition(euclidean_distance, sprouting_distance_per_tree_level),
+                sprouting_condition = max_metric_sprouting_condition(euclidean_distance,
+                                                                     sprouting_default_euclidean_distances(sigma)),
                 create_population,
                 suggestions = NULL,
                 with_gradient_method = FALSE,
