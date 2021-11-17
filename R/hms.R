@@ -177,7 +177,7 @@ hms <- function(tree_height = 3,
   # Gradient metaepoch:
   if (with_gradient_method) {
     demes_after_gradient_metaepoch <- run_gradient_metaepoch_for_leaves(
-      fitness,
+      f,
       run_gradient_method,
       gradient_method_args,
       metaepoch_snapshots,
@@ -189,7 +189,7 @@ hms <- function(tree_height = 3,
       best_fitness = best$fitness,
       best_solution = best$solution,
       time_in_seconds = seconds_since(start_time) - evaluation_times_sum(metaepoch_snapshots),
-      fitness_evaluations = 0, # TODO
+      fitness_evaluations = fitness_evaluations_count, # TODO
       blocked_sprouts = list(),
       is_evolutionary = FALSE
     )
