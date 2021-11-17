@@ -174,33 +174,24 @@ hms <- function(tree_height = 3,
   }
 
 
-  # Gradient methods:
-  # TODO wydzielić
+  # Gradient metaepoch:
   if (with_gradient_method) {
-    demes_after_gradient_metaepoch <- run_gradient_metaepoch(fitness,
-                                                             run_gradient_method,
-                                                             gradient_method_args,
-                                                             metaepoch_snapshots,
-                                                             tree_height)
-    previous_metaepochs_time <- 0
-    for (metaepoch_snapshot in metaepoch_snapshots) {
-      previous_metaepochs_time <- previous_metaepochs_time + metaepoch_snapshot@time_in_seconds
-    }
-    for(deme_after_gradient_method in demes_after_gradient_metaepoch) {
-      if (length(deme_after_gradient_method@best_fitness) != 0 &
-          deme_after_gradient_method@best_fitness > best_fitness) {
-        best_fitness <- deme_after_gradient_method@best_fitness
-        best_solution <- deme_after_gradient_method@best_solution
-      }
-    }
+    demes_after_gradient_metaepoch <- run_gradient_metaepoch_for_leaves(
+      fitness,
+      run_gradient_method,
+      gradient_method_args,
+      metaepoch_snapshots,
+      tree_height
+    )
+    best <- find_best_solution(demes_after_gradient_metaepoch)
     gradient_snapshot <- methods::new("MetaepochSnapshot",
-                 demes = demes_after_gradient_metaepoch,
-                 best_fitness = best_fitness,
-                 best_solution = best_solution,
-                 time_in_seconds = seconds_since(start_time) - evaluation_times_sum(metaepoch_snapshots),
-                 fitness_evaluations = 0, # TODO
-                 blocked_sprouts = list(),
-                 is_evolutionary = FALSE
+      demes = demes_after_gradient_metaepoch,
+      best_fitness = best$fitness,
+      best_solution = best$solution,
+      time_in_seconds = seconds_since(start_time) - evaluation_times_sum(metaepoch_snapshots),
+      fitness_evaluations = 0, # TODO
+      blocked_sprouts = list(),
+      is_evolutionary = FALSE
     )
     metaepoch_snapshots <- c(metaepoch_snapshots, gradient_snapshot)
     metaepochs_count <- metaepochs_count + 1
@@ -246,5 +237,7 @@ evaluation_times_sum <- function(metaepoch_snapshots) {
 }
 
 get_active_demes <- function(demes) {
-  Filter(function(deme) { deme@isActive }, demes)
+  Filter(function(deme) {
+    deme@isActive
+  }, demes)
 }

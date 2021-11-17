@@ -25,14 +25,14 @@ default_run_gradient_method <- function(deme, fitness, optim_args) {
 }
 
 is_leaf <- function(deme, tree_height) {
-  length(deme@best_fitness) != 0 & deme@level==tree_height
+  length(deme@best_fitness) != 0 & deme@level == tree_height
 }
 
-run_gradient_metaepoch <- function (fitness,
-                                    run_gradient_method,
-                                    gradient_method_args,
-                                    metaepoch_snapshots,
-                                    tree_height) {
+run_gradient_metaepoch_for_leaves <- function(fitness,
+                                              run_gradient_method,
+                                              gradient_method_args,
+                                              metaepoch_snapshots,
+                                              tree_height) {
   last_metaepoch_snapshot <- utils::tail(metaepoch_snapshots, n = 1)
   last_metaepoch_demes <- last_metaepoch_snapshot[[1]]@demes
   demes_after_gradient_method <- c()
