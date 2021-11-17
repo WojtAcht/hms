@@ -116,7 +116,7 @@ hms <- function(tree_height = 3,
       break
     }
 
-    next_metaepoch_demes <- c()
+    next_metaepoch_demes <- Filter(function(deme) { !deme@isActive }, demes)
     blocked_sprouts <- list()
     for (deme in get_active_demes(demes)) {
       start_metaepoch_time <- Sys.time()
@@ -144,7 +144,12 @@ hms <- function(tree_height = 3,
       # Leaves cannot sprout
       if (deme@level >= tree_height) next
 
-      if (sprouting_condition(metaepoch_result$solution, deme@level + 1, demes)) {
+
+      demes_including_this_metaepoch_sprouts <- c(
+        next_metaepoch_demes,
+        get_not_yet_processed_demes(demes, next_metaepoch_demes)
+      )
+      if (sprouting_condition(metaepoch_result$solution, deme@level + 1, demes_including_this_metaepoch_sprouts)) {
         new_deme <- create_deme(lower, upper, deme, population_size_per_tree_level[[deme@level + 1]], create_population)
         next_metaepoch_demes <- c(next_metaepoch_demes, new_deme)
       } else {
@@ -246,4 +251,16 @@ evaluation_times_sum <- function(metaepoch_snapshots) {
 
 get_active_demes <- function(demes) {
   Filter(function(deme) { deme@isActive }, demes)
+}
+
+get_not_yet_processed_demes <- function(all_demes, already_processed_demes) {
+  is_processed <- function(deme) {
+    for (processed_deme in already_processed_demes) {
+      if (deme@id == processed_deme@id) {
+        return(TRUE)
+      }
+    }
+    FALSE
+  }
+  Filter(function(deme) { is_processed(deme) }, all_demes)
 }
