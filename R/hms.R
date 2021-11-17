@@ -30,8 +30,10 @@ hms <- function(tree_height = 3,
                 run_metaepoch = default_ga_metaepoch(tree_height),
                 global_stopping_condition = default_global_stopping_condition,
                 local_stopping_condition = default_local_stopping_condition,
-                sprouting_condition = max_metric_sprouting_condition(euclidean_distance,
-                                                                     sprouting_default_euclidean_distances(sigma)),
+                sprouting_condition = max_metric_sprouting_condition(
+                  euclidean_distance,
+                  sprouting_default_euclidean_distances(sigma)
+                ),
                 create_population,
                 suggestions = NULL,
                 with_gradient_method = FALSE,
@@ -177,36 +179,26 @@ hms <- function(tree_height = 3,
   }
 
 
-  # Gradient methods:
-  # TODO wydzielić
+  # Gradient metaepoch:
   if (with_gradient_method) {
-    last_metaepoch_snapshot <- utils::tail(metaepoch_snapshots, n = 1)
-    leaves <- last_metaepoch_snapshot[[1]]@demes
-    leaves_after_gradient_method <- c()
-    for (deme in leaves) {
-      if (length(deme@best_fitness) != 0) {
-        result <- run_gradient_method(deme, fitness, gradient_method_args)
-        deme_after_gradient_method <- update_deme(result, deme)
-        leaves_after_gradient_method <- c(leaves_after_gradient_method, deme_after_gradient_method)
-        if (deme_after_gradient_method@best_fitness > best_fitness) {
-          best_fitness <- deme_after_gradient_method@best_fitness
-          best_solution <- deme_after_gradient_method@best_solution
-        }
-      } else {
-        leaves_after_gradient_method <- c(leaves_after_gradient_method, deme)
-      }
-    }
-
-    snapshot <- methods::new("MetaepochSnapshot",
-      demes = leaves_after_gradient_method,
-      best_fitness = best_fitness,
-      best_solution = best_solution,
+    demes_after_gradient_metaepoch <- run_gradient_metaepoch_for_leaves(
+      f,
+      run_gradient_method,
+      gradient_method_args,
+      metaepoch_snapshots,
+      tree_height
+    )
+    best <- find_best_solution(demes_after_gradient_metaepoch)
+    gradient_snapshot <- methods::new("MetaepochSnapshot",
+      demes = demes_after_gradient_metaepoch,
+      best_fitness = best$fitness,
+      best_solution = best$solution,
       time_in_seconds = seconds_since(start_time) - evaluation_times_sum(metaepoch_snapshots),
-      fitness_evaluations = 0, # TODO
+      fitness_evaluations = fitness_evaluations_count, # TODO
       blocked_sprouts = list(),
       is_evolutionary = FALSE
     )
-    metaepoch_snapshots <- c(metaepoch_snapshots, snapshot)
+    metaepoch_snapshots <- c(metaepoch_snapshots, gradient_snapshot)
     metaepochs_count <- metaepochs_count + 1
   }
   methods::new("hms",
@@ -250,7 +242,9 @@ evaluation_times_sum <- function(metaepoch_snapshots) {
 }
 
 get_active_demes <- function(demes) {
-  Filter(function(deme) { deme@isActive }, demes)
+  Filter(function(deme) {
+    deme@isActive
+  }, demes)
 }
 
 get_not_yet_processed_demes <- function(all_demes, already_processed_demes) {

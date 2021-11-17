@@ -136,21 +136,21 @@ plot.hms <- function(x) {
     snapshot@best_fitness
   }, object@metaepoch_snapshots)
   plot(metaepochs,
-       ylim = c(min(metaepoch_fitnesses), max(metaepoch_fitnesses)),
-       xlab = "metaepoch",
-       ylab = "fitness",
-       type = "n"
+    ylim = c(min(metaepoch_fitnesses), max(metaepoch_fitnesses)),
+    xlab = "metaepoch",
+    ylab = "fitness",
+    type = "n"
   )
   graphics::lines(metaepochs,
-                  metaepoch_fitnesses,
-                  pch = 16,
-                  type = "b",
-                  col = "green3"
+    metaepoch_fitnesses,
+    pch = 16,
+    type = "b",
+    col = "green3"
   )
   graphics::legend("bottomright",
-                   inset = 0.02,
-                   legend = "Best fitness",
-                   fill = "green"
+    inset = 0.02,
+    legend = "Best fitness",
+    fill = "green"
   )
 }
 
@@ -167,10 +167,10 @@ setMethod("plotActiveDemes", "hms", function(object) {
   }, object@metaepoch_snapshots)
   active_demes_count_per_metaepoch <- mapply(length, active_demes_per_metaepoch)
   graphics::barplot(active_demes_count_per_metaepoch,
-                    names.arg = metaepochs,
-                    main = "Active demes per metaepoch.",
-                    xlab = "Metaepoch",
-                    ylab = "Active demes count"
+    names.arg = metaepochs,
+    main = "Active demes per metaepoch.",
+    xlab = "Metaepoch",
+    ylab = "Active demes count"
   )
 })
 
