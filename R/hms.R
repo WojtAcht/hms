@@ -34,7 +34,7 @@ hms <- function(tree_height = 3,
                   euclidean_distance,
                   sprouting_default_euclidean_distances(sigma)
                 ),
-                create_population,
+                create_population = default_create_population(sigma),
                 suggestions = NULL,
                 with_gradient_method = FALSE,
                 gradient_method_args = default_gradient_method_args,
@@ -70,23 +70,8 @@ hms <- function(tree_height = 3,
   if (missing(create_population) & missing(sigma)) {
     message("A list of standard deviations (sigma) or a function to create population should be provided.")
   }
-  if (missing(create_population)) {
-    create_population <- default_create_population(sigma)
-  }
   if (with_gradient_method & missing(run_gradient_method)) {
-    gradient_method_args$lower <- lower
-    gradient_method_args$upper <- upper
-    if (gradient_method_args$poptim & (gradient_method_args$poptim < 0 | gradient_method_args$poptim > 1)) {
-      stop("gradient_method_args: poptim value has to be within [0,1].")
-    }
-    gradient_method_args$control$maxit <- as.integer(gradient_method_args$control$maxit)
-    if (is.null(gradient_method_args$control$fnscale)) {
-      gradient_method_args$control$fnscale <- -1
-    }
-    if (gradient_method_args$control$fnscale > 0) {
-      warning("gradient_method_args: fnscale should not be positive.")
-      gradient_method_args$control$fnscale <- -1 * gradient_method_args$control$fnscale
-    }
+    gradient_method_args <- validate_gradient_method_args(gradient_method_args, lower, upper)
     run_gradient_method <- default_run_gradient_method
   }
   monitor_level <- getMonitorLevel(monitor_level) # TODO :((
