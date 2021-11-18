@@ -30,8 +30,10 @@ hms <- function(tree_height = 3,
                 run_metaepoch = default_ga_metaepoch(tree_height),
                 global_stopping_condition = default_global_stopping_condition,
                 local_stopping_condition = default_local_stopping_condition,
-                sprouting_condition = max_metric_sprouting_condition(euclidean_distance,
-                                                                     sprouting_default_euclidean_distances(sigma)),
+                sprouting_condition = max_metric_sprouting_condition(
+                  euclidean_distance,
+                  sprouting_default_euclidean_distances(sigma)
+                ),
                 create_population,
                 suggestions = NULL,
                 with_gradient_method = FALSE,
@@ -87,7 +89,7 @@ hms <- function(tree_height = 3,
     }
     run_gradient_method <- default_run_gradient_method
   }
-  monitor_level <- getMonitorLevel(monitor_level)
+  monitor_level <- getMonitorLevel(monitor_level) # TODO :((
 
   root <- if (is.null(suggestions)) {
     create_deme(lower, upper, NULL, population_size_per_tree_level[[1]], create_population)
@@ -102,21 +104,23 @@ hms <- function(tree_height = 3,
   }
   total_metaepoch_time <- 0
   start_time <- Sys.time()
-  active_demes <- c(root)
-  inactive_demes <- c()
-  best_solution <- -Inf
-  best_fitness <- -Inf
+  demes <- c(root)
   metaepochs_count <- 0
   metaepoch_snapshots <- list()
   fitness_evaluations_count <- 0
   f <- function(x) {
     fitness_evaluations_count <<- fitness_evaluations_count + 1
-    fitness(x)
+    fitness(x) # TODO hmm jak by to zrobić
   }
-  while (!global_stopping_condition(metaepoch_snapshots) && length(active_demes) > 0) {
-    new_demes <- c()
+  while (!global_stopping_condition(metaepoch_snapshots)) {
+    if (length(Filter(function(deme) { deme@isActive }, demes)) == 0) {
+      message("HMS stopped due to a lack of active demes!")
+      break
+    }
+
+    next_metaepoch_demes <- Filter(function(deme) { !deme@isActive }, demes)
     blocked_sprouts <- list()
-    for (deme in active_demes) {
+    for (deme in Filter(function(deme) { deme@isActive }, demes)) {
       start_metaepoch_time <- Sys.time()
       deme_evaluations_count <- 0
       deme_f <- function(x) {
@@ -124,116 +128,84 @@ hms <- function(tree_height = 3,
         f(x)
       }
       metaepoch_result <- run_metaepoch(deme_f, deme@population, lower, upper, deme@level)
+
       end_metaepoch_time <- Sys.time()
       total_metaepoch_time <- total_metaepoch_time + (end_metaepoch_time - start_metaepoch_time)
+
       deme <- update_deme(metaepoch_result, deme)
       deme@evaluations_count <- deme@evaluations_count + deme_evaluations_count
+
       if (local_stopping_condition(deme, metaepoch_snapshots)) {
-        if (deme@best_fitness > best_fitness) {
-          best_fitness <- deme@best_fitness
-          best_solution <- deme@best_solution
-        }
         deme@isActive <- FALSE
-        inactive_demes <- c(inactive_demes, deme)
+        next_metaepoch_demes <- c(next_metaepoch_demes, deme)
         next
+      } else {
+        next_metaepoch_demes <- c(next_metaepoch_demes, deme)
       }
-      new_demes <- c(new_demes, deme)
+
+      # Leaves cannot sprout
       if (deme@level >= tree_height) next
-      if (sprouting_condition(metaepoch_result$solution, deme@level + 1, c(active_demes, inactive_demes))) {
+
+
+      demes_including_this_metaepoch_sprouts <- c(
+        next_metaepoch_demes,
+        get_not_yet_processed_demes(demes, next_metaepoch_demes)
+      )
+      if (sprouting_condition(metaepoch_result$solution, deme@level + 1, demes_including_this_metaepoch_sprouts)) {
         new_deme <- create_deme(lower, upper, deme, population_size_per_tree_level[[deme@level + 1]], create_population)
-        new_demes <- c(new_demes, new_deme)
+        next_metaepoch_demes <- c(next_metaepoch_demes, new_deme)
       } else {
         blocked_sprouts <- c(blocked_sprouts, list(metaepoch_result$solution))
       }
     }
-    active_demes <- new_demes
+    demes <- next_metaepoch_demes
 
-
-    for (deme in active_demes) {
-      if (length(deme@best_fitness) != 0 && deme@best_fitness > best_fitness) {
-        best_fitness <- deme@best_fitness
-        best_solution <- deme@best_solution
-      }
-    }
-
-    previous_metaepochs_time <- 0
-    for (metaepoch_snapshot in metaepoch_snapshots) {
-      previous_metaepochs_time <- previous_metaepochs_time + metaepoch_snapshot@time_in_seconds
-    }
+    best <- find_best_solution(demes)
 
     snapshot <- methods::new("MetaepochSnapshot",
-      demes = c(active_demes, inactive_demes),
-      best_fitness = best_fitness,
-      best_solution = best_solution,
-      time_in_seconds = seconds_since(start_time) - previous_metaepochs_time,
+      demes = demes,
+      best_fitness = best$fitness,
+      best_solution = best$solution,
+      time_in_seconds = seconds_since(start_time) - evaluation_times_sum(metaepoch_snapshots),
       fitness_evaluations = fitness_evaluations_count,
       blocked_sprouts = blocked_sprouts,
       is_evolutionary = TRUE
     )
-    if (monitor_level > MONITOR_LEVEL_NONE) {
-      cat("Metaepoch:", metaepochs_count, "Best fitness:", best_fitness, "\n")
 
-      if (monitor_level > MONITOR_LEVEL_BASIC) {
-        cat("Best solution:", get_solution_string(best_solution), "\n")
-        population_size <- Reduce(`+`, mapply(function(deme) base::nrow(deme@population), active_demes))
-        cat("Whole population size:", population_size, "\n")
-        cat("Demes count:", length(Filter(function(deme) length(deme@best_solution > 0), snapshot@demes)), "\n")
-        cat("Calculation time:", snapshot@time_in_seconds, "sec\n")
-        cat("Fitness evaluations count:", snapshot@fitness_evaluations, "\n")
-        if (monitor_level >= MONITOR_LEVEL_BASIC_TREE) {
-          print_tree(snapshot@demes, root@id, best_solution, show_details = (monitor_level > MONITOR_LEVEL_BASIC_TREE))
-        }
-        cat("\n\n")
-      }
-    }
+    log_metaepoch_snapshot(snapshot, root@id, metaepochs_count, monitor_level)
+
     metaepoch_snapshots <- c(metaepoch_snapshots, snapshot)
     metaepochs_count <- metaepochs_count + 1
   }
 
-  if (length(active_demes) == 0) {
-    message("HMS stopped due to a lack of active demes!")
-  }
 
-  # Gradient methods:
+  # Gradient metaepoch:
   if (with_gradient_method) {
-    last_metaepoch_snapshot <- utils::tail(metaepoch_snapshots, n = 1)
-    leaves <- last_metaepoch_snapshot[[1]]@demes
-    leaves_after_gradient_method <- c()
-    for (deme in leaves) {
-      if (length(deme@best_fitness) != 0) {
-        result <- run_gradient_method(deme, fitness, gradient_method_args)
-        deme_after_gradient_method <- update_deme(result, deme)
-        leaves_after_gradient_method <- c(leaves_after_gradient_method, deme_after_gradient_method)
-        if (deme_after_gradient_method@best_fitness > best_fitness) {
-          best_fitness <- deme_after_gradient_method@best_fitness
-          best_solution <- deme_after_gradient_method@best_solution
-        }
-      } else {
-        leaves_after_gradient_method <- c(leaves_after_gradient_method, deme)
-      }
-    }
-    # TODO: dodać jakąś funkcję na to
-    previous_metaepochs_time <- 0
-    for (metaepoch_snapshot in metaepoch_snapshots) {
-      previous_metaepochs_time <- previous_metaepochs_time + metaepoch_snapshot@time_in_seconds
-    }
-    snapshot <- methods::new("MetaepochSnapshot",
-      demes = leaves_after_gradient_method,
-      best_fitness = best_fitness,
-      best_solution = best_solution,
-      time_in_seconds = seconds_since(start_time) - previous_metaepochs_time,
-      fitness_evaluations = 0, # TODO
+    demes_after_gradient_metaepoch <- run_gradient_metaepoch_for_leaves(
+      f,
+      run_gradient_method,
+      gradient_method_args,
+      metaepoch_snapshots,
+      tree_height
+    )
+    best <- find_best_solution(demes_after_gradient_metaepoch)
+    gradient_snapshot <- methods::new("MetaepochSnapshot",
+      demes = demes_after_gradient_metaepoch,
+      best_fitness = best$fitness,
+      best_solution = best$solution,
+      time_in_seconds = seconds_since(start_time) - evaluation_times_sum(metaepoch_snapshots),
+      fitness_evaluations = fitness_evaluations_count, # TODO
       blocked_sprouts = list(),
       is_evolutionary = FALSE
     )
-    metaepoch_snapshots <- c(metaepoch_snapshots, snapshot)
+    metaepoch_snapshots <- c(metaepoch_snapshots, gradient_snapshot)
     metaepochs_count <- metaepochs_count + 1
   }
   methods::new("hms",
     root_id = root@id,
     metaepoch_snapshots = metaepoch_snapshots,
-    best_fitness = best_fitness,
-    best_solution = best_solution,
+    best_fitness = metaepoch_snapshots[[metaepochs_count]]@best_fitness,
+    best_solution = metaepoch_snapshots[[metaepochs_count]]@best_solution,
     total_time_in_seconds = seconds_since(start_time),
     total_metaepoch_time_in_seconds = as.numeric(total_metaepoch_time, units = "secs"),
     metaepochs_count = metaepochs_count,
@@ -242,4 +214,41 @@ hms <- function(tree_height = 3,
     upper = upper,
     call = match.call()
   )
+}
+
+find_best_solution <- function(demes) {
+  best_solution <- NULL
+  best_fitness <- -Inf
+  for (deme in demes) {
+    if (length(deme@best_fitness) == 0) {
+      next
+    }
+
+    if (deme@best_fitness > best_fitness) {
+      best_fitness <- deme@best_fitness
+      best_solution <- deme@best_solution
+    }
+  }
+
+  list("fitness" = best_fitness, "solution" = best_solution)
+}
+
+evaluation_times_sum <- function(metaepoch_snapshots) {
+  time_sum <- 0
+  for (metaepoch_snapshot in metaepoch_snapshots) {
+    time_sum <- time_sum + metaepoch_snapshot@time_in_seconds
+  }
+  time_sum
+}
+
+get_not_yet_processed_demes <- function(all_demes, already_processed_demes) {
+  is_processed <- function(deme) {
+    for (processed_deme in already_processed_demes) {
+      if (deme@id == processed_deme@id) {
+        return(TRUE)
+      }
+    }
+    FALSE
+  }
+  Filter(function(deme) { is_processed(deme) }, all_demes)
 }
