@@ -88,6 +88,31 @@ test_that("HMS works - Baele:", {
   expect_true(euclidean_distance(expected_result, result@best_solution) < 0.5)
 })
 
+test_that("HMS works - Baele with gradient metaepoch:", {
+  set.seed(1)
+  Baele <- function(x) {
+    x1 <- x[[1]]
+    x2 <- x[[2]]
+    result <- (1.5 - x1 + x1 * x2)^2 + (2.25 - x1 + x1 * x2^2)^2 + (2.625 - x1 + x1 * x2^3)^2
+    -1 * result
+  }
+  default_sd <- c(1, 1)
+  sigma <- list(default_sd, default_sd, default_sd, default_sd, default_sd, default_sd)
+  lower <- c(-4.5, -4.5)
+  upper <- c(4.5, 4.5)
+  result <- hms(
+    fitness = Baele,
+    lower = lower,
+    upper = upper,
+    sigma = sigma,
+    population_size_per_tree_level = c(50, 25, 15),
+    with_gradient_method = TRUE,
+    monitor_level = "none"
+  )
+  expected_result <- c(3, 0.5)
+  expect_true(euclidean_distance(expected_result, result@best_solution) < 1e-4)
+})
+
 test_that("HMS works - Eggholder:", {
   set.seed(1)
   Eggholder <- function(x) {
