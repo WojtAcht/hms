@@ -12,7 +12,7 @@ setClass("Deme", slots = c(
   sprout = "numericOrNULL",
   parent_id = "characterOrNULL",
   evaluations_count = "numeric",
-  isActive = "logical"
+  is_active = "logical"
 ))
 
 rnorm_population <- function(mean, lower, upper, population_size, tree_level, sigma) {
@@ -74,7 +74,7 @@ create_deme <- function(lower, upper, parent, population_size, create_population
     id = uuid::UUIDgenerate(),
     parent_id = if (is.null(parent)) NULL else parent@id,
     evaluations_count = 0,
-    isActive = TRUE
+    is_active = TRUE
   )
 }
 
