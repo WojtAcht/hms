@@ -52,8 +52,13 @@ default_create_population <- function(sigma) {
 
 create_deme <- function(lower, upper, parent, population_size, create_population) {
   new_deme_level <- ifelse(is.null(parent), 1, parent@level + 1)
+  new_sprout <- if (is.null(parent)) {
+    NULL
+  } else {
+    unlist(utils::tail(parent@best_solutions_per_metaepoch, n = 1))
+  }
   new_population <- create_population(
-    mean = parent@best_solution,
+    mean = new_sprout,
     lower = lower,
     upper = upper,
     population_size = population_size,
@@ -61,11 +66,6 @@ create_deme <- function(lower, upper, parent, population_size, create_population
   )
   if (any(dim(new_population) != c(population_size, length(lower)))) {
     stop("Created population is invalid - wrong dimensions.")
-  }
-  new_sprout <- if (is.null(parent)) {
-    NULL
-  } else {
-    unlist(utils::tail(parent@best_solutions_per_metaepoch, n = 1))
   }
   methods::new("Deme",
     population = new_population,
