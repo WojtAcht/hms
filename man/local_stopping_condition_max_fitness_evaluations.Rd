@@ -4,10 +4,10 @@
 \alias{local_stopping_condition_max_fitness_evaluations}
 \title{local_stopping_condition_max_fitness_evaluations}
 \usage{
-local_stopping_condition_max_fitness_evaluations(max_evaluations_count)
+local_stopping_condition_max_fitness_evaluations(max_evaluations)
 }
 \arguments{
-\item{max_evaluations_count}{\itemize{
+\item{max_evaluations}{\itemize{
 \item numeric
 }}
 }

@@ -16,15 +16,15 @@ local_stopping_condition_metaepochs_without_improvement <- function(max_metaepoc
 
 #' local_stopping_condition_max_fitness_evaluations
 #'
-#' @param max_evaluations_count - numeric
+#' @param max_evaluations - numeric
 #'
 #' @return
 #' @export
 #'
 #' @examples
-local_stopping_condition_max_fitness_evaluations <- function(max_evaluations_count) {
+local_stopping_condition_max_fitness_evaluations <- function(max_evaluations) {
   function(deme, previous_metaepoch_snapshots) {
-    deme@evaluations_count < max_evaluations_count
+    deme@evaluations_count > max_evaluations
   }
 }
 

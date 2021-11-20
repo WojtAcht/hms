@@ -81,3 +81,36 @@ Griewank <- function(x) {
   y <- sum - prod + 1
   return(y)
 }
+
+
+#' Baele
+#' Min: f(x) = 0 at x = (3, 0.5)
+#' x1, x2 in \[-4.5, 4.5\]
+#'
+#' @param x - numeric
+#'
+#' @return
+#' @export
+#'
+#' @examples
+Baele <- function(x) {
+  x1 <- x[[1]]
+  x2 <- x[[2]]
+  (1.5 - x1 + x1 * x2)^2 + (2.25 - x1 + x1 * x2^2)^2 + (2.625 - x1 + x1 * x2^3)^2
+}
+
+#' Eggholder
+#' Min: f(x) = -959.6407 at x = (512, 404.2319)
+#' x1, x2 in \[-512, 512]
+#'
+#' @param x - numeric
+#'
+#' @return
+#' @export
+#'
+#' @examples
+Eggholder <- function(x) {
+  x1 <- x[[1]]
+  x2 <- x[[2]]
+  -1 * (x2 + 47) * sin(sqrt(abs(x1 / 2 + x2 + 47))) - x1 * sin(sqrt(abs(x1 - x2 - 47)))
+}
