@@ -12,7 +12,7 @@ setClass("Deme", slots = c(
   sprout = "numericOrNULL",
   parent_id = "characterOrNULL",
   evaluations_count = "numeric",
-  isActive = "logical"
+  is_active = "logical"
 ))
 
 rnorm_population <- function(mean, lower, upper, population_size, tree_level, sigma) {
@@ -52,8 +52,13 @@ default_create_population <- function(sigma) {
 
 create_deme <- function(lower, upper, parent, population_size, create_population) {
   new_deme_level <- ifelse(is.null(parent), 1, parent@level + 1)
+  new_sprout <- if (is.null(parent)) {
+    NULL
+  } else {
+    unlist(utils::tail(parent@best_solutions_per_metaepoch, n = 1))
+  }
   new_population <- create_population(
-    mean = parent@best_solution,
+    mean = new_sprout,
     lower = lower,
     upper = upper,
     population_size = population_size,
@@ -62,11 +67,6 @@ create_deme <- function(lower, upper, parent, population_size, create_population
   if (any(dim(new_population) != c(population_size, length(lower)))) {
     stop("Created population is invalid - wrong dimensions.")
   }
-  new_sprout <- if (is.null(parent)) {
-    NULL
-  } else {
-    unlist(utils::tail(parent@best_solutions_per_metaepoch, n = 1))
-  }
   methods::new("Deme",
     population = new_population,
     level = new_deme_level,
@@ -74,7 +74,7 @@ create_deme <- function(lower, upper, parent, population_size, create_population
     id = uuid::UUIDgenerate(),
     parent_id = if (is.null(parent)) NULL else parent@id,
     evaluations_count = 0,
-    isActive = TRUE
+    is_active = TRUE
   )
 }
 

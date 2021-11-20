@@ -1,3 +1,20 @@
+validate_gradient_method_args <- function(gradient_method_args, lower, upper) {
+  gradient_method_args$lower <- lower
+  gradient_method_args$upper <- upper
+  if (gradient_method_args$poptim & (gradient_method_args$poptim < 0 | gradient_method_args$poptim > 1)) {
+    stop("gradient_method_args: poptim value has to be within [0,1].")
+  }
+  gradient_method_args$control$maxit <- as.integer(gradient_method_args$control$maxit)
+  if (is.null(gradient_method_args$control$fnscale)) {
+    gradient_method_args$control$fnscale <- -1
+  }
+  if (gradient_method_args$control$fnscale > 0) {
+    message("gradient_method_args: fnscale should not be positive.")
+    gradient_method_args$control$fnscale <- -1 * gradient_method_args$control$fnscale
+  }
+  gradient_method_args
+}
+
 #' Function that runs gradient method for one deme.
 #'
 #' @param deme - Deme
