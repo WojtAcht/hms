@@ -2,5 +2,11 @@
 
 export(default_run_gradient_method)
 export(ga_metaepoch)
+export(global_stopping_condition_max_fitness_evaluations)
+export(global_stopping_condition_metaepochs_count)
+export(global_stopping_condition_trivial)
 export(hms)
+export(local_stopping_condition_max_fitness_evaluations)
+export(local_stopping_condition_metaepochs_without_improvement)
+export(local_stopping_condition_trivial)
 export(max_metric_sprouting_condition)

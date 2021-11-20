@@ -14,10 +14,9 @@ hms(
   run_metaepoch = default_ga_metaepoch(tree_height),
   global_stopping_condition = default_global_stopping_condition,
   local_stopping_condition = default_local_stopping_condition,
-  sprouting_distance_per_tree_level = sprouting_default_euclidean_distances(sigma),
   sprouting_condition = max_metric_sprouting_condition(euclidean_distance,
-    sprouting_distance_per_tree_level),
-  create_population,
+    sprouting_default_euclidean_distances(sigma)),
+  create_population = default_create_population(sigma),
   suggestions = NULL,
   with_gradient_method = FALSE,
   gradient_method_args = default_gradient_method_args,
@@ -60,10 +59,6 @@ hms(
 
 \item{local_stopping_condition}{\itemize{
 \item function
-}}
-
-\item{sprouting_distance_per_tree_level}{\itemize{
-\item numeric - distances per level for sprouting condition
 }}
 
 \item{sprouting_condition}{\itemize{

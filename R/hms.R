@@ -50,7 +50,7 @@ hms <- function(tree_height = 3,
     stop("A lower and upper range of values must be provided.")
   }
   if (!is.vector(sigma) & !is.list(sigma)) {
-    stop("A list of standard deviations (sigma) must be provided.")
+    stop("Invalid object for argument \"sigma\": should be a vector or a list.")
   }
   if (!missing(sigma) & !length(sigma) >= tree_height) {
     stop("The list of standard deviations (sigma) must have tree_height elements.")
