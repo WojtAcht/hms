@@ -59,7 +59,7 @@ print_tree <- function(demes, root_id, best_solution, show_details = TRUE) {
     }
     cat(paste(deme_distinguisher, "f", sep = ""))
     cat(get_solution_string(deme@best_solution))
-    active <- ifelse(deme@isActive, " A", "")
+    active <- ifelse(deme@is_active, " A", "")
     new_deme <- ifelse(length(deme@best_fitnesses_per_metaepoch) <= 1 & show_details & !is_root, " (new_deme)", "")
     cat(paste(" = ", sprintf(deme@best_fitness, fmt = "%#.2f"), deme_distinguisher, sep = ""))
     if (show_details) {
@@ -162,7 +162,7 @@ setMethod("plotActiveDemes", "hms", function(object) {
   metaepochs <- 1:object@metaepochs_count
   active_demes_per_metaepoch <- mapply(function(snapshot) {
     Filter(function(deme) {
-      deme@isActive
+      deme@is_active
     }, snapshot@demes)
   }, object@metaepoch_snapshots)
   active_demes_count_per_metaepoch <- mapply(length, active_demes_per_metaepoch)

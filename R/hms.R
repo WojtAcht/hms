@@ -235,5 +235,5 @@ get_not_yet_processed_demes <- function(all_demes, already_processed_demes) {
     }
     FALSE
   }
-  Filter(function(deme) { is_processed(deme) }, all_demes)
+  Filter(function(deme) { !is_processed(deme) }, all_demes)
 }
