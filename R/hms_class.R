@@ -16,7 +16,7 @@ setClass("hms", slots = c(
   total_time_in_seconds = "numeric",
   total_metaepoch_time_in_seconds = "numeric",
   metaepochs_count = "numeric",
-  deme_population_size = "numeric",
+  deme_population_size_per_tree_level = "numeric",
   lower = "numeric",
   upper = "numeric",
   call = "language"
@@ -118,7 +118,7 @@ summary.hms <- function(object, ...) {
     fitness = object@best_fitness,
     solution = domain_element_to_string(object@best_solution),
     metaepochs = object@metaepochs_count,
-    deme_population_size = object@deme_population_size,
+    deme_population_size_per_tree_level = object@deme_population_size_per_tree_level,
     lower_bound = domain_element_to_string(object@lower),
     upper_bound = domain_element_to_string(object@upper),
     computation_time = paste(as.numeric(object@total_time_in_seconds), " seconds", sep = "")

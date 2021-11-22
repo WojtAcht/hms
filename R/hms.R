@@ -194,7 +194,7 @@ hms <- function(tree_height = 3,
     total_time_in_seconds = seconds_since(start_time),
     total_metaepoch_time_in_seconds = as.numeric(total_metaepoch_time, units = "secs"),
     metaepochs_count = metaepochs_count,
-    deme_population_size = population_size_per_tree_level,
+    deme_population_size_per_tree_level = population_size_per_tree_level,
     lower = lower,
     upper = upper,
     call = match.call()

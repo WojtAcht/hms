@@ -8,7 +8,7 @@
 #' @examples
 global_stopping_condition_metaepochs_count <- function(metaepochs_count) {
   function(metaepoch_snapshots) {
-    length(metaepoch_snapshots) > metaepochs_count
+    length(metaepoch_snapshots) >= metaepochs_count
   }
 }
 
