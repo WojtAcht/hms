@@ -41,6 +41,34 @@ test_that("HMS works - Ackley:", {
   expect_true(euclidean_distance(expected_result, result@best_solution) < 1e-3)
 })
 
+test_that("HMS works - Schwefel:", {
+  set.seed(1)
+  lower <- c(-500, -500)
+  upper <- c(500, 500)
+  result <- hms(
+    fitness = function(x) { -1 * Schwefel(x)},
+    lower = lower,
+    upper = upper,
+    monitor_level = "none"
+  )
+  expected_result <- c(420.9687, 420.9687)
+  expect_true(euclidean_distance(expected_result, result@best_solution) < 1e-1)
+})
+
+test_that("HMS works - Griewank:", {
+  set.seed(1)
+  lower <- c(-600, -600)
+  upper <- c(600, 600)
+  result <- hms(
+    fitness = function(x) { -1 * Griewank(x)},
+    lower = lower,
+    upper = upper,
+    monitor_level = "none"
+  )
+  expected_result <- c(0, 0)
+  expect_true(euclidean_distance(expected_result, result@best_solution) < 1e1)
+})
+
 test_that("HMS works - Baele:", {
   set.seed(1)
   lower <- c(-4.5, -4.5)
