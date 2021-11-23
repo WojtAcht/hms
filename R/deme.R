@@ -104,3 +104,7 @@ update_deme <- function(metaepoch_result, deme) {
 is_leaf <- function(deme, tree_height) {
   length(deme@best_fitness) != 0 & deme@level == tree_height
 }
+
+is_root <- function(deme) {
+  deme@level == 1
+}

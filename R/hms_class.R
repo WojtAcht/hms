@@ -1,3 +1,17 @@
+#' Title
+#'
+#' @slot demes list.
+#' @slot best_fitness numeric.
+#' @slot best_solution numeric.
+#' @slot time_in_seconds numeric.
+#' @slot fitness_evaluations numeric.
+#' @slot blocked_sprouts list.
+#' @slot is_evolutionary logical.
+#'
+#' @return
+#' @export
+#'
+#' @examples
 setClass("MetaepochSnapshot", slots = c(
   demes = "list",
   best_fitness = "numeric",
@@ -8,6 +22,24 @@ setClass("MetaepochSnapshot", slots = c(
   is_evolutionary = "logical"
 ))
 
+#' Title
+#'
+#' @slot root_id character.
+#' @slot metaepoch_snapshots list.
+#' @slot best_fitness numeric.
+#' @slot best_solution numeric.
+#' @slot total_time_in_seconds numeric.
+#' @slot total_metaepoch_time_in_seconds numeric.
+#' @slot metaepochs_count numeric.
+#' @slot deme_population_size_per_tree_level numeric.
+#' @slot lower numeric.
+#' @slot upper numeric.
+#' @slot call language.
+#'
+#' @return
+#' @export
+#'
+#' @examples
 setClass("hms", slots = c(
   root_id = "character",
   metaepoch_snapshots = "list",
@@ -22,8 +54,24 @@ setClass("hms", slots = c(
   call = "language"
 ))
 
+#' Title
+#'
+#' @param hms - hms s4 object
+#'
+#' @return
+#' @export
+#'
+#' @examples
 setMethod("print", "hms", function(x, ...) utils::str(x))
 
+#' Title
+#'
+#' @param hms - hms s4 object
+#'
+#' @return
+#' @export
+#'
+#' @examples
 setMethod("show", "hms", function(object) {
   cat("An object of class \"hms\"\n")
   cat("\nCall:\n", deparse(object@call), "\n\n", sep = "")
@@ -31,6 +79,14 @@ setMethod("show", "hms", function(object) {
   print(methods::slotNames(object))
 })
 
+#' Title
+#'
+#' @param object - hms s4 object
+#'
+#' @return
+#' @export
+#'
+#' @examples
 setGeneric("printTree", function(object) standardGeneric("printTree"))
 
 get_solution_string <- function(solution, format = "%#.2f") {
@@ -92,6 +148,15 @@ print_tree <- function(demes, root_id, best_solution, show_details = TRUE) {
   print_tree_from_deme(root)
 }
 
+
+#' Title
+#'
+#' @param hms - hms s4 object
+#'
+#' @return
+#' @export
+#'
+#' @examples
 setMethod("printTree", "hms", function(object) {
   last_metaepoch_snapshot <- utils::tail(object@metaepoch_snapshots, n = 1)
   if (length(last_metaepoch_snapshot) == 0) {
@@ -127,6 +192,14 @@ summary.hms <- function(object, ...) {
   out
 }
 
+#' Title
+#'
+#' @param hms - hms s4 object
+#'
+#' @return
+#' @export
+#'
+#' @examples
 setMethod("summary", "hms", summary.hms)
 
 plot.hms <- function(x) {
@@ -154,10 +227,34 @@ plot.hms <- function(x) {
   )
 }
 
+#' Title
+#'
+#' @param hms - hms s4 object
+#'
+#' @return
+#' @export
+#'
+#' @examples
 setMethod("plot", "hms", plot.hms)
 
+#' Title
+#'
+#' @param object - hms s4 object
+#'
+#' @return
+#' @export
+#'
+#' @examples
 setGeneric("plotActiveDemes", function(object) standardGeneric("plotActiveDemes"))
 
+#' Title
+#'
+#' @param hms - hms s4 object
+#'
+#' @return
+#' @export
+#'
+#' @examples
 setMethod("plotActiveDemes", "hms", function(object) {
   metaepochs <- 1:object@metaepochs_count
   active_demes_per_metaepoch <- mapply(function(snapshot) {
@@ -174,8 +271,24 @@ setMethod("plotActiveDemes", "hms", function(object) {
   )
 })
 
+#' Title
+#'
+#' @param object - hms s4 object
+#'
+#' @return
+#' @export
+#'
+#' @examples
 setGeneric("printBlockedSprouts", function(object) standardGeneric("printBlockedSprouts"))
 
+#' Title
+#'
+#' @param hms - hms s4 object
+#'
+#' @return
+#' @export
+#'
+#' @examples
 setMethod("printBlockedSprouts", "hms", function(object) {
   metaepochs <- 1:object@metaepochs_count
   blocked_sprouts_per_metaepoch <- mapply(function(snapshot) {
