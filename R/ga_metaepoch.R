@@ -8,10 +8,10 @@
 #' @examples
 ga_metaepoch <- function(config_ga) {
   function(fitness, suggestions, lower, upper, tree_level) {
-    config <- config_ga[tree_level]
+    config <- config_ga[[tree_level]]
     legal_passed_param_names <- Filter(function(name) {
       name %in% methods::formalArgs(GA::ga)
-    }, config)
+    }, names(config))
     params <- list("maxiter" = 5, "popSize" = nrow(suggestions))
     for (param_name in legal_passed_param_names) {
       params[param_name] <- config[param_name]
