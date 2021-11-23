@@ -1,3 +1,13 @@
+#' Title
+#'
+#' @param lower - numeric
+#' @param upper - numeric
+#' @param sd - numeric
+#'
+#' @return
+#' @export
+#'
+#' @examples
 rtnorm_mutation <- function(lower, upper, sd) {
   function(object, parent) {
     parent <- as.vector(object@population[parent, ])
