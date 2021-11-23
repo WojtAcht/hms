@@ -10,7 +10,7 @@ local_stopping_condition_metaepochs_without_improvement <- function(max_metaepoc
   function(deme, previous_metaepoch_snapshots) {
     best_fitness_metaepoch <- match(deme@best_fitness, deme@best_fitnesses_per_metaepoch)
     metaepoch_count <- length(deme@best_fitnesses_per_metaepoch)
-    best_fitness_metaepoch <= metaepoch_count - max_metaepochs_without_improvement
+    !is_root(deme) & best_fitness_metaepoch <= metaepoch_count - max_metaepochs_without_improvement
   }
 }
 
@@ -24,7 +24,7 @@ local_stopping_condition_metaepochs_without_improvement <- function(max_metaepoc
 #' @examples
 local_stopping_condition_max_fitness_evaluations <- function(max_evaluations) {
   function(deme, previous_metaepoch_snapshots) {
-    deme@evaluations_count > max_evaluations
+    !is_root(deme) & deme@evaluations_count > max_evaluations
   }
 }
 
