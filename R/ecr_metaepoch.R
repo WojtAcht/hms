@@ -1,0 +1,40 @@
+#' Function that runs one ecr metaepoch.
+#'
+#' @param config_ecr - list of ecr::ecr params
+#'
+#' @return list with named fields: solution, population, value
+#' @export
+#'
+#' @examples
+ecr_metaepoch <- function(config_ecr) {
+  function(fitness, suggestions, lower, upper, tree_level) {
+    config <- config_ecr[[tree_level]]
+    legal_passed_param_names <- Filter(function(name) {
+      name %in% methods::formalArgs(ecr::ecr)
+    }, names(config))
+    params <- list("maxiter" = 5,
+                   "popSize" = nrow(suggestions))
+    for (param_name in legal_passed_param_names) {
+      params[param_name] <- config[param_name]
+    }
+    params$fitness.fun <- fitness
+    params$n.objectives <- 1L
+    params$minimize <- FALSE
+    params$lower <- lower
+    params$upper <- upper
+    params$n.dim <- length(lower)
+    params$initial.solutions <- suggestions
+    params$representation <- "float"
+    params$monitor <- FALSE
+    result <- do.call(ecr::ecr, params)
+    population <- matrix(unlist(result$last.population), ncol = length(lower), byrow = TRUE)
+    list("solution" = result$best.x[[1]], "population" = population, "value" = result$best.y[[1]])
+  }
+}
+
+default_ecr_metaepoch <- function(tree_height) {
+  empty_config_ecr <- lapply(1:tree_height, function(x) {
+    list()
+  })
+  ecr_metaepoch(empty_config_ecr)
+}
