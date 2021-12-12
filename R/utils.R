@@ -27,3 +27,11 @@ manhattan_distance <- function(x, y) {
 seconds_since <- function(start_time) {
   as.numeric(Sys.time() - start_time, units = "secs")
 }
+
+matrix_to_list <- function(x) {
+  lapply(seq_len(nrow(x)), function(i) x[i,])
+}
+
+list_to_matrix <- function(x, ncol) {
+  matrix(unlist(x), ncol = ncol, byrow = TRUE)
+}
