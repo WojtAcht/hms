@@ -22,7 +22,10 @@ Imports:
     msm,
     methods,
     uuid,
-    graphics
+    graphics,
+    filelock,
+    parallel,
+    doParallel
 Suggests: 
     testthat (>= 3.0.0),
     ecr,
