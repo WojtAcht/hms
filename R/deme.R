@@ -87,6 +87,15 @@ update_deme <- function(metaepoch_result, deme) {
     !is.numeric(metaepoch_result$population)) {
     stop("The run_metaepoch function must return a list with following named parameters of type numeric: solution, value, population")
   }
+  if (any(dim(metaepoch_result$population) != dim(deme@population))) {
+    stop("The run_metaepoch function must return population with matching dimensions.")
+  }
+  if (length(metaepoch_result$solution) != dim(deme@population)[[2]]) {
+    stop("The run_metaepoch function must return solution with matching dimensions.")
+  }
+  if (length(metaepoch_result$value) != 1) {
+    stop("The run_metaepoch function must return 1D value.")
+  }
 
   potential_sprout <- metaepoch_result$solution
   metaepoch_best <- metaepoch_result$value
