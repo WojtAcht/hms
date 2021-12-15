@@ -4,5 +4,8 @@ library(GA)
 library(purrr)
 library(msm)
 library(uuid)
+library(filelock)
+library(parallel)
+library(doParallel)
 
 test_check("hms")

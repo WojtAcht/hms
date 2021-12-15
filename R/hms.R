@@ -39,7 +39,8 @@ hms <- function(tree_height = 3,
                 with_gradient_method = FALSE,
                 gradient_method_args = default_gradient_method_args,
                 run_gradient_method,
-                monitor_level = "basic") {
+                monitor_level = "basic",
+                parallel = FALSE) {
   if (tree_height < 1) {
     stop("Max tree height has to be greater or equal 1.")
   }
@@ -94,8 +95,12 @@ hms <- function(tree_height = 3,
   metaepoch_snapshots <- list()
   fitness_evaluations_count <- 0
   f <- function(x) {
+    lock <- if (parallel) filelock::lock("/general.lck") else NULL
     fitness_evaluations_count <<- fitness_evaluations_count + 1
-    fitness(x) # TODO hmm jak by to zrobić
+    if (parallel) {
+      filelock::unlock(lock)
+    }
+    fitness(x)
   }
   while (!global_stopping_condition(metaepoch_snapshots)) {
     if (length(Filter(function(deme) { deme@is_active }, demes)) == 0) {
@@ -109,7 +114,11 @@ hms <- function(tree_height = 3,
       start_metaepoch_time <- Sys.time()
       deme_evaluations_count <- 0
       deme_f <- function(x) {
+        lock <- if (parallel) filelock::lock("/deme.lck") else NULL
         deme_evaluations_count <<- deme_evaluations_count + 1
+        if (parallel) {
+          filelock::unlock(lock)
+        }
         f(x)
       }
       metaepoch_result <- run_metaepoch(deme_f, deme@population, lower, upper, deme@level)
