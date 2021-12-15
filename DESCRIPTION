@@ -22,12 +22,12 @@ Imports:
     msm,
     methods,
     uuid,
-    graphics,
-    filelock,
-    parallel,
-    doParallel
+    graphics
 Suggests: 
     testthat (>= 3.0.0),
     ecr,
-    rgenoud
+    rgenoud,
+    filelock,
+    parallel,
+    doParallel
 Config/testthat/edition: 3

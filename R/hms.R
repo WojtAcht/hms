@@ -95,7 +95,7 @@ hms <- function(tree_height = 3,
   metaepoch_snapshots <- list()
   fitness_evaluations_count <- 0
   f <- function(x) {
-    lock <- `if`(parallel, filelock::lock("/general.lck"), NULL)
+    lock <- if (parallel) filelock::lock("/general.lck") else NULL
     fitness_evaluations_count <<- fitness_evaluations_count + 1
     if (parallel) {
       filelock::unlock(lock)
@@ -114,7 +114,7 @@ hms <- function(tree_height = 3,
       start_metaepoch_time <- Sys.time()
       deme_evaluations_count <- 0
       deme_f <- function(x) {
-        lock <- `if`(parallel, filelock::lock("/deme.lck"), NULL)
+        lock <- if (parallel) filelock::lock("/deme.lck") else NULL
         deme_evaluations_count <<- deme_evaluations_count + 1
         if (parallel) {
           filelock::unlock(lock)
