@@ -26,7 +26,7 @@ ga_metaepoch <- function(config_ga) {
     # TODO Always better to have more data :)
     params$keepBest <- TRUE
     GA <- do.call(GA::ga, params)
-    list("solution" = c(GA@solution), "population" = GA@population, "value" = GA@fitnessValue)
+    list("solution" = c(GA@solution[1,]), "population" = GA@population, "value" = GA@fitnessValue)
   }
 }
 
