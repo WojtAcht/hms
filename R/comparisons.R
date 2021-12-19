@@ -152,8 +152,8 @@ hms_vs_ga_schwefel_5d <- function(evaluations) {
         pmutation = 0.4
       ),
       list(
-        pmutation = 0.2,
-        mutation = rtnorm_mutation(lower, upper, sigma[[2]])
+        pmutation = 0.2 #,
+        #mutation = rtnorm_mutation(lower, upper, sigma[[2]])
       ),
       list(
         pmutation = 0.2,
@@ -169,11 +169,11 @@ hms_vs_ga_schwefel_5d <- function(evaluations) {
       lower = lower,
       upper = upper,
       run_metaepoch = ga_metaepoch(ga_config),
-      population_size_per_tree_level = c(50, 30, 15),
+      population_size_per_tree_level = c(50, 25, 10),
       sigma = sigma,
       global_stopping_condition =   global_stopping_condition_max_fitness_evaluations(evaluations),
-      sprouting_condition = max_metric_sprouting_condition(euclidean_distance, c(45, 20, 10)),
-      local_stopping_condition = local_stopping_condition_metaepochs_without_improvement(8),
+      sprouting_condition = max_metric_sprouting_condition(euclidean_distance, c(55, 30, 18)),
+      local_stopping_condition = local_stopping_condition_metaepochs_without_improvement(7),
       monitor_level = "none"
     )
     printTree(result)
@@ -232,19 +232,19 @@ get_hms_vs_ga_schwefel_5d_res <- function() {
   a_20k = hms_vs_ga_schwefel_5d(20000)
   a_25k = hms_vs_ga_schwefel_5d(25000)
   a_30k = hms_vs_ga_schwefel_5d(30000)
-  a_35k = hms_vs_ga_schwefel_5d(35000)
-  a_40k = hms_vs_ga_schwefel_5d(40000)
+  #a_35k = hms_vs_ga_schwefel_5d(35000)
+  #a_40k = hms_vs_ga_schwefel_5d(40000)
 
-  list(ga_5k = a_5k$ga, hms_5k = a_5k$hms, ga_10k = a_10k$ga, hms_10k = a_10k$hms, ga_15k = a_15k$ga, hms_15k = a_15k$hms, ga_20k = a_20k$ga, hms_20k = a_20k$hms, ga_25k = a_25k$ga, hms_25k = a_25k$hms, ga_30k = a_30k$ga, hms_30k = a_30k$hms, ga_35k = a_35k$ga, hms_35k = a_35k$hms, ga_40k = a_40k$ga, hms_40k = a_40k$hms)
+  list(ga_5k = a_5k$ga, hms_5k = a_5k$hms, ga_10k = a_10k$ga, hms_10k = a_10k$hms, ga_15k = a_15k$ga, hms_15k = a_15k$hms, ga_20k = a_20k$ga, hms_20k = a_20k$hms, ga_25k = a_25k$ga, hms_25k = a_25k$hms, ga_30k = a_30k$ga, hms_30k = a_30k$hms)#, ga_35k = a_35k$ga, hms_35k = a_35k$hms, ga_40k = a_40k$ga, hms_40k = a_40k$hms)
 }
 
 plot_hms_vs_ga <- function(res) {
   cols = tail(rainbow(3, s = 0.1), n=2)
   # , names = c("2k", "2k", "4k", "4k", "6k", "6k", "8k", "8k", "10k", "10k", "12k", "12k", "14k", "14k", "16k", "16k")
-  boxplot(res, at=c(1,2,5,6,9,10,13,14,17,18,21,22,25,26,29,30), col=rep(cols, times=8), ylab="f(x)", xlab="Fitness evaluations", names = c("2k", "2k", "4k", "4k", "6k", "6k", "8k", "8k", "10k", "10k", "12k", "12k", "14k", "14k", "16k", "16k"))
-  points(x = c(1,2,5,6,9,10,13,14,17,18,21,22,25,26,29,30),
+  boxplot(res, at=c(1,2,5,6,9,10,13,14,17,18,21,22), col=rep(cols, times=8), ylab="f(x)", xlab="Fitness evaluations")
+  points(x = c(1,2,5,6,9,10,13,14,17,18,21,22),
          y = mapply(mean, res),
-         col = rep(tail(rainbow(3), n=2), times=8),
+         col = rep(tail(rainbow(3), n=2), times=6),
          pch = 16)
   legend("topleft", fill = tail(rainbow(3), n=2), legend = c("GA", "HMS"), horiz = T)
 }
