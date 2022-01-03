@@ -1,6 +1,6 @@
 test_that("Global stopping condition (metaepochs count) works:", {
   max_metaepochs_count <- 2
-  global_stopping_condition <- global_stopping_condition_metaepochs_count(max_metaepochs_count)
+  global_stopping_condition <- gsc_metaepochs_count(max_metaepochs_count)
   metaepoch_snapshot <- methods::new(
     "MetaepochSnapshot",
     demes = list(),
@@ -19,7 +19,7 @@ test_that("Global stopping condition (metaepochs count) works:", {
 
 test_that("Global stopping condition (fitness evaluations count) works:", {
   max_evaluations_count <- 2
-  global_stopping_condition <- global_stopping_condition_max_fitness_evaluations(max_evaluations_count)
+  global_stopping_condition <- gsc_max_fitness_evaluations(max_evaluations_count)
   metaepoch_snapshot_with_evaluations_count_lower_than_max <- methods::new(
     "MetaepochSnapshot",
      demes = list(),
@@ -47,13 +47,13 @@ test_that("Global stopping condition (fitness evaluations count) works:", {
 })
 
 test_that("Global stopping condition (trivial) works:", {
-  global_stopping_condition <- global_stopping_condition_trivial()
+  global_stopping_condition <- gsc_trivial()
   expect_false(global_stopping_condition(list()))
   expect_false(global_stopping_condition(NULL))
 })
 
 test_that("Local stopping condition (max metaepochs without improvement) works:", {
-  local_stopping_condition <- local_stopping_condition_metaepochs_without_improvement(5)
+  local_stopping_condition <- lsc_metaepochs_without_improvement(5)
   deme <- methods::new(
     "Deme",
     id = "id1",
@@ -75,7 +75,7 @@ test_that("Local stopping condition (max metaepochs without improvement) works:"
 })
 
 test_that("Local stopping condition (max evaluations) works:", {
-  local_stopping_condition <- local_stopping_condition_max_fitness_evaluations(5)
+  local_stopping_condition <- lsc_max_fitness_evaluations(5)
   deme <- methods::new(
     "Deme",
     id = "id1",
@@ -96,7 +96,7 @@ test_that("Local stopping condition (max evaluations) works:", {
 })
 
 test_that("Local stopping condition (trivial) works:", {
-  local_stopping_condition <- local_stopping_condition_trivial()
+  local_stopping_condition <- lsc_trivial()
   deme <- methods::new(
     "Deme",
     id = "id1",

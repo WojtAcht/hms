@@ -27,7 +27,7 @@ Title
 
 \item{\code{metaepochs_count}}{numeric.}
 
-\item{\code{deme_population_size_per_tree_level}}{numeric.}
+\item{\code{deme_population_sizes}}{numeric.}
 
 \item{\code{lower}}{numeric.}
 

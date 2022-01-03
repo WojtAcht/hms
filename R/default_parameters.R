@@ -1,12 +1,12 @@
-default_population_size_per_tree_level <- function(tree_height) {
+default_population_sizes <- function(tree_height) {
   population_size <- 60
   population_size_ratio <- 0.5
-  population_size_per_tree_level <- c()
+  population_sizes <- c()
   for (height in 1:tree_height) {
-    population_size_per_tree_level <- c(population_size_per_tree_level, population_size)
+    population_sizes <- c(population_sizes, population_size)
     population_size <- round(population_size * population_size_ratio)
   }
-  population_size_per_tree_level
+  population_sizes
 }
 
 default_sigma <- function(lower, upper, tree_height) {

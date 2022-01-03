@@ -1,7 +1,7 @@
 test_that("default population size per tree level:", {
   tree_height <- 5
-  expected_population_size_per_tree_level <- c(60, 30, 15, 8, 4)
-  expect_equal(default_population_size_per_tree_level(tree_height), expected_population_size_per_tree_level)
+  expected_population_sizes <- c(60, 30, 15, 8, 4)
+  expect_equal(default_population_sizes(tree_height), expected_population_sizes)
 })
 
 test_that("default sigma - 5d Schwefel:", {
