@@ -25,8 +25,6 @@ ga_metaepoch <- function(config_ga) {
     params$type <- "real-valued"
     params$monitor <- FALSE
 
-    # TODO Always better to have more data :)
-    params$keepBest <- TRUE
     GA <- do.call(GA::ga, params)
     value <- ifelse(minimize, GA@fitnessValue * -1, GA@fitnessValue)
     list("solution" = c(GA@solution[1,]), "population" = GA@population, "value" = value)

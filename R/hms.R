@@ -78,7 +78,7 @@ hms <- function(tree_height = 3,
     run_gradient_method <- default_run_gradient_method
   }
   monitor_level <- getMonitorLevel(monitor_level)
-  
+
   operator <- ifelse(minimize, `<`, `>`)
 
   root <- if (is.null(suggestions)) {
@@ -192,7 +192,7 @@ hms <- function(tree_height = 3,
       best_fitness = best$fitness,
       best_solution = best$solution,
       time_in_seconds = seconds_since(start_time) - evaluation_times_sum(metaepoch_snapshots),
-      fitness_evaluations = fitness_evaluations_count, # TODO
+      fitness_evaluations = fitness_evaluations_count,
       blocked_sprouts = list(),
       is_evolutionary = FALSE
     )
