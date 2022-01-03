@@ -122,11 +122,11 @@ test_that("HMS works - Eggholder with gradient method:", {
     lower = lower,
     upper = upper,
     run_metaepoch = ga_metaepoch(ga_config),
-    population_size_per_tree_level = c(50, 30, 15),
+    population_sizes = c(50, 30, 15),
     sigma = sigma,
-    global_stopping_condition = global_stopping_condition_max_fitness_evaluations(25000),
-    sprouting_condition = max_metric_sprouting_condition(euclidean_distance, c(40, 20, 10)),
-    local_stopping_condition = local_stopping_condition_metaepochs_without_improvement(15),
+    gsc = gsc_max_fitness_evaluations(25000),
+    sc = sc_max_metric(euclidean_distance, c(40, 20, 10)),
+    lsc = lsc_metaepochs_without_improvement(15),
     monitor_level = "none",
     with_gradient_method = TRUE
   )

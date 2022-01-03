@@ -1,4 +1,4 @@
-#' local_stopping_condition_metaepochs_without_improvement
+#' lsc_metaepochs_without_improvement
 #'
 #' @param max_metaepochs_without_improvement - numeric
 #'
@@ -6,7 +6,7 @@
 #' @export
 #'
 #' @examples
-local_stopping_condition_metaepochs_without_improvement <- function(max_metaepochs_without_improvement) {
+lsc_metaepochs_without_improvement <- function(max_metaepochs_without_improvement) {
   function(deme, previous_metaepoch_snapshots) {
     best_fitness_metaepoch <- match(deme@best_fitness, deme@best_fitnesses_per_metaepoch)
     metaepoch_count <- length(deme@best_fitnesses_per_metaepoch)
@@ -14,7 +14,7 @@ local_stopping_condition_metaepochs_without_improvement <- function(max_metaepoc
   }
 }
 
-#' local_stopping_condition_max_fitness_evaluations
+#' lsc_max_fitness_evaluations
 #'
 #' @param max_evaluations - numeric
 #'
@@ -22,22 +22,22 @@ local_stopping_condition_metaepochs_without_improvement <- function(max_metaepoc
 #' @export
 #'
 #' @examples
-local_stopping_condition_max_fitness_evaluations <- function(max_evaluations) {
+lsc_max_fitness_evaluations <- function(max_evaluations) {
   function(deme, previous_metaepoch_snapshots) {
     !is_root(deme) & deme@evaluations_count > max_evaluations
   }
 }
 
-#' local_stopping_condition_trivial
+#' lsc_trivial
 #'
 #' @return
 #' @export
 #'
 #' @examples
-local_stopping_condition_trivial <- function() {
+lsc_trivial <- function() {
   function(deme, previous_metaepoch_snapshots){
     FALSE
   }
 }
 
-default_local_stopping_condition <- local_stopping_condition_metaepochs_without_improvement(6)
+lsc_default <- lsc_metaepochs_without_improvement(6)
