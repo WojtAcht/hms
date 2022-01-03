@@ -78,7 +78,7 @@ create_deme <- function(lower, upper, parent, population_size, create_population
   )
 }
 
-update_deme <- function(metaepoch_result, deme) {
+update_deme <- function(metaepoch_result, deme, minimize = FALSE) {
   if (is.null(metaepoch_result$solution) |
     is.null(metaepoch_result$value) |
     is.null(metaepoch_result$population) |
@@ -102,8 +102,10 @@ update_deme <- function(metaepoch_result, deme) {
   deme@population <- metaepoch_result$population
   deme@best_fitnesses_per_metaepoch <- c(deme@best_fitnesses_per_metaepoch, list(metaepoch_best))
   deme@best_solutions_per_metaepoch <- c(deme@best_solutions_per_metaepoch, list(potential_sprout))
-  deme_best <- ifelse(length(deme@best_fitness) == 0, -Inf, deme@best_fitness)
-  if (metaepoch_best > deme_best) {
+  min_value <- ifelse(minimize, Inf, -Inf)
+  deme_best <- ifelse(length(deme@best_fitness) == 0, min_value, deme@best_fitness)
+  operator <- ifelse(minimize, `<`, `>`)
+  if (operator(metaepoch_best, deme_best)) {
     deme@best_fitness <- metaepoch_best
     deme@best_solution <- potential_sprout
   }

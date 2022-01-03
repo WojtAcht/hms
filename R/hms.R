@@ -96,26 +96,15 @@ hms <- function(tree_height = 3,
   metaepochs_count <- 0
   metaepoch_snapshots <- list()
   fitness_evaluations_count <- 0
-  if(minimize) {
-    f <- function(x) {
-      lock <- if (parallel) filelock::lock("/general.lck") else NULL
-      fitness_evaluations_count <<- fitness_evaluations_count + 1
-      if (parallel) {
-        filelock::unlock(lock)
-      }
-      -1 * fitness(x)
+  f <- function(x) {
+    lock <- if (parallel) filelock::lock("/general.lck") else NULL
+    fitness_evaluations_count <<- fitness_evaluations_count + 1
+    if (parallel) {
+      filelock::unlock(lock)
     }
+    fitness(x)
   }
-  else {
-    f <- function(x) {
-      lock <- if (parallel) filelock::lock("/general.lck") else NULL
-      fitness_evaluations_count <<- fitness_evaluations_count + 1
-      if (parallel) {
-        filelock::unlock(lock)
-      }
-      fitness(x)
-    }
-  }
+  operator <- ifelse(minimize, `<`, `>`)
   while (!global_stopping_condition(metaepoch_snapshots)) {
     if (length(Filter(function(deme) { deme@is_active }, demes)) == 0) {
       message("HMS stopped due to a lack of active demes!")
@@ -140,7 +129,7 @@ hms <- function(tree_height = 3,
       end_metaepoch_time <- Sys.time()
       total_metaepoch_time <- total_metaepoch_time + (end_metaepoch_time - start_metaepoch_time)
 
-      deme <- update_deme(metaepoch_result, deme)
+      deme <- update_deme(metaepoch_result, deme, minimize)
       deme@evaluations_count <- deme@evaluations_count + deme_evaluations_count
 
       if (local_stopping_condition(deme, metaepoch_snapshots)) {
@@ -168,7 +157,7 @@ hms <- function(tree_height = 3,
     }
     demes <- next_metaepoch_demes
 
-    best <- find_best_solution(demes)
+    best <- find_best_solution(demes, minimize)
 
     snapshot <- methods::new("MetaepochSnapshot",
       demes = demes,
@@ -196,7 +185,7 @@ hms <- function(tree_height = 3,
       metaepoch_snapshots,
       tree_height
     )
-    best <- find_best_solution(demes_after_gradient_metaepoch)
+    best <- find_best_solution(demes_after_gradient_metaepoch, minimize)
     gradient_snapshot <- methods::new("MetaepochSnapshot",
       demes = demes_after_gradient_metaepoch,
       best_fitness = best$fitness,
@@ -224,15 +213,16 @@ hms <- function(tree_height = 3,
   )
 }
 
-find_best_solution <- function(demes) {
+find_best_solution <- function(demes, minimize) {
+  operator <- ifelse(minimize, `<`, `>`)
   best_solution <- NULL
-  best_fitness <- -Inf
+  best_fitness <- ifelse(minimize, Inf, -Inf)
   for (deme in demes) {
     if (length(deme@best_fitness) == 0) {
       next
     }
 
-    if (deme@best_fitness > best_fitness) {
+    if (operator(deme@best_fitness, best_fitness)) {
       best_fitness <- deme@best_fitness
       best_solution <- deme@best_solution
     }
