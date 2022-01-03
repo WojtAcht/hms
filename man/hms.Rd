@@ -6,6 +6,7 @@
 \usage{
 hms(
   tree_height = 3,
+  minimize = FALSE,
   fitness,
   lower,
   upper,
@@ -21,12 +22,17 @@ hms(
   with_gradient_method = FALSE,
   gradient_method_args = default_gradient_method_args,
   run_gradient_method,
-  monitor_level = "basic"
+  monitor_level = "basic",
+  parallel = FALSE
 )
 }
 \arguments{
 \item{tree_height}{\itemize{
 \item numeric - default value: 5
+}}
+
+\item{minimize}{\itemize{
+\item logic - default value: FALSE
 }}
 
 \item{fitness}{\itemize{

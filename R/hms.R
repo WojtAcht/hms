@@ -1,6 +1,7 @@
 #' Title
 #'
 #' @param tree_height - numeric - default value: 5
+#' @param minimize - logic - default value: FALSE
 #' @param fitness - fitness function
 #' @param lower - numeric - lower bound
 #' @param upper - numeric - upper bound
@@ -22,6 +23,7 @@
 #'
 #' @examples
 hms <- function(tree_height = 3,
+                minimize = FALSE,
                 fitness,
                 lower,
                 upper,
@@ -94,13 +96,25 @@ hms <- function(tree_height = 3,
   metaepochs_count <- 0
   metaepoch_snapshots <- list()
   fitness_evaluations_count <- 0
-  f <- function(x) {
-    lock <- if (parallel) filelock::lock("/general.lck") else NULL
-    fitness_evaluations_count <<- fitness_evaluations_count + 1
-    if (parallel) {
-      filelock::unlock(lock)
+  if(minimize) {
+    f <- function(x) {
+      lock <- if (parallel) filelock::lock("/general.lck") else NULL
+      fitness_evaluations_count <<- fitness_evaluations_count + 1
+      if (parallel) {
+        filelock::unlock(lock)
+      }
+      -1 * fitness(x)
     }
-    fitness(x)
+  }
+  else {
+    f <- function(x) {
+      lock <- if (parallel) filelock::lock("/general.lck") else NULL
+      fitness_evaluations_count <<- fitness_evaluations_count + 1
+      if (parallel) {
+        filelock::unlock(lock)
+      }
+      fitness(x)
+    }
   }
   while (!global_stopping_condition(metaepoch_snapshots)) {
     if (length(Filter(function(deme) { deme@is_active }, demes)) == 0) {
@@ -121,7 +135,7 @@ hms <- function(tree_height = 3,
         }
         f(x)
       }
-      metaepoch_result <- run_metaepoch(deme_f, deme@population, lower, upper, deme@level)
+      metaepoch_result <- run_metaepoch(deme_f, deme@population, lower, upper, deme@level, minimize)
 
       end_metaepoch_time <- Sys.time()
       total_metaepoch_time <- total_metaepoch_time + (end_metaepoch_time - start_metaepoch_time)
