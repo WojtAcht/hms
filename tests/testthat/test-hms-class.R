@@ -19,6 +19,6 @@ test_that("HMS result is valid - trivial 1D function:", {
   expect_equal(metaepochs_count, result@metaepochs_count)
   expect_equal(length(result@metaepoch_snapshots), result@metaepochs_count)
   expect_true(result@total_time_in_seconds >= result@total_metaepoch_time_in_seconds)
-  expect_equal(result@deme_population_size_per_tree_level, default_population_size_per_tree_level(3))
+  expect_equal(result@deme_population_sizes, default_population_sizes(3))
   expect_true(all(mapply(function(snapshot){snapshot@is_evolutionary}, result@metaepoch_snapshots)))
 })

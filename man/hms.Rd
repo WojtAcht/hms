@@ -11,12 +11,11 @@ hms(
   lower,
   upper,
   sigma = default_sigma(lower, upper, tree_height),
-  population_size_per_tree_level = default_population_size_per_tree_level(tree_height),
+  population_sizes = default_population_sizes(tree_height),
   run_metaepoch = default_ga_metaepoch(tree_height),
-  global_stopping_condition = default_global_stopping_condition,
-  local_stopping_condition = default_local_stopping_condition,
-  sprouting_condition = max_metric_sprouting_condition(euclidean_distance,
-    sprouting_default_euclidean_distances(sigma)),
+  gsc = gsc_default,
+  lsc = lsc_default,
+  sc = sc_max_metric(euclidean_distance, sprouting_default_euclidean_distances(sigma)),
   create_population = default_create_population(sigma),
   suggestions = NULL,
   with_gradient_method = FALSE,
@@ -51,24 +50,24 @@ hms(
 \item numeric - vector of standard deviations for each tree level
 }}
 
-\item{population_size_per_tree_level}{\itemize{
-\item numeric
+\item{population_sizes}{\itemize{
+\item population size per tree level (numeric)
 }}
 
 \item{run_metaepoch}{\itemize{
 \item function - returns list with named fields: solution, population, value
 }}
 
-\item{global_stopping_condition}{\itemize{
-\item function
+\item{gsc}{\itemize{
+\item global stopping condition (function)
 }}
 
-\item{local_stopping_condition}{\itemize{
-\item function
+\item{lsc}{\itemize{
+\item local stopping condition (function)
 }}
 
-\item{sprouting_condition}{\itemize{
-\item function
+\item{sc}{\itemize{
+\item sprouting condition (function)
 }}
 
 \item{create_population}{\itemize{
