@@ -12,9 +12,10 @@ ecr_metaepoch <- function(config_ecr) {
     legal_passed_param_names <- Filter(function(name) {
       name %in% methods::formalArgs(ecr::ecr)
     }, names(config))
+    population_size <- nrow(suggestions)
+    iterations_count <- 5
     params <- list(
-      # TODO/Review: Lambda?
-      "mu" = nrow(suggestions),
+      "mu" = population_size,
       "mutator" = ecr::setup(ecr::mutGauss, lower = lower, upper = upper),
       "lambda" = 1L)
     for (param_name in legal_passed_param_names) {
@@ -29,6 +30,7 @@ ecr_metaepoch <- function(config_ecr) {
     params$initial.solutions <- matrix_to_list(suggestions)
     params$representation <- "float"
     params$monitor <- FALSE
+    params$terminators <- list(stopOnIters(max.iter = iterations_count * population_size))
     result <- do.call(ecr::ecr, params)
     population <- list_to_matrix(result$last.population, length(lower))
     list("solution" = result$best.x[[1]], "population" = population, "value" = result$best.y[[1]])
