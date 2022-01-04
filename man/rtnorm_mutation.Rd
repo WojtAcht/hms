@@ -2,7 +2,7 @@
 % Please edit documentation in R/mutation.R
 \name{rtnorm_mutation}
 \alias{rtnorm_mutation}
-\title{Title}
+\title{rtnorm mutation - truncated normal distribution}
 \usage{
 rtnorm_mutation(lower, upper, sd)
 }
@@ -20,8 +20,8 @@ rtnorm_mutation(lower, upper, sd)
 }}
 }
 \value{
-
+function that can be used as a GA mutation function
 }
 \description{
-Title
+rtnorm mutation - truncated normal distribution
 }

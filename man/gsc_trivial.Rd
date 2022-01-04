@@ -7,7 +7,7 @@
 gsc_trivial()
 }
 \value{
-
+function that can be used as a global stopping condition
 }
 \description{
 gsc_trivial

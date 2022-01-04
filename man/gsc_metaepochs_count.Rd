@@ -8,11 +8,11 @@ gsc_metaepochs_count(metaepochs_count)
 }
 \arguments{
 \item{metaepochs_count}{\itemize{
-\item numeric
+\item numeric - maximum number of metaepochs
 }}
 }
 \value{
-
+function that can be used as a global stopping condition
 }
 \description{
 gsc_metaepochs_count

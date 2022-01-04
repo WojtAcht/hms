@@ -2,7 +2,7 @@
 % Please edit documentation in R/test_functions.R
 \name{Ackley}
 \alias{Ackley}
-\title{Ackley
+\title{Ackley benchmark function
 f(x) = 0 at x = (0, ..., 0)
 x_i in [-32.768, 32.768]}
 \usage{
@@ -17,7 +17,7 @@ Ackley(x)
 numeric value of Ackley function
 }
 \description{
-Ackley
+Ackley benchmark function
 f(x) = 0 at x = (0, ..., 0)
 x_i in [-32.768, 32.768]
 }

@@ -12,7 +12,7 @@ lsc_metaepochs_without_improvement(max_metaepochs_without_improvement)
 }}
 }
 \value{
-
+function that can be used as a local stopping condition
 }
 \description{
 lsc_metaepochs_without_improvement

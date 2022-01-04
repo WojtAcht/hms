@@ -1,13 +1,11 @@
-#' Title
+#' rtnorm mutation - truncated normal distribution
 #'
 #' @param lower - numeric
 #' @param upper - numeric
 #' @param sd - numeric
 #'
-#' @return
+#' @return function that can be used as a GA mutation function
 #' @export
-#'
-#' @examples
 rtnorm_mutation <- function(lower, upper, sd) {
   function(object, parent) {
     parent <- as.vector(object@population[parent, ])

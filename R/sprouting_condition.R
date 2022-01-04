@@ -1,12 +1,11 @@
 #' Default sprouting condition based on given metric.
 #'
-#' @param metric - Metric used for deme distance comparison
+#' @param metric - Metric used for deme distance comparison (e.g.
+#' euclidean_distance, manhattan_distance)
 #' @param max_distances - numeric
 #'
 #' @return logical
 #' @export
-#'
-#' @examples
 sc_max_metric <- function(metric, max_distances) {
   function(potential_sprout, potential_sprout_level, demes) {
     level_demes <- Filter(function(d) {

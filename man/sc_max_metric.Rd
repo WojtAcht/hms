@@ -8,7 +8,8 @@ sc_max_metric(metric, max_distances)
 }
 \arguments{
 \item{metric}{\itemize{
-\item Metric used for deme distance comparison
+\item Metric used for deme distance comparison (e.g.
+euclidean_distance, manhattan_distance)
 }}
 
 \item{max_distances}{\itemize{

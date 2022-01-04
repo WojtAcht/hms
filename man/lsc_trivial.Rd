@@ -7,7 +7,7 @@
 lsc_trivial()
 }
 \value{
-
+function that can be used as a local stopping condition
 }
 \description{
 lsc_trivial

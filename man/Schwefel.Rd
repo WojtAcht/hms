@@ -2,7 +2,7 @@
 % Please edit documentation in R/test_functions.R
 \name{Schwefel}
 \alias{Schwefel}
-\title{Schwefel
+\title{Schwefel benchmark function
 Min: f(x) = 0 at x = (420.9687, ..., 420.9687)
 x_i in [-500, 500]}
 \usage{
@@ -17,7 +17,7 @@ Schwefel(x)
 numeric value of Schwefel function
 }
 \description{
-Schwefel
+Schwefel benchmark function
 Min: f(x) = 0 at x = (420.9687, ..., 420.9687)
 x_i in [-500, 500]
 }

@@ -1,11 +1,9 @@
 #' gsc_metaepochs_count
 #'
-#' @param metaepochs_count - numeric
+#' @param metaepochs_count - numeric - maximum number of metaepochs
 #'
-#' @return
+#' @return function that can be used as a global stopping condition
 #' @export
-#'
-#' @examples
 gsc_metaepochs_count <- function(metaepochs_count) {
   function(metaepoch_snapshots) {
     length(metaepoch_snapshots) >= metaepochs_count
@@ -14,12 +12,10 @@ gsc_metaepochs_count <- function(metaepochs_count) {
 
 #' gsc_max_fitness_evaluations
 #'
-#' @param max_evaluations - numeric
+#' @param max_evaluations - numeric - maximum number of fitness function evaluations
 #'
-#' @return
+#' @return function that can be used as a global stopping condition
 #' @export
-#'
-#' @examples
 gsc_max_fitness_evaluations <- function(max_evaluations) {
   function(metaepoch_snapshots) {
     length(metaepoch_snapshots) > 0 &&
@@ -29,10 +25,8 @@ gsc_max_fitness_evaluations <- function(max_evaluations) {
 
 #' gsc_trivial
 #'
-#' @return
+#' @return function that can be used as a global stopping condition
 #' @export
-#'
-#' @examples
 gsc_trivial <- function() {
   function(metaepoch_snapshots) {
     FALSE

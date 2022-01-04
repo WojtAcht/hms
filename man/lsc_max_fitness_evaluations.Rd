@@ -12,7 +12,7 @@ lsc_max_fitness_evaluations(max_evaluations)
 }}
 }
 \value{
-
+function that can be used as a local stopping condition
 }
 \description{
 lsc_max_fitness_evaluations

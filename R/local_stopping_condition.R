@@ -2,10 +2,8 @@
 #'
 #' @param max_metaepochs_without_improvement - numeric
 #'
-#' @return
+#' @return function that can be used as a local stopping condition
 #' @export
-#'
-#' @examples
 lsc_metaepochs_without_improvement <- function(max_metaepochs_without_improvement) {
   function(deme, previous_metaepoch_snapshots) {
     best_fitness_metaepoch <- match(deme@best_fitness, deme@best_fitnesses_per_metaepoch)
@@ -18,10 +16,8 @@ lsc_metaepochs_without_improvement <- function(max_metaepochs_without_improvemen
 #'
 #' @param max_evaluations - numeric
 #'
-#' @return
+#' @return function that can be used as a local stopping condition
 #' @export
-#'
-#' @examples
 lsc_max_fitness_evaluations <- function(max_evaluations) {
   function(deme, previous_metaepoch_snapshots) {
     !is_root(deme) & deme@evaluations_count > max_evaluations
@@ -30,10 +26,8 @@ lsc_max_fitness_evaluations <- function(max_evaluations) {
 
 #' lsc_trivial
 #'
-#' @return
+#' @return function that can be used as a local stopping condition
 #' @export
-#'
-#' @examples
 lsc_trivial <- function() {
   function(deme, previous_metaepoch_snapshots){
     FALSE

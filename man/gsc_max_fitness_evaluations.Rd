@@ -8,11 +8,11 @@ gsc_max_fitness_evaluations(max_evaluations)
 }
 \arguments{
 \item{max_evaluations}{\itemize{
-\item numeric
+\item numeric - maximum number of fitness function evaluations
 }}
 }
 \value{
-
+function that can be used as a global stopping condition
 }
 \description{
 gsc_max_fitness_evaluations

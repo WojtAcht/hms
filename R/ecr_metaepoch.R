@@ -4,8 +4,6 @@
 #'
 #' @return list with named fields: solution, population, value
 #' @export
-#'
-#' @examples
 ecr_metaepoch <- function(config_ecr) {
   function(fitness, suggestions, lower, upper, tree_level) {
     config <- config_ecr[[tree_level]]
@@ -30,7 +28,7 @@ ecr_metaepoch <- function(config_ecr) {
     params$initial.solutions <- matrix_to_list(suggestions)
     params$representation <- "float"
     params$monitor <- FALSE
-    params$terminators <- list(stopOnIters(max.iter = iterations_count * population_size))
+    params$terminators <- list(ecr::stopOnIters(max.iter = iterations_count * population_size))
     result <- do.call(ecr::ecr, params)
     population <- list_to_matrix(result$last.population, length(lower))
     list("solution" = result$best.x[[1]], "population" = population, "value" = result$best.y[[1]])

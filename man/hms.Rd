@@ -88,6 +88,10 @@ hms(
 \item{monitor_level}{\itemize{
 \item string - one of {'none', 'basic', 'basic_tree', 'verbose_tree'}
 }}
+
+\item{parallel}{\itemize{
+\item logical - should be TRUE when run_metaepoch runs in parallel
+}}
 }
 \value{
 numeric best solution

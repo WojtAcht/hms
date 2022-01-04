@@ -16,11 +16,10 @@
 #' @param gradient_method_args - list of parameters that are passed to the gradient method
 #' @param run_gradient_method - function - returns list with named fields: solution, population, value
 #' @param monitor_level - string - one of {'none', 'basic', 'basic_tree', 'verbose_tree'}
+#' @param parallel - logical - should be TRUE when run_metaepoch runs in parallel
 #'
 #' @return numeric best solution
 #' @export
-#'
-#' @examples
 hms <- function(tree_height = 3,
                 fitness,
                 lower,
