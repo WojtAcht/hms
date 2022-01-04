@@ -1,11 +1,24 @@
-#' rtnorm mutation - truncated normal distribution
+#' Factory function that creates normal mutation function
 #'
-#' @param lower - numeric
-#' @param upper - numeric
-#' @param sd - numeric
+#' Given the domain bounds and standard deviation returns a function
+#' compatible with GA interface that performs a mutation on the given
+#' individual using truncated normal distribution.
 #'
-#' @return function that can be used as a GA mutation function
+#' @param lower - Lower bound of the problem's domain
+#' @param upper - Upper bound of the problem's domain
+#' @param sd - Standard deviation of the truncated normal distribution
+#'  used for the mutation
+#'
+#' @return Function that takes two parameters (the GA object \code{object}
+#' and an individual to perform the mutation on \code{parent}) and returns
+#' a new individual that is the result of normal mutation applied to the parent.
+#'
 #' @export
+#'
+#' @examples
+#' mutation <- rtnorm_mutation(lower=rep(-500, 5),
+#'                             upper=rep(500, 5),
+#'                             sd=rep(50, 5))
 rtnorm_mutation <- function(lower, upper, sd) {
   function(object, parent) {
     parent <- as.vector(object@population[parent, ])
