@@ -7,7 +7,7 @@
 #'
 #' @examples
 ecr_metaepoch <- function(config_ecr) {
-  function(fitness, suggestions, lower, upper, tree_level) {
+  function(fitness, suggestions, lower, upper, tree_level, minimize) {
     config <- config_ecr[[tree_level]]
     legal_passed_param_names <- Filter(function(name) {
       name %in% methods::formalArgs(ecr::ecr)
@@ -23,7 +23,7 @@ ecr_metaepoch <- function(config_ecr) {
     }
     params$fitness.fun <- fitness
     params$n.objectives <- 1L
-    params$minimize <- FALSE
+    params$minimize <- minimize
     params$lower <- lower
     params$upper <- upper
     params$n.dim <- length(lower)
