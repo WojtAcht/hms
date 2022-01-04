@@ -5,7 +5,8 @@
 #' @return list with named fields: solution, population, value
 #' @export
 ga_metaepoch <- function(config_ga) {
-  function(fitness, suggestions, lower, upper, tree_level) {
+  function(fitness, suggestions, lower, upper, tree_level, minimize) {
+    ga_fitness <- ifelse(minimize, function(x) {-1 * fitness(x)}, fitness)
     config <- config_ga[[tree_level]]
     legal_passed_param_names <- Filter(function(name) {
       name %in% methods::formalArgs(GA::ga)
@@ -14,17 +15,17 @@ ga_metaepoch <- function(config_ga) {
     for (param_name in legal_passed_param_names) {
       params[param_name] <- config[param_name]
     }
-    params$fitness <- fitness
+    # GA is used for maximization of a fitness function
+    params$fitness <- ga_fitness
     params$lower <- lower
     params$upper <- upper
     params$suggestions <- suggestions
     params$type <- "real-valued"
     params$monitor <- FALSE
 
-    # TODO Always better to have more data :)
-    params$keepBest <- TRUE
     GA <- do.call(GA::ga, params)
-    list("solution" = c(GA@solution[1,]), "population" = GA@population, "value" = GA@fitnessValue)
+    value <- ifelse(minimize, GA@fitnessValue * -1, GA@fitnessValue)
+    list("solution" = c(GA@solution[1,]), "population" = GA@population, "value" = value)
   }
 }
 

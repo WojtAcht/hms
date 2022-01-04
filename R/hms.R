@@ -35,6 +35,7 @@
 #' @return numeric best solution
 #' @export
 hms <- function(tree_height = 3,
+                minimize = FALSE,
                 fitness,
                 lower,
                 upper,
@@ -88,7 +89,9 @@ hms <- function(tree_height = 3,
     gradient_method_args <- validate_gradient_method_args(gradient_method_args, lower, upper)
     run_gradient_method <- default_run_gradient_method
   }
-  monitor_level <- getMonitorLevel(monitor_level) # TODO :((
+  monitor_level <- getMonitorLevel(monitor_level)
+
+  operator <- ifelse(minimize, `<`, `>`)
 
   root <- if (is.null(suggestions)) {
     create_deme(lower, upper, NULL, population_sizes[[1]], create_population)
@@ -134,12 +137,12 @@ hms <- function(tree_height = 3,
         }
         f(x)
       }
-      metaepoch_result <- run_metaepoch(deme_f, deme@population, lower, upper, deme@level)
+      metaepoch_result <- run_metaepoch(deme_f, deme@population, lower, upper, deme@level, minimize)
 
       end_metaepoch_time <- Sys.time()
       total_metaepoch_time <- total_metaepoch_time + (end_metaepoch_time - start_metaepoch_time)
 
-      deme <- update_deme(metaepoch_result, deme)
+      deme <- update_deme(metaepoch_result, deme, minimize)
       deme@evaluations_count <- deme@evaluations_count + deme_evaluations_count
 
       if (lsc(deme, metaepoch_snapshots)) {
@@ -167,7 +170,7 @@ hms <- function(tree_height = 3,
     }
     demes <- next_metaepoch_demes
 
-    best <- find_best_solution(demes)
+    best <- find_best_solution(demes, minimize)
 
     snapshot <- methods::new("MetaepochSnapshot",
       demes = demes,
@@ -195,13 +198,13 @@ hms <- function(tree_height = 3,
       metaepoch_snapshots,
       tree_height
     )
-    best <- find_best_solution(demes_after_gradient_metaepoch)
+    best <- find_best_solution(demes_after_gradient_metaepoch, minimize)
     gradient_snapshot <- methods::new("MetaepochSnapshot",
       demes = demes_after_gradient_metaepoch,
       best_fitness = best$fitness,
       best_solution = best$solution,
       time_in_seconds = seconds_since(start_time) - evaluation_times_sum(metaepoch_snapshots),
-      fitness_evaluations = fitness_evaluations_count, # TODO
+      fitness_evaluations = fitness_evaluations_count,
       blocked_sprouts = list(),
       is_evolutionary = FALSE
     )
@@ -223,15 +226,16 @@ hms <- function(tree_height = 3,
   )
 }
 
-find_best_solution <- function(demes) {
+find_best_solution <- function(demes, minimize) {
+  operator <- ifelse(minimize, `<`, `>`)
   best_solution <- NULL
-  best_fitness <- -Inf
+  best_fitness <- ifelse(minimize, Inf, -Inf)
   for (deme in demes) {
     if (length(deme@best_fitness) == 0) {
       next
     }
 
-    if (deme@best_fitness > best_fitness) {
+    if (operator(deme@best_fitness, best_fitness)) {
       best_fitness <- deme@best_fitness
       best_solution <- deme@best_solution
     }

@@ -6,6 +6,7 @@
 \usage{
 hms(
   tree_height = 3,
+  minimize = FALSE,
   fitness,
   lower,
   upper,
@@ -27,6 +28,10 @@ hms(
 \arguments{
 \item{tree_height}{\itemize{
 \item numeric - default value: 5
+}}
+
+\item{minimize}{\itemize{
+\item logic - default value: FALSE
 }}
 
 \item{fitness}{\itemize{
