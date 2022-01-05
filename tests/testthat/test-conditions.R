@@ -22,13 +22,13 @@ test_that("Global stopping condition (fitness evaluations count) works:", {
   global_stopping_condition <- gsc_max_fitness_evaluations(max_evaluations_count)
   metaepoch_snapshot_with_evaluations_count_lower_than_max <- methods::new(
     "MetaepochSnapshot",
-     demes = list(),
-     best_fitness = 0,
-     best_solution = 0,
-     time_in_seconds = 0,
-     fitness_evaluations = 1,
-     blocked_sprouts = list(),
-     is_evolutionary = TRUE
+    demes = list(),
+    best_fitness = 0,
+    best_solution = 0,
+    time_in_seconds = 0,
+    fitness_evaluations = 1,
+    blocked_sprouts = list(),
+    is_evolutionary = TRUE
   )
   metaepoch_snapshots <- list(metaepoch_snapshot_with_evaluations_count_lower_than_max)
   expect_false(global_stopping_condition(metaepoch_snapshots))
@@ -61,16 +61,16 @@ test_that("Local stopping condition (max metaepochs without improvement) works:"
     level = 2,
     best_fitness = 5,
     best_solution = 5,
-    best_solutions_per_metaepoch = list(5,4,3,2,1),
-    best_fitnesses_per_metaepoch = list(5,4,3,2,1),
+    best_solutions_per_metaepoch = list(5, 4, 3, 2, 1),
+    best_fitnesses_per_metaepoch = list(5, 4, 3, 2, 1),
     sprout = NULL,
     parent_id = NULL,
     evaluations_count = 0,
     is_active = TRUE
   )
   expect_false(local_stopping_condition(deme, list()))
-  deme@best_fitnesses_per_metaepoch <- list(5,4,3,2,1,0)
-  deme@best_solutions_per_metaepoch <- list(5,4,3,2,1,0)
+  deme@best_fitnesses_per_metaepoch <- list(5, 4, 3, 2, 1, 0)
+  deme@best_solutions_per_metaepoch <- list(5, 4, 3, 2, 1, 0)
   expect_true(local_stopping_condition(deme, list()))
 })
 
@@ -114,5 +114,3 @@ test_that("Local stopping condition (trivial) works:", {
   expect_false(local_stopping_condition(deme, list()))
   expect_false(local_stopping_condition(NULL, list()))
 })
-
-
