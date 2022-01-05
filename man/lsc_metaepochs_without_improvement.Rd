@@ -2,7 +2,9 @@
 % Please edit documentation in R/local_stopping_condition.R
 \name{lsc_metaepochs_without_improvement}
 \alias{lsc_metaepochs_without_improvement}
-\title{lsc_metaepochs_without_improvement}
+\title{Factory function for a local stopping condition that stops a deme
+after given number of consecutive metaeopochs without an improvement
+of the best solution found in that deme.}
 \usage{
 lsc_metaepochs_without_improvement(max_metaepochs_without_improvement)
 }
@@ -12,8 +14,10 @@ lsc_metaepochs_without_improvement(max_metaepochs_without_improvement)
 }}
 }
 \value{
-function that can be used as a local stopping condition
+Function that can be used as a local stopping condition for hms.
 }
 \description{
-lsc_metaepochs_without_improvement
+Factory function for a local stopping condition that stops a deme
+after given number of consecutive metaeopochs without an improvement
+of the best solution found in that deme.
 }

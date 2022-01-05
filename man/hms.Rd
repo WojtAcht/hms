@@ -27,59 +27,73 @@ hms(
 }
 \arguments{
 \item{tree_height}{\itemize{
-\item numeric - default value: 5
+\item numeric - default value: 5. It determines the maximum tree height
+which will usually be reached unless a very strict local stopping condition, global
+stopping consition or sprouting condition is used.
 }}
 
 \item{minimize}{\itemize{
-\item logic - default value: FALSE
+\item logical - \code{TRUE} when fitness shall be minimized.
 }}
 
 \item{fitness}{\itemize{
-\item fitness function
+\item fitness function to be optimized by the strategy.
 }}
 
 \item{lower}{\itemize{
-\item numeric - lower bound
+\item numeric - lower bound of the domain.
 }}
 
 \item{upper}{\itemize{
-\item numeric - upper bound
+\item numeric - upper bound of the domain.
 }}
 
 \item{sigma}{\itemize{
-\item numeric - vector of standard deviations for each tree level
+\item numeric - Vector of standard deviations for each tree level used to create
+a population of a sprouted deme.
 }}
 
 \item{population_sizes}{\itemize{
-\item population size per tree level (numeric)
+\item numeric - Sizes of deme populations on each tree level.
 }}
 
 \item{run_metaepoch}{\itemize{
-\item function - returns list with named fields: solution, population, value
+\item A function that takes 5 parameters: fitness, suggestions, lower,
+upper, tree_level, runs a metaepoch on the given deme population and returns list with
+3 named fields: solution, population, value.
 }}
 
 \item{gsc}{\itemize{
-\item global stopping condition (function)
+\item global stopping condition - function taking a list of MetaepochSnapshot
+objects and returning a logical value; it is evaluated after every metaepoch and
+determines whether whole computation should be stopped.
 }}
 
 \item{lsc}{\itemize{
-\item local stopping condition (function)
+\item local stopping condition - function taking a deme and a list of MetaepochSmapshot
+objects representing previous metaepochs; it is run on every deme after it has run a metaepoch
+and determines whether that deme will remain active.
 }}
 
 \item{sc}{\itemize{
-\item sprouting condition (function)
+\item sprouting condition - function taking 3 arguments: an individual, a tree level
+and a list of Deme objects; it determines whether the given individual can sprout a new deme
+on the given level.
 }}
 
 \item{create_population}{\itemize{
-\item function
+\item function taking 6 parameters: mean, lower, upper, population_size,
+tree_level, sigma that returns a population for a Deme object to be created on the given
+tree level.
 }}
 
 \item{suggestions}{\itemize{
-\item matrix
+\item matrix of individuals for the initial population of the root
 }}
 
 \item{with_gradient_method}{\itemize{
-\item logical
+\item logical determining whether a gradient method should be run
+for all leaves at the end of the computation to refine their best solutions.
 }}
 
 \item{gradient_method_args}{\itemize{
@@ -91,11 +105,11 @@ hms(
 }}
 
 \item{monitor_level}{\itemize{
-\item string - one of {'none', 'basic', 'basic_tree', 'verbose_tree'}
+\item string - one of {'none', 'basic', 'basic_tree', 'verbose_tree'}.
 }}
 
 \item{parallel}{\itemize{
-\item logical - should be TRUE when run_metaepoch runs in parallel
+\item logical - \code{TRUE} when run_metaepoch runs in parallel.
 }}
 }
 \value{

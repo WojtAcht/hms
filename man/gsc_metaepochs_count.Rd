@@ -2,7 +2,8 @@
 % Please edit documentation in R/global_stopping_condition.R
 \name{gsc_metaepochs_count}
 \alias{gsc_metaepochs_count}
-\title{gsc_metaepochs_count}
+\title{Factory function for a global stopping condition that stops
+the computation after given number of metaepochs.}
 \usage{
 gsc_metaepochs_count(metaepochs_count)
 }
@@ -12,8 +13,12 @@ gsc_metaepochs_count(metaepochs_count)
 }}
 }
 \value{
-function that can be used as a global stopping condition
+Function that receives a list of metaepoch snapshots
+and returns a Boolean value determining whether the computation
+should be stopped based on how many metaepochs have passed,
+which can be used as a global stopping conditionfor the hms function.
 }
 \description{
-gsc_metaepochs_count
+Factory function for a global stopping condition that stops
+the computation after given number of metaepochs.
 }

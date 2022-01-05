@@ -250,4 +250,24 @@ setMethod("plotActiveDemes", "hms", function(object) {
 #' @export
 setGeneric("printBlockedSprouts", function(object) standardGeneric("printBlockedSprouts"))
 
+#' Title
+#'
+#' @param object - hms s4 object
+#'
+#' @export
+setMethod("printBlockedSprouts", "hms", function(object) {
+  metaepochs <- 1:object@metaepochs_count
+  blocked_sprouts_per_metaepoch <- mapply(function(snapshot) {
+    snapshot@blocked_sprouts
+  }, object@metaepoch_snapshots)
+  for (metaepoch in metaepochs) {
+    blocked_sprouts <- blocked_sprouts_per_metaepoch[[metaepoch]]
+    cat(sprintf("Metaepoch %d - blocked sprouts count: %d\n", metaepoch, length(blocked_sprouts)))
+    for (blocked_sprout in blocked_sprouts) {
+      print(blocked_sprout)
+    }
+    cat("\n")
+  }
+})
+
 
