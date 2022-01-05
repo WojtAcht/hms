@@ -7,12 +7,13 @@
 \S4method{print}{hms}(x, ...)
 }
 \arguments{
-\item{hms}{\itemize{
+\item{x}{\itemize{
 \item hms s4 object
 }}
-}
-\value{
 
+\item{...}{\itemize{
+\item other print arguments
+}}
 }
 \description{
 Title

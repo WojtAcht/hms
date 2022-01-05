@@ -4,9 +4,6 @@
 \name{MetaepochSnapshot-class}
 \alias{MetaepochSnapshot-class}
 \title{Title}
-\value{
-
-}
 \description{
 Title
 }

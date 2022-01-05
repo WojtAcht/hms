@@ -4,9 +4,6 @@
 \name{hms-class}
 \alias{hms-class}
 \title{Title}
-\value{
-
-}
 \description{
 Title
 }

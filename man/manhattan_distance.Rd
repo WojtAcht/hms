@@ -2,7 +2,7 @@
 % Please edit documentation in R/utils.R
 \name{manhattan_distance}
 \alias{manhattan_distance}
-\title{Title}
+\title{Manhattan distance}
 \usage{
 manhattan_distance(x, y)
 }
@@ -16,8 +16,8 @@ manhattan_distance(x, y)
 }}
 }
 \value{
-
+numeric - manhattan distance between x and y
 }
 \description{
-Title
+Manhattan distance
 }

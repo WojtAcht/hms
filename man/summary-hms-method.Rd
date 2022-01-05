@@ -7,12 +7,13 @@
 \S4method{summary}{hms}(object, ...)
 }
 \arguments{
-\item{hms}{\itemize{
+\item{object}{\itemize{
 \item hms s4 object
 }}
-}
-\value{
 
+\item{...}{\itemize{
+\item other summary arguments
+}}
 }
 \description{
 Title

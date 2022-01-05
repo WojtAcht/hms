@@ -7,12 +7,9 @@
 \S4method{show}{hms}(object)
 }
 \arguments{
-\item{hms}{\itemize{
+\item{object}{\itemize{
 \item hms s4 object
 }}
-}
-\value{
-
 }
 \description{
 Title

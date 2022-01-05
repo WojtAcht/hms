@@ -4,8 +4,6 @@
 #'
 #' @return list with named fields: solution, population, value
 #' @export
-#'
-#' @examples
 ga_metaepoch <- function(config_ga) {
   function(fitness, suggestions, lower, upper, tree_level, minimize) {
     ga_fitness <- ifelse(minimize, function(x) {-1 * fitness(x)}, fitness)

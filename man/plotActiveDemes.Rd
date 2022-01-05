@@ -11,9 +11,6 @@ plotActiveDemes(object)
 \item hms s4 object
 }}
 }
-\value{
-
-}
 \description{
 Title
 }
