@@ -29,5 +29,6 @@ Suggests:
     rgenoud,
     filelock,
     parallel,
-    doParallel
+    doParallel,
+    grDevices
 Config/testthat/edition: 3
