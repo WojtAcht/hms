@@ -2,7 +2,7 @@
 % Please edit documentation in R/test_functions.R
 \name{Rastrigin}
 \alias{Rastrigin}
-\title{Rastrigin
+\title{Rastrigin benchmark function
 f(x) = 0 at x = (0, ..., 0)
 x_i in  [-5.12, 5.12]}
 \usage{
@@ -17,7 +17,7 @@ Rastrigin(x)
 numeric value of Rastrigin function
 }
 \description{
-Rastrigin
+Rastrigin benchmark function
 f(x) = 0 at x = (0, ..., 0)
 x_i in  [-5.12, 5.12]
 }

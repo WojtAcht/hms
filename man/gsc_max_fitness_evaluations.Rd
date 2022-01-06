@@ -2,18 +2,26 @@
 % Please edit documentation in R/global_stopping_condition.R
 \name{gsc_max_fitness_evaluations}
 \alias{gsc_max_fitness_evaluations}
-\title{gsc_max_fitness_evaluations}
+\title{Factory function for a global stopping condition that stops
+the computation after fitness function has been evaluated
+given number of times.}
 \usage{
 gsc_max_fitness_evaluations(max_evaluations)
 }
 \arguments{
 \item{max_evaluations}{\itemize{
-\item numeric
+\item numeric - maximum number of fitness function evaluations
 }}
 }
 \value{
-
+Function that receives a list of metaepoch snapshots
+and returns a Boolean value determining whether the computation
+should be stopped based on how many fitness function evaluations
+have been made, which can be used as a global stopping condition
+for the hms function.
 }
 \description{
-gsc_max_fitness_evaluations
+Factory function for a global stopping condition that stops
+the computation after fitness function has been evaluated
+given number of times.
 }

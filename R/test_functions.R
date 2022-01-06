@@ -1,12 +1,11 @@
-#' Rastrigin
+#' Rastrigin benchmark function
 #' f(x) = 0 at x = (0, ..., 0)
 #' x_i in  \[-5.12, 5.12\]
 #'
 #' @param x - numeric
 #'
 #' @return numeric value of Rastrigin function
-#'
-#' @examples
+#' @export
 Rastrigin <- function(x) {
   sum <- 10 * length(x)
   for (x_i in x) {
@@ -15,15 +14,14 @@ Rastrigin <- function(x) {
   sum
 }
 
-#' Ackley
+#' Ackley benchmark function
 #' f(x) = 0 at x = (0, ..., 0)
 #' x_i in \[-32.768, 32.768\]
 #'
 #' @param x - numeric
 #'
 #' @return numeric value of Ackley function
-#'
-#' @examples
+#' @export
 Ackley <- function(x) {
   d <- length(x)
   a <- 20
@@ -43,15 +41,14 @@ Ackley <- function(x) {
   -a * exp(-b * sqrt((1 / d) * squares_sum)) - exp((1 / d) * cos_sum) + a + exp(1)
 }
 
-#' Schwefel
+#' Schwefel benchmark function
 #' Min: f(x) = 0 at x = (420.9687, ..., 420.9687)
 #' x_i in \[-500, 500\]
 #'
 #' @param x - numeric
 #'
 #' @return numeric value of Schwefel function
-#'
-#' @examples
+#' @export
 Schwefel <- function(x) {
   d <- length(x)
 
@@ -64,15 +61,14 @@ Schwefel <- function(x) {
 }
 
 
-#' Griewank
+#' Griewank benchmark function
 #' Min: f(x) = 0 at x = (0, ..., 0)
 #' x_i in \[-600, 600\]
 #'
 #' @param x - numeric
 #'
 #' @return numeric value of Griewank function
-#'
-#' @examples
+#' @export
 Griewank <- function(x) {
   i <- c(1:length(x))
   sum <- sum(x^2 / 4000)
@@ -83,32 +79,28 @@ Griewank <- function(x) {
 }
 
 
-#' Baele
+#' Baele benchmark function
 #' Min: f(x) = 0 at x = (3, 0.5)
 #' x1, x2 in \[-4.5, 4.5\]
 #'
 #' @param x - numeric
 #'
-#' @return
+#' @return numeric value of Baele function
 #' @export
-#'
-#' @examples
 Baele <- function(x) {
   x1 <- x[[1]]
   x2 <- x[[2]]
   (1.5 - x1 + x1 * x2)^2 + (2.25 - x1 + x1 * x2^2)^2 + (2.625 - x1 + x1 * x2^3)^2
 }
 
-#' Eggholder
+#' Eggholder benchmark function
 #' Min: f(x) = -959.6407 at x = (512, 404.2319)
 #' x1, x2 in \[-512, 512]
 #'
 #' @param x - numeric
 #'
-#' @return
+#' @return numeric value of Eggholder function
 #' @export
-#'
-#' @examples
 Eggholder <- function(x) {
   x1 <- x[[1]]
   x2 <- x[[2]]

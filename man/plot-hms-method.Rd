@@ -7,12 +7,9 @@
 \S4method{plot}{hms}(x)
 }
 \arguments{
-\item{hms}{\itemize{
+\item{x}{\itemize{
 \item hms s4 object
 }}
-}
-\value{
-
 }
 \description{
 Title

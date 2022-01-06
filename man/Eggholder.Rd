@@ -2,7 +2,7 @@
 % Please edit documentation in R/test_functions.R
 \name{Eggholder}
 \alias{Eggholder}
-\title{Eggholder
+\title{Eggholder benchmark function
 Min: f(x) = -959.6407 at x = (512, 404.2319)
 x1, x2 in [-512, 512]}
 \usage{
@@ -14,10 +14,10 @@ Eggholder(x)
 }}
 }
 \value{
-
+numeric value of Eggholder function
 }
 \description{
-Eggholder
+Eggholder benchmark function
 Min: f(x) = -959.6407 at x = (512, 404.2319)
 x1, x2 in [-512, 512]
 }

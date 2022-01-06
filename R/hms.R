@@ -1,27 +1,42 @@
 #' Title
 #'
-#' @param tree_height - numeric - default value: 5
-#' @param fitness - fitness function
-#' @param lower - numeric - lower bound
-#' @param upper - numeric - upper bound
-#' @param sigma - numeric - vector of standard deviations for each tree level
-#' @param population_sizes - population size per tree level (numeric)
-#' @param run_metaepoch - function - returns list with named fields: solution, population, value
-#' @param gsc - global stopping condition (function)
-#' @param lsc - local stopping condition (function)
-#' @param sc - sprouting condition (function)
-#' @param create_population - function
-#' @param suggestions - matrix
-#' @param with_gradient_method - logical
+#' @param tree_height - numeric - default value: 5. It determines the maximum tree height
+#' which will usually be reached unless a very strict local stopping condition, global
+#' stopping consition or sprouting condition is used.
+#' @param fitness - fitness function to be optimized by the strategy.
+#' @param lower - numeric - lower bound of the domain.
+#' @param upper - numeric - upper bound of the domain.
+#' @param sigma - numeric - Vector of standard deviations for each tree level used to create
+#' a population of a sprouted deme.
+#' @param population_sizes - numeric - Sizes of deme populations on each tree level.
+#' @param run_metaepoch - A function that takes 5 parameters: fitness, suggestions, lower,
+#' upper, tree_level, runs a metaepoch on the given deme population and returns list with
+#' 3 named fields: solution, population, value.
+#' @param gsc - global stopping condition - function taking a list of MetaepochSnapshot
+#' objects and returning a logical value; it is evaluated after every metaepoch and
+#' determines whether whole computation should be stopped.
+#' @param lsc - local stopping condition - function taking a deme and a list of MetaepochSmapshot
+#' objects representing previous metaepochs; it is run on every deme after it has run a metaepoch
+#' and determines whether that deme will remain active.
+#' @param sc - sprouting condition - function taking 3 arguments: an individual, a tree level
+#' and a list of Deme objects; it determines whether the given individual can sprout a new deme
+#' on the given level.
+#' @param create_population - function taking 6 parameters: mean, lower, upper, population_size,
+#' tree_level, sigma that returns a population for a Deme object to be created on the given
+#'  tree level.
+#' @param suggestions - matrix of individuals for the initial population of the root
+#' @param with_gradient_method - logical determining whether a gradient method should be run
+#' for all leaves at the end of the computation to refine their best solutions.
 #' @param gradient_method_args - list of parameters that are passed to the gradient method
 #' @param run_gradient_method - function - returns list with named fields: solution, population, value
-#' @param monitor_level - string - one of {'none', 'basic', 'basic_tree', 'verbose_tree'}
+#' @param monitor_level - string - one of {'none', 'basic', 'basic_tree', 'verbose_tree'}.
+#' @param parallel - logical - \code{TRUE} when run_metaepoch runs in parallel.
+#' @param minimize - logical - \code{TRUE} when fitness shall be minimized.
 #'
 #' @return numeric best solution
 #' @export
-#'
-#' @examples
 hms <- function(tree_height = 3,
+                minimize = FALSE,
                 fitness,
                 lower,
                 upper,
@@ -75,7 +90,9 @@ hms <- function(tree_height = 3,
     gradient_method_args <- validate_gradient_method_args(gradient_method_args, lower, upper)
     run_gradient_method <- default_run_gradient_method
   }
-  monitor_level <- getMonitorLevel(monitor_level) # TODO :((
+  monitor_level <- getMonitorLevel(monitor_level)
+
+  operator <- ifelse(minimize, `<`, `>`)
 
   root <- if (is.null(suggestions)) {
     create_deme(lower, upper, NULL, population_sizes[[1]], create_population)
@@ -121,12 +138,12 @@ hms <- function(tree_height = 3,
         }
         f(x)
       }
-      metaepoch_result <- run_metaepoch(deme_f, deme@population, lower, upper, deme@level)
+      metaepoch_result <- run_metaepoch(deme_f, deme@population, lower, upper, deme@level, minimize)
 
       end_metaepoch_time <- Sys.time()
       total_metaepoch_time <- total_metaepoch_time + (end_metaepoch_time - start_metaepoch_time)
 
-      deme <- update_deme(metaepoch_result, deme)
+      deme <- update_deme(metaepoch_result, deme, minimize)
       deme@evaluations_count <- deme@evaluations_count + deme_evaluations_count
 
       if (lsc(deme, metaepoch_snapshots)) {
@@ -154,7 +171,7 @@ hms <- function(tree_height = 3,
     }
     demes <- next_metaepoch_demes
 
-    best <- find_best_solution(demes)
+    best <- find_best_solution(demes, minimize)
 
     snapshot <- methods::new("MetaepochSnapshot",
       demes = demes,
@@ -182,13 +199,13 @@ hms <- function(tree_height = 3,
       metaepoch_snapshots,
       tree_height
     )
-    best <- find_best_solution(demes_after_gradient_metaepoch)
+    best <- find_best_solution(demes_after_gradient_metaepoch, minimize)
     gradient_snapshot <- methods::new("MetaepochSnapshot",
       demes = demes_after_gradient_metaepoch,
       best_fitness = best$fitness,
       best_solution = best$solution,
       time_in_seconds = seconds_since(start_time) - evaluation_times_sum(metaepoch_snapshots),
-      fitness_evaluations = fitness_evaluations_count, # TODO
+      fitness_evaluations = fitness_evaluations_count,
       blocked_sprouts = list(),
       is_evolutionary = FALSE
     )
@@ -210,15 +227,16 @@ hms <- function(tree_height = 3,
   )
 }
 
-find_best_solution <- function(demes) {
+find_best_solution <- function(demes, minimize) {
+  operator <- ifelse(minimize, `<`, `>`)
   best_solution <- NULL
-  best_fitness <- -Inf
+  best_fitness <- ifelse(minimize, Inf, -Inf)
   for (deme in demes) {
     if (length(deme@best_fitness) == 0) {
       next
     }
 
-    if (deme@best_fitness > best_fitness) {
+    if (operator(deme@best_fitness, best_fitness)) {
       best_fitness <- deme@best_fitness
       best_solution <- deme@best_solution
     }

@@ -2,13 +2,18 @@
 % Please edit documentation in R/local_stopping_condition.R
 \name{lsc_trivial}
 \alias{lsc_trivial}
-\title{lsc_trivial}
+\title{Factory function for a trivial local stopping condition that
+lets a deme be active forever. It is usually used in the root of
+a hms tree.}
 \usage{
 lsc_trivial()
 }
 \value{
-
+Function that always returns \code{FALSE}, which can be
+used as a local stopping condition for hms.
 }
 \description{
-lsc_trivial
+Factory function for a trivial local stopping condition that
+lets a deme be active forever. It is usually used in the root of
+a hms tree.
 }

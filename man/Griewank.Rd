@@ -2,7 +2,7 @@
 % Please edit documentation in R/test_functions.R
 \name{Griewank}
 \alias{Griewank}
-\title{Griewank
+\title{Griewank benchmark function
 Min: f(x) = 0 at x = (0, ..., 0)
 x_i in [-600, 600]}
 \usage{
@@ -17,7 +17,7 @@ Griewank(x)
 numeric value of Griewank function
 }
 \description{
-Griewank
+Griewank benchmark function
 Min: f(x) = 0 at x = (0, ..., 0)
 x_i in [-600, 600]
 }

@@ -2,7 +2,7 @@
 % Please edit documentation in R/test_functions.R
 \name{Baele}
 \alias{Baele}
-\title{Baele
+\title{Baele benchmark function
 Min: f(x) = 0 at x = (3, 0.5)
 x1, x2 in [-4.5, 4.5]}
 \usage{
@@ -14,10 +14,10 @@ Baele(x)
 }}
 }
 \value{
-
+numeric value of Baele function
 }
 \description{
-Baele
+Baele benchmark function
 Min: f(x) = 0 at x = (3, 0.5)
 x1, x2 in [-4.5, 4.5]
 }

@@ -2,13 +2,18 @@
 % Please edit documentation in R/global_stopping_condition.R
 \name{gsc_trivial}
 \alias{gsc_trivial}
-\title{gsc_trivial}
+\title{Factory function for a global stopping condition that never stops
+the computation. It results in hms running until there are no more
+active demes.}
 \usage{
 gsc_trivial()
 }
 \value{
-
+function that always returns \code{FALSE}, which can be used
+as a global stopping condition for the hms function.
 }
 \description{
-gsc_trivial
+Factory function for a global stopping condition that never stops
+the computation. It results in hms running until there are no more
+active demes.
 }

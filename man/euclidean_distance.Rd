@@ -2,7 +2,7 @@
 % Please edit documentation in R/utils.R
 \name{euclidean_distance}
 \alias{euclidean_distance}
-\title{Title}
+\title{Euclidean distance}
 \usage{
 euclidean_distance(x, y)
 }
@@ -16,8 +16,8 @@ euclidean_distance(x, y)
 }}
 }
 \value{
-
+numeric - euclidean distance between x and y
 }
 \description{
-Title
+Euclidean distance
 }

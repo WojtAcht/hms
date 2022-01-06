@@ -1,11 +1,15 @@
-#' lsc_metaepochs_without_improvement
+#' Factory function for a local stopping condition that stops a deme
+#' after given number of consecutive metaeopochs without an improvement
+#' of the best solution found in that deme.
 #'
 #' @param max_metaepochs_without_improvement - numeric
 #'
-#' @return
+#' @return Function that can be used as a local stopping condition for hms.
+#'
 #' @export
 #'
-#' @examples
+#' @example
+#' local_stopping_condition <- lsc_metaepochs_without_improvement(5)
 lsc_metaepochs_without_improvement <- function(max_metaepochs_without_improvement) {
   function(deme, previous_metaepoch_snapshots) {
     best_fitness_metaepoch <- match(deme@best_fitness, deme@best_fitnesses_per_metaepoch)
@@ -14,26 +18,35 @@ lsc_metaepochs_without_improvement <- function(max_metaepochs_without_improvemen
   }
 }
 
-#' lsc_max_fitness_evaluations
+#' Factory function for a local stopping consition that stops a deme
+#' after given number of fitness function evaluations has been made
+#' in that deme.
 #'
 #' @param max_evaluations - numeric
 #'
-#' @return
+#' @return Function that can be used as a local stopping condition for hms.
+#'
 #' @export
 #'
-#' @examples
+#' @example
+#' local_stopping_condition <- lsc_max_fitness_evaluations(500)
 lsc_max_fitness_evaluations <- function(max_evaluations) {
   function(deme, previous_metaepoch_snapshots) {
     !is_root(deme) & deme@evaluations_count > max_evaluations
   }
 }
 
-#' lsc_trivial
+#' Factory function for a trivial local stopping condition that
+#' lets a deme be active forever. It is usually used in the root of
+#' a hms tree.
 #'
-#' @return
+#' @return Function that always returns \code{FALSE}, which can be
+#' used as a local stopping condition for hms.
+#'
 #' @export
 #'
-#' @examples
+#' @example
+#' local_stopping_condition <- lsc_trivial()
 lsc_trivial <- function() {
   function(deme, previous_metaepoch_snapshots){
     FALSE

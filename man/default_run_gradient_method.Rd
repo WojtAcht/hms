@@ -12,11 +12,11 @@ default_run_gradient_method(deme, fitness, optim_args)
 }}
 
 \item{fitness}{\itemize{
-\item function
+\item fitness function
 }}
 
 \item{optim_args}{\itemize{
-\item list of additional parameters
+\item list of additional parameters (stats::optim parameters)
 }}
 }
 \description{

@@ -8,16 +8,20 @@ sc_max_metric(metric, max_distances)
 }
 \arguments{
 \item{metric}{\itemize{
-\item Metric used for deme distance comparison
+\item Metric used for deme distance comparison (e.g.
+euclidean_distance, manhattan_distance)
 }}
 
 \item{max_distances}{\itemize{
-\item numeric
+\item numeric - maximum distance to a sprout of
+a deme on the target level that would allow the idividual to sprout
 }}
 }
 \value{
-logical
+Function that can be used as a sprouting condition of hms.
 }
 \description{
-Default sprouting condition based on given metric.
+It allows an individual to sprout only if there are no other
+demes on the target level that have sprouted within the given
+distance.
 }

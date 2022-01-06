@@ -18,12 +18,10 @@ validate_gradient_method_args <- function(gradient_method_args, lower, upper) {
 #' Function that runs gradient method for one deme.
 #'
 #' @param deme - Deme
-#' @param fitness - function
-#' @param optim_args - list of additional parameters
+#' @param fitness - fitness function
+#' @param optim_args - list of additional parameters (stats::optim parameters)
 #'
 #' @export
-#'
-#' @examples
 default_run_gradient_method <- function(deme, fitness, optim_args) {
   result <- suppressWarnings(
     do.call(
