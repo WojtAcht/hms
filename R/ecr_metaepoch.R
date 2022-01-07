@@ -15,7 +15,8 @@ ecr_metaepoch <- function(config_ecr) {
     params <- list(
       "mu" = population_size,
       "mutator" = ecr::setup(ecr::mutGauss, lower = lower, upper = upper),
-      "lambda" = 1L)
+      "lambda" = 1L
+    )
     for (param_name in legal_passed_param_names) {
       params[param_name] <- config[param_name]
     }

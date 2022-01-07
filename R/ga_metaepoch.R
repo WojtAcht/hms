@@ -6,7 +6,9 @@
 #' @export
 ga_metaepoch <- function(config_ga) {
   function(fitness, suggestions, lower, upper, tree_level, minimize) {
-    ga_fitness <- ifelse(minimize, function(x) {-1 * fitness(x)}, fitness)
+    ga_fitness <- ifelse(minimize, function(x) {
+      -1 * fitness(x)
+    }, fitness)
     config <- config_ga[[tree_level]]
     legal_passed_param_names <- Filter(function(name) {
       name %in% methods::formalArgs(GA::ga)
@@ -25,7 +27,7 @@ ga_metaepoch <- function(config_ga) {
 
     GA <- do.call(GA::ga, params)
     value <- ifelse(minimize, GA@fitnessValue * -1, GA@fitnessValue)
-    list("solution" = c(GA@solution[1,]), "population" = GA@population, "value" = value)
+    list("solution" = c(GA@solution[1, ]), "population" = GA@population, "value" = value)
   }
 }
 

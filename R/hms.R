@@ -120,14 +120,20 @@ hms <- function(tree_height = 3,
     fitness(x)
   }
   while (!gsc(metaepoch_snapshots)) {
-    if (length(Filter(function(deme) { deme@is_active }, demes)) == 0) {
+    if (length(Filter(function(deme) {
+      deme@is_active
+    }, demes)) == 0) {
       message("HMS stopped due to a lack of active demes!")
       break
     }
 
-    next_metaepoch_demes <- Filter(function(deme) { !deme@is_active }, demes)
+    next_metaepoch_demes <- Filter(function(deme) {
+      !deme@is_active
+    }, demes)
     blocked_sprouts <- list()
-    for (deme in Filter(function(deme) { deme@is_active }, demes)) {
+    for (deme in Filter(function(deme) {
+      deme@is_active
+    }, demes)) {
       start_metaepoch_time <- Sys.time()
       deme_evaluations_count <- 0
       deme_f <- function(x) {
@@ -262,5 +268,7 @@ get_not_yet_processed_demes <- function(all_demes, already_processed_demes) {
     }
     FALSE
   }
-  Filter(function(deme) { !is_processed(deme) }, all_demes)
+  Filter(function(deme) {
+    !is_processed(deme)
+  }, all_demes)
 }
