@@ -16,9 +16,11 @@
 #' @export
 #'
 #' @examples
-#' mutation <- rtnorm_mutation(lower=rep(-500, 5),
-#'                             upper=rep(500, 5),
-#'                             sd=rep(50, 5))
+#' mutation <- rtnorm_mutation(
+#'   lower = rep(-500, 5),
+#'   upper = rep(500, 5),
+#'   sd = rep(50, 5)
+#' )
 rtnorm_mutation <- function(lower, upper, sd) {
   function(object, parent) {
     parent <- as.vector(object@population[parent, ])

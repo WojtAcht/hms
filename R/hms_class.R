@@ -269,5 +269,3 @@ setMethod("printBlockedSprouts", "hms", function(object) {
     cat("\n")
   }
 })
-
-

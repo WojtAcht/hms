@@ -35,7 +35,7 @@ test_that("create_deme with parent for 2D", {
   population_size <- 5
   sigma <- default_sigma(lower, upper, tree_height)
   parent_deme <- create_deme(lower, upper, NULL, population_size, default_create_population(sigma))
-  sprout <- c(1,1)
+  sprout <- c(1, 1)
   parent_deme@best_solutions_per_metaepoch <- list(sprout)
   deme <- create_deme(lower, upper, parent_deme, population_size, default_create_population(sigma))
   expect_equal(deme@level, 2)
@@ -47,7 +47,7 @@ test_that("create_deme with parent for 2D", {
 })
 
 test_that("create_deme error for invalid dimensions of population", {
-  invalid_create_population <- function(mean, lower, upper, population_size, tree_level){
+  invalid_create_population <- function(mean, lower, upper, population_size, tree_level) {
     matrix(lower)
   }
   lower <- c(-5, -5)
@@ -57,7 +57,8 @@ test_that("create_deme error for invalid dimensions of population", {
   sigma <- default_sigma(lower, upper, tree_height)
   expect_error(
     create_deme(lower, upper, NULL, population_size, invalid_create_population),
-    "Created population is invalid - wrong dimensions.")
+    "Created population is invalid - wrong dimensions."
+  )
 })
 
 test_that("update_deme", {
@@ -70,10 +71,12 @@ test_that("update_deme", {
   deme <- create_deme(lower, upper, NULL, population_size, default_create_population(sigma))
   solution <- c(0, 0)
   value <- 0
-  population <- t(matrix(rep(solution, population_size), nrow=dimensions))
-  metaepoch_result <- list("solution" = solution,
-                           "value" = value,
-                           "population" = population)
+  population <- t(matrix(rep(solution, population_size), nrow = dimensions))
+  metaepoch_result <- list(
+    "solution" = solution,
+    "value" = value,
+    "population" = population
+  )
   updated_deme <- update_deme(metaepoch_result, deme)
   expect_equal(updated_deme@best_solution, solution)
   expect_equal(updated_deme@best_fitness, value)
@@ -88,7 +91,7 @@ test_that("is_leaf", {
   population_size <- 5
   sigma <- default_sigma(lower, upper, tree_height)
   parent_deme <- create_deme(lower, upper, NULL, population_size, default_create_population(sigma))
-  sprout <- c(1,1)
+  sprout <- c(1, 1)
   parent_deme@best_solution <- sprout
   parent_deme@best_solutions_per_metaepoch <- list(sprout)
   deme <- create_deme(lower, upper, parent_deme, population_size, default_create_population(sigma))
@@ -97,4 +100,3 @@ test_that("is_leaf", {
   expect_true(is_leaf(deme, tree_height))
   expect_false(is_leaf(parent_deme, tree_height))
 })
-

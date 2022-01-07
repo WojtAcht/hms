@@ -1,6 +1,8 @@
 # HMS
 <!-- badges: start -->
 [![R-CMD-check](https://github.com/WojtAcht/hms/workflows/R-CMD-check/badge.svg)](https://github.com/WojtAcht/hms/actions)
+[![Codecov test
+coverage](https://codecov.io/gh/WojtAcht/hms/branch/master/graph/badge.svg)](https://codecov.io/gh/WojtAcht/hms?branch=master)
 <!-- badges: end -->
 
 The HMS is a mixture of a multi-deme evolutionary algorithm and gradient-based optimization methods. As a multi-population evolutionary strategy, the HMS makes use of a particular data structure that provides an organization among the sub-populations (demes). It is a tree with a fixed maximal height and variable internal node degree. The tree has the parent–child semantics.
