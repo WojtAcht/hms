@@ -11,6 +11,10 @@ test_that("HMS works - trivial 1D function:", {
   )
   expected_result <- 5
   expect_true(euclidean_distance(expected_result, result@best_solution) < 1e-2)
+  expect_output(printTree(result))
+  expect_output(printBlockedSprouts(result))
+  expect_visible(summary(result))
+  expect_output(print(result))
 })
 
 test_that("HMS works - Rastrigin:", {
@@ -18,7 +22,9 @@ test_that("HMS works - Rastrigin:", {
   lower <- c(-5.12, -5.12)
   upper <- c(5.12, 5.12)
   result <- hms(
-    fitness = function(x) { -1 * Rastrigin(x) },
+    fitness = function(x) {
+      -1 * Rastrigin(x)
+    },
     lower = lower,
     upper = upper,
     monitor_level = "none"
@@ -32,7 +38,9 @@ test_that("HMS works - Ackley:", {
   lower <- c(-32.768, -32.768)
   upper <- c(32.768, 32.768)
   result <- hms(
-    fitness = function(x) { -1 * Ackley(x)},
+    fitness = function(x) {
+      -1 * Ackley(x)
+    },
     lower = lower,
     upper = upper,
     monitor_level = "none"
@@ -46,7 +54,9 @@ test_that("HMS works - Schwefel:", {
   lower <- c(-500, -500)
   upper <- c(500, 500)
   result <- hms(
-    fitness = function(x) { -1 * Schwefel(x)},
+    fitness = function(x) {
+      -1 * Schwefel(x)
+    },
     lower = lower,
     upper = upper,
     monitor_level = "none"
@@ -60,7 +70,9 @@ test_that("HMS works - Griewank:", {
   lower <- c(-600, -600)
   upper <- c(600, 600)
   result <- hms(
-    fitness = function(x) { -1 * Griewank(x)},
+    fitness = function(x) {
+      -1 * Griewank(x)
+    },
     lower = lower,
     upper = upper,
     monitor_level = "none"
@@ -74,7 +86,9 @@ test_that("HMS works - Baele:", {
   lower <- c(-4.5, -4.5)
   upper <- c(4.5, 4.5)
   result <- hms(
-    fitness = function(x) { -1 * Baele(x) },
+    fitness = function(x) {
+      -1 * Baele(x)
+    },
     lower = lower,
     upper = upper,
     monitor_level = "none"
@@ -88,7 +102,9 @@ test_that("HMS works - Baele with gradient metaepoch:", {
   lower <- c(-4.5, -4.5)
   upper <- c(4.5, 4.5)
   result <- hms(
-    fitness = function(x) { -1 * Baele(x) },
+    fitness = function(x) {
+      -1 * Baele(x)
+    },
     lower = lower,
     upper = upper,
     with_gradient_method = TRUE,
@@ -117,7 +133,9 @@ test_that("HMS works - Eggholder with gradient method:", {
     )
   )
   result <- hms(
-    fitness = function(x) { -1 * Eggholder(x)},
+    fitness = function(x) {
+      -1 * Eggholder(x)
+    },
     tree_height = 3,
     lower = lower,
     upper = upper,
@@ -133,4 +151,20 @@ test_that("HMS works - Eggholder with gradient method:", {
   expected_solution <- c(512, 404.2319)
   expected_fitness <- -1 * Eggholder(expected_solution)
   expect_true(abs(result@best_fitness - expected_fitness) < 1e1)
+})
+
+test_that("HMS works with ecr - trivial 1D function:", {
+  set.seed(1)
+  f <- function(x) {
+    x
+  }
+  result <- hms(
+    fitness = f,
+    lower = -5,
+    upper = 5,
+    monitor_level = "none",
+    run_metaepoch = default_ecr_metaepoch(3)
+  )
+  expected_result <- 5
+  expect_true(euclidean_distance(expected_result, result@best_solution) < 1e-2)
 })

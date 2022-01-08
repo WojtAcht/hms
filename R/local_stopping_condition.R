@@ -48,7 +48,7 @@ lsc_max_fitness_evaluations <- function(max_evaluations) {
 #' @example
 #' local_stopping_condition <- lsc_trivial()
 lsc_trivial <- function() {
-  function(deme, previous_metaepoch_snapshots){
+  function(deme, previous_metaepoch_snapshots) {
     FALSE
   }
 }
