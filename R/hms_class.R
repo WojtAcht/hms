@@ -270,6 +270,7 @@ setMethod("printBlockedSprouts", "hms", function(object) {
   }
 })
 
+
 #' Title
 #'
 #' @param object - hms s4 object
@@ -285,6 +286,9 @@ setGeneric("plotPopulation", function(object, dimensions) standardGeneric("plotP
 #'
 #' @export
 setMethod("plotPopulation", "hms", function(object, dimensions) {
+  if (!length(dimensions) == 2) {
+    stop("The vector of dimensions must have two elements.")
+  }
   dimensions_names <- mapply(function(n) {
     paste("x", toString(n), sep = "")
   }, dimensions)
@@ -300,34 +304,40 @@ setMethod("plotPopulation", "hms", function(object, dimensions) {
       deme_df
     }
   )
-  population <- Reduce(rbind, populations_with_indices)
+  population <- unique(Reduce(rbind, populations_with_indices))
   plot(
     x = population[, dimensions_names[[1]]],
     y = population[, dimensions_names[[2]]],
     col = population$color,
     pch = 16,
     xlab = dimensions_names[[1]],
-    ylab = dimensions_names[[2]]
+    ylab = dimensions_names[[2]],
+    main = "Last snapshot population"
   )
 })
 
 #' Title
 #'
-#' @param object - hms s4 object
-#' @param path - path
-#' @param dimensions - two selected dimensions
+#' @param object hms s4 object
+#' @param path path
+#' @param dimensions vector of two selected dimensions e.g. c(1,2)
 #'
 #' @export
 setGeneric("saveMetaepochsPopulations", function(object, path, dimensions) standardGeneric("saveMetaepochsPopulations"))
 
 #' Title
 #'
-#' @param object - hms s4 object
-#' @param path - path
-#' @param dimensions - two selected dimensions
+#' @param object hms s4 object
+#' @param path path
+#' @param dimensions vector of two selected dimensions e.g. c(1,2)
 #'
 #' @export
+#' @example
+#' saveMetaepochsPopulations(result, paste(getwd(), "/snapshots", sep=""), c(1,2))
 setMethod("saveMetaepochsPopulations", "hms", function(object, path, dimensions) {
+  if (!length(dimensions) == 2) {
+    stop("The vector of dimensions must have two elements.")
+  }
   dimensions_names <- mapply(function(n) {
     paste("x", toString(n), sep = "")
   }, dimensions)

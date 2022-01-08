@@ -7,17 +7,11 @@
 \S4method{saveMetaepochsPopulations}{hms}(object, path, dimensions)
 }
 \arguments{
-\item{object}{\itemize{
-\item hms s4 object
-}}
+\item{object}{hms s4 object}
 
-\item{path}{\itemize{
-\item path
-}}
+\item{path}{path}
 
-\item{dimensions}{\itemize{
-\item two selected dimensions
-}}
+\item{dimensions}{vector of two selected dimensions e.g. c(1,2)}
 }
 \description{
 Title
