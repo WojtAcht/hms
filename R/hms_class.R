@@ -269,3 +269,115 @@ setMethod("printBlockedSprouts", "hms", function(object) {
     cat("\n")
   }
 })
+
+
+#' Title
+#'
+#' @param object - hms s4 object
+#' @param dimensions - two selected dimensions
+#'
+#' @export
+setGeneric("plotPopulation", function(object, dimensions) standardGeneric("plotPopulation"))
+
+#' Title
+#'
+#' @param object - hms s4 object
+#' @param dimensions - two selected dimensions
+#'
+#' @export
+setMethod("plotPopulation", "hms", function(object, dimensions) {
+  if (!length(dimensions) == 2) {
+    stop("The vector of dimensions must have two elements.")
+  }
+  dimensions_names <- mapply(function(n) {
+    paste("x", toString(n), sep = "")
+  }, dimensions)
+  last_metaepoch_demes <- utils::tail(object@metaepoch_snapshots, n = 1)[[1]]@demes
+  demes_ids <- mapply(function(deme) deme@id, last_metaepoch_demes)
+  populations_with_indices <- lapply(
+    last_metaepoch_demes,
+    function(deme) {
+      deme_population <- deme@population[, dimensions]
+      colnames(deme_population) <- dimensions_names
+      deme_df <- as.data.frame(deme_population)
+      deme_df["color"] <- match(deme@id, demes_ids)
+      deme_df
+    }
+  )
+  population <- unique(Reduce(rbind, populations_with_indices))
+  plot(
+    x = population[, dimensions_names[[1]]],
+    y = population[, dimensions_names[[2]]],
+    col = population$color,
+    pch = 16,
+    xlab = dimensions_names[[1]],
+    ylab = dimensions_names[[2]],
+    main = "Last snapshot population"
+  )
+})
+
+#' Title
+#'
+#' @param object hms s4 object
+#' @param path path
+#' @param dimensions vector of two selected dimensions e.g. c(1,2)
+#'
+#' @export
+setGeneric("saveMetaepochsPopulations", function(object, path, dimensions) standardGeneric("saveMetaepochsPopulations"))
+
+#' Title
+#'
+#' @param object hms s4 object
+#' @param path path
+#' @param dimensions vector of two selected dimensions e.g. c(1,2)
+#'
+#' @export
+#' @example
+#' saveMetaepochsPopulations(result, paste(getwd(), "/snapshots", sep=""), c(1,2))
+setMethod("saveMetaepochsPopulations", "hms", function(object, path, dimensions) {
+  if (!length(dimensions) == 2) {
+    stop("The vector of dimensions must have two elements.")
+  }
+  dimensions_names <- mapply(function(n) {
+    paste("x", toString(n), sep = "")
+  }, dimensions)
+  xlim <- c(object@lower[[dimensions[[1]]]], object@upper[[dimensions[[1]]]])
+  ylim <- c(object@lower[[dimensions[[2]]]], object@upper[[dimensions[[2]]]])
+  demes_ids_per_snapshot <- mapply(
+    function(s) mapply(function(d) d@id, s@demes),
+    object@metaepoch_snapshots
+  )
+  demes_ids <- Reduce(c, demes_ids_per_snapshot)
+  for (i in seq_along(object@metaepoch_snapshots)) {
+    snapshot <- object@metaepoch_snapshots[[i]]
+    snapshot_demes <- snapshot@demes
+    populations_with_indices <- lapply(
+      snapshot_demes,
+      function(deme) {
+        deme_population <- deme@population[, dimensions]
+        colnames(deme_population) <- dimensions_names
+        deme_df <- as.data.frame(deme_population)
+        deme_df["color"] <- match(deme@id, demes_ids)
+        deme_df
+      }
+    )
+    snapshot_population <- Reduce(rbind, populations_with_indices)
+    grDevices::jpeg(
+      file = paste(path, "/snapshot", toString(i), ".png", sep = ""),
+      width = 480,
+      height = 480
+    )
+    plot(
+      x = snapshot_population[, dimensions_names[[1]]],
+      y = snapshot_population[, dimensions_names[[2]]],
+      col = snapshot_population$color,
+      pch = 16,
+      xlab = dimensions_names[[1]],
+      ylab = dimensions_names[[2]],
+      xlim = xlim,
+      ylim = ylim,
+      main = paste("Snapshot", toString(i))
+    )
+    grDevices::dev.off()
+  }
+})
