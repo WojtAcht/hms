@@ -31,7 +31,9 @@ compatible with GA interface that performs a mutation on the given
 individual using truncated normal distribution.
 }
 \examples{
-mutation <- rtnorm_mutation(lower=rep(-500, 5),
-                            upper=rep(500, 5),
-                            sd=rep(50, 5))
+mutation <- rtnorm_mutation(
+  lower = rep(-500, 5),
+  upper = rep(500, 5),
+  sd = rep(50, 5)
+)
 }

@@ -95,6 +95,84 @@ test_that("Local stopping condition (max evaluations) works:", {
   expect_true(local_stopping_condition(deme, list()))
 })
 
+test_that("Local stopping condition (mmetaepochs without active child) works:", {
+  deme <- methods::new(
+    "Deme",
+    id = "id1",
+    population = matrix(),
+    level = 2,
+    best_fitness = 0,
+    best_solution = 0,
+    best_solutions_per_metaepoch = list(),
+    best_fitnesses_per_metaepoch = list(),
+    sprout = NULL,
+    parent_id = NULL,
+    evaluations_count = 0,
+    is_active = TRUE
+  )
+  active_child_deme <- methods::new(
+    "Deme",
+    id = "id2",
+    population = matrix(),
+    level = 2,
+    best_fitness = 0,
+    best_solution = 0,
+    best_solutions_per_metaepoch = list(),
+    best_fitnesses_per_metaepoch = list(),
+    sprout = NULL,
+    parent_id = "id1",
+    evaluations_count = 0,
+    is_active = TRUE
+  )
+  inactive_child_deme <- methods::new(
+    "Deme",
+    id = "id3",
+    population = matrix(),
+    level = 2,
+    best_fitness = 0,
+    best_solution = 0,
+    best_solutions_per_metaepoch = list(),
+    best_fitnesses_per_metaepoch = list(),
+    sprout = NULL,
+    parent_id = "id1",
+    evaluations_count = 0,
+    is_active = FALSE
+  )
+  snapshot <- function(demes) {
+    methods::new(
+      "MetaepochSnapshot",
+      demes = demes,
+      best_fitness = 0,
+      best_solution = 0,
+      time_in_seconds = 0,
+      fitness_evaluations = 3,
+      blocked_sprouts = list(),
+      is_evolutionary = FALSE
+    )
+  }
+  expect_false(lsc_metaepochs_without_active_child(1)(deme, list(snapshot(
+    list(deme, active_child_deme)
+  ))))
+  expect_true(lsc_metaepochs_without_active_child(1)(deme, list(snapshot(
+    list(deme, active_child_deme)
+  ), snapshot(
+    list(deme, inactive_child_deme)
+  ))))
+  expect_false(lsc_metaepochs_without_active_child(2)(deme, list(snapshot(
+    list(deme, active_child_deme)
+  ), snapshot(
+    list(deme, inactive_child_deme)
+  ))))
+  expect_true(lsc_metaepochs_without_active_child(2)(deme, list(snapshot(
+    list(deme, inactive_child_deme)
+  ), snapshot(
+    list(deme, inactive_child_deme)
+  ))))
+  expect_true(lsc_metaepochs_without_active_child(2)(deme, list(
+    snapshot(list(deme, active_child_deme)), snapshot(list(deme, inactive_child_deme)), snapshot(list(deme, inactive_child_deme))
+  )))
+})
+
 test_that("Local stopping condition (trivial) works:", {
   local_stopping_condition <- lsc_trivial()
   deme <- methods::new(

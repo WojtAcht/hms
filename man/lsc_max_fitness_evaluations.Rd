@@ -2,7 +2,7 @@
 % Please edit documentation in R/local_stopping_condition.R
 \name{lsc_max_fitness_evaluations}
 \alias{lsc_max_fitness_evaluations}
-\title{Factory function for a local stopping consition that stops a deme
+\title{Factory function for a local stopping condition that stops a deme
 after given number of fitness function evaluations has been made
 in that deme.}
 \usage{
@@ -17,7 +17,7 @@ lsc_max_fitness_evaluations(max_evaluations)
 Function that can be used as a local stopping condition for hms.
 }
 \description{
-Factory function for a local stopping consition that stops a deme
+Factory function for a local stopping condition that stops a deme
 after given number of fitness function evaluations has been made
 in that deme.
 }
