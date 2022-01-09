@@ -53,11 +53,14 @@ lsc_metaepochs_without_active_child <- function(metaepochs_limit) {
   function(deme, previous_metaepoch_snapshots) {
     has_active_child <- function(snapshot) {
       any(mapply(function(d) {
-        d@parent_id == deme@id && d@is_active
+        identical(d@parent_id, deme@id) && d@is_active
       }, snapshot@demes))
     }
-    any(has_active_child,
-        tail(previous_metaepoch_snapshots, n = metaepochs_limit))
+
+    !any(mapply(
+      has_active_child,
+      utils::tail(previous_metaepoch_snapshots, n = metaepochs_limit)
+    ))
   }
 }
 

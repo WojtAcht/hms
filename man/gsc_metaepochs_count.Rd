@@ -16,7 +16,7 @@ gsc_metaepochs_count(metaepochs_count)
 Function that receives a list of metaepoch snapshots
 and returns a Boolean value determining whether the computation
 should be stopped based on how many metaepochs have passed,
-which can be used as a global stopping conditionfor the hms function.
+which can be used as a global stopping condition for the hms function.
 }
 \description{
 Factory function for a global stopping condition that stops
