@@ -40,7 +40,6 @@ There are number of parameters used for strategy configuration. The sample below
 <img width="400" src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/Eggholder_function.pdf/page1-1200px-Eggholder_function.pdf.jpg">
 
 ```R
-fitness <- function(x) { -1 * Eggholder(x) }
 lower <- rep(-512, 2)
 upper <- rep(512, 2)
 sigma <- list(rep(200, 2), rep(100, 2), rep(50, 2))
@@ -59,7 +58,8 @@ ga_config <- list(
     )
 )
 HMS <- hms(
-    fitness = fitness,
+    fitness = Eggholder,
+    minimize = TRUE,
     tree_height = 3,
     lower = lower,
     upper = upper,
