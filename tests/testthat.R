@@ -1,7 +1,6 @@
 library(testthat)
 library(hms)
 library(GA)
-library(ecr)
 library(purrr)
 library(msm)
 library(uuid)
