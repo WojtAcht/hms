@@ -4,7 +4,7 @@
 #'
 #' @return list with named fields: solution, population, value
 #' @export
-ecr_metaepoch <- function(config_ecr) {
+ecr_metaepoch <- function(config_ecr) { # nocov start
   function(fitness, suggestions, lower, upper, tree_level, minimize) {
     config <- config_ecr[[tree_level]]
     legal_passed_param_names <- Filter(function(name) {
@@ -41,4 +41,4 @@ default_ecr_metaepoch <- function(tree_height) {
     list()
   })
   ecr_metaepoch(empty_config_ecr)
-}
+} # nocov end
