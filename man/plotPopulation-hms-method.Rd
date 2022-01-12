@@ -2,7 +2,7 @@
 % Please edit documentation in R/hms_class.R
 \name{plotPopulation,hms-method}
 \alias{plotPopulation,hms-method}
-\title{Title}
+\title{plotPopulation}
 \usage{
 \S4method{plotPopulation}{hms}(object, dimensions)
 }
@@ -16,5 +16,5 @@
 }}
 }
 \description{
-Title
+plotPopulation
 }

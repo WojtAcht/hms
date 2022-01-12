@@ -2,7 +2,7 @@
 % Please edit documentation in R/hms_class.R
 \name{plotActiveDemes}
 \alias{plotActiveDemes}
-\title{Title}
+\title{plotActiveDemes}
 \usage{
 plotActiveDemes(object)
 }
@@ -12,5 +12,5 @@ plotActiveDemes(object)
 }}
 }
 \description{
-Title
+plotActiveDemes
 }

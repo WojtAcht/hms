@@ -3,9 +3,9 @@
 \docType{class}
 \name{MetaepochSnapshot-class}
 \alias{MetaepochSnapshot-class}
-\title{Title}
+\title{MetaepochSnapshot}
 \description{
-Title
+MetaepochSnapshot
 }
 \section{Slots}{
 

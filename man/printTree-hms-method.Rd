@@ -2,7 +2,7 @@
 % Please edit documentation in R/hms_class.R
 \name{printTree,hms-method}
 \alias{printTree,hms-method}
-\title{Title}
+\title{printTree}
 \usage{
 \S4method{printTree}{hms}(object)
 }
@@ -12,5 +12,5 @@
 }}
 }
 \description{
-Title
+printTree
 }

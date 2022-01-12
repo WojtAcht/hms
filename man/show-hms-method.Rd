@@ -2,7 +2,7 @@
 % Please edit documentation in R/hms_class.R
 \name{show,hms-method}
 \alias{show,hms-method}
-\title{Title}
+\title{show}
 \usage{
 \S4method{show}{hms}(object)
 }
@@ -12,5 +12,5 @@
 }}
 }
 \description{
-Title
+show
 }

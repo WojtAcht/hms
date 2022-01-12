@@ -3,9 +3,9 @@
 \docType{class}
 \name{hms-class}
 \alias{hms-class}
-\title{Title}
+\title{hms}
 \description{
-Title
+hms
 }
 \section{Slots}{
 
