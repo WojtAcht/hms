@@ -2,7 +2,7 @@
 % Please edit documentation in R/hms_class.R
 \name{printBlockedSprouts,hms-method}
 \alias{printBlockedSprouts,hms-method}
-\title{Title}
+\title{printBlockedSprouts}
 \usage{
 \S4method{printBlockedSprouts}{hms}(object)
 }
@@ -12,5 +12,5 @@
 }}
 }
 \description{
-Title
+printBlockedSprouts
 }

@@ -2,7 +2,7 @@
 % Please edit documentation in R/hms_class.R
 \name{print,hms-method}
 \alias{print,hms-method}
-\title{Title}
+\title{print}
 \usage{
 \S4method{print}{hms}(x, ...)
 }
@@ -16,5 +16,5 @@
 }}
 }
 \description{
-Title
+print
 }

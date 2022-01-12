@@ -2,7 +2,7 @@
 % Please edit documentation in R/hms_class.R
 \name{summary,hms-method}
 \alias{summary,hms-method}
-\title{Title}
+\title{summary}
 \usage{
 \S4method{summary}{hms}(object, ...)
 }
@@ -16,5 +16,5 @@
 }}
 }
 \description{
-Title
+summary
 }

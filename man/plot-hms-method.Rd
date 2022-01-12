@@ -2,7 +2,7 @@
 % Please edit documentation in R/hms_class.R
 \name{plot,hms-method}
 \alias{plot,hms-method}
-\title{Title}
+\title{plot}
 \usage{
 \S4method{plot}{hms}(x)
 }
@@ -12,5 +12,5 @@
 }}
 }
 \description{
-Title
+plot
 }

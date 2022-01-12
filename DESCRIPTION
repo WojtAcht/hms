@@ -5,12 +5,12 @@ Authors@R: c(
     person(given = "Marcin",
            family = "Kozubek",
            role = "aut",
-           email = "first.last@example.com"),
+           email = "mkozubek@protonmail.com"),
     person(given = "Wojciech",
            family = "Achtelik",
            role = "cre",
            email = "wachtelik@gmail.com"))
-Description: What the package does (one paragraph).
+Description: Implementation of evolutionary strategy HMS in R.
 License: GPL (>= 2)
 Encoding: UTF-8
 LazyData: true

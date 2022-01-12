@@ -2,7 +2,7 @@
 % Please edit documentation in R/hms_class.R
 \name{printBlockedSprouts}
 \alias{printBlockedSprouts}
-\title{Title}
+\title{printBlockedSprouts}
 \usage{
 printBlockedSprouts(object)
 }
@@ -12,5 +12,5 @@ printBlockedSprouts(object)
 }}
 }
 \description{
-Title
+printBlockedSprouts
 }

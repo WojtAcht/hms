@@ -2,7 +2,7 @@
 % Please edit documentation in R/hms_class.R
 \name{saveMetaepochsPopulations}
 \alias{saveMetaepochsPopulations}
-\title{Title}
+\title{saveMetaepochsPopulations}
 \usage{
 saveMetaepochsPopulations(object, path, dimensions)
 }
@@ -14,5 +14,5 @@ saveMetaepochsPopulations(object, path, dimensions)
 \item{dimensions}{vector of two selected dimensions e.g. c(1,2)}
 }
 \description{
-Title
+saveMetaepochsPopulations
 }

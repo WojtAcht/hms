@@ -2,7 +2,7 @@
 % Please edit documentation in R/hms_class.R
 \name{plotPopulation}
 \alias{plotPopulation}
-\title{Title}
+\title{plotPopulation}
 \usage{
 plotPopulation(object, dimensions)
 }
@@ -16,5 +16,5 @@ plotPopulation(object, dimensions)
 }}
 }
 \description{
-Title
+plotPopulation
 }

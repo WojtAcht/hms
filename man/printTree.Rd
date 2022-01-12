@@ -2,7 +2,7 @@
 % Please edit documentation in R/hms_class.R
 \name{printTree}
 \alias{printTree}
-\title{Title}
+\title{printTree}
 \usage{
 printTree(object)
 }
@@ -12,5 +12,5 @@ printTree(object)
 }}
 }
 \description{
-Title
+printTree
 }
