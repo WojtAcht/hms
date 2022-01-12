@@ -1,4 +1,4 @@
-#' Title
+#' MetaepochSnapshot
 #'
 #' @slot demes list.
 #' @slot best_fitness numeric.
@@ -19,7 +19,7 @@ setClass("MetaepochSnapshot", slots = c(
   is_evolutionary = "logical"
 ))
 
-#' Title
+#' hms
 #'
 #' @slot root_id character.
 #' @slot metaepoch_snapshots list.
@@ -48,7 +48,7 @@ setClass("hms", slots = c(
   call = "language"
 ))
 
-#' Title
+#' print
 #'
 #' @param x - hms s4 object
 #' @param ... - other print arguments
@@ -56,7 +56,7 @@ setClass("hms", slots = c(
 #' @export
 setMethod("print", "hms", function(x, ...) utils::str(x))
 
-#' Title
+#' show
 #'
 #' @param object - hms s4 object
 #'
@@ -68,7 +68,7 @@ setMethod("show", "hms", function(object) {
   print(methods::slotNames(object))
 })
 
-#' Title
+#' printTree
 #'
 #' @param object - hms s4 object
 #'
@@ -135,7 +135,7 @@ print_tree <- function(demes, root_id, best_solution, show_details = TRUE) {
 }
 
 
-#' Title
+#' printTree
 #'
 #' @param object - hms s4 object
 #'
@@ -175,7 +175,7 @@ summary.hms <- function(object, ...) {
   out
 }
 
-#' Title
+#' summary
 #'
 #' @param object - hms s4 object
 #' @param ... - other summary arguments
@@ -208,21 +208,21 @@ plot.hms <- function(x) {
   )
 }
 
-#' Title
+#' plot
 #'
 #' @param x - hms s4 object
 #'
 #' @export
 setMethod("plot", "hms", plot.hms)
 
-#' Title
+#' plotActiveDemes
 #'
 #' @param object - hms s4 object
 #'
 #' @export
 setGeneric("plotActiveDemes", function(object) standardGeneric("plotActiveDemes"))
 
-#' Title
+#' plotActiveDemes
 #'
 #' @param object - hms s4 object
 #'
@@ -243,14 +243,14 @@ setMethod("plotActiveDemes", "hms", function(object) {
   )
 })
 
-#' Title
+#' printBlockedSprouts
 #'
 #' @param object - hms s4 object
 #'
 #' @export
 setGeneric("printBlockedSprouts", function(object) standardGeneric("printBlockedSprouts"))
 
-#' Title
+#' printBlockedSprouts
 #'
 #' @param object - hms s4 object
 #'
@@ -271,7 +271,7 @@ setMethod("printBlockedSprouts", "hms", function(object) {
 })
 
 
-#' Title
+#' plotPopulation
 #'
 #' @param object - hms s4 object
 #' @param dimensions - two selected dimensions
@@ -279,7 +279,7 @@ setMethod("printBlockedSprouts", "hms", function(object) {
 #' @export
 setGeneric("plotPopulation", function(object, dimensions) standardGeneric("plotPopulation"))
 
-#' Title
+#' plotPopulation
 #'
 #' @param object - hms s4 object
 #' @param dimensions - two selected dimensions
@@ -316,7 +316,7 @@ setMethod("plotPopulation", "hms", function(object, dimensions) {
   )
 })
 
-#' Title
+#' saveMetaepochsPopulations
 #'
 #' @param object hms s4 object
 #' @param path path
@@ -325,7 +325,7 @@ setMethod("plotPopulation", "hms", function(object, dimensions) {
 #' @export
 setGeneric("saveMetaepochsPopulations", function(object, path, dimensions) standardGeneric("saveMetaepochsPopulations"))
 
-#' Title
+#' saveMetaepochsPopulations
 #'
 #' @param object hms s4 object
 #' @param path path
