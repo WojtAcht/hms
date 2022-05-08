@@ -76,6 +76,10 @@ setMethod("show", "hms", function(object) {
 setGeneric("printTree", function(object) standardGeneric("printTree"))
 
 get_solution_string <- function(solution, format = "%#.2f") {
+  MAX_SOLUTION_SIZE <- 10
+  if(length(solution) > MAX_SOLUTION_SIZE) {
+    solution <- solution[1:MAX_SOLUTION_SIZE]
+  }
   solution_values <- mapply(function(sol) sprintf(sol, fmt = format), solution)
   paste("(", paste(solution_values, collapse = ", "), ")", sep = "")
 }
