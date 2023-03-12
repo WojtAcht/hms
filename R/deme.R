@@ -4,6 +4,7 @@ setClassUnion("characterOrNULL", members = c("character", "NULL"))
 setClass("Deme", slots = c(
   id = "character",
   population = "matrix",
+  fitnessValues = "numericOrNULL",
   level = "numeric",
   best_fitness = "numeric",
   best_solution = "numeric",
@@ -69,6 +70,7 @@ create_deme <- function(lower, upper, parent, population_size, create_population
   }
   methods::new("Deme",
     population = new_population,
+    fitnessValues = NULL,
     level = new_deme_level,
     sprout = new_sprout,
     id = uuid::UUIDgenerate(),
@@ -102,6 +104,9 @@ update_deme <- function(metaepoch_result, deme, minimize = FALSE) {
   deme@population <- metaepoch_result$population
   deme@best_fitnesses_per_metaepoch <- c(deme@best_fitnesses_per_metaepoch, list(metaepoch_best))
   deme@best_solutions_per_metaepoch <- c(deme@best_solutions_per_metaepoch, list(potential_sprout))
+  if (!is.null(metaepoch_result$fitnessValues)) {
+    deme@fitnessValues <- metaepoch_result$fitnessValues
+  }
   min_value <- ifelse(minimize, Inf, -Inf)
   deme_best <- ifelse(length(deme@best_fitness) == 0, min_value, deme@best_fitness)
   operator <- ifelse(minimize, `<`, `>`)

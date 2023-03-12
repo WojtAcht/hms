@@ -5,7 +5,7 @@
 #' @return list with named fields: solution, population, value
 #' @export
 ecr_metaepoch <- function(config_ecr) { # nocov start
-  function(fitness, suggestions, lower, upper, tree_level, minimize) {
+  function(fitness, suggestions, fitness_suggestions, lower, upper, tree_level, minimize) {
     config <- config_ecr[[tree_level]]
     legal_passed_param_names <- Filter(function(name) {
       name %in% methods::formalArgs(ecr::ecr)
@@ -32,7 +32,12 @@ ecr_metaepoch <- function(config_ecr) { # nocov start
     params$terminators <- list(ecr::stopOnIters(max.iter = iterations_count * population_size))
     result <- do.call(ecr::ecr, params)
     population <- list_to_matrix(result$last.population, length(lower))
-    list("solution" = result$best.x[[1]], "population" = population, "value" = result$best.y[[1]])
+    list(
+      "solution" = result$best.x[[1]],
+      "population" = population,
+      "value" = result$best.y[[1]],
+      "fitnessValues" = NULL
+    )
   }
 }
 
