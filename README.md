@@ -32,7 +32,7 @@ devtools::install_github("WojtAcht/hmsR")
 To run the HMS with a default configuration the only arguments that have to be provided are the bounds of the domain: `lower` and `upper`
 
 ```R
-library("hmsR")
+library(hmsR)
 f <- function(x)  (x^2+x)*cos(x)
 HMS <- hms(fitness = f, lower = -10, upper = 10)
 HMS@best_solution
@@ -46,6 +46,8 @@ There are number of parameters used for strategy configuration. The sample below
 <img width="400" src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/Eggholder_function.pdf/page1-1200px-Eggholder_function.pdf.jpg">
 
 ```R
+library(smoof)
+Eggholder <- smoof::makeEggholderFunction()
 lower <- rep(-512, 2)
 upper <- rep(512, 2)
 sigma <- list(rep(200, 2), rep(100, 2), rep(50, 2))

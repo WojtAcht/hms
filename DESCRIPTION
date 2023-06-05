@@ -36,7 +36,8 @@ Imports:
     msm,
     methods,
     uuid,
-    graphics
+    graphics,
+    smoof
 Suggests: 
     testthat (>= 3.0.0),
     ecr,
