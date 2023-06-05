@@ -1,11 +1,10 @@
 library(testthat)
-library(hms)
+library(hmsR)
 library(GA)
-library(purrr)
 library(msm)
 library(uuid)
 library(filelock)
 library(parallel)
 library(doParallel)
 
-test_check("hms")
+test_check("hmsR")

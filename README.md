@@ -16,7 +16,7 @@ You can install the development version from this repository:
 ```R
 install.packages("devtools")
 library("devtools")
-devtools::install_github("WojtAcht/hms")
+devtools::install_github("WojtAcht/hmsR")
 ```
 
 ## Usage
@@ -26,7 +26,7 @@ devtools::install_github("WojtAcht/hms")
 To run the HMS with a default configuration the only arguments that have to be provided are the bounds of the domain: `lower` and `upper`
 
 ```R
-library("hms")
+library("hmsR")
 f <- function(x)  (x^2+x)*cos(x)
 HMS <- hms(fitness = f, lower = -10, upper = 10)
 HMS@best_solution

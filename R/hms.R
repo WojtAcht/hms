@@ -90,7 +90,7 @@ hms <- function(tree_height = 3,
     gradient_method_args <- validate_gradient_method_args(gradient_method_args, lower, upper)
     run_gradient_method <- default_run_gradient_method
   }
-  monitor_level <- getMonitorLevel(monitor_level)
+  monitor_level <- get_monitor_level(monitor_level)
 
   operator <- ifelse(minimize, `<`, `>`)
 
