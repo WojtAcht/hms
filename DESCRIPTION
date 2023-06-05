@@ -19,7 +19,7 @@ Authors@R: c(
            role = "cph"
     ))
 Description: Implementation of evolutionary strategy HMS in R.
-License: GPL (>= 2)
+License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
