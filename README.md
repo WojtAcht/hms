@@ -11,7 +11,13 @@ This package does not provide an implementation of a Simple Genetic Algorithm to
 
 ## Installation
 
-You can install the development version from this repository:
+You can install the released version of `hmsR` from CRAN:
+
+```R
+install.packages("hmsR")
+```
+
+or the development version from this repository:
 
 ```R
 install.packages("devtools")
