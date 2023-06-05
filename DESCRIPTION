@@ -18,7 +18,14 @@ Authors@R: c(
     person(given = "AGH UST",
            role = "cph"
     ))
-Description: Implementation of evolutionary strategy HMS in R.
+Description: 
+  The HMS (Hierarchic Memetic Strategy) is a mixture of a multi-deme 
+  evolutionary algorithm and gradient-based optimization methods. 
+  As a multi-population evolutionary strategy, the HMS 
+  makes use of a particular data structure that provides an organization among 
+  the sub-populations (demes). It is a tree with a fixed maximal height and 
+  variable internal node degree. This package provides a simple R implementation 
+  with examples of integrating different genetic algorithms.
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
@@ -37,6 +44,5 @@ Suggests:
     parallel,
     doParallel,
     grDevices
-Config/testthat/edition: 3
 BugReports: https://github.com/WojtAcht/hms/issues
 URL: https://wojtacht.github.io/hms/
