@@ -332,8 +332,15 @@ setGeneric("saveMetaepochsPopulations", function(object, path, dimensions) stand
 #' @param dimensions vector of two selected dimensions e.g. c(1,2)
 #'
 #' @export
-#' @example
-#' saveMetaepochsPopulations(result, paste(getwd(), "/snapshots", sep=""), c(1,2))
+#' @examples
+#' \dontrun{
+#' fitness <- function(x) x[1] + x[2]
+#' lower <- c(-5, -5)
+#' upper <- c(5, 5)
+#' result <- hms(fitness = fitness, lower = lower, upper = upper)
+#' selected_dimensions <- c(1, 2)
+#' saveMetaepochsPopulations(result, paste(getwd(), "/snapshots", sep = ""), selected_dimensions)
+#' }
 setMethod("saveMetaepochsPopulations", "hms", function(object, path, dimensions) {
   if (!length(dimensions) == 2) {
     stop("The vector of dimensions must have two elements.")

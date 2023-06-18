@@ -21,3 +21,6 @@ numeric - euclidean distance between x and y
 \description{
 Euclidean distance
 }
+\examples{
+euclidean_distance(c(1, 1), c(1, 2))
+}

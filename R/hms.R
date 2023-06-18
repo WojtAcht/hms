@@ -1,40 +1,46 @@
-#' Title
+#' Maximization (or minimization) of a fitness function using Hierarchic Memetic Strategy.
 #'
-#' @param tree_height - numeric - default value: 5. It determines the maximum tree height
+#' @param tree_height numeric - default value: 5. It determines the maximum tree height
 #' which will usually be reached unless a very strict local stopping condition, global
-#' stopping consition or sprouting condition is used.
-#' @param fitness - fitness function to be optimized by the strategy.
-#' @param lower - numeric - lower bound of the domain.
-#' @param upper - numeric - upper bound of the domain.
-#' @param sigma - numeric - Vector of standard deviations for each tree level used to create
+#' stopping condition or sprouting condition is used.
+#' @param fitness fitness function, that returns a numerical value, to be optimized by the strategy.
+#' @param lower numeric - lower bound of the domain, a vector of length equal
+#' to the decision variables.
+#' @param upper numeric - upper bound of the domain, a vector of length equal
+#' to the decision variables.
+#' @param sigma numeric - Vector of standard deviations for each tree level used to create
 #' a population of a sprouted deme.
-#' @param population_sizes - numeric - Sizes of deme populations on each tree level.
-#' @param run_metaepoch - A function that takes 5 parameters: fitness, suggestions, lower,
+#' @param population_sizes numeric - Sizes of deme populations on each tree level.
+#' @param run_metaepoch A function that takes 5 parameters: fitness, suggestions, lower,
 #' upper, tree_level, runs a metaepoch on the given deme population and returns list with
 #' 3 named fields: solution, population, value.
-#' @param gsc - global stopping condition - function taking a list of MetaepochSnapshot
+#' @param gsc global stopping condition function taking a list of MetaepochSnapshot
 #' objects and returning a logical value; it is evaluated after every metaepoch and
-#' determines whether whole computation should be stopped.
-#' @param lsc - local stopping condition - function taking a deme and a list of MetaepochSmapshot
+#' determines whether whole computation should be stopped. See \code{\link{gsc_metaepochs_count}} for more details.
+#' @param lsc local stopping condition - function taking a deme and a list of MetaepochSmapshot
 #' objects representing previous metaepochs; it is run on every deme after it has run a metaepoch
-#' and determines whether that deme will remain active.
-#' @param sc - sprouting condition - function taking 3 arguments: an individual, a tree level
+#' and determines whether that deme will remain active. See \code{\link{lsc_max_fitness_evaluations}} for more details.
+#' @param sc sprouting condition - function taking 3 arguments: an individual, a tree level
 #' and a list of Deme objects; it determines whether the given individual can sprout a new deme
-#' on the given level.
-#' @param create_population - function taking 6 parameters: mean, lower, upper, population_size,
+#' on the given level. See \code{\link{sc_max_metric}} for more details.
+#' @param create_population function taking 6 parameters: mean, lower, upper, population_size,
 #' tree_level, sigma that returns a population for a Deme object to be created on the given
-#'  tree level.
-#' @param suggestions - matrix of individuals for the initial population of the root
-#' @param with_gradient_method - logical determining whether a gradient method should be run
+#' tree level.
+#' @param suggestions matrix of individuals for the initial population of the root
+#' @param with_gradient_method logical determining whether a gradient method should be run
 #' for all leaves at the end of the computation to refine their best solutions.
-#' @param gradient_method_args - list of parameters that are passed to the gradient method
-#' @param run_gradient_method - function - returns list with named fields: solution, population, value
-#' @param monitor_level - string - one of {'none', 'basic', 'basic_tree', 'verbose_tree'}.
-#' @param parallel - logical - \code{TRUE} when run_metaepoch runs in parallel.
-#' @param minimize - logical - \code{TRUE} when fitness shall be minimized.
+#' @param gradient_method_args list of parameters that are passed to the gradient method
+#' @param run_gradient_method function - returns list with named fields: solution, population, value
+#' @param monitor_level string - one of {'none', 'basic', 'basic_tree', 'verbose_tree'}.
+#' @param parallel logical - \code{TRUE} when run_metaepoch runs in parallel.
+#' @param minimize logical - \code{TRUE} when fitness shall be minimized.
 #'
-#' @return numeric best solution
+#' @return Returns an object of class hms.
 #' @export
+#'
+#' @examples
+#' f <- function(x) x
+#' result <- hms(fitness = f, lower = -5, upper = 5)
 hms <- function(tree_height = 3,
                 minimize = FALSE,
                 fitness,

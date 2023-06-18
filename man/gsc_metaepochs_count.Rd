@@ -22,3 +22,6 @@ which can be used as a global stopping condition for the hms function.
 Factory function for a global stopping condition that stops
 the computation after given number of metaepochs.
 }
+\examples{
+global_stopping_condition <- gsc_metaepochs_count(10)
+}

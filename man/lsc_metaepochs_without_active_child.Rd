@@ -22,3 +22,6 @@ Factory function for a local stopping condition that stops a deme
 after given number of metaepochs have past since last metaepoch during
 which this deme had an active child.
 }
+\examples{
+local_stopping_condition <- lsc_metaepochs_without_active_child(3)
+}

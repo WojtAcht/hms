@@ -16,12 +16,14 @@ validate_gradient_method_args <- function(gradient_method_args, lower, upper) {
 }
 
 #' Function that runs gradient method for one deme.
+#' Wrapper function for stats::optim.
 #'
 #' @param deme - Deme
 #' @param fitness - fitness function
 #' @param optim_args - list of additional parameters (stats::optim parameters)
 #'
-#' @export
+#' @return list with named fields: solution, population, value. See
+#' \code{\link{ga_metaepoch}} for more details.
 default_run_gradient_method <- function(deme, fitness, optim_args) {
   result <- suppressWarnings(
     do.call(

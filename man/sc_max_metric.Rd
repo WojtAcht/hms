@@ -25,3 +25,6 @@ It allows an individual to sprout only if there are no other
 demes on the target level that have sprouted within the given
 distance.
 }
+\examples{
+sprouting_condition <- sc_max_metric(euclidean_distance, c(20, 10))
+}

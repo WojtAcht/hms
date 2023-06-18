@@ -2,7 +2,7 @@
 % Please edit documentation in R/hms.R
 \name{hms}
 \alias{hms}
-\title{Title}
+\title{Maximization (or minimization) of a fitness function using Hierarchic Memetic Strategy.}
 \usage{
 hms(
   tree_height = 3,
@@ -26,95 +26,65 @@ hms(
 )
 }
 \arguments{
-\item{tree_height}{\itemize{
-\item numeric - default value: 5. It determines the maximum tree height
+\item{tree_height}{numeric - default value: 5. It determines the maximum tree height
 which will usually be reached unless a very strict local stopping condition, global
-stopping consition or sprouting condition is used.
-}}
+stopping condition or sprouting condition is used.}
 
-\item{minimize}{\itemize{
-\item logical - \code{TRUE} when fitness shall be minimized.
-}}
+\item{minimize}{logical - \code{TRUE} when fitness shall be minimized.}
 
-\item{fitness}{\itemize{
-\item fitness function to be optimized by the strategy.
-}}
+\item{fitness}{fitness function, that returns a numerical value, to be optimized by the strategy.}
 
-\item{lower}{\itemize{
-\item numeric - lower bound of the domain.
-}}
+\item{lower}{numeric - lower bound of the domain, a vector of length equal
+to the decision variables.}
 
-\item{upper}{\itemize{
-\item numeric - upper bound of the domain.
-}}
+\item{upper}{numeric - upper bound of the domain, a vector of length equal
+to the decision variables.}
 
-\item{sigma}{\itemize{
-\item numeric - Vector of standard deviations for each tree level used to create
-a population of a sprouted deme.
-}}
+\item{sigma}{numeric - Vector of standard deviations for each tree level used to create
+a population of a sprouted deme.}
 
-\item{population_sizes}{\itemize{
-\item numeric - Sizes of deme populations on each tree level.
-}}
+\item{population_sizes}{numeric - Sizes of deme populations on each tree level.}
 
-\item{run_metaepoch}{\itemize{
-\item A function that takes 5 parameters: fitness, suggestions, lower,
+\item{run_metaepoch}{A function that takes 5 parameters: fitness, suggestions, lower,
 upper, tree_level, runs a metaepoch on the given deme population and returns list with
-3 named fields: solution, population, value.
-}}
+3 named fields: solution, population, value.}
 
-\item{gsc}{\itemize{
-\item global stopping condition - function taking a list of MetaepochSnapshot
+\item{gsc}{global stopping condition function taking a list of MetaepochSnapshot
 objects and returning a logical value; it is evaluated after every metaepoch and
-determines whether whole computation should be stopped.
-}}
+determines whether whole computation should be stopped. See \code{\link{gsc_metaepochs_count}} for more details.}
 
-\item{lsc}{\itemize{
-\item local stopping condition - function taking a deme and a list of MetaepochSmapshot
+\item{lsc}{local stopping condition - function taking a deme and a list of MetaepochSmapshot
 objects representing previous metaepochs; it is run on every deme after it has run a metaepoch
-and determines whether that deme will remain active.
-}}
+and determines whether that deme will remain active. See \code{\link{lsc_max_fitness_evaluations}} for more details.}
 
-\item{sc}{\itemize{
-\item sprouting condition - function taking 3 arguments: an individual, a tree level
+\item{sc}{sprouting condition - function taking 3 arguments: an individual, a tree level
 and a list of Deme objects; it determines whether the given individual can sprout a new deme
-on the given level.
-}}
+on the given level. See \code{\link{sc_max_metric}} for more details.}
 
-\item{create_population}{\itemize{
-\item function taking 6 parameters: mean, lower, upper, population_size,
+\item{create_population}{function taking 6 parameters: mean, lower, upper, population_size,
 tree_level, sigma that returns a population for a Deme object to be created on the given
-tree level.
-}}
+tree level.}
 
-\item{suggestions}{\itemize{
-\item matrix of individuals for the initial population of the root
-}}
+\item{suggestions}{matrix of individuals for the initial population of the root}
 
-\item{with_gradient_method}{\itemize{
-\item logical determining whether a gradient method should be run
-for all leaves at the end of the computation to refine their best solutions.
-}}
+\item{with_gradient_method}{logical determining whether a gradient method should be run
+for all leaves at the end of the computation to refine their best solutions.}
 
-\item{gradient_method_args}{\itemize{
-\item list of parameters that are passed to the gradient method
-}}
+\item{gradient_method_args}{list of parameters that are passed to the gradient method}
 
-\item{run_gradient_method}{\itemize{
-\item function - returns list with named fields: solution, population, value
-}}
+\item{run_gradient_method}{function - returns list with named fields: solution, population, value}
 
-\item{monitor_level}{\itemize{
-\item string - one of {'none', 'basic', 'basic_tree', 'verbose_tree'}.
-}}
+\item{monitor_level}{string - one of {'none', 'basic', 'basic_tree', 'verbose_tree'}.}
 
-\item{parallel}{\itemize{
-\item logical - \code{TRUE} when run_metaepoch runs in parallel.
-}}
+\item{parallel}{logical - \code{TRUE} when run_metaepoch runs in parallel.}
 }
 \value{
-numeric best solution
+Returns an object of class hms.
 }
 \description{
-Title
+Maximization (or minimization) of a fitness function using Hierarchic Memetic Strategy.
+}
+\examples{
+f <- function(x) x
+result <- hms(fitness = f, lower = -5, upper = 5)
 }

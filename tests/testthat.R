@@ -1,9 +1,9 @@
 library(testthat)
-library(hmsR)
+library(hmsr)
 library(GA)
 library(msm)
 library(uuid)
 library(filelock)
 library(smoof)
 
-test_check("hmsR")
+test_check("hmsr")

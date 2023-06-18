@@ -2,7 +2,7 @@
 % Please edit documentation in R/ga_metaepoch.R
 \name{ga_metaepoch}
 \alias{ga_metaepoch}
-\title{Function that runs one GA metaepoch.}
+\title{Function that runs one GA metaepoch. Wrapper function for GA::ga.}
 \usage{
 ga_metaepoch(config_ga)
 }
@@ -12,8 +12,18 @@ ga_metaepoch(config_ga)
 }}
 }
 \value{
-list with named fields: solution, population, value
+list with named fields: solution, population, value. A solution is a
+value of the decision variable giving the best fitness. A population is a
+matrix representing final population. Value is the value of a fitness
+function for the solution.
 }
 \description{
-Function that runs one GA metaepoch.
+Function that runs one GA metaepoch. Wrapper function for GA::ga.
+}
+\examples{
+tree_height <- 3
+empty_config_ga <- lapply(1:tree_height, function(x) {
+  list()
+})
+ga_metaepoch(empty_config_ga)
 }

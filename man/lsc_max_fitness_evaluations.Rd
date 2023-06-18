@@ -21,3 +21,6 @@ Factory function for a local stopping condition that stops a deme
 after given number of fitness function evaluations has been made
 in that deme.
 }
+\examples{
+local_stopping_condition <- lsc_max_fitness_evaluations(500)
+}
