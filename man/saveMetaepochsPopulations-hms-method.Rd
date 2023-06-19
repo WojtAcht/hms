@@ -13,6 +13,10 @@
 
 \item{dimensions}{vector of two selected dimensions e.g. c(1,2)}
 }
+\value{
+It doesn't return anything. It creates plots and saves them to a specified
+directory.
+}
 \description{
 saveMetaepochsPopulations
 }

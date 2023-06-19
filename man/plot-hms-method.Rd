@@ -2,7 +2,7 @@
 % Please edit documentation in R/hms_class.R
 \name{plot,hms-method}
 \alias{plot,hms-method}
-\title{plot}
+\title{Plot method for "hms" class.}
 \usage{
 \S4method{plot}{hms}(x)
 }
@@ -11,6 +11,14 @@
 \item hms s4 object
 }}
 }
+\value{
+It doesn't return anything meaningful. It plots the fitness by metaepoch count.
+}
 \description{
-plot
+Plot method for "hms" class.
+}
+\examples{
+f <- function(x) x
+result <- hms(fitness = f, lower = -5, upper = 5)
+plot(result)
 }

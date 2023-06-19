@@ -1,12 +1,14 @@
-#' MetaepochSnapshot
+#' A S4 class representing a snapshot of one metaepoch.
 #'
-#' @slot demes list.
-#' @slot best_fitness numeric.
-#' @slot best_solution numeric.
-#' @slot time_in_seconds numeric.
-#' @slot fitness_evaluations numeric.
-#' @slot blocked_sprouts list.
-#' @slot is_evolutionary logical.
+#' @slot demes list of objects of class Deme.
+#' @slot best_fitness numeric - best fitness value of a metaepoch.
+#' @slot best_solution numeric - best solution of a metaepoch.
+#' @slot time_in_seconds numeric - time of metaepoch in seconds.
+#' @slot fitness_evaluations numeric - number of fitness evaluations.
+#' @slot blocked_sprouts list - list of sprouts that were blocked by sprouting
+#' condition..
+#' @slot is_evolutionary logical - \code{TRUE} for all metaepochs except the
+#' gradient one..
 #'
 #' @export
 setClass("MetaepochSnapshot", slots = c(
@@ -19,19 +21,21 @@ setClass("MetaepochSnapshot", slots = c(
   is_evolutionary = "logical"
 ))
 
-#' hms
+#' A S4 class representing a result of hms.
 #'
-#' @slot root_id character.
-#' @slot metaepoch_snapshots list.
-#' @slot best_fitness numeric.
-#' @slot best_solution numeric.
-#' @slot total_time_in_seconds numeric.
-#' @slot total_metaepoch_time_in_seconds numeric.
-#' @slot metaepochs_count numeric.
-#' @slot deme_population_sizes numeric.
-#' @slot lower numeric.
-#' @slot upper numeric.
-#' @slot call language.
+#' @slot root_id character - UUID of a root Deme.
+#' @slot metaepoch_snapshots list of objects of class MetaepochSnapshot.
+#' @slot best_fitness numeric - best fitness value of all metaepochs..
+#' @slot best_solution numeric -  best solution of all metaepochs.
+#' @slot total_time_in_seconds numeric - time of a hms execution in seconds.
+#' @slot total_metaepoch_time_in_seconds numeric - time of all metaepochs in seconds.
+#' @slot metaepochs_count numeric - total number of all metaepochs.
+#' @slot deme_population_sizes numeric .
+#' @slot lower numeric - lower bound of the domain, a vector of length equal
+#' to the decision variables.
+#' @slot upper numeric - upper bound of the domain, a vector of length equal
+#' to the decision variables.
+#' @slot call language - an object of class "call" representing the matched call.
 #'
 #' @export
 setClass("hms", slots = c(
@@ -48,19 +52,34 @@ setClass("hms", slots = c(
   call = "language"
 ))
 
-#' print
+#' Print method for class "hms".
 #'
 #' @param x - hms s4 object
 #' @param ... - other print arguments
 #'
+#' @return It does not return anything. The obvious side effect is output to the terminal.
+#'
 #' @export
+#'
+#' @examples
+#' f <- function(x) x
+#' result <- hms(fitness = f, lower = -5, upper = 5)
+#' print(result)
 setMethod("print", "hms", function(x, ...) utils::str(x))
 
-#' show
+#' Show method for class "hms".
 #'
 #' @param object - hms s4 object
 #'
+#' @return It returns the names of the slots and the classes associated with the
+#' slots in the "hms" class. It prints call details.
+#'
 #' @export
+#'
+#' @examples
+#' f <- function(x) x
+#' result <- hms(fitness = f, lower = -5, upper = 5)
+#' show(result)
 setMethod("show", "hms", function(object) {
   cat("An object of class \"hms\"\n")
   cat("\nCall:\n", deparse(object@call), "\n\n", sep = "")
@@ -68,11 +87,18 @@ setMethod("show", "hms", function(object) {
   print(methods::slotNames(object))
 })
 
-#' printTree
+#' printTree method for class "hms".
 #'
 #' @param object - hms s4 object
 #'
+#' @return It does not return anything. It prints the hms tree.
+#'
 #' @export
+#'
+#' @examples
+#' f <- function(x) x
+#' result <- hms(fitness = f, lower = -5, upper = 5)
+#' printTree(result)
 setGeneric("printTree", function(object) standardGeneric("printTree"))
 
 get_solution_string <- function(solution, format = "%#.2f") {
@@ -135,11 +161,18 @@ print_tree <- function(demes, root_id, best_solution, show_details = TRUE) {
 }
 
 
-#' printTree
+#' printTree method for class "hms".
 #'
 #' @param object - hms s4 object
 #'
+#' @return It does not return anything. It prints the hms tree.
+#'
 #' @export
+#'
+#' @examples
+#' f <- function(x) x
+#' result <- hms(fitness = f, lower = -5, upper = 5)
+#' printTree(result)
 setMethod("printTree", "hms", function(object) {
   last_metaepoch_snapshot <- utils::tail(object@metaepoch_snapshots, n = 1)
   if (length(last_metaepoch_snapshot) == 0) {
@@ -175,12 +208,21 @@ summary.hms <- function(object, ...) {
   out
 }
 
-#' summary
+#' Summary method for class "hms".
 #'
 #' @param object - hms s4 object
 #' @param ... - other summary arguments
 #'
+#' @return Returns a list with fields: fitness, solution, metaepochs, deme_population_sizes,
+#' lower_bound, upper_bound, computation_time. These fields should match fields
+#' of class "hms".
+#'
 #' @export
+#'
+#' @examples
+#' f <- function(x) x
+#' result <- hms(fitness = f, lower = -5, upper = 5)
+#' summary(result)
 setMethod("summary", "hms", summary.hms)
 
 plot.hms <- function(x) {
@@ -208,25 +250,48 @@ plot.hms <- function(x) {
   )
 }
 
-#' plot
+#' Plot method for "hms" class.
 #'
 #' @param x - hms s4 object
 #'
+#' @return It doesn't return anything meaningful. It plots the fitness by metaepoch count.
+#'
 #' @export
+#'
+#' @examples
+#' f <- function(x) x
+#' result <- hms(fitness = f, lower = -5, upper = 5)
+#' plot(result)
 setMethod("plot", "hms", plot.hms)
 
-#' plotActiveDemes
+#' plotActiveDemes method for "hms" class.
 #'
 #' @param object - hms s4 object
 #'
+#' @return It doesn't return anything meaningful. It plots the number of active
+#' demes per metaepoch.
+#'
 #' @export
+#'
+#' @examples
+#' f <- function(x) x
+#' result <- hms(fitness = f, lower = -5, upper = 5)
+#' plotActiveDemes(result)
 setGeneric("plotActiveDemes", function(object) standardGeneric("plotActiveDemes"))
 
-#' plotActiveDemes
+#' plotActiveDemes method for "hms" class.
 #'
 #' @param object - hms s4 object
 #'
+#' @return It doesn't return anything meaningful. It plots the number of active
+#' demes per metaepoch.
+#'
 #' @export
+#'
+#' @examples
+#' f <- function(x) x
+#' result <- hms(fitness = f, lower = -5, upper = 5)
+#' plotActiveDemes(result)
 setMethod("plotActiveDemes", "hms", function(object) {
   metaepochs <- 1:object@metaepochs_count
   active_demes_per_metaepoch <- mapply(function(snapshot) {
@@ -243,18 +308,32 @@ setMethod("plotActiveDemes", "hms", function(object) {
   )
 })
 
-#' printBlockedSprouts
+#' printBlockedSprouts method for "hms" class.
 #'
 #' @param object - hms s4 object
 #'
+#' @return It doesn't return anything. It prints blocked sprouts per metaepoch.
+#'
 #' @export
+#'
+#' @examples
+#' f <- function(x) x
+#' result <- hms(fitness = f, lower = -5, upper = 5)
+#' printBlockedSprouts(result)
 setGeneric("printBlockedSprouts", function(object) standardGeneric("printBlockedSprouts"))
 
-#' printBlockedSprouts
+#' printBlockedSprouts method for "hms" class.
 #'
 #' @param object - hms s4 object
 #'
+#' @return It doesn't return anything. It prints blocked sprouts per metaepoch.
+#'
 #' @export
+#'
+#' @examples
+#' f <- function(x) x
+#' result <- hms(fitness = f, lower = -5, upper = 5)
+#' printBlockedSprouts(result)
 setMethod("printBlockedSprouts", "hms", function(object) {
   metaepochs <- 1:object@metaepochs_count
   blocked_sprouts_per_metaepoch <- mapply(function(snapshot) {
@@ -271,20 +350,36 @@ setMethod("printBlockedSprouts", "hms", function(object) {
 })
 
 
-#' plotPopulation
+#' plotPopulation method for "hms" class.
 #'
 #' @param object - hms s4 object
 #' @param dimensions - two selected dimensions
 #'
+#' @return It doesn't return anything meaningful. It plots the selected two
+#' dimensions of a population.
+#'
 #' @export
+#'
+#' @examples
+#' f <- function(x) x
+#' result <- hms(fitness = f, lower = -5, upper = 5)
+#' plotPopulation(result, c(1,1))
 setGeneric("plotPopulation", function(object, dimensions) standardGeneric("plotPopulation"))
 
-#' plotPopulation
+#' plotPopulation method for "hms" class.
 #'
 #' @param object - hms s4 object
 #' @param dimensions - two selected dimensions
 #'
+#' @return It doesn't return anything meaningful. It plots the selected two
+#' dimensions of a population.
+#'
 #' @export
+#'
+#' @examples
+#' f <- function(x) x
+#' result <- hms(fitness = f, lower = -5, upper = 5)
+#' plotPopulation(result, c(1,1))
 setMethod("plotPopulation", "hms", function(object, dimensions) {
   if (!length(dimensions) == 2) {
     stop("The vector of dimensions must have two elements.")
@@ -316,13 +411,25 @@ setMethod("plotPopulation", "hms", function(object, dimensions) {
   )
 })
 
-#' saveMetaepochsPopulations
+#' saveMetaepochsPopulations method for "hms" class.
 #'
 #' @param object hms s4 object
 #' @param path path
 #' @param dimensions vector of two selected dimensions e.g. c(1,2)
 #'
+#' @return It doesn't return anything. It creates plots and saves them to a specified
+#' directory.
+#'
 #' @export
+#' @examples
+#' \dontrun{
+#' fitness <- function(x) x[1] + x[2]
+#' lower <- c(-5, -5)
+#' upper <- c(5, 5)
+#' result <- hms(fitness = fitness, lower = lower, upper = upper)
+#' selected_dimensions <- c(1, 2)
+#' saveMetaepochsPopulations(result, paste(getwd(), "/snapshots", sep = ""), selected_dimensions)
+#' }
 setGeneric("saveMetaepochsPopulations", function(object, path, dimensions) standardGeneric("saveMetaepochsPopulations"))
 
 #' saveMetaepochsPopulations
@@ -330,6 +437,9 @@ setGeneric("saveMetaepochsPopulations", function(object, path, dimensions) stand
 #' @param object hms s4 object
 #' @param path path
 #' @param dimensions vector of two selected dimensions e.g. c(1,2)
+#'
+#' @return It doesn't return anything. It creates plots and saves them to a specified
+#' directory.
 #'
 #' @export
 #' @examples

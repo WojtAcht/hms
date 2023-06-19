@@ -3,33 +3,35 @@
 \docType{class}
 \name{hms-class}
 \alias{hms-class}
-\title{hms}
+\title{A S4 class representing a result of hms.}
 \description{
-hms
+A S4 class representing a result of hms.
 }
 \section{Slots}{
 
 \describe{
-\item{\code{root_id}}{character.}
+\item{\code{root_id}}{character - UUID of a root Deme.}
 
-\item{\code{metaepoch_snapshots}}{list.}
+\item{\code{metaepoch_snapshots}}{list of objects of class MetaepochSnapshot.}
 
-\item{\code{best_fitness}}{numeric.}
+\item{\code{best_fitness}}{numeric - best fitness value of all metaepochs..}
 
-\item{\code{best_solution}}{numeric.}
+\item{\code{best_solution}}{numeric -  best solution of all metaepochs.}
 
-\item{\code{total_time_in_seconds}}{numeric.}
+\item{\code{total_time_in_seconds}}{numeric - time of a hms execution in seconds.}
 
-\item{\code{total_metaepoch_time_in_seconds}}{numeric.}
+\item{\code{total_metaepoch_time_in_seconds}}{numeric - time of all metaepochs in seconds.}
 
-\item{\code{metaepochs_count}}{numeric.}
+\item{\code{metaepochs_count}}{numeric - total number of all metaepochs.}
 
-\item{\code{deme_population_sizes}}{numeric.}
+\item{\code{deme_population_sizes}}{numeric .}
 
-\item{\code{lower}}{numeric.}
+\item{\code{lower}}{numeric - lower bound of the domain, a vector of length equal
+to the decision variables.}
 
-\item{\code{upper}}{numeric.}
+\item{\code{upper}}{numeric - upper bound of the domain, a vector of length equal
+to the decision variables.}
 
-\item{\code{call}}{language.}
+\item{\code{call}}{language - an object of class "call" representing the matched call.}
 }}
 

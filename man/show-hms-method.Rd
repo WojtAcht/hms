@@ -2,7 +2,7 @@
 % Please edit documentation in R/hms_class.R
 \name{show,hms-method}
 \alias{show,hms-method}
-\title{show}
+\title{Show method for class "hms".}
 \usage{
 \S4method{show}{hms}(object)
 }
@@ -11,6 +11,15 @@
 \item hms s4 object
 }}
 }
+\value{
+It returns the names of the slots and the classes associated with the
+slots in the "hms" class. It prints call details.
+}
 \description{
-show
+Show method for class "hms".
+}
+\examples{
+f <- function(x) x
+result <- hms(fitness = f, lower = -5, upper = 5)
+show(result)
 }
