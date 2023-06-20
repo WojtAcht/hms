@@ -21,3 +21,6 @@ numeric - manhattan distance between x and y
 \description{
 Manhattan distance
 }
+\examples{
+manhattan_distance(c(1, 1), c(1, 2))
+}

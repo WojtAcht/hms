@@ -1,4 +1,4 @@
-# HMS
+# hmsr
 <!-- badges: start -->
 [![R-CMD-check](https://github.com/WojtAcht/hms/workflows/R-CMD-check/badge.svg)](https://github.com/WojtAcht/hms/actions)
 [![codecov](https://codecov.io/gh/WojtAcht/hms/branch/main/graph/badge.svg)](https://codecov.io/gh/WojtAcht/hms)
@@ -11,12 +11,18 @@ This package does not provide an implementation of a Simple Genetic Algorithm to
 
 ## Installation
 
-You can install the development version from this repository:
+You can install the released version of `hmsr` from CRAN:
+
+```R
+install.packages("hmsr")
+```
+
+or the development version from this repository:
 
 ```R
 install.packages("devtools")
 library("devtools")
-devtools::install_github("WojtAcht/hms")
+devtools::install_github("WojtAcht/hmsr")
 ```
 
 ## Usage
@@ -26,7 +32,7 @@ devtools::install_github("WojtAcht/hms")
 To run the HMS with a default configuration the only arguments that have to be provided are the bounds of the domain: `lower` and `upper`
 
 ```R
-library("hms")
+library(hmsr)
 f <- function(x)  (x^2+x)*cos(x)
 HMS <- hms(fitness = f, lower = -10, upper = 10)
 HMS@best_solution
@@ -40,6 +46,8 @@ There are number of parameters used for strategy configuration. The sample below
 <img width="400" src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/Eggholder_function.pdf/page1-1200px-Eggholder_function.pdf.jpg">
 
 ```R
+library(smoof)
+Eggholder <- smoof::makeEggholderFunction()
 lower <- rep(-512, 2)
 upper <- rep(512, 2)
 sigma <- list(rep(200, 2), rep(100, 2), rep(50, 2))

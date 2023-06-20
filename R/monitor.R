@@ -3,7 +3,7 @@ MONITOR_LEVEL_BASIC <- 1
 MONITOR_LEVEL_BASIC_TREE <- 2
 MONITOR_LEVEL_VERBOSE_TREE <- 3
 
-getMonitorLevel <- function(level_name) {
+get_monitor_level <- function(level_name) {
   if (level_name == "verbose_tree") {
     return(MONITOR_LEVEL_VERBOSE_TREE)
   }

@@ -17,3 +17,6 @@ Factory function for a trivial local stopping condition that
 lets a deme be active forever. It is usually used in the root of
 a hms tree.
 }
+\examples{
+local_stopping_condition <- lsc_trivial()
+}

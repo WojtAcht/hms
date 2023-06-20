@@ -13,7 +13,7 @@
 #'
 #' @export
 #'
-#' @example
+#' @examples
 #' sprouting_condition <- sc_max_metric(euclidean_distance, c(20, 10))
 sc_max_metric <- function(metric, max_distances) {
   function(potential_sprout, potential_sprout_level, demes) {

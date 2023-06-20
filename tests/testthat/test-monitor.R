@@ -1,8 +1,8 @@
-test_that("getMonitorLevel works:", {
-  expect_equal(getMonitorLevel("verbose_tree"), MONITOR_LEVEL_VERBOSE_TREE)
-  expect_equal(getMonitorLevel("basic_tree"), MONITOR_LEVEL_BASIC_TREE)
-  expect_equal(getMonitorLevel("basic"), MONITOR_LEVEL_BASIC)
-  expect_equal(getMonitorLevel("none"), MONITOR_LEVEL_NONE)
+test_that("get_monitor_level works:", {
+  expect_equal(get_monitor_level("verbose_tree"), MONITOR_LEVEL_VERBOSE_TREE)
+  expect_equal(get_monitor_level("basic_tree"), MONITOR_LEVEL_BASIC_TREE)
+  expect_equal(get_monitor_level("basic"), MONITOR_LEVEL_BASIC)
+  expect_equal(get_monitor_level("none"), MONITOR_LEVEL_NONE)
 })
 
 test_that("log_metaepoch_snapshot works:", {

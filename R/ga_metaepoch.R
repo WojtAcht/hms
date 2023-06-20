@@ -1,9 +1,20 @@
-#' Function that runs one GA metaepoch.
+#' Function that runs one GA metaepoch. Wrapper function for GA::ga.
 #'
 #' @param config_ga - list of GA::ga params
 #'
-#' @return list with named fields: solution, population, value
+#' @return list with named fields: solution, population, value. A solution is a
+#' value of the decision variable giving the best fitness. A population is a
+#' matrix representing final population. Value is the value of a fitness
+#' function for the solution.
+#'
 #' @export
+#'
+#' @examples
+#' tree_height <- 3
+#' empty_config_ga <- lapply(1:tree_height, function(x) {
+#'   list()
+#' })
+#' ga_metaepoch(empty_config_ga)
 ga_metaepoch <- function(config_ga) {
   function(fitness, suggestions, lower, upper, tree_level, minimize) {
     ga_fitness <- ifelse(minimize, function(x) {

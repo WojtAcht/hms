@@ -21,3 +21,6 @@ Factory function for a local stopping condition that stops a deme
 after given number of consecutive metaeopochs without an improvement
 of the best solution found in that deme.
 }
+\examples{
+local_stopping_condition <- lsc_metaepochs_without_improvement(5)
+}

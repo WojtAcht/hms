@@ -2,7 +2,7 @@
 % Please edit documentation in R/ecr_metaepoch.R
 \name{ecr_metaepoch}
 \alias{ecr_metaepoch}
-\title{Function that runs one ecr metaepoch.}
+\title{Function that runs one ecr metaepoch. Wrapper function for ecr::ecr.}
 \usage{
 ecr_metaepoch(config_ecr)
 }
@@ -12,8 +12,16 @@ ecr_metaepoch(config_ecr)
 }}
 }
 \value{
-list with named fields: solution, population, value
+list with named fields: solution, population, value. See
+\code{\link{ga_metaepoch}} for more details.
 }
 \description{
-Function that runs one ecr metaepoch.
+Function that runs one ecr metaepoch. Wrapper function for ecr::ecr.
+}
+\examples{
+tree_height <- 3
+empty_config_ecr <- lapply(1:tree_height, function(x) {
+  list()
+})
+ecr_metaepoch(empty_config_ecr)
 }

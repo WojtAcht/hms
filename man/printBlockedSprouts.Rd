@@ -2,7 +2,7 @@
 % Please edit documentation in R/hms_class.R
 \name{printBlockedSprouts}
 \alias{printBlockedSprouts}
-\title{printBlockedSprouts}
+\title{printBlockedSprouts method for "hms" class.}
 \usage{
 printBlockedSprouts(object)
 }
@@ -11,6 +11,14 @@ printBlockedSprouts(object)
 \item hms s4 object
 }}
 }
+\value{
+It doesn't return anything. It prints blocked sprouts per metaepoch.
+}
 \description{
-printBlockedSprouts
+printBlockedSprouts method for "hms" class.
+}
+\examples{
+f <- function(x) x
+result <- hms(fitness = f, lower = -5, upper = 5)
+printBlockedSprouts(result)
 }

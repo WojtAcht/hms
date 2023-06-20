@@ -2,7 +2,7 @@
 % Please edit documentation in R/hms_class.R
 \name{printTree}
 \alias{printTree}
-\title{printTree}
+\title{printTree method for class "hms".}
 \usage{
 printTree(object)
 }
@@ -11,6 +11,14 @@ printTree(object)
 \item hms s4 object
 }}
 }
+\value{
+It does not return anything. It prints the hms tree.
+}
 \description{
-printTree
+printTree method for class "hms".
+}
+\examples{
+f <- function(x) x
+result <- hms(fitness = f, lower = -5, upper = 5)
+printTree(result)
 }

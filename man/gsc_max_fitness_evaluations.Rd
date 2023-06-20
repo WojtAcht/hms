@@ -25,3 +25,6 @@ Factory function for a global stopping condition that stops
 the computation after fitness function has been evaluated
 given number of times.
 }
+\examples{
+global_stopping_condition <- gsc_max_fitness_evaluations(10000)
+}

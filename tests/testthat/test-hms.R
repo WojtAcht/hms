@@ -19,6 +19,7 @@ test_that("HMS works - trivial 1D function:", {
 
 test_that("HMS works - Rastrigin:", {
   set.seed(1)
+  Rastrigin <- smoof::makeRastriginFunction(2L)
   lower <- c(-5.12, -5.12)
   upper <- c(5.12, 5.12)
   result <- hms(
@@ -34,6 +35,7 @@ test_that("HMS works - Rastrigin:", {
 
 test_that("HMS works - Ackley:", {
   set.seed(1)
+  Ackley <- smoof::makeAckleyFunction(2L)
   lower <- c(-32.768, -32.768)
   upper <- c(32.768, 32.768)
   result <- hms(
@@ -49,6 +51,7 @@ test_that("HMS works - Ackley:", {
 
 test_that("HMS works - Schwefel:", {
   set.seed(1)
+  Schwefel <- smoof::makeSchwefelFunction(2L)
   lower <- c(-500, -500)
   upper <- c(500, 500)
   result <- hms(
@@ -64,6 +67,7 @@ test_that("HMS works - Schwefel:", {
 
 test_that("HMS works - Griewank:", {
   set.seed(1)
+  Griewank <- smoof::makeGriewankFunction(2L)
   lower <- c(-600, -600)
   upper <- c(600, 600)
   result <- hms(
@@ -79,6 +83,7 @@ test_that("HMS works - Griewank:", {
 
 test_that("HMS works - Baele:", {
   set.seed(1)
+  Baele <- smoof::makeBealeFunction()
   lower <- c(-4.5, -4.5)
   upper <- c(4.5, 4.5)
   result <- hms(
@@ -94,6 +99,7 @@ test_that("HMS works - Baele:", {
 
 test_that("HMS works - Baele with gradient metaepoch:", {
   set.seed(1)
+  Baele <- smoof::makeBealeFunction()
   lower <- c(-4.5, -4.5)
   upper <- c(4.5, 4.5)
   fitness <- function(x) {
@@ -112,6 +118,7 @@ test_that("HMS works - Baele with gradient metaepoch:", {
 
 test_that("HMS works - Eggholder with gradient method:", {
   set.seed(1)
+  Eggholder <- smoof::makeEggholderFunction()
   lower <- c(-512, -512)
   upper <- c(512, 512)
   sigma <- list(c(200, 200), c(100, 100), c(50, 50))
