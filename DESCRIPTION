@@ -1,5 +1,5 @@
 Package: hmsr
-Title: Implementation of multipopulation evolutionary strategy HMS in R
+Title: Multipopulation Evolutionary Strategy HMS
 Version: 0.0.0.9000
 Authors@R: c(
     person(given = "Wojciech",
