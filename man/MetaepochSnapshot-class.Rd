@@ -21,9 +21,10 @@ A S4 class representing a snapshot of one metaepoch.
 \item{\code{fitness_evaluations}}{numeric - number of fitness evaluations.}
 
 \item{\code{blocked_sprouts}}{list - list of sprouts that were blocked by sprouting
-condition..}
+condition. A sprout is a potential origin of a new Deme, it can be blocked
+by sc -- sprouting condition. See \code{\link{sc_max_metric}} for more details.}
 
 \item{\code{is_evolutionary}}{logical - \code{TRUE} for all metaepochs except the
-gradient one..}
+gradient one.}
 }}
 

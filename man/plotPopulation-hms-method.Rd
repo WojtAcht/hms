@@ -25,5 +25,5 @@ plotPopulation method for "hms" class.
 \examples{
 f <- function(x) x
 result <- hms(fitness = f, lower = -5, upper = 5)
-plotPopulation(result, c(1,1))
+plotPopulation(result, c(1, 1))
 }

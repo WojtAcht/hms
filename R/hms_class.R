@@ -6,9 +6,10 @@
 #' @slot time_in_seconds numeric - time of metaepoch in seconds.
 #' @slot fitness_evaluations numeric - number of fitness evaluations.
 #' @slot blocked_sprouts list - list of sprouts that were blocked by sprouting
-#' condition..
+#' condition. A sprout is a potential origin of a new Deme, it can be blocked
+#' by sc -- sprouting condition. See \code{\link{sc_max_metric}} for more details.
 #' @slot is_evolutionary logical - \code{TRUE} for all metaepochs except the
-#' gradient one..
+#' gradient one.
 #'
 #' @export
 setClass("MetaepochSnapshot", slots = c(
@@ -25,12 +26,13 @@ setClass("MetaepochSnapshot", slots = c(
 #'
 #' @slot root_id character - UUID of a root Deme.
 #' @slot metaepoch_snapshots list of objects of class MetaepochSnapshot.
-#' @slot best_fitness numeric - best fitness value of all metaepochs..
+#' @slot best_fitness numeric - best fitness value of all metaepochs.
 #' @slot best_solution numeric -  best solution of all metaepochs.
 #' @slot total_time_in_seconds numeric - time of a hms execution in seconds.
 #' @slot total_metaepoch_time_in_seconds numeric - time of all metaepochs in seconds.
 #' @slot metaepochs_count numeric - total number of all metaepochs.
-#' @slot deme_population_sizes numeric .
+#' @slot deme_population_sizes numeric - sizes of deme populations on each tree level.
+#' Same as \code{population_sizes} parameter of hms function.
 #' @slot lower numeric - lower bound of the domain, a vector of length equal
 #' to the decision variables.
 #' @slot upper numeric - upper bound of the domain, a vector of length equal
@@ -363,7 +365,7 @@ setMethod("printBlockedSprouts", "hms", function(object) {
 #' @examples
 #' f <- function(x) x
 #' result <- hms(fitness = f, lower = -5, upper = 5)
-#' plotPopulation(result, c(1,1))
+#' plotPopulation(result, c(1, 1))
 setGeneric("plotPopulation", function(object, dimensions) standardGeneric("plotPopulation"))
 
 #' plotPopulation method for "hms" class.
@@ -379,7 +381,7 @@ setGeneric("plotPopulation", function(object, dimensions) standardGeneric("plotP
 #' @examples
 #' f <- function(x) x
 #' result <- hms(fitness = f, lower = -5, upper = 5)
-#' plotPopulation(result, c(1,1))
+#' plotPopulation(result, c(1, 1))
 setMethod("plotPopulation", "hms", function(object, dimensions) {
   if (!length(dimensions) == 2) {
     stop("The vector of dimensions must have two elements.")

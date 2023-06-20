@@ -14,7 +14,7 @@ A S4 class representing a result of hms.
 
 \item{\code{metaepoch_snapshots}}{list of objects of class MetaepochSnapshot.}
 
-\item{\code{best_fitness}}{numeric - best fitness value of all metaepochs..}
+\item{\code{best_fitness}}{numeric - best fitness value of all metaepochs.}
 
 \item{\code{best_solution}}{numeric -  best solution of all metaepochs.}
 
@@ -24,7 +24,8 @@ A S4 class representing a result of hms.
 
 \item{\code{metaepochs_count}}{numeric - total number of all metaepochs.}
 
-\item{\code{deme_population_sizes}}{numeric .}
+\item{\code{deme_population_sizes}}{numeric - sizes of deme populations on each tree level.
+Same as \code{population_sizes} parameter of hms function.}
 
 \item{\code{lower}}{numeric - lower bound of the domain, a vector of length equal
 to the decision variables.}
