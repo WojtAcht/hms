@@ -1,28 +1,33 @@
 # hmsr
+
 <!-- badges: start -->
-[![R-CMD-check](https://github.com/WojtAcht/hms/workflows/R-CMD-check/badge.svg)](https://github.com/WojtAcht/hms/actions)
-[![codecov](https://app.codecov.io/gh/WojtAcht/hms/branch/main/graph/badge.svg)](https://app.codecov.io/gh/WojtAcht/hms/branch/main/graph/badge.svg)
+
+[![R-CMD-check](https://github.com/WojtAcht/hms/workflows/R-CMD-check/badge.svg)](https://github.com/WojtAcht/hms/actions) [![codecov](https://codecov.io/gh/WojtAcht/hms/branch/main/graph/badge.svg?token=Y06UN8TU8U)](https://codecov.io/gh/WojtAcht/hms)
+
 <!-- badges: end -->
 
-The HMS is a mixture of a multi-deme evolutionary algorithm and gradient-based optimization methods. As a multi-population evolutionary strategy, the HMS makes use of a particular data structure that provides an organization among the sub-populations (demes). It is a tree with a fixed maximal height and variable internal node degree. The tree has the parent–child semantics.
+The HMS (Hierarchic Memetic Strategy) is a composite global optimization strategy consisting of a multi-population evolutionary strategy and some auxiliary methods. The HMS makes use of a dynamically-evolving data structure that provides an organization among the component populations. It is a tree with a fixed maximal height and variable internal node degree. Each component population is governed by a particular evolutionary engine. This package provides a simple R implementation with examples of using different genetic algorithms as the population engines.
+
+### Relevant literature
+
+-   J. Sawicki, M. Łoś, M. Smołka, R. Schaefer. Understanding measure-driven algorithms solving irreversibly ill-conditioned problems. Natural Computing 21:289-315, 2022. doi: [10.1007/s11047-020-09836-w](https://doi.org/10.1007/s11047-020-09836-w)
 
 This package does not provide an implementation of a Simple Genetic Algorithm to be used in demes. However the default configuration uses SGA implementation from [GA](https://github.com/luca-scr/GA) package available on CRAN.
-
 
 ## Installation
 
 You can install the released version of `hmsr` from CRAN:
 
-```R
+``` r
 install.packages("hmsr")
 ```
 
 or the development version from this repository:
 
-```R
+``` r
 install.packages("devtools")
 library("devtools")
-devtools::install_github("WojtAcht/hmsr")
+devtools::install_github("WojtAcht/hms")
 ```
 
 ## Usage
@@ -31,7 +36,7 @@ devtools::install_github("WojtAcht/hmsr")
 
 To run the HMS with a default configuration the only arguments that have to be provided are the bounds of the domain: `lower` and `upper`
 
-```R
+``` r
 library(hmsr)
 f <- function(x)  (x^2+x)*cos(x)
 HMS <- hms(fitness = f, lower = -10, upper = 10)
@@ -40,12 +45,12 @@ HMS@best_solution
 ```
 
 ### Custom configuration
+
 There are number of parameters used for strategy configuration. The sample below runs HMS on the Eggholder function - a benchmark for optimization problems.
 
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/Eggholder_function.pdf/page1-1200px-Eggholder_function.pdf.jpg" width="400"/>
 
-<img width="400" src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/Eggholder_function.pdf/page1-1200px-Eggholder_function.pdf.jpg">
-
-```R
+``` r
 library(smoof)
 Eggholder <- smoof::makeEggholderFunction()
 lower <- rep(-512, 2)
@@ -82,10 +87,9 @@ HMS <- hms(
 )
 ```
 
-
 To see the structure of demes tree at the end of the evaluation, use `printTree` function
 
-```R
+``` r
 printTree(HMS)
 #> f(476.52, 431.37) = 943.07 evaluations: 7675 A
 #> ├-- spr: (507.90, 402.59); f(480.26, 430.74) = 956.02 evaluations: 1955 A
@@ -96,7 +100,4 @@ printTree(HMS)
 #>     └-- spr: (441.83, 454.04); ***f(512.00, 404.23) = 959.64*** evaluations: 2000 A
 ```
 
-To display a plot showing how best solution has changed during the evaluation use `plot(HMS)`
-
-
-<img width="400" src="https://user-images.githubusercontent.com/24687031/143093573-f81b008b-3cd3-4cc2-af51-a3307b319f74.png">
+To display a plot showing how best solution has changed during the evaluation use `plot(HMS)`.
