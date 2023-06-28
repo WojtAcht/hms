@@ -6,13 +6,15 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="description" content="
-  The HMS (Hierarchic Memetic Strategy) is a mixture of a multi-deme 
-  evolutionary algorithm and gradient-based optimization methods. 
-  As a multi-population evolutionary strategy, the HMS 
-  makes use of a particular data structure that provides an organization among 
-  the sub-populations (demes). It is a tree with a fixed maximal height and 
-  variable internal node degree. This package provides a simple R implementation 
-  with examples of integrating different genetic algorithms.">
+  The HMS (Hierarchic Memetic Strategy) is a composite global optimization 
+  strategy consisting of a multi-population evolutionary strategy and some 
+  auxiliary methods. The HMS makes use of a dynamically-evolving data structure 
+  that provides an organization among the component populations. It is a tree 
+  with a fixed maximal height and variable internal node degree. Each component 
+  population is governed by a particular evolutionary engine. This package 
+  provides a simple R implementation with examples of using different genetic 
+  algorithms as the population engines. References: J. Sawicki, M. Łoś, 
+  M. Smołka, J. Alvarez-Aramberri (2022) &lt;doi:10.1007/s11047-020-09836-w&gt;.">
 <title>Multipopulation Evolutionary Strategy HMS • hmsr</title>
 <script src="deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="deps/bootstrap-5.2.2/bootstrap.min.css" rel="stylesheet">
@@ -20,13 +22,15 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- bootstrap-toc --><script src="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@v1.0.1/dist/bootstrap-toc.min.js" integrity="sha256-4veVQbu7//Lk5TSmc7YV48MxtMy98e26cf5MrgZYnwo=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="Multipopulation Evolutionary Strategy HMS">
 <meta property="og:description" content="
-  The HMS (Hierarchic Memetic Strategy) is a mixture of a multi-deme 
-  evolutionary algorithm and gradient-based optimization methods. 
-  As a multi-population evolutionary strategy, the HMS 
-  makes use of a particular data structure that provides an organization among 
-  the sub-populations (demes). It is a tree with a fixed maximal height and 
-  variable internal node degree. This package provides a simple R implementation 
-  with examples of integrating different genetic algorithms.">
+  The HMS (Hierarchic Memetic Strategy) is a composite global optimization 
+  strategy consisting of a multi-population evolutionary strategy and some 
+  auxiliary methods. The HMS makes use of a dynamically-evolving data structure 
+  that provides an organization among the component populations. It is a tree 
+  with a fixed maximal height and variable internal node degree. Each component 
+  population is governed by a particular evolutionary engine. This package 
+  provides a simple R implementation with examples of using different genetic 
+  algorithms as the population engines. References: J. Sawicki, M. Łoś, 
+  M. Smołka, J. Alvarez-Aramberri (2022) &lt;doi:10.1007/s11047-020-09836-w&gt;.">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
@@ -79,8 +83,17 @@
 </h1></div>
 <!-- badges: start -->
 
-<p>The HMS is a mixture of a multi-deme evolutionary algorithm and gradient-based optimization methods. As a multi-population evolutionary strategy, the HMS makes use of a particular data structure that provides an organization among the sub-populations (demes). It is a tree with a fixed maximal height and variable internal node degree. The tree has the parent–child semantics.</p>
+<!-- badges: end -->
+<p>The HMS (Hierarchic Memetic Strategy) is a composite global optimization strategy consisting of a multi-population evolutionary strategy and some auxiliary methods. The HMS makes use of a dynamically-evolving data structure that provides an organization among the component populations. It is a tree with a fixed maximal height and variable internal node degree. Each component population is governed by a particular evolutionary engine. This package provides a simple R implementation with examples of using different genetic algorithms as the population engines.</p>
+<div class="section level3">
+<h3 id="relevant-literature">Relevant literature<a class="anchor" aria-label="anchor" href="#relevant-literature"></a>
+</h3>
+<ul>
+<li>J. Sawicki, M. Łoś, M. Smołka, R. Schaefer. Understanding measure-driven algorithms solving irreversibly ill-conditioned problems. Natural Computing 21:289-315, 2022. doi: <a href="https://doi.org/10.1007/s11047-020-09836-w" class="external-link">10.1007/s11047-020-09836-w</a>
+</li>
+</ul>
 <p>This package does not provide an implementation of a Simple Genetic Algorithm to be used in demes. However the default configuration uses SGA implementation from <a href="https://github.com/luca-scr/GA" class="external-link">GA</a> package available on CRAN.</p>
+</div>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
@@ -91,7 +104,7 @@
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"devtools"</span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st"><a href="https://devtools.r-lib.org/" class="external-link">"devtools"</a></span><span class="op">)</span></span>
-<span><span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"WojtAcht/hmsr"</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"WojtAcht/hms"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="usage">Usage<a class="anchor" aria-label="anchor" href="#usage"></a>
@@ -111,7 +124,7 @@
 <h3 id="custom-configuration">Custom configuration<a class="anchor" aria-label="anchor" href="#custom-configuration"></a>
 </h3>
 <p>There are number of parameters used for strategy configuration. The sample below runs HMS on the Eggholder function - a benchmark for optimization problems.</p>
-<p><img width="400" src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/Eggholder_function.pdf/page1-1200px-Eggholder_function.pdf.jpg"></p>
+<p><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/Eggholder_function.pdf/page1-1200px-Eggholder_function.pdf.jpg" width="400"></p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://jakobbossek.github.io/smoof/" class="external-link">smoof</a></span><span class="op">)</span></span>
 <span><span class="va">Eggholder</span> <span class="op">&lt;-</span> <span class="fu">smoof</span><span class="fu">::</span><span class="fu"><a href="https://jakobbossek.github.io/smoof/reference/makeEggholderFunction.html" class="external-link">makeEggholderFunction</a></span><span class="op">(</span><span class="op">)</span></span>
@@ -157,8 +170,7 @@
 <span><span class="co">#&gt; |   └-- spr: (480.59, 430.58); f(482.35, 432.88) = 956.92 evaluations: 1075 A</span></span>
 <span><span class="co">#&gt; └-- spr: (365.96, 500.10); f(507.31, 401.35) = 938.19 evaluations: 4293 A</span></span>
 <span><span class="co">#&gt;     └-- spr: (441.83, 454.04); ***f(512.00, 404.23) = 959.64*** evaluations: 2000 A</span></span></code></pre></div>
-<p>To display a plot showing how best solution has changed during the evaluation use <code>plot(HMS)</code></p>
-<p><img width="400" src="https://user-images.githubusercontent.com/24687031/143093573-f81b008b-3cd3-4cc2-af51-a3307b319f74.png"></p>
+<p>To display a plot showing how best solution has changed during the evaluation use <code>plot(HMS)</code>.</p>
 </div>
 </div>
 </div>
@@ -191,6 +203,7 @@
 <ul class="list-unstyled">
 <li>Wojciech Achtelik <br><small class="roles"> Author, maintainer </small>  </li>
 <li>Marcin Kozubek <br><small class="roles"> Author </small>  </li>
+<li>Maciej Smołka <br><small class="roles"> Thesis advisor, author </small> <a href="https://orcid.org/0000-0002-3386-0555" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
 <li><a href="authors.html">More about authors...</a></li>
 </ul>
 </div>
@@ -199,7 +212,7 @@
 <h2 data-toc-skip>Dev status</h2>
 <ul class="list-unstyled">
 <li><a href="https://github.com/WojtAcht/hms/actions" class="external-link"><img src="https://github.com/WojtAcht/hms/workflows/R-CMD-check/badge.svg" alt="R-CMD-check"></a></li>
-<li><a href="https://app.codecov.io/gh/WojtAcht/hms/branch/main/graph/badge.svg" class="external-link"><img src="https://app.codecov.io/gh/WojtAcht/hms/branch/main/graph/badge.svg" alt="codecov"></a></li>
+<li><a href="https://codecov.io/gh/WojtAcht/hms" class="external-link"><img src="https://codecov.io/gh/WojtAcht/hms/branch/main/graph/badge.svg?token=Y06UN8TU8U" alt="codecov"></a></li>
 </ul>
 </div>
 
@@ -209,7 +222,7 @@
 
     <footer><div class="pkgdown-footer-left">
   <p></p>
-<p>Developed by Wojciech Achtelik, Marcin Kozubek.</p>
+<p>Developed by Wojciech Achtelik, Marcin Kozubek, Maciej Smołka.</p>
 </div>
 
 <div class="pkgdown-footer-right">

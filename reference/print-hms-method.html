@@ -79,41 +79,41 @@
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">f</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="va">x</span></span></span>
 <span class="r-in"><span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="hms.html">hms</a></span><span class="op">(</span>fitness <span class="op">=</span> <span class="va">f</span>, lower <span class="op">=</span> <span class="op">-</span><span class="fl">5</span>, upper <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> A list of standard deviations (sigma) or a function to create population should be provided.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Metaepoch: 0 Best fitness: 4.952449 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Metaepoch: 1 Best fitness: 4.997046 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Metaepoch: 2 Best fitness: 4.997046 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Metaepoch: 3 Best fitness: 4.997046 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Metaepoch: 4 Best fitness: 4.997046 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Metaepoch: 5 Best fitness: 4.997046 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Metaepoch: 6 Best fitness: 4.997046 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Metaepoch: 7 Best fitness: 4.997046 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Metaepoch: 8 Best fitness: 4.997046 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Metaepoch: 9 Best fitness: 4.997046 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Metaepoch: 0 Best fitness: 4.722915 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Metaepoch: 1 Best fitness: 4.976773 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Metaepoch: 2 Best fitness: 4.976773 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Metaepoch: 3 Best fitness: 4.976773 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Metaepoch: 4 Best fitness: 4.976773 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Metaepoch: 5 Best fitness: 4.976773 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Metaepoch: 6 Best fitness: 4.976773 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Metaepoch: 7 Best fitness: 4.976773 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Metaepoch: 8 Best fitness: 4.976773 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Metaepoch: 9 Best fitness: 4.976773 </span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Formal class 'hms' [package "hmsr"] with 11 slots</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ..@ root_id                        : chr "7282218d-81e0-49d8-9219-ed43cb9e00fd"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ..@ root_id                        : chr "fec7054e-3af4-42f9-93b8-259e2e1cce37"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   ..@ metaepoch_snapshots            :List of 10</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. ..$ :Formal class 'MetaepochSnapshot' [package "hmsr"] with 7 slots</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. ..@ demes              :List of 2</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. ..$ :Formal class 'Deme' [package "hmsr"] with 11 slots</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ id                          : chr "7282218d-81e0-49d8-9219-ed43cb9e00fd"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ population                  : num [1:60, 1] 4.37 1.7 3.87 4.54 2.11 ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ id                          : chr "fec7054e-3af4-42f9-93b8-259e2e1cce37"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ population                  : num [1:60, 1] 4.72 3.95 4.42 2.42 4.28 ...</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ level                       : num 1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ best_fitness                : num 4.95</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ best_solution               : Named num 4.95</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ best_fitness                : num 4.72</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ best_solution               : Named num 4.72</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..- attr(*, "names")= chr "x1"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ best_solutions_per_metaepoch:List of 1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 4.95</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 4.72</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. .. ..- attr(*, "names")= chr "x1"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ best_fitnesses_per_metaepoch:List of 1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 4.95</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 4.72</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ sprout                      : NULL</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ parent_id                   : NULL</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ evaluations_count           : num 263</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ evaluations_count           : num 259</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ is_active                   : logi TRUE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. ..$ :Formal class 'Deme' [package "hmsr"] with 11 slots</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ id                          : chr "50e85d4a-c437-46bb-874b-d6c5a7d2d9f7"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ population                  : num [1:30, 1] 4.97 4.8 5 4.93 4.86 ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ id                          : chr "dcd3616c-4c91-41d0-9053-6cb8a42bb1fd"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ population                  : num [1:30, 1] 4.95 4.52 4.9 4.6 4.47 ...</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..- attr(*, "dimnames")=List of 2</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. .. ..$ : chr [1:30] "" "" "" "" ...</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. .. ..$ : chr "x1"</span>
@@ -122,59 +122,59 @@
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ best_solution               : num(0) </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ best_solutions_per_metaepoch: list()</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ best_fitnesses_per_metaepoch: list()</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ sprout                      : Named num 4.95</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ sprout                      : Named num 4.72</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..- attr(*, "names")= chr "x1"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ parent_id                   : chr "7282218d-81e0-49d8-9219-ed43cb9e00fd"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ parent_id                   : chr "fec7054e-3af4-42f9-93b8-259e2e1cce37"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ evaluations_count           : num 0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ is_active                   : logi TRUE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. ..@ best_fitness       : num 4.95</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. ..@ best_solution      : Named num 4.95</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. ..@ best_fitness       : num 4.72</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. ..@ best_solution      : Named num 4.72</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. ..- attr(*, "names")= chr "x1"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. ..@ time_in_seconds    : num 0.00903</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. ..@ fitness_evaluations: num 263</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. ..@ time_in_seconds    : num 0.00999</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. ..@ fitness_evaluations: num 259</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. ..@ blocked_sprouts    : list()</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. ..@ is_evolutionary    : logi TRUE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. ..$ :Formal class 'MetaepochSnapshot' [package "hmsr"] with 7 slots</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. ..@ demes              :List of 3</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. ..$ :Formal class 'Deme' [package "hmsr"] with 11 slots</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ id                          : chr "7282218d-81e0-49d8-9219-ed43cb9e00fd"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ population                  : num [1:60, 1] 4.01 4.77 3.48 4.62 4.58 ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ id                          : chr "fec7054e-3af4-42f9-93b8-259e2e1cce37"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ population                  : num [1:60, 1] 3.63 4.3 3.31 4.69 4.2 ...</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ level                       : num 1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ best_fitness                : num 4.95</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ best_solution               : Named num 4.95</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ best_fitness                : num 4.72</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ best_solution               : Named num 4.72</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..- attr(*, "names")= chr "x1"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ best_solutions_per_metaepoch:List of 2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 4.95</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 4.72</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. .. ..- attr(*, "names")= chr "x1"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 4.95</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 4.72</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. .. ..- attr(*, "names")= chr "x1"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ best_fitnesses_per_metaepoch:List of 2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 4.95</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 4.95</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 4.72</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 4.72</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ sprout                      : NULL</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ parent_id                   : NULL</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ evaluations_count           : num 523</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ evaluations_count           : num 527</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ is_active                   : logi TRUE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. ..$ :Formal class 'Deme' [package "hmsr"] with 11 slots</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ id                          : chr "50e85d4a-c437-46bb-874b-d6c5a7d2d9f7"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ population                  : num [1:30, 1] 4.11 4.51 4.26 3.81 5 ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ id                          : chr "dcd3616c-4c91-41d0-9053-6cb8a42bb1fd"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ population                  : num [1:30, 1] 4.95 2.96 4.89 4.92 4.94 ...</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ level                       : num 2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ best_fitness                : num 5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ best_solution               : Named num 5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ best_fitness                : num 4.98</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ best_solution               : Named num 4.98</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..- attr(*, "names")= chr "x1"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ best_solutions_per_metaepoch:List of 1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 4.98</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. .. ..- attr(*, "names")= chr "x1"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ best_fitnesses_per_metaepoch:List of 1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ sprout                      : Named num 4.95</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 4.98</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ sprout                      : Named num 4.72</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..- attr(*, "names")= chr "x1"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ parent_id                   : chr "7282218d-81e0-49d8-9219-ed43cb9e00fd"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ evaluations_count           : num 129</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ parent_id                   : chr "fec7054e-3af4-42f9-93b8-259e2e1cce37"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ evaluations_count           : num 118</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ is_active                   : logi TRUE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. ..$ :Formal class 'Deme' [package "hmsr"] with 11 slots</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ id                          : chr "e57f7adb-3104-4a8d-9898-40358c758c8e"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ population                  : num [1:15, 1] 4.85 4.98 4.98 4.98 4.92 ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ id                          : chr "e5e624c5-5f0a-417e-8a81-3b304b090131"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ population                  : num [1:15, 1] 4.91 4.96 4.93 4.94 4.8 ...</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..- attr(*, "dimnames")=List of 2</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. .. ..$ : chr [1:15] "" "" "" "" ...</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. .. ..$ : chr "x1"</span>
@@ -183,835 +183,835 @@
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ best_solution               : num(0) </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ best_solutions_per_metaepoch: list()</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ best_fitnesses_per_metaepoch: list()</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ sprout                      : Named num 5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ sprout                      : Named num 4.98</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..- attr(*, "names")= chr "x1"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ parent_id                   : chr "50e85d4a-c437-46bb-874b-d6c5a7d2d9f7"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ parent_id                   : chr "dcd3616c-4c91-41d0-9053-6cb8a42bb1fd"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ evaluations_count           : num 0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ is_active                   : logi TRUE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. ..@ best_fitness       : num 5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. ..@ best_solution      : Named num 5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. ..@ best_fitness       : num 4.98</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. ..@ best_solution      : Named num 4.98</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. ..- attr(*, "names")= chr "x1"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. ..@ time_in_seconds    : num 0.0146</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. ..@ fitness_evaluations: num 652</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. ..@ time_in_seconds    : num 0.0168</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. ..@ fitness_evaluations: num 645</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. ..@ blocked_sprouts    :List of 1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. ..$ : Named num 4.95</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. ..$ : Named num 4.72</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. ..- attr(*, "names")= chr "x1"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. ..@ is_evolutionary    : logi TRUE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. ..$ :Formal class 'MetaepochSnapshot' [package "hmsr"] with 7 slots</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. ..@ demes              :List of 3</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. ..$ :Formal class 'Deme' [package "hmsr"] with 11 slots</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ id                          : chr "7282218d-81e0-49d8-9219-ed43cb9e00fd"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ population                  : num [1:60, 1] 4.32 4.09 -1.19 4.95 4.59 ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ id                          : chr "fec7054e-3af4-42f9-93b8-259e2e1cce37"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ population                  : num [1:60, 1] 4.35 3.92 4.72 4.77 -1.32 ...</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ level                       : num 1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ best_fitness                : num 4.95</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ best_solution               : Named num 4.95</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ best_fitness                : num 4.77</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ best_solution               : Named num 4.77</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..- attr(*, "names")= chr "x1"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ best_solutions_per_metaepoch:List of 3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 4.95</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 4.72</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. .. ..- attr(*, "names")= chr "x1"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 4.95</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 4.72</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. .. ..- attr(*, "names")= chr "x1"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 4.95</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 4.77</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. .. ..- attr(*, "names")= chr "x1"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ best_fitnesses_per_metaepoch:List of 3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 4.95</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 4.95</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 4.95</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 4.72</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 4.72</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 4.77</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ sprout                      : NULL</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ parent_id                   : NULL</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ evaluations_count           : num 787</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ evaluations_count           : num 784</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ is_active                   : logi TRUE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. ..$ :Formal class 'Deme' [package "hmsr"] with 11 slots</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ id                          : chr "50e85d4a-c437-46bb-874b-d6c5a7d2d9f7"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ population                  : num [1:30, 1] 4.9 5 5 4.98 5 ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ id                          : chr "dcd3616c-4c91-41d0-9053-6cb8a42bb1fd"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ population                  : num [1:30, 1] 3.135 4.836 4.932 0.729 4.964 ...</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ level                       : num 2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ best_fitness                : num 5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ best_solution               : Named num 5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ best_fitness                : num 4.98</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ best_solution               : Named num 4.98</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..- attr(*, "names")= chr "x1"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ best_solutions_per_metaepoch:List of 2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 4.98</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. .. ..- attr(*, "names")= chr "x1"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 4.98</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. .. ..- attr(*, "names")= chr "x1"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ best_fitnesses_per_metaepoch:List of 2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ sprout                      : Named num 4.95</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 4.98</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 4.98</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ sprout                      : Named num 4.72</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..- attr(*, "names")= chr "x1"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ parent_id                   : chr "7282218d-81e0-49d8-9219-ed43cb9e00fd"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ evaluations_count           : num 250</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ parent_id                   : chr "fec7054e-3af4-42f9-93b8-259e2e1cce37"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ evaluations_count           : num 249</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ is_active                   : logi TRUE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. ..$ :Formal class 'Deme' [package "hmsr"] with 11 slots</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ id                          : chr "e57f7adb-3104-4a8d-9898-40358c758c8e"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ population                  : num [1:15, 1] 5 4.99 4.98 4.99 4.99 ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ id                          : chr "e5e624c5-5f0a-417e-8a81-3b304b090131"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ population                  : num [1:15, 1] 4.98 4.98 4.95 4.95 2.33 ...</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ level                       : num 3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ best_fitness                : num 5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ best_solution               : Named num 5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ best_fitness                : num 4.98</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ best_solution               : Named num 4.98</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..- attr(*, "names")= chr "x1"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ best_solutions_per_metaepoch:List of 1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 4.98</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. .. ..- attr(*, "names")= chr "x1"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ best_fitnesses_per_metaepoch:List of 1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ sprout                      : Named num 5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 4.98</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ sprout                      : Named num 4.98</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..- attr(*, "names")= chr "x1"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ parent_id                   : chr "50e85d4a-c437-46bb-874b-d6c5a7d2d9f7"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ evaluations_count           : num 58</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ parent_id                   : chr "dcd3616c-4c91-41d0-9053-6cb8a42bb1fd"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ evaluations_count           : num 52</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ is_active                   : logi TRUE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. ..@ best_fitness       : num 5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. ..@ best_solution      : Named num 5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. ..@ best_fitness       : num 4.98</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. ..@ best_solution      : Named num 4.98</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. ..- attr(*, "names")= chr "x1"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. ..@ time_in_seconds    : num 0.0183</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. ..@ fitness_evaluations: num 1095</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. ..@ time_in_seconds    : num 0.021</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. ..@ fitness_evaluations: num 1085</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. ..@ blocked_sprouts    :List of 2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. ..$ : Named num 4.95</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. ..$ : Named num 4.77</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. ..- attr(*, "names")= chr "x1"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. ..$ : Named num 5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. ..$ : Named num 4.98</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. ..- attr(*, "names")= chr "x1"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. ..@ is_evolutionary    : logi TRUE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. ..$ :Formal class 'MetaepochSnapshot' [package "hmsr"] with 7 slots</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. ..@ demes              :List of 3</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. ..$ :Formal class 'Deme' [package "hmsr"] with 11 slots</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ id                          : chr "7282218d-81e0-49d8-9219-ed43cb9e00fd"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ population                  : num [1:60, 1] -1.69 3 4.73 4.68 4.9 ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ id                          : chr "fec7054e-3af4-42f9-93b8-259e2e1cce37"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ population                  : num [1:60, 1] 4.33 4.11 3.53 4.08 3.79 ...</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ level                       : num 1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ best_fitness                : num 4.95</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ best_solution               : Named num 4.95</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ best_fitness                : num 4.77</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ best_solution               : Named num 4.77</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..- attr(*, "names")= chr "x1"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ best_solutions_per_metaepoch:List of 4</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 4.95</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 4.72</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. .. ..- attr(*, "names")= chr "x1"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 4.95</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 4.72</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. .. ..- attr(*, "names")= chr "x1"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 4.95</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 4.77</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. .. ..- attr(*, "names")= chr "x1"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 4.95</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 4.77</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. .. ..- attr(*, "names")= chr "x1"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ best_fitnesses_per_metaepoch:List of 4</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 4.95</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 4.95</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 4.95</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 4.95</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 4.72</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 4.72</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 4.77</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 4.77</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ sprout                      : NULL</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ parent_id                   : NULL</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ evaluations_count           : num 1042</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ evaluations_count           : num 1039</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ is_active                   : logi TRUE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. ..$ :Formal class 'Deme' [package "hmsr"] with 11 slots</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ id                          : chr "50e85d4a-c437-46bb-874b-d6c5a7d2d9f7"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ population                  : num [1:30, 1] 4.96 4.98 4.94 4.9 4.93 ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ id                          : chr "dcd3616c-4c91-41d0-9053-6cb8a42bb1fd"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ population                  : num [1:30, 1] 4.796 4.128 0.311 4.898 4.86 ...</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ level                       : num 2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ best_fitness                : num 5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ best_solution               : Named num 5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ best_fitness                : num 4.98</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ best_solution               : Named num 4.98</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..- attr(*, "names")= chr "x1"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ best_solutions_per_metaepoch:List of 3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 4.98</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. .. ..- attr(*, "names")= chr "x1"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 4.98</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. .. ..- attr(*, "names")= chr "x1"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 4.98</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. .. ..- attr(*, "names")= chr "x1"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ best_fitnesses_per_metaepoch:List of 3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ sprout                      : Named num 4.95</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 4.98</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 4.98</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 4.98</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ sprout                      : Named num 4.72</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..- attr(*, "names")= chr "x1"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ parent_id                   : chr "7282218d-81e0-49d8-9219-ed43cb9e00fd"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ evaluations_count           : num 383</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ parent_id                   : chr "fec7054e-3af4-42f9-93b8-259e2e1cce37"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ evaluations_count           : num 375</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ is_active                   : logi TRUE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. ..$ :Formal class 'Deme' [package "hmsr"] with 11 slots</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ id                          : chr "e57f7adb-3104-4a8d-9898-40358c758c8e"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ population                  : num [1:15, 1] 4.26 4.67 5 4.36 4.99 ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ id                          : chr "e5e624c5-5f0a-417e-8a81-3b304b090131"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ population                  : num [1:15, 1] 4.97 3.09 4.96 4.86 4.95 ...</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ level                       : num 3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ best_fitness                : num 5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ best_solution               : Named num 5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ best_fitness                : num 4.98</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ best_solution               : Named num 4.98</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..- attr(*, "names")= chr "x1"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ best_solutions_per_metaepoch:List of 2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 4.98</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. .. ..- attr(*, "names")= chr "x1"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 4.98</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. .. ..- attr(*, "names")= chr "x1"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ best_fitnesses_per_metaepoch:List of 2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ sprout                      : Named num 5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 4.98</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 4.98</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ sprout                      : Named num 4.98</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..- attr(*, "names")= chr "x1"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ parent_id                   : chr "50e85d4a-c437-46bb-874b-d6c5a7d2d9f7"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ evaluations_count           : num 117</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ parent_id                   : chr "dcd3616c-4c91-41d0-9053-6cb8a42bb1fd"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ evaluations_count           : num 115</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ is_active                   : logi TRUE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. ..@ best_fitness       : num 5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. ..@ best_solution      : Named num 5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. ..@ best_fitness       : num 4.98</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. ..@ best_solution      : Named num 4.98</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. ..- attr(*, "names")= chr "x1"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. ..@ time_in_seconds    : num 0.0184</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. ..@ fitness_evaluations: num 1542</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. ..@ time_in_seconds    : num 0.0212</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. ..@ fitness_evaluations: num 1529</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. ..@ blocked_sprouts    :List of 2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. ..$ : Named num 4.95</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. ..$ : Named num 4.77</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. ..- attr(*, "names")= chr "x1"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. ..$ : Named num 5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. ..$ : Named num 4.98</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. ..- attr(*, "names")= chr "x1"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. ..@ is_evolutionary    : logi TRUE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. ..$ :Formal class 'MetaepochSnapshot' [package "hmsr"] with 7 slots</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. ..@ demes              :List of 3</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. ..$ :Formal class 'Deme' [package "hmsr"] with 11 slots</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ id                          : chr "7282218d-81e0-49d8-9219-ed43cb9e00fd"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ population                  : num [1:60, 1] 4.65 4.95 4.46 4.68 4.66 ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ id                          : chr "fec7054e-3af4-42f9-93b8-259e2e1cce37"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ population                  : num [1:60, 1] 4.03 4.41 4.01 4.41 4.25 ...</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ level                       : num 1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ best_fitness                : num 4.95</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ best_solution               : Named num 4.95</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ best_fitness                : num 4.89</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ best_solution               : Named num 4.89</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..- attr(*, "names")= chr "x1"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ best_solutions_per_metaepoch:List of 5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 4.95</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 4.72</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. .. ..- attr(*, "names")= chr "x1"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 4.95</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 4.72</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. .. ..- attr(*, "names")= chr "x1"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 4.95</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 4.77</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. .. ..- attr(*, "names")= chr "x1"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 4.95</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 4.77</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. .. ..- attr(*, "names")= chr "x1"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 4.95</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 4.89</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. .. ..- attr(*, "names")= chr "x1"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ best_fitnesses_per_metaepoch:List of 5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 4.95</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 4.95</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 4.95</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 4.95</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 4.95</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 4.72</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 4.72</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 4.77</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 4.77</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 4.89</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ sprout                      : NULL</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ parent_id                   : NULL</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ evaluations_count           : num 1301</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ evaluations_count           : num 1288</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ is_active                   : logi TRUE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. ..$ :Formal class 'Deme' [package "hmsr"] with 11 slots</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ id                          : chr "50e85d4a-c437-46bb-874b-d6c5a7d2d9f7"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ population                  : num [1:30, 1] 4.98 4.98 3.93 4.96 4.99 ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ id                          : chr "dcd3616c-4c91-41d0-9053-6cb8a42bb1fd"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ population                  : num [1:30, 1] 4.92 4.87 4.96 4.46 4.98 ...</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ level                       : num 2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ best_fitness                : num 5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ best_solution               : Named num 5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ best_fitness                : num 4.98</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ best_solution               : Named num 4.98</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..- attr(*, "names")= chr "x1"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ best_solutions_per_metaepoch:List of 4</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 4.98</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. .. ..- attr(*, "names")= chr "x1"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 4.98</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. .. ..- attr(*, "names")= chr "x1"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 4.98</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. .. ..- attr(*, "names")= chr "x1"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 4.98</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. .. ..- attr(*, "names")= chr "x1"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ best_fitnesses_per_metaepoch:List of 4</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ sprout                      : Named num 4.95</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 4.98</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 4.98</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 4.98</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 4.98</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ sprout                      : Named num 4.72</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..- attr(*, "names")= chr "x1"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ parent_id                   : chr "7282218d-81e0-49d8-9219-ed43cb9e00fd"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ evaluations_count           : num 517</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ parent_id                   : chr "fec7054e-3af4-42f9-93b8-259e2e1cce37"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ evaluations_count           : num 506</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ is_active                   : logi TRUE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. ..$ :Formal class 'Deme' [package "hmsr"] with 11 slots</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ id                          : chr "e57f7adb-3104-4a8d-9898-40358c758c8e"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ population                  : num [1:15, 1] 5 5 4.99 5 4.99 ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ id                          : chr "e5e624c5-5f0a-417e-8a81-3b304b090131"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ population                  : num [1:15, 1] 4.95 4.96 4.96 4.95 4.98 ...</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ level                       : num 3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ best_fitness                : num 5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ best_solution               : Named num 5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ best_fitness                : num 4.98</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ best_solution               : Named num 4.98</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..- attr(*, "names")= chr "x1"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ best_solutions_per_metaepoch:List of 3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 4.98</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. .. ..- attr(*, "names")= chr "x1"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 4.98</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. .. ..- attr(*, "names")= chr "x1"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 4.98</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. .. ..- attr(*, "names")= chr "x1"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ best_fitnesses_per_metaepoch:List of 3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ sprout                      : Named num 5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 4.98</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 4.98</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 4.98</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ sprout                      : Named num 4.98</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..- attr(*, "names")= chr "x1"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ parent_id                   : chr "50e85d4a-c437-46bb-874b-d6c5a7d2d9f7"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ evaluations_count           : num 181</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ parent_id                   : chr "dcd3616c-4c91-41d0-9053-6cb8a42bb1fd"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ evaluations_count           : num 171</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ is_active                   : logi TRUE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. ..@ best_fitness       : num 5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. ..@ best_solution      : Named num 5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. ..@ best_fitness       : num 4.98</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. ..@ best_solution      : Named num 4.98</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. ..- attr(*, "names")= chr "x1"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. ..@ time_in_seconds    : num 0.0185</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. ..@ fitness_evaluations: num 1999</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. ..@ time_in_seconds    : num 0.0208</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. ..@ fitness_evaluations: num 1965</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. ..@ blocked_sprouts    :List of 2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. ..$ : Named num 4.95</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. ..$ : Named num 4.89</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. ..- attr(*, "names")= chr "x1"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. ..$ : Named num 5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. ..$ : Named num 4.98</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. ..- attr(*, "names")= chr "x1"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. ..@ is_evolutionary    : logi TRUE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. ..$ :Formal class 'MetaepochSnapshot' [package "hmsr"] with 7 slots</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. ..@ demes              :List of 3</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. ..$ :Formal class 'Deme' [package "hmsr"] with 11 slots</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ id                          : chr "7282218d-81e0-49d8-9219-ed43cb9e00fd"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ population                  : num [1:60, 1] -0.648 4.399 4.784 4.599 4.644 ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ id                          : chr "fec7054e-3af4-42f9-93b8-259e2e1cce37"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ population                  : num [1:60, 1] 4.71 4.42 4.38 4.45 4.27 ...</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ level                       : num 1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ best_fitness                : num 4.95</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ best_solution               : Named num 4.95</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ best_fitness                : num 4.89</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ best_solution               : Named num 4.89</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..- attr(*, "names")= chr "x1"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ best_solutions_per_metaepoch:List of 6</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 4.95</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 4.72</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. .. ..- attr(*, "names")= chr "x1"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 4.95</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 4.72</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. .. ..- attr(*, "names")= chr "x1"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 4.95</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 4.77</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. .. ..- attr(*, "names")= chr "x1"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 4.95</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 4.77</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. .. ..- attr(*, "names")= chr "x1"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 4.95</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 4.89</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. .. ..- attr(*, "names")= chr "x1"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 4.95</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 4.89</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. .. ..- attr(*, "names")= chr "x1"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ best_fitnesses_per_metaepoch:List of 6</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 4.95</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 4.95</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 4.95</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 4.95</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 4.95</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 4.95</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 4.72</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 4.72</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 4.77</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 4.77</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 4.89</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 4.89</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ sprout                      : NULL</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ parent_id                   : NULL</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ evaluations_count           : num 1560</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ evaluations_count           : num 1551</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ is_active                   : logi TRUE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. ..$ :Formal class 'Deme' [package "hmsr"] with 11 slots</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ id                          : chr "50e85d4a-c437-46bb-874b-d6c5a7d2d9f7"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ population                  : num [1:30, 1] 4.997 4.939 4.924 0.086 4.951 ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ id                          : chr "dcd3616c-4c91-41d0-9053-6cb8a42bb1fd"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ population                  : num [1:30, 1] 4.98 4.98 4.68 4.8 -3.91 ...</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ level                       : num 2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ best_fitness                : num 5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ best_solution               : Named num 5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ best_fitness                : num 4.98</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ best_solution               : Named num 4.98</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..- attr(*, "names")= chr "x1"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ best_solutions_per_metaepoch:List of 5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 4.98</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. .. ..- attr(*, "names")= chr "x1"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 4.98</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. .. ..- attr(*, "names")= chr "x1"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 4.98</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. .. ..- attr(*, "names")= chr "x1"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 4.98</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. .. ..- attr(*, "names")= chr "x1"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 4.98</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. .. ..- attr(*, "names")= chr "x1"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ best_fitnesses_per_metaepoch:List of 5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ sprout                      : Named num 4.95</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 4.98</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 4.98</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 4.98</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 4.98</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 4.98</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ sprout                      : Named num 4.72</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..- attr(*, "names")= chr "x1"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ parent_id                   : chr "7282218d-81e0-49d8-9219-ed43cb9e00fd"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ evaluations_count           : num 641</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ parent_id                   : chr "fec7054e-3af4-42f9-93b8-259e2e1cce37"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ evaluations_count           : num 642</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ is_active                   : logi TRUE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. ..$ :Formal class 'Deme' [package "hmsr"] with 11 slots</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ id                          : chr "e57f7adb-3104-4a8d-9898-40358c758c8e"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ population                  : num [1:15, 1] 5 5 5 5 -1.78 ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ id                          : chr "e5e624c5-5f0a-417e-8a81-3b304b090131"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ population                  : num [1:15, 1] 4.97 4.96 4.97 4.97 4.97 ...</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ level                       : num 3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ best_fitness                : num 5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ best_solution               : Named num 5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ best_fitness                : num 4.98</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ best_solution               : Named num 4.98</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..- attr(*, "names")= chr "x1"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ best_solutions_per_metaepoch:List of 4</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 4.98</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. .. ..- attr(*, "names")= chr "x1"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 4.98</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. .. ..- attr(*, "names")= chr "x1"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 4.98</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. .. ..- attr(*, "names")= chr "x1"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 4.98</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. .. ..- attr(*, "names")= chr "x1"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ best_fitnesses_per_metaepoch:List of 4</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ sprout                      : Named num 5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 4.98</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 4.98</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 4.98</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 4.98</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ sprout                      : Named num 4.98</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..- attr(*, "names")= chr "x1"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ parent_id                   : chr "50e85d4a-c437-46bb-874b-d6c5a7d2d9f7"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ evaluations_count           : num 245</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ parent_id                   : chr "dcd3616c-4c91-41d0-9053-6cb8a42bb1fd"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ evaluations_count           : num 232</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ is_active                   : logi TRUE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. ..@ best_fitness       : num 5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. ..@ best_solution      : Named num 5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. ..@ best_fitness       : num 4.98</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. ..@ best_solution      : Named num 4.98</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. ..- attr(*, "names")= chr "x1"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. ..@ time_in_seconds    : num 0.0182</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. ..@ fitness_evaluations: num 2446</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. ..@ time_in_seconds    : num 0.0211</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. ..@ fitness_evaluations: num 2425</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. ..@ blocked_sprouts    :List of 2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. ..$ : Named num 4.95</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. ..$ : Named num 4.89</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. ..- attr(*, "names")= chr "x1"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. ..$ : Named num 5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. ..$ : Named num 4.98</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. ..- attr(*, "names")= chr "x1"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. ..@ is_evolutionary    : logi TRUE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. ..$ :Formal class 'MetaepochSnapshot' [package "hmsr"] with 7 slots</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. ..@ demes              :List of 3</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. ..$ :Formal class 'Deme' [package "hmsr"] with 11 slots</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ id                          : chr "7282218d-81e0-49d8-9219-ed43cb9e00fd"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ population                  : num [1:60, 1] 4.7 4.89 1.36 4.32 -2.67 ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ id                          : chr "fec7054e-3af4-42f9-93b8-259e2e1cce37"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ population                  : num [1:60, 1] 4.52 4.54 4.6 4.63 4.76 ...</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ level                       : num 1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ best_fitness                : num 4.95</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ best_solution               : Named num 4.95</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ best_fitness                : num 4.89</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ best_solution               : Named num 4.89</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..- attr(*, "names")= chr "x1"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ best_solutions_per_metaepoch:List of 7</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 4.95</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 4.72</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. .. ..- attr(*, "names")= chr "x1"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 4.95</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 4.72</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. .. ..- attr(*, "names")= chr "x1"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 4.95</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 4.77</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. .. ..- attr(*, "names")= chr "x1"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 4.95</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 4.77</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. .. ..- attr(*, "names")= chr "x1"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 4.95</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 4.89</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. .. ..- attr(*, "names")= chr "x1"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 4.95</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 4.89</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. .. ..- attr(*, "names")= chr "x1"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 4.95</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 4.89</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. .. ..- attr(*, "names")= chr "x1"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ best_fitnesses_per_metaepoch:List of 7</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 4.95</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 4.95</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 4.95</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 4.95</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 4.95</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 4.95</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 4.95</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 4.72</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 4.72</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 4.77</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 4.77</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 4.89</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 4.89</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 4.89</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ sprout                      : NULL</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ parent_id                   : NULL</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ evaluations_count           : num 1819</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ evaluations_count           : num 1812</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ is_active                   : logi TRUE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. ..$ :Formal class 'Deme' [package "hmsr"] with 11 slots</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ id                          : chr "50e85d4a-c437-46bb-874b-d6c5a7d2d9f7"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ population                  : num [1:30, 1] 4.811 4.775 -4.369 4.804 0.154 ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ id                          : chr "dcd3616c-4c91-41d0-9053-6cb8a42bb1fd"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ population                  : num [1:30, 1] 4.55 4.65 4.72 4.74 4.21 ...</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ level                       : num 2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ best_fitness                : num 5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ best_solution               : Named num 5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ best_fitness                : num 4.98</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ best_solution               : Named num 4.98</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..- attr(*, "names")= chr "x1"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ best_solutions_per_metaepoch:List of 6</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 4.98</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. .. ..- attr(*, "names")= chr "x1"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 4.98</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. .. ..- attr(*, "names")= chr "x1"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 4.98</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. .. ..- attr(*, "names")= chr "x1"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 4.98</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. .. ..- attr(*, "names")= chr "x1"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 4.98</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. .. ..- attr(*, "names")= chr "x1"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 4.98</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. .. ..- attr(*, "names")= chr "x1"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ best_fitnesses_per_metaepoch:List of 6</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ sprout                      : Named num 4.95</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 4.98</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 4.98</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 4.98</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 4.98</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 4.98</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 4.98</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ sprout                      : Named num 4.72</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..- attr(*, "names")= chr "x1"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ parent_id                   : chr "7282218d-81e0-49d8-9219-ed43cb9e00fd"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ evaluations_count           : num 770</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ parent_id                   : chr "fec7054e-3af4-42f9-93b8-259e2e1cce37"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ evaluations_count           : num 772</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ is_active                   : logi TRUE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. ..$ :Formal class 'Deme' [package "hmsr"] with 11 slots</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ id                          : chr "e57f7adb-3104-4a8d-9898-40358c758c8e"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ population                  : num [1:15, 1] 4.88 3.73 1.7 4.95 5 ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ id                          : chr "e5e624c5-5f0a-417e-8a81-3b304b090131"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ population                  : num [1:15, 1] 4.98 4.97 4.96 4.97 4.97 ...</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ level                       : num 3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ best_fitness                : num 5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ best_solution               : Named num 5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ best_fitness                : num 4.98</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ best_solution               : Named num 4.98</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..- attr(*, "names")= chr "x1"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ best_solutions_per_metaepoch:List of 5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 4.98</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. .. ..- attr(*, "names")= chr "x1"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 4.98</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. .. ..- attr(*, "names")= chr "x1"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 4.98</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. .. ..- attr(*, "names")= chr "x1"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 4.98</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. .. ..- attr(*, "names")= chr "x1"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 4.98</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. .. ..- attr(*, "names")= chr "x1"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ best_fitnesses_per_metaepoch:List of 5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ sprout                      : Named num 5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 4.98</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 4.98</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 4.98</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 4.98</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 4.98</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ sprout                      : Named num 4.98</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..- attr(*, "names")= chr "x1"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ parent_id                   : chr "50e85d4a-c437-46bb-874b-d6c5a7d2d9f7"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ evaluations_count           : num 299</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ parent_id                   : chr "dcd3616c-4c91-41d0-9053-6cb8a42bb1fd"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ evaluations_count           : num 291</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ is_active                   : logi TRUE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. ..@ best_fitness       : num 5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. ..@ best_solution      : Named num 5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. ..@ best_fitness       : num 4.98</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. ..@ best_solution      : Named num 4.98</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. ..- attr(*, "names")= chr "x1"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. ..@ time_in_seconds    : num 0.0181</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. ..@ fitness_evaluations: num 2888</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. ..@ time_in_seconds    : num 0.0209</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. ..@ fitness_evaluations: num 2875</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. ..@ blocked_sprouts    :List of 2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. ..$ : Named num 4.95</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. ..$ : Named num 4.89</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. ..- attr(*, "names")= chr "x1"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. ..$ : Named num 5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. ..$ : Named num 4.98</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. ..- attr(*, "names")= chr "x1"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. ..@ is_evolutionary    : logi TRUE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. ..$ :Formal class 'MetaepochSnapshot' [package "hmsr"] with 7 slots</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. ..@ demes              :List of 3</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. ..$ :Formal class 'Deme' [package "hmsr"] with 11 slots</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ id                          : chr "7282218d-81e0-49d8-9219-ed43cb9e00fd"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ population                  : num [1:60, 1] 4.71 4.9 4.68 4.81 4.75 ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ id                          : chr "fec7054e-3af4-42f9-93b8-259e2e1cce37"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ population                  : num [1:60, 1] 4.89 4.34 4.76 4.58 4.84 ...</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ level                       : num 1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ best_fitness                : num 4.95</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ best_solution               : Named num 4.95</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ best_fitness                : num 4.89</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ best_solution               : Named num 4.89</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..- attr(*, "names")= chr "x1"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ best_solutions_per_metaepoch:List of 8</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 4.95</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 4.72</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. .. ..- attr(*, "names")= chr "x1"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 4.95</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 4.72</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. .. ..- attr(*, "names")= chr "x1"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 4.95</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 4.77</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. .. ..- attr(*, "names")= chr "x1"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 4.95</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 4.77</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. .. ..- attr(*, "names")= chr "x1"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 4.95</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 4.89</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. .. ..- attr(*, "names")= chr "x1"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 4.95</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 4.89</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. .. ..- attr(*, "names")= chr "x1"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 4.95</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 4.89</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. .. ..- attr(*, "names")= chr "x1"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 4.95</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 4.89</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. .. ..- attr(*, "names")= chr "x1"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ best_fitnesses_per_metaepoch:List of 8</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 4.95</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 4.95</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 4.95</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 4.95</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 4.95</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 4.95</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 4.95</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 4.95</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 4.72</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 4.72</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 4.77</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 4.77</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 4.89</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 4.89</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 4.89</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 4.89</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ sprout                      : NULL</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ parent_id                   : NULL</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ evaluations_count           : num 2064</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ evaluations_count           : num 2055</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ is_active                   : logi TRUE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. ..$ :Formal class 'Deme' [package "hmsr"] with 11 slots</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ id                          : chr "50e85d4a-c437-46bb-874b-d6c5a7d2d9f7"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ population                  : num [1:30, 1] 4.95 4.87 4.93 4.31 4.99 ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ id                          : chr "dcd3616c-4c91-41d0-9053-6cb8a42bb1fd"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ population                  : num [1:30, 1] 4.6 4.86 2.53 4.61 4.67 ...</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ level                       : num 2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ best_fitness                : num 5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ best_solution               : Named num 5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ best_fitness                : num 4.98</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ best_solution               : Named num 4.98</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..- attr(*, "names")= chr "x1"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ best_solutions_per_metaepoch:List of 7</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 4.98</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. .. ..- attr(*, "names")= chr "x1"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 4.98</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. .. ..- attr(*, "names")= chr "x1"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 4.98</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. .. ..- attr(*, "names")= chr "x1"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 4.98</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. .. ..- attr(*, "names")= chr "x1"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 4.98</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. .. ..- attr(*, "names")= chr "x1"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 4.98</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. .. ..- attr(*, "names")= chr "x1"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 4.98</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. .. ..- attr(*, "names")= chr "x1"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ best_fitnesses_per_metaepoch:List of 7</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ sprout                      : Named num 4.95</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 4.98</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 4.98</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 4.98</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 4.98</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 4.98</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 4.98</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 4.98</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ sprout                      : Named num 4.72</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..- attr(*, "names")= chr "x1"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ parent_id                   : chr "7282218d-81e0-49d8-9219-ed43cb9e00fd"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ evaluations_count           : num 905</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ parent_id                   : chr "fec7054e-3af4-42f9-93b8-259e2e1cce37"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ evaluations_count           : num 906</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ is_active                   : logi FALSE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. ..$ :Formal class 'Deme' [package "hmsr"] with 11 slots</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ id                          : chr "e57f7adb-3104-4a8d-9898-40358c758c8e"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ population                  : num [1:15, 1] 4.99 4.98 4.98 4.99 4.97 ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ id                          : chr "e5e624c5-5f0a-417e-8a81-3b304b090131"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ population                  : num [1:15, 1] 4.98 4.98 4.98 2.33 4.98 ...</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ level                       : num 3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ best_fitness                : num 5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ best_solution               : Named num 5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ best_fitness                : num 4.98</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ best_solution               : Named num 4.98</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..- attr(*, "names")= chr "x1"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ best_solutions_per_metaepoch:List of 6</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 4.98</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. .. ..- attr(*, "names")= chr "x1"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 4.98</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. .. ..- attr(*, "names")= chr "x1"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 4.98</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. .. ..- attr(*, "names")= chr "x1"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 4.98</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. .. ..- attr(*, "names")= chr "x1"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 4.98</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. .. ..- attr(*, "names")= chr "x1"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 4.98</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. .. ..- attr(*, "names")= chr "x1"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ best_fitnesses_per_metaepoch:List of 6</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ sprout                      : Named num 5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 4.98</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 4.98</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 4.98</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 4.98</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 4.98</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 4.98</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ sprout                      : Named num 4.98</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..- attr(*, "names")= chr "x1"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ parent_id                   : chr "50e85d4a-c437-46bb-874b-d6c5a7d2d9f7"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ evaluations_count           : num 363</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ parent_id                   : chr "dcd3616c-4c91-41d0-9053-6cb8a42bb1fd"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ evaluations_count           : num 351</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ is_active                   : logi TRUE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. ..@ best_fitness       : num 5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. ..@ best_solution      : Named num 5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. ..@ best_fitness       : num 4.98</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. ..@ best_solution      : Named num 4.98</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. ..- attr(*, "names")= chr "x1"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. ..@ time_in_seconds    : num 0.0178</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. ..@ fitness_evaluations: num 3332</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. ..@ time_in_seconds    : num 0.0211</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. ..@ fitness_evaluations: num 3312</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. ..@ blocked_sprouts    :List of 1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. ..$ : Named num 4.95</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. ..$ : Named num 4.89</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. ..- attr(*, "names")= chr "x1"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. ..@ is_evolutionary    : logi TRUE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. ..$ :Formal class 'MetaepochSnapshot' [package "hmsr"] with 7 slots</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. ..@ demes              :List of 3</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. ..$ :Formal class 'Deme' [package "hmsr"] with 11 slots</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ id                          : chr "50e85d4a-c437-46bb-874b-d6c5a7d2d9f7"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ population                  : num [1:30, 1] 4.95 4.87 4.93 4.31 4.99 ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ id                          : chr "dcd3616c-4c91-41d0-9053-6cb8a42bb1fd"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ population                  : num [1:30, 1] 4.6 4.86 2.53 4.61 4.67 ...</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ level                       : num 2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ best_fitness                : num 5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ best_solution               : Named num 5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ best_fitness                : num 4.98</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ best_solution               : Named num 4.98</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..- attr(*, "names")= chr "x1"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ best_solutions_per_metaepoch:List of 7</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 4.98</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. .. ..- attr(*, "names")= chr "x1"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 4.98</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. .. ..- attr(*, "names")= chr "x1"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 4.98</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. .. ..- attr(*, "names")= chr "x1"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 4.98</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. .. ..- attr(*, "names")= chr "x1"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 4.98</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. .. ..- attr(*, "names")= chr "x1"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 4.98</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. .. ..- attr(*, "names")= chr "x1"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 4.98</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. .. ..- attr(*, "names")= chr "x1"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ best_fitnesses_per_metaepoch:List of 7</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ sprout                      : Named num 4.95</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 4.98</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 4.98</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 4.98</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 4.98</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 4.98</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 4.98</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 4.98</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ sprout                      : Named num 4.72</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..- attr(*, "names")= chr "x1"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ parent_id                   : chr "7282218d-81e0-49d8-9219-ed43cb9e00fd"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ evaluations_count           : num 905</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ parent_id                   : chr "fec7054e-3af4-42f9-93b8-259e2e1cce37"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ evaluations_count           : num 906</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ is_active                   : logi FALSE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. ..$ :Formal class 'Deme' [package "hmsr"] with 11 slots</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ id                          : chr "7282218d-81e0-49d8-9219-ed43cb9e00fd"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ population                  : num [1:60, 1] 4.81 4.77 4.59 4.92 4.68 ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ id                          : chr "fec7054e-3af4-42f9-93b8-259e2e1cce37"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ population                  : num [1:60, 1] 4.73 4.67 4.89 4.39 4.66 ...</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ level                       : num 1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ best_fitness                : num 4.95</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ best_solution               : Named num 4.95</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ best_fitness                : num 4.89</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ best_solution               : Named num 4.89</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..- attr(*, "names")= chr "x1"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ best_solutions_per_metaepoch:List of 9</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 4.95</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 4.72</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. .. ..- attr(*, "names")= chr "x1"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 4.95</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 4.72</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. .. ..- attr(*, "names")= chr "x1"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 4.95</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 4.77</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. .. ..- attr(*, "names")= chr "x1"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 4.95</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 4.77</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. .. ..- attr(*, "names")= chr "x1"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 4.95</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 4.89</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. .. ..- attr(*, "names")= chr "x1"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 4.95</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 4.89</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. .. ..- attr(*, "names")= chr "x1"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 4.95</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 4.89</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. .. ..- attr(*, "names")= chr "x1"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 4.95</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 4.89</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. .. ..- attr(*, "names")= chr "x1"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 4.95</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 4.89</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. .. ..- attr(*, "names")= chr "x1"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ best_fitnesses_per_metaepoch:List of 9</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 4.95</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 4.95</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 4.95</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 4.95</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 4.95</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 4.95</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 4.95</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 4.95</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 4.95</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 4.72</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 4.72</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 4.77</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 4.77</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 4.89</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 4.89</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 4.89</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 4.89</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 4.89</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ sprout                      : NULL</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ parent_id                   : NULL</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ evaluations_count           : num 2329</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ evaluations_count           : num 2308</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ is_active                   : logi TRUE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. ..$ :Formal class 'Deme' [package "hmsr"] with 11 slots</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ id                          : chr "e57f7adb-3104-4a8d-9898-40358c758c8e"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ population                  : num [1:15, 1] 4.99 4.99 4.99 4.99 -3.66 ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ id                          : chr "e5e624c5-5f0a-417e-8a81-3b304b090131"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ population                  : num [1:15, 1] 4.98 4.98 4.98 4.98 4.98 ...</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ level                       : num 3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ best_fitness                : num 5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ best_solution               : Named num 5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ best_fitness                : num 4.98</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ best_solution               : Named num 4.98</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..- attr(*, "names")= chr "x1"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ best_solutions_per_metaepoch:List of 7</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 4.98</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. .. ..- attr(*, "names")= chr "x1"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 4.98</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. .. ..- attr(*, "names")= chr "x1"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 4.98</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. .. ..- attr(*, "names")= chr "x1"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 4.98</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. .. ..- attr(*, "names")= chr "x1"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 4.98</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. .. ..- attr(*, "names")= chr "x1"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 4.98</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. .. ..- attr(*, "names")= chr "x1"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 4.98</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. .. ..- attr(*, "names")= chr "x1"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ best_fitnesses_per_metaepoch:List of 7</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ sprout                      : Named num 5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 4.98</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 4.98</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 4.98</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 4.98</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 4.98</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 4.98</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 4.98</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ sprout                      : Named num 4.98</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..- attr(*, "names")= chr "x1"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ parent_id                   : chr "50e85d4a-c437-46bb-874b-d6c5a7d2d9f7"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ evaluations_count           : num 427</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ parent_id                   : chr "dcd3616c-4c91-41d0-9053-6cb8a42bb1fd"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ evaluations_count           : num 416</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ is_active                   : logi FALSE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. ..@ best_fitness       : num 5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. ..@ best_solution      : Named num 5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. ..@ best_fitness       : num 4.98</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. ..@ best_solution      : Named num 4.98</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. ..- attr(*, "names")= chr "x1"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. ..@ time_in_seconds    : num 0.0321</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. ..@ fitness_evaluations: num 3661</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. ..@ time_in_seconds    : num 0.0145</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. ..@ fitness_evaluations: num 3630</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. ..@ blocked_sprouts    :List of 1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. ..$ : Named num 4.95</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. ..$ : Named num 4.89</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. ..- attr(*, "names")= chr "x1"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. ..@ is_evolutionary    : logi TRUE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. ..$ :Formal class 'MetaepochSnapshot' [package "hmsr"] with 7 slots</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. ..@ demes              :List of 3</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. ..$ :Formal class 'Deme' [package "hmsr"] with 11 slots</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ id                          : chr "50e85d4a-c437-46bb-874b-d6c5a7d2d9f7"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ population                  : num [1:30, 1] 4.95 4.87 4.93 4.31 4.99 ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ id                          : chr "dcd3616c-4c91-41d0-9053-6cb8a42bb1fd"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ population                  : num [1:30, 1] 4.6 4.86 2.53 4.61 4.67 ...</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ level                       : num 2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ best_fitness                : num 5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ best_solution               : Named num 5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ best_fitness                : num 4.98</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ best_solution               : Named num 4.98</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..- attr(*, "names")= chr "x1"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ best_solutions_per_metaepoch:List of 7</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 4.98</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. .. ..- attr(*, "names")= chr "x1"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 4.98</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. .. ..- attr(*, "names")= chr "x1"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 4.98</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. .. ..- attr(*, "names")= chr "x1"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 4.98</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. .. ..- attr(*, "names")= chr "x1"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 4.98</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. .. ..- attr(*, "names")= chr "x1"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 4.98</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. .. ..- attr(*, "names")= chr "x1"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 4.98</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. .. ..- attr(*, "names")= chr "x1"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ best_fitnesses_per_metaepoch:List of 7</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ sprout                      : Named num 4.95</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 4.98</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 4.98</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 4.98</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 4.98</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 4.98</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 4.98</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 4.98</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ sprout                      : Named num 4.72</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..- attr(*, "names")= chr "x1"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ parent_id                   : chr "7282218d-81e0-49d8-9219-ed43cb9e00fd"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ evaluations_count           : num 905</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ parent_id                   : chr "fec7054e-3af4-42f9-93b8-259e2e1cce37"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ evaluations_count           : num 906</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ is_active                   : logi FALSE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. ..$ :Formal class 'Deme' [package "hmsr"] with 11 slots</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ id                          : chr "e57f7adb-3104-4a8d-9898-40358c758c8e"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ population                  : num [1:15, 1] 4.99 4.99 4.99 4.99 -3.66 ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ id                          : chr "e5e624c5-5f0a-417e-8a81-3b304b090131"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ population                  : num [1:15, 1] 4.98 4.98 4.98 4.98 4.98 ...</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ level                       : num 3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ best_fitness                : num 5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ best_solution               : Named num 5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ best_fitness                : num 4.98</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ best_solution               : Named num 4.98</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..- attr(*, "names")= chr "x1"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ best_solutions_per_metaepoch:List of 7</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 4.98</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. .. ..- attr(*, "names")= chr "x1"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 4.98</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. .. ..- attr(*, "names")= chr "x1"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 4.98</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. .. ..- attr(*, "names")= chr "x1"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 4.98</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. .. ..- attr(*, "names")= chr "x1"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 4.98</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. .. ..- attr(*, "names")= chr "x1"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 4.98</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. .. ..- attr(*, "names")= chr "x1"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 4.98</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. .. ..- attr(*, "names")= chr "x1"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ best_fitnesses_per_metaepoch:List of 7</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ sprout                      : Named num 5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 4.98</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 4.98</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 4.98</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 4.98</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 4.98</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 4.98</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 4.98</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ sprout                      : Named num 4.98</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..- attr(*, "names")= chr "x1"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ parent_id                   : chr "50e85d4a-c437-46bb-874b-d6c5a7d2d9f7"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ evaluations_count           : num 427</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ parent_id                   : chr "dcd3616c-4c91-41d0-9053-6cb8a42bb1fd"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ evaluations_count           : num 416</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ is_active                   : logi FALSE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. ..$ :Formal class 'Deme' [package "hmsr"] with 11 slots</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ id                          : chr "7282218d-81e0-49d8-9219-ed43cb9e00fd"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ population                  : num [1:60, 1] 4.83 4.83 4.81 4.73 4.78 ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ id                          : chr "fec7054e-3af4-42f9-93b8-259e2e1cce37"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ population                  : num [1:60, 1] 4.7072 4.5567 4.6218 4.8896 -0.0264 ...</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ level                       : num 1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ best_fitness                : num 4.95</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ best_solution               : Named num 4.95</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ best_fitness                : num 4.89</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ best_solution               : Named num 4.89</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..- attr(*, "names")= chr "x1"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ best_solutions_per_metaepoch:List of 10</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 4.95</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 4.72</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. .. ..- attr(*, "names")= chr "x1"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 4.95</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 4.72</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. .. ..- attr(*, "names")= chr "x1"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 4.95</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 4.77</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. .. ..- attr(*, "names")= chr "x1"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 4.95</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 4.77</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. .. ..- attr(*, "names")= chr "x1"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 4.95</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 4.89</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. .. ..- attr(*, "names")= chr "x1"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 4.95</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 4.89</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. .. ..- attr(*, "names")= chr "x1"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 4.95</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 4.89</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. .. ..- attr(*, "names")= chr "x1"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 4.95</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 4.89</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. .. ..- attr(*, "names")= chr "x1"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 4.95</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 4.89</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. .. ..- attr(*, "names")= chr "x1"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 4.95</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : Named num 4.89</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. .. ..- attr(*, "names")= chr "x1"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ best_fitnesses_per_metaepoch:List of 10</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 4.95</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 4.95</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 4.95</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 4.95</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 4.95</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 4.95</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 4.95</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 4.95</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 4.95</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 4.95</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 4.72</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 4.72</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 4.77</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 4.77</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 4.89</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 4.89</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 4.89</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 4.89</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 4.89</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. .. ..$ : num 4.89</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ sprout                      : NULL</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ parent_id                   : NULL</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ evaluations_count           : num 2598</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ evaluations_count           : num 2569</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. .. ..@ is_active                   : logi TRUE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. ..@ best_fitness       : num 5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. ..@ best_solution      : Named num 5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. ..@ best_fitness       : num 4.98</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. ..@ best_solution      : Named num 4.98</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. ..- attr(*, "names")= chr "x1"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. ..@ time_in_seconds    : num 0.00794</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. ..@ fitness_evaluations: num 3930</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. ..@ time_in_seconds    : num 0.00912</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. ..@ fitness_evaluations: num 3891</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. ..@ blocked_sprouts    :List of 1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. ..$ : Named num 4.95</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. ..$ : Named num 4.89</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. .. .. ..- attr(*, "names")= chr "x1"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. ..@ is_evolutionary    : logi TRUE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ..@ best_fitness                   : num 5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ..@ best_solution                  : Named num 5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ..@ best_fitness                   : num 4.98</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ..@ best_solution                  : Named num 4.98</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. ..- attr(*, "names")= chr "x1"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ..@ total_time_in_seconds          : num 0.173</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ..@ total_metaepoch_time_in_seconds: num 0.162</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ..@ total_time_in_seconds          : num 0.177</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ..@ total_metaepoch_time_in_seconds: num 0.164</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   ..@ metaepochs_count               : num 10</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   ..@ deme_population_sizes          : num [1:3] 60 30 15</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   ..@ lower                          : num -5</span>
@@ -1024,7 +1024,7 @@
 
 
     <footer><div class="pkgdown-footer-left">
-  <p></p><p>Developed by Wojciech Achtelik, Marcin Kozubek.</p>
+  <p></p><p>Developed by Wojciech Achtelik, Marcin Kozubek, Maciej Smołka.</p>
 </div>
 
 <div class="pkgdown-footer-right">
