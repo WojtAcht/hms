@@ -38,14 +38,14 @@ Imports:
     msm,
     methods,
     uuid,
-    graphics,
-    smoof
+    graphics
 Suggests: 
     testthat (>= 3.0.0),
     ecr,
     filelock,
     parallel,
     doParallel,
-    grDevices
+    grDevices,
+    smoof
 BugReports: https://github.com/WojtAcht/hms/issues
 URL: https://wojtacht.github.io/hms/

@@ -2,7 +2,7 @@
 
 <!-- badges: start -->
 
-[![R-CMD-check](https://github.com/WojtAcht/hms/workflows/R-CMD-check/badge.svg)](https://github.com/WojtAcht/hms/actions) [![codecov](https://codecov.io/gh/WojtAcht/hms/branch/main/graph/badge.svg?token=Y06UN8TU8U)](https://codecov.io/gh/WojtAcht/hms)
+[![R-CMD-check](https://github.com/WojtAcht/hms/workflows/R-CMD-check/badge.svg)](https://github.com/WojtAcht/hms/actions)
 
 <!-- badges: end -->
 
