@@ -424,14 +424,12 @@ setMethod("plotPopulation", "hms", function(object, dimensions) {
 #'
 #' @export
 #' @examples
-#' \dontrun{
 #' fitness <- function(x) x[1] + x[2]
 #' lower <- c(-5, -5)
 #' upper <- c(5, 5)
 #' result <- hms(fitness = fitness, lower = lower, upper = upper)
 #' selected_dimensions <- c(1, 2)
-#' saveMetaepochsPopulations(result, paste(getwd(), "/snapshots", sep = ""), selected_dimensions)
-#' }
+#' saveMetaepochsPopulations(result, paste(tempdir(), "/snapshots", sep = ""), selected_dimensions)
 setGeneric("saveMetaepochsPopulations", function(object, path, dimensions) standardGeneric("saveMetaepochsPopulations"))
 
 #' saveMetaepochsPopulations
@@ -445,14 +443,12 @@ setGeneric("saveMetaepochsPopulations", function(object, path, dimensions) stand
 #'
 #' @export
 #' @examples
-#' \dontrun{
 #' fitness <- function(x) x[1] + x[2]
 #' lower <- c(-5, -5)
 #' upper <- c(5, 5)
 #' result <- hms(fitness = fitness, lower = lower, upper = upper)
 #' selected_dimensions <- c(1, 2)
-#' saveMetaepochsPopulations(result, paste(getwd(), "/snapshots", sep = ""), selected_dimensions)
-#' }
+#' saveMetaepochsPopulations(result, paste(tempdir(), "/snapshots", sep = ""), selected_dimensions)
 setMethod("saveMetaepochsPopulations", "hms", function(object, path, dimensions) {
   if (!length(dimensions) == 2) {
     stop("The vector of dimensions must have two elements.")
