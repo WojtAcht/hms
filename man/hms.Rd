@@ -74,7 +74,7 @@ for all leaves at the end of the computation to refine their best solutions.}
 
 \item{run_gradient_method}{function - returns list with named fields: solution, population, value}
 
-\item{monitor_level}{string - one of {'none', 'basic', 'basic_tree', 'verbose_tree'}.}
+\item{monitor_level}{string - one of: 'none', 'basic', 'basic_tree', 'verbose_tree'.}
 
 \item{parallel}{logical - \code{TRUE} when run_metaepoch runs in parallel.}
 }

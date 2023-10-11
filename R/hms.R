@@ -31,7 +31,7 @@
 #' for all leaves at the end of the computation to refine their best solutions.
 #' @param gradient_method_args list of parameters that are passed to the gradient method
 #' @param run_gradient_method function - returns list with named fields: solution, population, value
-#' @param monitor_level string - one of {'none', 'basic', 'basic_tree', 'verbose_tree'}.
+#' @param monitor_level string - one of: 'none', 'basic', 'basic_tree', 'verbose_tree'.
 #' @param parallel logical - \code{TRUE} when run_metaepoch runs in parallel.
 #' @param minimize logical - \code{TRUE} when fitness shall be minimized.
 #'
