@@ -73,20 +73,25 @@
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">f</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="va">x</span></span></span>
 <span class="r-in"><span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="hms.html">hms</a></span><span class="op">(</span>fitness <span class="op">=</span> <span class="va">f</span>, lower <span class="op">=</span> <span class="op">-</span><span class="fl">5</span>, upper <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> A list of standard deviations (sigma) or a function to create population should be provided.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Metaepoch: 0 Best fitness: 4.871827 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Metaepoch: 1 Best fitness: 4.998789 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Metaepoch: 2 Best fitness: 4.998789 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Metaepoch: 3 Best fitness: 4.998789 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Metaepoch: 4 Best fitness: 4.998789 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Metaepoch: 5 Best fitness: 4.998789 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Metaepoch: 6 Best fitness: 4.998789 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Metaepoch: 7 Best fitness: 4.998789 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Metaepoch: 8 Best fitness: 4.998789 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Metaepoch: 9 Best fitness: 4.998789 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Metaepoch: 0 Best fitness: 4.921875 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Metaepoch: 1 Best fitness: 4.995489 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Metaepoch: 2 Best fitness: 4.995489 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Metaepoch: 3 Best fitness: 4.995489 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Metaepoch: 4 Best fitness: 4.995489 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Metaepoch: 5 Best fitness: 4.995489 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Metaepoch: 6 Best fitness: 4.995489 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Metaepoch: 7 Best fitness: 4.995489 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Metaepoch: 8 Best fitness: 4.997056 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Metaepoch: 9 Best fitness: 4.997056 </span>
 <span class="r-in"><span><span class="fu">printTree</span><span class="op">(</span><span class="va">result</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> f(4.99) = 4.99 evaluations: 2601 A</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> └-- spr: (4.87); ***f(5.00) = 5.00*** evaluations: 911</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     └-- spr: (5.00); ***f(5.00) = 5.00*** evaluations: 418</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> f(4.95) = 4.95 evaluations: 2558 A</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ├-- spr: (4.92); f(5.00) = 5.00 evaluations: 876</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> |   └-- spr: (5.00); f(5.00) = 5.00 evaluations: 408</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ├-- spr: (4.95); ***f(5.00) = 5.00*** evaluations: 269 A</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> |   └-- spr: (5.00); ***f(5.00) = 5.00*** evaluations: 68 A (new_deme)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ├-- spr: (4.95); f(4.98) = 4.98 evaluations: 649 A</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> └-- spr: (4.92); f(4.98) = 4.98 evaluations: 871</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     └-- spr: (4.98); f(4.98) = 4.98 evaluations: 370 A</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
