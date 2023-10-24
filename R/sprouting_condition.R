@@ -1,13 +1,13 @@
 #' Default sprouting condition based on given metric.
 #'
 #' It allows an individual to sprout only if there are no other
-#' demes on the target level that have sprouted within the given
+#' demes on the target level that have centroid within the given
 #' distance.
 #'
 #' @param metric - Metric used for deme distance comparison (e.g.
 #' euclidean_distance, manhattan_distance)
-#' @param max_distances - numeric - maximum distance to a sprout of
-#' a deme on the target level that would allow the idividual to sprout
+#' @param max_distances - numeric - maximum distance to a centroid of
+#' a deme on the target level that would allow the individual to sprout
 #'
 #' @return Function that can be used as a sprouting condition of hms.
 #'
@@ -22,11 +22,8 @@ sc_max_metric <- function(metric, max_distances) {
     }, demes)
 
     single_deme_condition <- function(deme) {
-      if (is.null(deme@sprout)) {
-        FALSE
-      } else {
-        metric(deme@sprout, potential_sprout) < max_distances[[potential_sprout_level - 1]]
-      }
+      centroid <- colMeans(deme@population)
+      metric(centroid, potential_sprout) < max_distances[[potential_sprout_level - 1]]
     }
     length(Filter(single_deme_condition, level_demes)) == 0
   }

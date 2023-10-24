@@ -13,8 +13,8 @@ euclidean_distance, manhattan_distance)
 }}
 
 \item{max_distances}{\itemize{
-\item numeric - maximum distance to a sprout of
-a deme on the target level that would allow the idividual to sprout
+\item numeric - maximum distance to a centroid of
+a deme on the target level that would allow the individual to sprout
 }}
 }
 \value{
@@ -22,7 +22,7 @@ Function that can be used as a sprouting condition of hms.
 }
 \description{
 It allows an individual to sprout only if there are no other
-demes on the target level that have sprouted within the given
+demes on the target level that have centroid within the given
 distance.
 }
 \examples{
