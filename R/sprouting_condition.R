@@ -22,11 +22,7 @@ sc_max_metric <- function(metric, max_distances) {
     }, demes)
 
     single_deme_condition <- function(deme) {
-      if (is.null(deme@sprout)) {
-        FALSE
-      } else {
-        metric(deme@sprout, potential_sprout) < max_distances[[potential_sprout_level - 1]]
-      }
+      metric(deme@sprout, potential_sprout) < max_distances[[potential_sprout_level - 1]]
     }
     length(Filter(single_deme_condition, level_demes)) == 0
   }
