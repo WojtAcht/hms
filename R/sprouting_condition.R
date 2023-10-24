@@ -22,12 +22,8 @@ sc_max_metric <- function(metric, max_distances) {
     }, demes)
 
     single_deme_condition <- function(deme) {
-      if (is.null(deme@population)) {
-        FALSE
-      } else {
-        centroid <- colMeans(deme@population)
-        metric(centroid, potential_sprout) < max_distances[[potential_sprout_level - 1]]
-      }
+      centroid <- colMeans(deme@population)
+      metric(centroid, potential_sprout) < max_distances[[potential_sprout_level - 1]]
     }
     length(Filter(single_deme_condition, level_demes)) == 0
   }
