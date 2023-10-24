@@ -1,5 +1,3 @@
-# hmsr 1.0.0
-
-# hmsr 0.0.0.9000
-
-* Added a `NEWS.md` file to track changes to the package.
+# hmsr 1.0.1
+* `sc_max_metric()` uses centroids instead of sprouts (#54).
+* fix M1 mac failing tests.
