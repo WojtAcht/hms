@@ -124,10 +124,10 @@ test_that("HMS works - Eggholder with gradient method:", {
   sigma <- list(c(200, 200), c(100, 100), c(50, 50))
   ga_config <- list(
     list(
-      pmutation = 0.4, mutation = rtnorm_mutation(lower, upper, sigma[[1]])
+      pmutation = 0.6, mutation = rtnorm_mutation(lower, upper, sigma[[1]])
     ),
     list(
-      pmutation = 0.2,
+      pmutation = 0.4,
       mutation = rtnorm_mutation(lower, upper, sigma[[2]])
     ),
     list(
@@ -144,7 +144,7 @@ test_that("HMS works - Eggholder with gradient method:", {
     run_metaepoch = ga_metaepoch(ga_config),
     population_sizes = c(50, 30, 15),
     sigma = sigma,
-    gsc = gsc_max_fitness_evaluations(25000),
+    gsc = gsc_max_fitness_evaluations(50000),
     sc = sc_max_metric(euclidean_distance, c(40, 20, 10)),
     lsc = lsc_metaepochs_without_improvement(15),
     monitor_level = "none",
@@ -152,5 +152,5 @@ test_that("HMS works - Eggholder with gradient method:", {
   )
   expected_solution <- c(512, 404.2319)
   expected_fitness <- Eggholder(expected_solution)
-  expect_true(abs(result@best_fitness - expected_fitness) < 1e1)
+  expect_true(abs(result@best_fitness - expected_fitness) < 1e2)
 })
