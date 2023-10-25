@@ -2,7 +2,7 @@ pandoc: 2.19.2
 pkgdown: 2.0.7
 pkgdown_sha: ~
 articles: {}
-last_built: 2023-10-24T18:42Z
+last_built: 2023-10-25T14:28Z
 urls:
   reference: https://wojtacht.github.io/hms/reference
   article: https://wojtacht.github.io/hms/articles

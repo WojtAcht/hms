@@ -74,28 +74,27 @@
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">f</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="va">x</span></span></span>
 <span class="r-in"><span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="hms.html">hms</a></span><span class="op">(</span>fitness <span class="op">=</span> <span class="va">f</span>, lower <span class="op">=</span> <span class="op">-</span><span class="fl">5</span>, upper <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> A list of standard deviations (sigma) or a function to create population should be provided.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Metaepoch: 0 Best fitness: 4.903806 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Metaepoch: 1 Best fitness: 4.983147 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Metaepoch: 2 Best fitness: 4.995524 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Metaepoch: 3 Best fitness: 4.995524 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Metaepoch: 4 Best fitness: 4.995524 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Metaepoch: 5 Best fitness: 4.995524 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Metaepoch: 6 Best fitness: 4.995524 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Metaepoch: 7 Best fitness: 4.995524 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Metaepoch: 8 Best fitness: 4.995524 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Metaepoch: 9 Best fitness: 4.995728 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Metaepoch: 0 Best fitness: 4.868011 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Metaepoch: 1 Best fitness: 4.968247 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Metaepoch: 2 Best fitness: 4.993712 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Metaepoch: 3 Best fitness: 4.993712 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Metaepoch: 4 Best fitness: 4.993712 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Metaepoch: 5 Best fitness: 4.993712 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Metaepoch: 6 Best fitness: 4.993712 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Metaepoch: 7 Best fitness: 4.997688 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Metaepoch: 8 Best fitness: 4.997688 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Metaepoch: 9 Best fitness: 4.997688 </span>
 <span class="r-in"><span><span class="fu"><a href="printTree.html">printTree</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> f(4.90) = 4.90 evaluations: 2571 A</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ├-- spr: (4.90); f(4.98) = 4.98 evaluations: 916</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> |   ├-- spr: (4.98); f(5.00) = 5.00 evaluations: 426</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> |   └-- spr: (4.98); f(5.00) = 5.00 evaluations: 233 A</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ├-- spr: (4.90); f(4.99) = 4.99 evaluations: 132 A (new_deme)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ├-- spr: (4.90); f(4.99) = 4.99 evaluations: 377 A</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> |   └-- spr: (4.99); f(4.99) = 4.99 evaluations: 119 A</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ├-- spr: (4.90); f(4.99) = 4.99 evaluations: 654 A</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> |   └-- spr: (4.99); ***f(5.00) = 5.00*** evaluations: 66 A (new_deme)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> └-- spr: (4.90); f(4.99) = 4.99 evaluations: 892</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     └-- spr: (4.99); f(4.99) = 4.99 evaluations: 383 A</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> f(4.95) = 4.95 evaluations: 2605 A</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ├-- spr: (4.87); f(4.97) = 4.97 evaluations: 909</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> |   ├-- spr: (4.97); f(4.99) = 4.99 evaluations: 430</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> |   └-- spr: (4.97); f(4.99) = 4.99 evaluations: 305 A</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ├-- spr: (4.95); f(4.99) = 4.99 evaluations: 386 A</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ├-- spr: (4.87); f(4.98) = 4.98 evaluations: 642 A</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> |   └-- spr: (4.98); ***f(5.00) = 5.00*** evaluations: 188 A</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> └-- spr: (4.87); f(4.98) = 4.98 evaluations: 870</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     ├-- spr: (4.98); f(4.99) = 4.99 evaluations: 116 A</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     └-- spr: (4.98); f(4.99) = 4.99 evaluations: 364 A</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
