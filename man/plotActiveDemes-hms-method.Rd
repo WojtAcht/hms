@@ -2,7 +2,7 @@
 % Please edit documentation in R/hms_class.R
 \name{plotActiveDemes,hms-method}
 \alias{plotActiveDemes,hms-method}
-\title{plotActiveDemes}
+\title{plotActiveDemes method for "hms" class.}
 \usage{
 \S4method{plotActiveDemes}{hms}(object)
 }
@@ -11,6 +11,15 @@
 \item hms s4 object
 }}
 }
+\value{
+It doesn't return anything meaningful. It plots the number of active
+demes per metaepoch.
+}
 \description{
-plotActiveDemes
+plotActiveDemes method for "hms" class.
+}
+\examples{
+f <- function(x) x
+result <- hms(fitness = f, lower = -5, upper = 5)
+plotActiveDemes(result)
 }

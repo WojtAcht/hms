@@ -17,3 +17,6 @@ Factory function for a global stopping condition that never stops
 the computation. It results in hms running until there are no more
 active demes.
 }
+\examples{
+global_stopping_condition <- gsc_trivial()
+}

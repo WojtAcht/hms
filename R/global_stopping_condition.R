@@ -10,7 +10,7 @@
 #'
 #' @export
 #'
-#' @example
+#' @examples
 #' global_stopping_condition <- gsc_metaepochs_count(10)
 gsc_metaepochs_count <- function(metaepochs_count) {
   function(metaepoch_snapshots) {
@@ -32,7 +32,7 @@ gsc_metaepochs_count <- function(metaepochs_count) {
 #'
 #' @export
 #'
-#' @example
+#' @examples
 #' global_stopping_condition <- gsc_max_fitness_evaluations(10000)
 gsc_max_fitness_evaluations <- function(max_evaluations) {
   function(metaepoch_snapshots) {
@@ -50,7 +50,7 @@ gsc_max_fitness_evaluations <- function(max_evaluations) {
 #'
 #' @export
 #'
-#' @example
+#' @examples
 #' global_stopping_condition <- gsc_trivial()
 gsc_trivial <- function() {
   function(metaepoch_snapshots) {

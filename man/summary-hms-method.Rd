@@ -2,7 +2,7 @@
 % Please edit documentation in R/hms_class.R
 \name{summary,hms-method}
 \alias{summary,hms-method}
-\title{summary}
+\title{Summary method for class "hms".}
 \usage{
 \S4method{summary}{hms}(object, ...)
 }
@@ -15,6 +15,16 @@
 \item other summary arguments
 }}
 }
+\value{
+Returns a list with fields: fitness, solution, metaepochs, deme_population_sizes,
+lower_bound, upper_bound, computation_time. These fields should match fields
+of class "hms".
+}
 \description{
-summary
+Summary method for class "hms".
+}
+\examples{
+f <- function(x) x
+result <- hms(fitness = f, lower = -5, upper = 5)
+summary(result)
 }

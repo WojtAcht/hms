@@ -1,2 +1,5 @@
 .Rproj.user
 .Rhistory
+docs
+revdep
+.DS_Store

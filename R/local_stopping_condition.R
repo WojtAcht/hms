@@ -8,7 +8,7 @@
 #'
 #' @export
 #'
-#' @example
+#' @examples
 #' local_stopping_condition <- lsc_metaepochs_without_improvement(5)
 lsc_metaepochs_without_improvement <- function(max_metaepochs_without_improvement) {
   function(deme, previous_metaepoch_snapshots) {
@@ -28,7 +28,7 @@ lsc_metaepochs_without_improvement <- function(max_metaepochs_without_improvemen
 #'
 #' @export
 #'
-#' @example
+#' @examples
 #' local_stopping_condition <- lsc_max_fitness_evaluations(500)
 lsc_max_fitness_evaluations <- function(max_evaluations) {
   function(deme, previous_metaepoch_snapshots) {
@@ -47,7 +47,7 @@ lsc_max_fitness_evaluations <- function(max_evaluations) {
 #'
 #' @export
 #'
-#' @example
+#' @examples
 #' local_stopping_condition <- lsc_metaepochs_without_active_child(3)
 lsc_metaepochs_without_active_child <- function(metaepochs_limit) {
   function(deme, previous_metaepoch_snapshots) {
@@ -73,7 +73,7 @@ lsc_metaepochs_without_active_child <- function(metaepochs_limit) {
 #'
 #' @export
 #'
-#' @example
+#' @examples
 #' local_stopping_condition <- lsc_trivial()
 lsc_trivial <- function() {
   function(deme, previous_metaepoch_snapshots) {

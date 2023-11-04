@@ -3,25 +3,28 @@
 \docType{class}
 \name{MetaepochSnapshot-class}
 \alias{MetaepochSnapshot-class}
-\title{MetaepochSnapshot}
+\title{A S4 class representing a snapshot of one metaepoch.}
 \description{
-MetaepochSnapshot
+A S4 class representing a snapshot of one metaepoch.
 }
 \section{Slots}{
 
 \describe{
-\item{\code{demes}}{list.}
+\item{\code{demes}}{list of objects of class Deme.}
 
-\item{\code{best_fitness}}{numeric.}
+\item{\code{best_fitness}}{numeric - best fitness value of a metaepoch.}
 
-\item{\code{best_solution}}{numeric.}
+\item{\code{best_solution}}{numeric - best solution of a metaepoch.}
 
-\item{\code{time_in_seconds}}{numeric.}
+\item{\code{time_in_seconds}}{numeric - time of metaepoch in seconds.}
 
-\item{\code{fitness_evaluations}}{numeric.}
+\item{\code{fitness_evaluations}}{numeric - number of fitness evaluations.}
 
-\item{\code{blocked_sprouts}}{list.}
+\item{\code{blocked_sprouts}}{list - list of sprouts that were blocked by sprouting
+condition. A sprout is a potential origin of a new Deme, it can be blocked
+by sc -- sprouting condition. See \code{\link{sc_max_metric}} for more details.}
 
-\item{\code{is_evolutionary}}{logical.}
+\item{\code{is_evolutionary}}{logical - \code{TRUE} for all metaepochs except the
+gradient one.}
 }}
 

@@ -2,7 +2,7 @@
 % Please edit documentation in R/hms_class.R
 \name{plotPopulation}
 \alias{plotPopulation}
-\title{plotPopulation}
+\title{plotPopulation method for "hms" class.}
 \usage{
 plotPopulation(object, dimensions)
 }
@@ -15,6 +15,15 @@ plotPopulation(object, dimensions)
 \item two selected dimensions
 }}
 }
+\value{
+It doesn't return anything meaningful. It plots the selected two
+dimensions of a population.
+}
 \description{
-plotPopulation
+plotPopulation method for "hms" class.
+}
+\examples{
+f <- function(x) x
+result <- hms(fitness = f, lower = -5, upper = 5)
+plotPopulation(result, c(1, 1))
 }

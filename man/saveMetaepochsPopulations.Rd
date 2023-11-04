@@ -2,7 +2,7 @@
 % Please edit documentation in R/hms_class.R
 \name{saveMetaepochsPopulations}
 \alias{saveMetaepochsPopulations}
-\title{saveMetaepochsPopulations}
+\title{saveMetaepochsPopulations method for "hms" class.}
 \usage{
 saveMetaepochsPopulations(object, path, dimensions)
 }
@@ -13,6 +13,18 @@ saveMetaepochsPopulations(object, path, dimensions)
 
 \item{dimensions}{vector of two selected dimensions e.g. c(1,2)}
 }
+\value{
+It doesn't return anything. It creates plots and saves them to a specified
+directory.
+}
 \description{
-saveMetaepochsPopulations
+saveMetaepochsPopulations method for "hms" class.
+}
+\examples{
+fitness <- function(x) x[1] + x[2]
+lower <- c(-5, -5)
+upper <- c(5, 5)
+result <- hms(fitness = fitness, lower = lower, upper = upper)
+selected_dimensions <- c(1, 2)
+saveMetaepochsPopulations(result, tempdir(), selected_dimensions)
 }

@@ -5,6 +5,9 @@
 #'
 #' @return numeric - euclidean distance between x and y
 #' @export
+#'
+#' @examples
+#' euclidean_distance(c(1, 1), c(1, 2))
 euclidean_distance <- function(x, y) {
   sqrt(sum((x - y)^2))
 }
@@ -16,6 +19,9 @@ euclidean_distance <- function(x, y) {
 #'
 #' @return numeric - manhattan distance between x and y
 #' @export
+#'
+#' @examples
+#' manhattan_distance(c(1, 1), c(1, 2))
 manhattan_distance <- function(x, y) {
   sum(mapply(abs, x - y))
 }

@@ -2,7 +2,7 @@
 % Please edit documentation in R/hms_class.R
 \name{print,hms-method}
 \alias{print,hms-method}
-\title{print}
+\title{Print method for class "hms".}
 \usage{
 \S4method{print}{hms}(x, ...)
 }
@@ -15,6 +15,14 @@
 \item other print arguments
 }}
 }
+\value{
+It does not return anything. The obvious side effect is output to the terminal.
+}
 \description{
-print
+Print method for class "hms".
+}
+\examples{
+f <- function(x) x
+result <- hms(fitness = f, lower = -5, upper = 5)
+print(result)
 }

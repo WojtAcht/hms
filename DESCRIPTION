@@ -1,24 +1,40 @@
-Package: hms
-Title: Hierarchic Memetic Strategy
-Version: 0.0.0.9000
+Package: hmsr
+Title: Multipopulation Evolutionary Strategy HMS
+Version: 1.0.1
 Authors@R: c(
+    person(given = "Wojciech",
+           family = "Achtelik",
+           role = c("aut", "cre"),
+           email = "wachtelik@gmail.com"),
     person(given = "Marcin",
            family = "Kozubek",
            role = "aut",
            email = "mkozubek@protonmail.com"),
-    person(given = "Wojciech",
-           family = "Achtelik",
-           role = "cre",
-           email = "wachtelik@gmail.com"))
-Description: Implementation of evolutionary strategy HMS in R.
-License: GPL (>= 2)
+    person(given = "Maciej",
+           family = "Smołka",
+           role = c("ths", "aut"),
+           email = "smolka@agh.edu.pl",
+           comment = c(ORCID = "0000-0002-3386-0555", "Java original")),
+    person(given = "AGH University of Kraków",
+           role = "cph"
+    ))
+Description: 
+  The HMS (Hierarchic Memetic Strategy) is a composite global optimization
+  strategy consisting of a multi-population evolutionary strategy and some
+  auxiliary methods. The HMS makes use of a dynamically-evolving data structure
+  that provides an organization among the component populations. It is a tree
+  with a fixed maximal height and variable internal node degree. Each component
+  population is governed by a particular evolutionary engine. This package
+  provides a simple R implementation with examples of using different genetic
+  algorithms as the population engines. References: J. Sawicki, M. Łoś,
+  M. Smołka, J. Alvarez-Aramberri (2022) <doi:10.1007/s11047-020-09836-w>.
+License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.2
 Imports:
     GA,
-    purrr,
     msm,
     methods,
     uuid,
@@ -29,5 +45,7 @@ Suggests:
     filelock,
     parallel,
     doParallel,
-    grDevices
-Config/testthat/edition: 3
+    grDevices,
+    smoof
+BugReports: https://github.com/WojtAcht/hms/issues
+URL: https://wojtacht.github.io/hms/
