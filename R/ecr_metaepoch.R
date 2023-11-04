@@ -45,7 +45,7 @@ ecr_metaepoch <- function(config_ecr) { # nocov start
       "solution" = result$best.x[[1]],
       "population" = population,
       "value" = result$best.y[[1]],
-      "fitnessValues" = NULL
+      "fitness_values" = result$last.fitness
     )
   }
 }

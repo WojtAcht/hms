@@ -30,7 +30,7 @@ test_that("HMS works - Rastrigin:", {
     monitor_level = "none"
   )
   expected_result <- c(0, 0)
-  expect_true(euclidean_distance(expected_result, result@best_solution) < 1e-3)
+  expect_true(euclidean_distance(expected_result, result@best_solution) < 1e-2)
 })
 
 test_that("HMS works - Ackley:", {

@@ -142,7 +142,14 @@ hms <- function(tree_height = 3,
     }, demes)) {
       start_metaepoch_time <- Sys.time()
       deme_evaluations_count <- 0
+      deme_with_population_and_fitness <- !is.null(deme@population) && !is.null(deme@fitness_values)
       deme_f <- function(x) {
+        if(deme_with_population_and_fitness){
+          x_index <- find_row_index(deme@population, x)
+          if(!is.na(x_index)) {
+            return(deme@fitness_values[x_index])
+          }
+        }
         lock <- if (parallel) filelock::lock("/deme.lck") else NULL
         deme_evaluations_count <<- deme_evaluations_count + 1
         if (parallel) {
@@ -153,7 +160,7 @@ hms <- function(tree_height = 3,
       metaepoch_result <- run_metaepoch(
         deme_f,
         deme@population,
-        deme@fitnessValues,
+        deme@fitness_values,
         lower,
         upper,
         deme@level,
