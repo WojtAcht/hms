@@ -37,13 +37,3 @@ matrix_to_list <- function(x) {
 list_to_matrix <- function(x, ncol) {
   matrix(unlist(x), ncol = ncol, byrow = TRUE)
 }
-
-find_row_index <- function(m, row) {
-  matches <- apply(m, 1, function(r) all(r == row))
-  index <- which(matches)
-  if (length(index) > 0) {
-    return(index[1])
-  } else {
-    return(NA)
-  }
-}

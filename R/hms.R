@@ -117,13 +117,16 @@ hms <- function(tree_height = 3,
   metaepochs_count <- 0
   metaepoch_snapshots <- list()
   fitness_evaluations_count <- 0
+  memoised_fitness <- memoise::memoise(fitness)
   f <- function(x) {
-    lock <- if (parallel) filelock::lock("/general.lck") else NULL
-    fitness_evaluations_count <<- fitness_evaluations_count + 1
-    if (parallel) {
-      filelock::unlock(lock)
+    if (!memoise::has_cache(memoised_fitness)(x)) {
+      lock <- if (parallel) filelock::lock("/general.lck") else NULL
+      fitness_evaluations_count <<- fitness_evaluations_count + 1
+      if (parallel) {
+        filelock::unlock(lock)
+      }
     }
-    fitness(x)
+    memoised_fitness(x)
   }
   while (!gsc(metaepoch_snapshots)) {
     if (length(Filter(function(deme) {
@@ -144,16 +147,12 @@ hms <- function(tree_height = 3,
       deme_evaluations_count <- 0
       deme_with_population_and_fitness <- !is.null(deme@population) && !is.null(deme@fitness_values)
       deme_f <- function(x) {
-        if(deme_with_population_and_fitness){
-          x_index <- find_row_index(deme@population, x)
-          if(!is.na(x_index)) {
-            return(deme@fitness_values[x_index])
+        if (!memoise::has_cache(memoised_fitness)(x)) {
+          lock <- if (parallel) filelock::lock("/deme.lck") else NULL
+          deme_evaluations_count <<- deme_evaluations_count + 1
+          if (parallel) {
+            filelock::unlock(lock)
           }
-        }
-        lock <- if (parallel) filelock::lock("/deme.lck") else NULL
-        deme_evaluations_count <<- deme_evaluations_count + 1
-        if (parallel) {
-          filelock::unlock(lock)
         }
         f(x)
       }
