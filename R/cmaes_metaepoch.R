@@ -63,7 +63,9 @@ cmaes_metaepoch <- function(config_cmaes) {
       params[param_name] <- config[param_name]
     }
     result <- do.call(cmaesr::cmaes, params)
-    population <- utils::tail(result$population.trace, n = 1)[[1]]
+    last_two_populations <- utils::tail(result$population.trace, n = 2)
+    population <- t(cbind(last_two_populations[[1]], last_two_populations[[2]]))
+    population <- population[1:population_size, ]
     list(
       "solution" = result$best.param,
       "population" = population,
