@@ -50,6 +50,10 @@ cma_es_metaepoch <- function(config_cmaes) {
         return(NULL)
       }
     )
+    if(is.null(result$par)){
+      # Something went wrong, the result is NULL.
+      return(NULL)
+    }
     population <- matrix(rep(result$par, population_size), ncol = length(result$par), byrow = TRUE)
     value <- ifelse(minimize, result$value, result$value * -1)
     list(
