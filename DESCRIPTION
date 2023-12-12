@@ -48,6 +48,7 @@ Suggests:
     grDevices,
     smoof,
     ParamHelpers,
-    cmaesr
+    cmaesr,
+    cmaes
 BugReports: https://github.com/WojtAcht/hms/issues
 URL: https://wojtacht.github.io/hms/

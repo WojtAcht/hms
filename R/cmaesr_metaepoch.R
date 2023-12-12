@@ -9,11 +9,11 @@
 #'
 #' @examples
 #' tree_height <- 3
-#' empty_config_cmaes <- lapply(1:tree_height, function(x) {
+#' empty_config_cmaesr <- lapply(1:tree_height, function(x) {
 #'   list()
 #' })
-#' cmaes_metaepoch(empty_config_cmaes)
-cmaes_metaepoch <- function(config_cmaes) {
+#' cmaesr_metaepoch(empty_config_cmaesr)
+cmaesr_metaepoch <- function(config_cmaes) {
   # nocov start
   function(fitness,
            suggestions,
@@ -29,14 +29,12 @@ cmaes_metaepoch <- function(config_cmaes) {
     suggestions_centroid <- colMeans(suggestions)
     iterations_count <- 5
     control <- list(
-      "mu" = population_size %/% 2,
       "lambda" = population_size,
-      "stop.ons" = list(cmaesr::stopOnMaxIters(iterations_count)),
-      "log.population" = TRUE
+      "stop.ons" = list(cmaesr::stopOnMaxIters(iterations_count))
     )
     domain_params <- list()
     for (variable_index in seq_along(lower)) {
-      domain_param <- makeNumericParam(paste("x", variable_index, sep = ""),
+      domain_param <- ParamHelpers::makeNumericParam(paste("x", variable_index, sep = ""),
         lower = lower[variable_index],
         upper = upper[variable_index]
       )
@@ -62,10 +60,16 @@ cmaes_metaepoch <- function(config_cmaes) {
     for (param_name in legal_passed_param_names) {
       params[param_name] <- config[param_name]
     }
-    result <- do.call(cmaesr::cmaes, params)
-    last_two_populations <- utils::tail(result$population.trace, n = 2)
-    population <- t(cbind(last_two_populations[[1]], last_two_populations[[2]]))
-    population <- population[1:population_size, ]
+    tryCatch(
+      {
+        result <- do.call(cmaesr::cmaes, params)
+      },
+      error = function(e) {
+        save(params, file="params.Rdata")
+        stop("cmaesr::cmaes failed with error: ", e)
+      }
+    )
+    population <- matrix(rep(result$best.param, population_size), ncol = length(result$best.param), byrow = TRUE)
     list(
       "solution" = result$best.param,
       "population" = population,
@@ -74,9 +78,9 @@ cmaes_metaepoch <- function(config_cmaes) {
   }
 }
 
-default_cmaes_metaepoch <- function(tree_height) {
-  empty_config_cmaes <- lapply(1:tree_height, function(x) {
+default_cmaesr_metaepoch <- function(tree_height) {
+  empty_config_cmaesr <- lapply(1:tree_height, function(x) {
     list()
   })
-  cmaes_metaepoch(empty_config_cmase)
+  cmaesr_metaepoch(empty_config_cmaesr)
 } # nocov end

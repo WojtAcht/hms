@@ -36,7 +36,14 @@ ga_metaepoch <- function(config_ga) {
     params$type <- "real-valued"
     params$monitor <- FALSE
 
-    GA <- do.call(GA::ga, params)
+    tryCatch(
+      {
+        GA <- do.call(GA::ga, params)
+      },
+      error = function(e) {
+        stop("GA::ga failed with error: ", e)
+      }
+    )
     value <- ifelse(minimize, GA@fitnessValue * -1, GA@fitnessValue)
     list("solution" = c(GA@solution[1, ]), "population" = GA@population, "value" = value)
   }
