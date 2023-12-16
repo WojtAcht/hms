@@ -177,6 +177,7 @@ hms <- function(tree_height = 3,
 
       if (is_root(deme)) {
         if (with_restarts && lsc(deme, metaepoch_snapshots)) {
+          message("Restarting root's population.")
           deme@population <- create_population(
             mean = NULL,
             lower = lower,
@@ -190,10 +191,8 @@ hms <- function(tree_height = 3,
         deme@is_active <- FALSE
         next_metaepoch_demes <- c(next_metaepoch_demes, deme)
         next
-      } else {
-        next_metaepoch_demes <- c(next_metaepoch_demes, deme)
       }
-
+      next_metaepoch_demes <- c(next_metaepoch_demes, deme)
       # Leaves cannot sprout
       if (deme@level >= tree_height) next
 
