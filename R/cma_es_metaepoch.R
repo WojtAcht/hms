@@ -16,27 +16,30 @@
 cma_es_metaepoch <- function(config_cmaes) {
   # nocov start
   function(fitness,
-           suggestions,
+           deme,
            lower,
            upper,
-           tree_level,
            minimize) {
     cma_es_fitness <- ifelse(minimize, fitness, function(x) {
       -1 * fitness(x)
     })
-    config <- config_cmaes[[tree_level]]
+    config <- config_cmaes[[deme@level]]
     ignore_errors <- ifelse(is.null(config$ignore_errors), TRUE, config$ignore_errors)
-    population_size <- nrow(suggestions)
-    suggestions_centroid <- colMeans(suggestions)
+    population_size <- nrow(deme@population)
+    par <- ifelse(deme@evaluations_count == 0, deme@sprout, colMeans(deme@population))
     iterations_count <- 5
     control <- list(
       "maxit" = iterations_count,
       "keep.best" = TRUE,
       "mu" = population_size %/% 2,
-      "lambda" = population_size
+      "lambda" = population_size,
+      "diag.sigma" = TRUE
     )
+    if(!is.null(deme@context$sigma)) {
+      control$sigma <- deme@context$sigma
+    }
     params <- list(
-      "par" = suggestions_centroid,
+      "par" = par,
       "fn" = cma_es_fitness,
       "lower" = lower,
       "upper" = upper,
@@ -61,12 +64,13 @@ cma_es_metaepoch <- function(config_cmaes) {
     }
     population <- matrix(rep(result$par, population_size), ncol = length(result$par), byrow = TRUE)
     value <- ifelse(minimize, result$value, result$value * -1)
+    sigma <- utils::tail(result$diagnostic$sigma, n=1)
     list(
       "solution" = result$par,
       "population" = population,
       "value" = value,
       "fitness_values" = NULL,
-      "context" = NULL
+      "context" = list("sigma" = sigma)
     )
   }
 }

@@ -19,16 +19,16 @@
 #' })
 #' ga_metaepoch(empty_config_ga)
 ga_metaepoch <- function(config_ga) {
-  function(fitness, suggestions, lower, upper, tree_level, minimize) {
+  function(fitness, deme, lower, upper, minimize) {
     ga_fitness <- ifelse(minimize, function(x) {
       -1 * fitness(x)
     }, fitness)
-    config <- config_ga[[tree_level]]
+    config <- config_ga[[deme@level]]
     ignore_errors <- ifelse(is.null(config$ignore_errors), TRUE, config$ignore_errors)
     legal_passed_param_names <- Filter(function(name) {
       name %in% methods::formalArgs(GA::ga)
     }, names(config))
-    params <- list("maxiter" = 5, "popSize" = nrow(suggestions))
+    params <- list("maxiter" = 5, "popSize" = nrow(deme@population))
     for (param_name in legal_passed_param_names) {
       params[param_name] <- config[param_name]
     }
@@ -36,7 +36,7 @@ ga_metaepoch <- function(config_ga) {
     params$fitness <- ga_fitness
     params$lower <- lower
     params$upper <- upper
-    params$suggestions <- suggestions
+    params$suggestions <- deme@population
     params$type <- "real-valued"
     params$monitor <- FALSE
     tryCatch(
