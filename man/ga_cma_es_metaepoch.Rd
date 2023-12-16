@@ -24,6 +24,6 @@ First level: GA, second level: CMA-ES.
 tree_height <- 2
 ga_config <- list()
 cma_es_config <- list()
-config <- list(ga_configm cma_es_config)
+config <- list(ga_config, cma_es_config)
 ga_cma_es_metaepoch(config)
 }
