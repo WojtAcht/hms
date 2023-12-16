@@ -26,7 +26,11 @@ cma_es_metaepoch <- function(config_cmaes) {
     config <- config_cmaes[[deme@level]]
     ignore_errors <- ifelse(is.null(config$ignore_errors), TRUE, config$ignore_errors)
     population_size <- nrow(deme@population)
-    par <- ifelse(deme@evaluations_count == 0, deme@sprout, colMeans(deme@population))
+    par <- if (deme@evaluations_count == 0) {
+      deme@sprout
+    } else {
+      colMeans(deme@population)
+    }
     iterations_count <- 5
     control <- list(
       "maxit" = iterations_count,
@@ -35,7 +39,7 @@ cma_es_metaepoch <- function(config_cmaes) {
       "lambda" = population_size,
       "diag.sigma" = TRUE
     )
-    if(!is.null(deme@context$sigma)) {
+    if (!is.null(deme@context$sigma)) {
       control$sigma <- deme@context$sigma
     }
     params <- list(
@@ -60,16 +64,18 @@ cma_es_metaepoch <- function(config_cmaes) {
     )
     if (is.null(result$par)) {
       # Something went wrong, the result is NULL.
+      warning("cmaes::cma_es returned NULL")
       return(NULL)
     }
     population <- matrix(rep(result$par, population_size), ncol = length(result$par), byrow = TRUE)
     value <- ifelse(minimize, result$value, result$value * -1)
-    sigma <- utils::tail(result$diagnostic$sigma, n=1)
+    fitness_values <- rep(value, population_size)
+    sigma <- utils::tail(result$diagnostic$sigma, n = 1)
     list(
       "solution" = result$par,
       "population" = population,
       "value" = value,
-      "fitness_values" = NULL,
+      "fitness_values" = fitness_values,
       "context" = list("sigma" = sigma)
     )
   }
