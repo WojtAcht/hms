@@ -12,10 +12,13 @@ ga_metaepoch(config_ga)
 }}
 }
 \value{
-list with named fields: solution, population, value. A solution is a
-value of the decision variable giving the best fitness. A population is a
-matrix representing final population. Value is the value of a fitness
-function for the solution.
+list with named fields: solution, population, value, fitness_values, context or NULL.
+A solution is a value of the decision variable giving the best fitness.
+A population is a matrix representing final population.
+A value is the value of a fitness function for the solution.
+A fitness_values is a vector of fitness values for the final population.
+A context is a list with internal state of the metaepoch (or NULL if it's not necessary).
+NULL can be returned if GA::ga fails and "ignore_errors" is TRUE in the config.
 }
 \description{
 Function that runs one GA metaepoch. Wrapper function for GA::ga.
@@ -23,7 +26,7 @@ Function that runs one GA metaepoch. Wrapper function for GA::ga.
 \examples{
 tree_height <- 3
 empty_config_ga <- lapply(1:tree_height, function(x) {
-  list()
+  list("ignore_errors" = TRUE)
 })
 ga_metaepoch(empty_config_ga)
 }

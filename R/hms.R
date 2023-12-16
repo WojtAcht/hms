@@ -35,6 +35,7 @@
 #' @param monitor_level string - one of: 'none', 'basic', 'basic_tree', 'verbose_tree'.
 #' @param parallel logical - \code{TRUE} when run_metaepoch runs in parallel.
 #' @param minimize logical - \code{TRUE} when fitness shall be minimized.
+#' @param use_memoise logical - \code{TRUE} when memoise package shall be used to cache fitness function values.
 #'
 #' @return Returns an object of class hms.
 #' @export
@@ -63,7 +64,8 @@ hms <- function(tree_height = 3,
                 run_gradient_method,
                 with_restarts = FALSE,
                 monitor_level = "basic",
-                parallel = FALSE) {
+                parallel = FALSE,
+                use_memoise = FALSE) {
   if (tree_height < 1) {
     stop("Max tree height has to be greater or equal 1.")
   }
@@ -119,13 +121,20 @@ hms <- function(tree_height = 3,
   metaepochs_count <- 0
   metaepoch_snapshots <- list()
   fitness_evaluations_count <- 0
+  memoised_fitness <- if (use_memoise) {
+    memoise::memoise(fitness)
+  } else {
+    fitness
+  }
   f <- function(x) {
-    lock <- if (parallel) filelock::lock("/general.lck") else NULL
-    fitness_evaluations_count <<- fitness_evaluations_count + 1
-    if (parallel) {
-      filelock::unlock(lock)
+    if (!use_memoise || !memoise::has_cache(memoised_fitness)(x)) {
+      lock <- if (parallel) filelock::lock("/general.lck") else NULL
+      fitness_evaluations_count <<- fitness_evaluations_count + 1
+      if (parallel) {
+        filelock::unlock(lock)
+      }
     }
-    fitness(x)
+    memoised_fitness(x)
   }
   while (!gsc(metaepoch_snapshots)) {
     if (length(Filter(function(deme) {
@@ -145,31 +154,39 @@ hms <- function(tree_height = 3,
       start_metaepoch_time <- Sys.time()
       deme_evaluations_count <- 0
       deme_f <- function(x) {
-        lock <- if (parallel) filelock::lock("/deme.lck") else NULL
-        deme_evaluations_count <<- deme_evaluations_count + 1
-        if (parallel) {
-          filelock::unlock(lock)
+        if (!use_memoise || !memoise::has_cache(memoised_fitness)(x)) {
+          lock <- if (parallel) filelock::lock("/deme.lck") else NULL
+          deme_evaluations_count <<- deme_evaluations_count + 1
+          if (parallel) {
+            filelock::unlock(lock)
+          }
         }
         f(x)
       }
-      metaepoch_result <- run_metaepoch(deme_f, deme@population, lower, upper, deme@level, minimize)
-
+      metaepoch_result <- run_metaepoch(deme_f, deme, lower, upper, minimize)
       end_metaepoch_time <- Sys.time()
       total_metaepoch_time <- total_metaepoch_time + (end_metaepoch_time - start_metaepoch_time)
-
-      deme <- update_deme(metaepoch_result, deme, minimize)
       deme@evaluations_count <- deme@evaluations_count + deme_evaluations_count
+      if (is.null(metaepoch_result)) {
+        # If metaepoch_result is NULL, it means that run_metaepoch failed.
+        deme@is_active <- FALSE
+        next_metaepoch_demes <- c(next_metaepoch_demes, deme)
+        next
+      }
+      deme <- update_deme(metaepoch_result, deme, minimize)
 
-      if (with_restarts && is_root(deme) && lsc(deme, metaepoch_snapshots)) {
-        deme@population <- create_population(
-          mean = NULL,
-          lower = lower,
-          upper = upper,
-          population_size = population_sizes[[deme@level]],
-          tree_level = deme@level
-        )
-        deme@fitness_values <- NULL
-      } else if (!is_root(deme) && lsc(deme, metaepoch_snapshots)) {
+      if (is_root(deme)) {
+        if (with_restarts && lsc(deme, metaepoch_snapshots)) {
+          deme@population <- create_population(
+            mean = NULL,
+            lower = lower,
+            upper = upper,
+            population_size = population_sizes[[deme@level]],
+            tree_level = deme@level
+          )
+          deme@fitness_values <- NULL
+        }
+      } else if (lsc(deme, metaepoch_snapshots)) {
         deme@is_active <- FALSE
         next_metaepoch_demes <- c(next_metaepoch_demes, deme)
         next

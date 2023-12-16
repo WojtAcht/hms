@@ -38,7 +38,8 @@ Imports:
     msm,
     methods,
     uuid,
-    graphics
+    graphics,
+    memoise
 Suggests: 
     testthat (>= 3.0.0),
     ecr,
@@ -46,6 +47,7 @@ Suggests:
     parallel,
     doParallel,
     grDevices,
-    smoof
+    smoof,
+    cmaes
 BugReports: https://github.com/WojtAcht/hms/issues
 URL: https://wojtacht.github.io/hms/

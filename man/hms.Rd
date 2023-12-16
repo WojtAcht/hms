@@ -23,7 +23,8 @@ hms(
   run_gradient_method,
   with_restarts = FALSE,
   monitor_level = "basic",
-  parallel = FALSE
+  parallel = FALSE,
+  use_memoise = FALSE
 )
 }
 \arguments{
@@ -80,6 +81,8 @@ for all leaves at the end of the computation to refine their best solutions.}
 \item{monitor_level}{string - one of: 'none', 'basic', 'basic_tree', 'verbose_tree'.}
 
 \item{parallel}{logical - \code{TRUE} when run_metaepoch runs in parallel.}
+
+\item{use_memoise}{logical - \code{TRUE} when memoise package shall be used to cache fitness function values.}
 }
 \value{
 Returns an object of class hms.
