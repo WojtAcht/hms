@@ -43,11 +43,10 @@ ga_metaepoch <- function(config_ga) {
         GA <- do.call(GA::ga, params)
       },
       error = function(e) {
-        if(ignore_errors){
+        if (ignore_errors) {
           warning("GA::ga failed with error: ", e)
           return(NULL)
-        }
-        else{
+        } else {
           stop("GA::ga failed with error: ", e)
         }
       }

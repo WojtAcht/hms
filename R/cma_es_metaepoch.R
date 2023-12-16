@@ -47,16 +47,15 @@ cma_es_metaepoch <- function(config_cmaes) {
         result <- do.call(cmaes::cma_es, params)
       },
       error = function(e) {
-        if(ignore_errors){
+        if (ignore_errors) {
           warning("cmaes::cma_es failed with error: ", e)
           return(NULL)
-        }
-        else{
+        } else {
           stop("cmaes::cma_es failed with error: ", e)
         }
       }
     )
-    if(is.null(result$par)){
+    if (is.null(result$par)) {
       # Something went wrong, the result is NULL.
       return(NULL)
     }

@@ -165,7 +165,7 @@ hms <- function(tree_height = 3,
       end_metaepoch_time <- Sys.time()
       total_metaepoch_time <- total_metaepoch_time + (end_metaepoch_time - start_metaepoch_time)
       deme@evaluations_count <- deme@evaluations_count + deme_evaluations_count
-      if(is.null(metaepoch_result)){
+      if (is.null(metaepoch_result)) {
         # If metaepoch_result is NULL, it means that run_metaepoch failed.
         deme@is_active <- FALSE
         next_metaepoch_demes <- c(next_metaepoch_demes, deme)
