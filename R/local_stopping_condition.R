@@ -14,7 +14,7 @@ lsc_metaepochs_without_improvement <- function(max_metaepochs_without_improvemen
   function(deme, previous_metaepoch_snapshots) {
     best_fitness_metaepoch <- match(deme@best_fitness, deme@best_fitnesses_per_metaepoch)
     metaepoch_count <- length(deme@best_fitnesses_per_metaepoch)
-    !is_root(deme) & best_fitness_metaepoch <= metaepoch_count - max_metaepochs_without_improvement
+    best_fitness_metaepoch <= metaepoch_count - max_metaepochs_without_improvement
   }
 }
 
