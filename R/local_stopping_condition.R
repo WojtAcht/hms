@@ -32,7 +32,7 @@ lsc_metaepochs_without_improvement <- function(max_metaepochs_without_improvemen
 #' local_stopping_condition <- lsc_max_fitness_evaluations(500)
 lsc_max_fitness_evaluations <- function(max_evaluations) {
   function(deme, previous_metaepoch_snapshots) {
-    !is_root(deme) & deme@evaluations_count > max_evaluations
+    deme@evaluations_count > max_evaluations
   }
 }
 
