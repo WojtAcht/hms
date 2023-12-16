@@ -2,8 +2,8 @@
 #'
 #' @param config_ecr - list of ecr::ecr params
 #'
-#' @return list with named fields: solution, population, value. See
-#' \code{\link{ga_metaepoch}} for more details.
+#' @return list with named fields: solution, population, value, fitness_values.
+#' See \code{\link{ga_metaepoch}} for more details.
 #'
 #' @export
 #'
