@@ -2,8 +2,8 @@
 #'
 #' @param config_ecr - list of ecr::ecr params
 #'
-#' @return list with named fields: solution, population, value. See
-#' \code{\link{ga_metaepoch}} for more details.
+#' @return list with named fields: solution, population, value, fitness_values.
+#' See \code{\link{ga_metaepoch}} for more details.
 #'
 #' @export
 #'
@@ -41,7 +41,12 @@ ecr_metaepoch <- function(config_ecr) { # nocov start
     params$terminators <- list(ecr::stopOnIters(max.iter = iterations_count * population_size))
     result <- do.call(ecr::ecr, params)
     population <- list_to_matrix(result$last.population, length(lower))
-    list("solution" = result$best.x[[1]], "population" = population, "value" = result$best.y[[1]])
+    list(
+      "solution" = result$best.x[[1]],
+      "population" = population,
+      "value" = result$best.y[[1]],
+      "fitness_values" = result$last.fitness
+    )
   }
 }
 

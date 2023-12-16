@@ -38,7 +38,8 @@ Imports:
     msm,
     methods,
     uuid,
-    graphics
+    graphics,
+    memoise
 Suggests: 
     testthat (>= 3.0.0),
     ecr,

@@ -12,8 +12,8 @@ ecr_metaepoch(config_ecr)
 }}
 }
 \value{
-list with named fields: solution, population, value. See
-\code{\link{ga_metaepoch}} for more details.
+list with named fields: solution, population, value, fitness_values.
+See \code{\link{ga_metaepoch}} for more details.
 }
 \description{
 Function that runs one ecr metaepoch. Wrapper function for ecr::ecr.

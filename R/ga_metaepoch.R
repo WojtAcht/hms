@@ -2,10 +2,11 @@
 #'
 #' @param config_ga - list of GA::ga params
 #'
-#' @return list with named fields: solution, population, value. A solution is a
-#' value of the decision variable giving the best fitness. A population is a
-#' matrix representing final population. Value is the value of a fitness
-#' function for the solution.
+#' @return list with named fields: solution, population, value, fitness_values.
+#' A solution is a value of the decision variable giving the best fitness.
+#' A population is a matrix representing final population.
+#' A value is the value of a fitness function for the solution.
+#' A fitness_values is a vector of fitness values for the final population.
 #'
 #' @export
 #'
@@ -36,7 +37,6 @@ ga_metaepoch <- function(config_ga) {
     params$suggestions <- suggestions
     params$type <- "real-valued"
     params$monitor <- FALSE
-
     tryCatch(
       {
         GA <- do.call(GA::ga, params)
@@ -52,7 +52,13 @@ ga_metaepoch <- function(config_ga) {
       }
     )
     value <- ifelse(minimize, GA@fitnessValue * -1, GA@fitnessValue)
-    list("solution" = c(GA@solution[1, ]), "population" = GA@population, "value" = value)
+    fitness_values <- ifelse(minimize, GA@fitness * -1, GA@fitness)
+    list(
+      "solution" = c(GA@solution[1, ]),
+      "population" = GA@population,
+      "value" = value,
+      "fitness_values" = fitness_values
+    )
   }
 }
 

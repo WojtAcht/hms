@@ -12,10 +12,11 @@ ga_metaepoch(config_ga)
 }}
 }
 \value{
-list with named fields: solution, population, value. A solution is a
-value of the decision variable giving the best fitness. A population is a
-matrix representing final population. Value is the value of a fitness
-function for the solution.
+list with named fields: solution, population, value, fitness_values.
+A solution is a value of the decision variable giving the best fitness.
+A population is a matrix representing final population.
+A value is the value of a fitness function for the solution.
+A fitness_values is a vector of fitness values for the final population.
 }
 \description{
 Function that runs one GA metaepoch. Wrapper function for GA::ga.
