@@ -151,7 +151,6 @@ hms <- function(tree_height = 3,
     }, demes)) {
       start_metaepoch_time <- Sys.time()
       deme_evaluations_count <- 0
-      deme_with_population_and_fitness <- !is.null(deme@population) && !is.null(deme@fitness_values)
       deme_f <- function(x) {
         if (!use_memoise || !memoise::has_cache(memoised_fitness)(x)) {
           lock <- if (parallel) filelock::lock("/deme.lck") else NULL
@@ -165,7 +164,6 @@ hms <- function(tree_height = 3,
       metaepoch_result <- run_metaepoch(
         deme_f,
         deme@population,
-        deme@fitness_values,
         lower,
         upper,
         deme@level,

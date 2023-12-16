@@ -16,7 +16,7 @@
 #' })
 #' ga_metaepoch(empty_config_ga)
 ga_metaepoch <- function(config_ga) {
-  function(fitness, suggestions, fitness_suggestions, lower, upper, tree_level, minimize) {
+  function(fitness, suggestions, lower, upper, tree_level, minimize) {
     ga_fitness <- ifelse(minimize, function(x) {
       -1 * fitness(x)
     }, fitness)
@@ -35,14 +35,7 @@ ga_metaepoch <- function(config_ga) {
     params$suggestions <- suggestions
     params$type <- "real-valued"
     params$monitor <- FALSE
-    tryCatch(
-      {
-        GA <- do.call(GA::ga, params)
-      },
-      error = function(e) {
-        stop("GA::ga failed with error: ", e)
-      }
-    )
+    GA <- do.call(GA::ga, params)
     value <- ifelse(minimize, GA@fitnessValue * -1, GA@fitnessValue)
     fitness_values <- ifelse(minimize, GA@fitness * -1, GA@fitness)
     list(
