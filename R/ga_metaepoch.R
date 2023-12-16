@@ -2,18 +2,19 @@
 #'
 #' @param config_ga - list of GA::ga params
 #'
-#' @return list with named fields: solution, population, value, fitness_values.
+#' @return list with named fields: solution, population, value, fitness_values or NULL.
 #' A solution is a value of the decision variable giving the best fitness.
 #' A population is a matrix representing final population.
 #' A value is the value of a fitness function for the solution.
 #' A fitness_values is a vector of fitness values for the final population.
+#' NULL can be returned if GA::ga fails and "ignore_errors" is TRUE in the config.
 #'
 #' @export
 #'
 #' @examples
 #' tree_height <- 3
 #' empty_config_ga <- lapply(1:tree_height, function(x) {
-#'   list()
+#'   list("ignore_errors" = TRUE)
 #' })
 #' ga_metaepoch(empty_config_ga)
 ga_metaepoch <- function(config_ga) {
