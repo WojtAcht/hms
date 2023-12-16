@@ -25,6 +25,7 @@ cma_es_metaepoch <- function(config_cmaes) {
       -1 * fitness(x)
     })
     config <- config_cmaes[[tree_level]]
+    ignore_errors <- ifelse(is.null(config$ignore_errors), TRUE, config$ignore_errors)
     population_size <- nrow(suggestions)
     suggestions_centroid <- colMeans(suggestions)
     iterations_count <- 5
@@ -46,8 +47,13 @@ cma_es_metaepoch <- function(config_cmaes) {
         result <- do.call(cmaes::cma_es, params)
       },
       error = function(e) {
-        warning("cmaes::cma_es failed with error: ", e)
-        return(NULL)
+        if(ignore_errors){
+          warning("cmaes::cma_es failed with error: ", e)
+          return(NULL)
+        }
+        else{
+          stop("cmaes::cma_es failed with error: ", e)
+        }
       }
     )
     if(is.null(result$par)){

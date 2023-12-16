@@ -21,6 +21,7 @@ ga_metaepoch <- function(config_ga) {
       -1 * fitness(x)
     }, fitness)
     config <- config_ga[[tree_level]]
+    ignore_errors <- ifelse(is.null(config$ignore_errors), TRUE, config$ignore_errors)
     legal_passed_param_names <- Filter(function(name) {
       name %in% methods::formalArgs(GA::ga)
     }, names(config))
@@ -41,7 +42,13 @@ ga_metaepoch <- function(config_ga) {
         GA <- do.call(GA::ga, params)
       },
       error = function(e) {
-        stop("GA::ga failed with error: ", e)
+        if(ignore_errors){
+          warning("GA::ga failed with error: ", e)
+          return(NULL)
+        }
+        else{
+          stop("GA::ga failed with error: ", e)
+        }
       }
     )
     value <- ifelse(minimize, GA@fitnessValue * -1, GA@fitnessValue)
