@@ -64,7 +64,9 @@ cma_es_metaepoch <- function(config_cmaes) {
     list(
       "solution" = result$par,
       "population" = population,
-      "value" = value
+      "value" = value,
+      "fitness_values" = NULL,
+      "context" = NULL
     )
   }
 }

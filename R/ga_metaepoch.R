@@ -2,11 +2,12 @@
 #'
 #' @param config_ga - list of GA::ga params
 #'
-#' @return list with named fields: solution, population, value, fitness_values or NULL.
+#' @return list with named fields: solution, population, value, fitness_values, context or NULL.
 #' A solution is a value of the decision variable giving the best fitness.
 #' A population is a matrix representing final population.
 #' A value is the value of a fitness function for the solution.
 #' A fitness_values is a vector of fitness values for the final population.
+#' A context is a list with internal state of the metaepoch (or NULL if it's not necessary).
 #' NULL can be returned if GA::ga fails and "ignore_errors" is TRUE in the config.
 #'
 #' @export
@@ -57,7 +58,8 @@ ga_metaepoch <- function(config_ga) {
       "solution" = c(GA@solution[1, ]),
       "population" = GA@population,
       "value" = value,
-      "fitness_values" = fitness_values
+      "fitness_values" = fitness_values,
+      "context" = NULL
     )
   }
 }
