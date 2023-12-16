@@ -27,10 +27,11 @@ test_that("HMS works - Rastrigin:", {
     minimize = TRUE,
     lower = lower,
     upper = upper,
-    monitor_level = "none"
+    monitor_level = "none",
+    use_memoise = FALSE
   )
   expected_result <- c(0, 0)
-  expect_true(euclidean_distance(expected_result, result@best_solution) < 1e-2)
+  expect_true(euclidean_distance(expected_result, result@best_solution) < 1e-3)
 })
 
 test_that("HMS works - Ackley:", {
@@ -43,7 +44,8 @@ test_that("HMS works - Ackley:", {
     minimize = TRUE,
     lower = lower,
     upper = upper,
-    monitor_level = "none"
+    monitor_level = "none",
+    use_memoise = FALSE
   )
   expected_result <- c(0, 0)
   expect_true(euclidean_distance(expected_result, result@best_solution) < 1e-2)
@@ -59,7 +61,8 @@ test_that("HMS works - Schwefel:", {
     minimize = TRUE,
     lower = lower,
     upper = upper,
-    monitor_level = "none"
+    monitor_level = "none",
+    use_memoise = FALSE
   )
   expected_result <- c(420.9687, 420.9687)
   expect_true(euclidean_distance(expected_result, result@best_solution) < 1e0)
@@ -75,7 +78,8 @@ test_that("HMS works - Griewank:", {
     minimize = TRUE,
     lower = lower,
     upper = upper,
-    monitor_level = "none"
+    monitor_level = "none",
+    use_memoise = FALSE
   )
   expected_result <- c(0, 0)
   expect_true(euclidean_distance(expected_result, result@best_solution) < 1e1)
@@ -91,7 +95,8 @@ test_that("HMS works - Baele:", {
     minimize = TRUE,
     lower = lower,
     upper = upper,
-    monitor_level = "none"
+    monitor_level = "none",
+    use_memoise = FALSE
   )
   expected_result <- c(3, 0.5)
   expect_true(euclidean_distance(expected_result, result@best_solution) < 1e-2)
@@ -110,7 +115,8 @@ test_that("HMS works - Baele with gradient metaepoch:", {
     lower = lower,
     upper = upper,
     with_gradient_method = TRUE,
-    monitor_level = "none"
+    monitor_level = "none",
+    use_memoise = FALSE
   )
   expected_result <- c(3, 0.5)
   expect_true(euclidean_distance(expected_result, result@best_solution) < 1e-4)
@@ -148,7 +154,8 @@ test_that("HMS works - Eggholder with gradient method:", {
     sc = sc_max_metric(euclidean_distance, c(40, 20, 10)),
     lsc = lsc_metaepochs_without_improvement(15),
     monitor_level = "none",
-    with_gradient_method = TRUE
+    with_gradient_method = TRUE,
+    use_memoise = FALSE
   )
   expected_solution <- c(512, 404.2319)
   expected_fitness <- Eggholder(expected_solution)
