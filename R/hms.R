@@ -176,7 +176,8 @@ hms <- function(tree_height = 3,
       deme <- update_deme(metaepoch_result, deme, minimize)
 
       if (is_root(deme)) {
-        if (with_restarts && lsc(deme, metaepoch_snapshots)) {
+        can_restart <- is.null(deme@metaepoch_since_restart) || deme@metaepoch_since_restart >= 25
+        if (with_restarts && lsc(deme, metaepoch_snapshots) && can_restart) {
           message("Restarting root's population.")
           deme@population <- create_population(
             mean = NULL,
@@ -186,6 +187,9 @@ hms <- function(tree_height = 3,
             tree_level = deme@level
           )
           deme@fitness_values <- NULL
+          deme@metaepoch_since_restart <- 0
+        } else if(!is.null(deme@metaepoch_since_restart)) {
+          deme@metaepoch_since_restart <- deme@metaepoch_since_restart + 1
         }
       } else if (lsc(deme, metaepoch_snapshots)) {
         deme@is_active <- FALSE
