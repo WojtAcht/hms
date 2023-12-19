@@ -14,12 +14,12 @@
 #' })
 #' ecr_metaepoch(empty_config_ecr)
 ecr_metaepoch <- function(config_ecr) { # nocov start
-  function(fitness, suggestions, lower, upper, tree_level, minimize) {
-    config <- config_ecr[[tree_level]]
+  function(fitness, deme, lower, upper, minimize) {
+    config <- config_ecr[[deme@level]]
     legal_passed_param_names <- Filter(function(name) {
       name %in% methods::formalArgs(ecr::ecr)
     }, names(config))
-    population_size <- nrow(suggestions)
+    population_size <- nrow(deme@population)
     iterations_count <- 5
     params <- list(
       "mu" = population_size,
@@ -35,7 +35,7 @@ ecr_metaepoch <- function(config_ecr) { # nocov start
     params$lower <- lower
     params$upper <- upper
     params$n.dim <- length(lower)
-    params$initial.solutions <- matrix_to_list(suggestions)
+    params$initial.solutions <- matrix_to_list(deme@population)
     params$representation <- "float"
     params$monitor <- FALSE
     params$terminators <- list(ecr::stopOnIters(max.iter = iterations_count * population_size))
@@ -45,7 +45,8 @@ ecr_metaepoch <- function(config_ecr) { # nocov start
       "solution" = result$best.x[[1]],
       "population" = population,
       "value" = result$best.y[[1]],
-      "fitness_values" = result$last.fitness
+      "fitness_values" = result$last.fitness,
+      "context" = NULL
     )
   }
 }

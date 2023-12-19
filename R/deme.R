@@ -13,7 +13,8 @@ setClass("Deme", slots = c(
   sprout = "numericOrNULL",
   parent_id = "characterOrNULL",
   evaluations_count = "numeric",
-  is_active = "logical"
+  is_active = "logical",
+  context = "list"
 ))
 
 rnorm_population <- function(mean, lower, upper, population_size, tree_level, sigma) {
@@ -76,7 +77,8 @@ create_deme <- function(lower, upper, parent, population_size, create_population
     id = uuid::UUIDgenerate(),
     parent_id = if (is.null(parent)) NULL else parent@id,
     evaluations_count = 0,
-    is_active = TRUE
+    is_active = TRUE,
+    context = list()
   )
 }
 
@@ -106,6 +108,9 @@ update_deme <- function(metaepoch_result, deme, minimize = FALSE) {
   deme@best_solutions_per_metaepoch <- c(deme@best_solutions_per_metaepoch, list(potential_sprout))
   if (!is.null(metaepoch_result$fitness_values)) {
     deme@fitness_values <- metaepoch_result$fitness_values
+  }
+  if (!is.null(metaepoch_result$context)) {
+    deme@context <- metaepoch_result$context
   }
   min_value <- ifelse(minimize, Inf, -Inf)
   deme_best <- ifelse(length(deme@best_fitness) == 0, min_value, deme@best_fitness)

@@ -47,6 +47,7 @@ Suggests:
     parallel,
     doParallel,
     grDevices,
-    smoof
+    smoof,
+    cmaes
 BugReports: https://github.com/WojtAcht/hms/issues
 URL: https://wojtacht.github.io/hms/

@@ -161,21 +161,17 @@ hms <- function(tree_height = 3,
         }
         f(x)
       }
-      metaepoch_result <- run_metaepoch(
-        deme_f,
-        deme@population,
-        lower,
-        upper,
-        deme@level,
-        minimize
-      )
-
+      metaepoch_result <- run_metaepoch(deme_f, deme, lower, upper, minimize)
       end_metaepoch_time <- Sys.time()
       total_metaepoch_time <- total_metaepoch_time + (end_metaepoch_time - start_metaepoch_time)
-
-      deme <- update_deme(metaepoch_result, deme, minimize)
       deme@evaluations_count <- deme@evaluations_count + deme_evaluations_count
-
+      if (is.null(metaepoch_result)) {
+        # If metaepoch_result is NULL, it means that run_metaepoch failed.
+        deme@is_active <- FALSE
+        next_metaepoch_demes <- c(next_metaepoch_demes, deme)
+        next
+      }
+      deme <- update_deme(metaepoch_result, deme, minimize)
       if (lsc(deme, metaepoch_snapshots)) {
         deme@is_active <- FALSE
         next_metaepoch_demes <- c(next_metaepoch_demes, deme)
