@@ -76,13 +76,13 @@ See <code><a href="ga_metaepoch.html">ga_metaepoch</a></code> for more details.<
 <span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">ecr_metaepoch</span><span class="op">(</span><span class="va">empty_config_ecr</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> function (fitness, suggestions, lower, upper, tree_level, minimize) </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> function (fitness, deme, lower, upper, minimize) </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> {</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     config &lt;- config_ecr[[tree_level]]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     config &lt;- config_ecr[[deme@level]]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     legal_passed_param_names &lt;- Filter(function(name) {</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>         name %in% methods::formalArgs(ecr::ecr)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     }, names(config))</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     population_size &lt;- nrow(suggestions)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     population_size &lt;- nrow(deme@population)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     iterations_count &lt;- 5</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     params &lt;- list(mu = population_size, mutator = ecr::setup(ecr::mutGauss, </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>         lower = lower, upper = upper), lambda = 1L)</span>
@@ -95,7 +95,7 @@ See <code><a href="ga_metaepoch.html">ga_metaepoch</a></code> for more details.<
 <span class="r-out co"><span class="r-pr">#&gt;</span>     params$lower &lt;- lower</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     params$upper &lt;- upper</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     params$n.dim &lt;- length(lower)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     params$initial.solutions &lt;- matrix_to_list(suggestions)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     params$initial.solutions &lt;- matrix_to_list(deme@population)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     params$representation &lt;- "float"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     params$monitor &lt;- FALSE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     params$terminators &lt;- list(ecr::stopOnIters(max.iter = iterations_count * </span>
@@ -103,10 +103,11 @@ See <code><a href="ga_metaepoch.html">ga_metaepoch</a></code> for more details.<
 <span class="r-out co"><span class="r-pr">#&gt;</span>     result &lt;- do.call(ecr::ecr, params)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     population &lt;- list_to_matrix(result$last.population, length(lower))</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     list(solution = result$best.x[[1]], population = population, </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>         value = result$best.y[[1]], fitness_values = result$last.fitness)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         value = result$best.y[[1]], fitness_values = result$last.fitness, </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         context = NULL)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;bytecode: 0x557adab54f60&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;environment: 0x557adab57d70&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;bytecode: 0x55b81fd8caa0&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;environment: 0x55b81fd8f958&gt;</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>

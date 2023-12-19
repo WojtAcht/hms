@@ -22,6 +22,9 @@
     <loc>https://wojtacht.github.io/hms/reference/MetaepochSnapshot-class.html</loc>
   </url>
   <url>
+    <loc>https://wojtacht.github.io/hms/reference/cma_es_metaepoch.html</loc>
+  </url>
+  <url>
     <loc>https://wojtacht.github.io/hms/reference/default_run_gradient_method.html</loc>
   </url>
   <url>
@@ -29,6 +32,9 @@
   </url>
   <url>
     <loc>https://wojtacht.github.io/hms/reference/euclidean_distance.html</loc>
+  </url>
+  <url>
+    <loc>https://wojtacht.github.io/hms/reference/ga_cma_es_metaepoch.html</loc>
   </url>
   <url>
     <loc>https://wojtacht.github.io/hms/reference/ga_metaepoch.html</loc>
