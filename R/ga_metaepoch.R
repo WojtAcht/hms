@@ -2,7 +2,7 @@
 #'
 #' @param config_ga - list of GA::ga params
 #'
-#' @return list with named fields: solution, population, value, fitness_values, context or NULL.
+#' @return list with named fields: solution, population, value, fitness_values.
 #' A solution is a value of the decision variable giving the best fitness.
 #' A population is a matrix representing final population.
 #' A value is the value of a fitness function for the solution.
