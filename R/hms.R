@@ -30,6 +30,7 @@
 #' @param with_gradient_method logical determining whether a gradient method should be run
 #' for all leaves at the end of the computation to refine their best solutions.
 #' @param gradient_method_args list of parameters that are passed to the gradient method
+#' @param with_restarts logical - \code{TRUE} when root should be restarted if lcs is met.
 #' @param run_gradient_method function - returns list with named fields: solution, population, value
 #' @param monitor_level string - one of: 'none', 'basic', 'basic_tree', 'verbose_tree'.
 #' @param parallel logical - \code{TRUE} when run_metaepoch runs in parallel.
@@ -61,6 +62,7 @@ hms <- function(tree_height = 3,
                 with_gradient_method = FALSE,
                 gradient_method_args = default_gradient_method_args,
                 run_gradient_method,
+                with_restarts = FALSE,
                 monitor_level = "basic",
                 parallel = FALSE,
                 use_memoise = FALSE) {
@@ -172,14 +174,29 @@ hms <- function(tree_height = 3,
         next
       }
       deme <- update_deme(metaepoch_result, deme, minimize)
-      if (lsc(deme, metaepoch_snapshots)) {
+
+      if (is_root(deme)) {
+        can_restart <- is.null(deme@metaepoch_since_restart) || deme@metaepoch_since_restart >= 25
+        if (with_restarts && lsc(deme, metaepoch_snapshots) && can_restart) {
+          message("Restarting root's population.")
+          deme@population <- create_population(
+            mean = NULL,
+            lower = lower,
+            upper = upper,
+            population_size = population_sizes[[deme@level]],
+            tree_level = deme@level
+          )
+          deme@fitness_values <- NULL
+          deme@metaepoch_since_restart <- 0
+        } else if(!is.null(deme@metaepoch_since_restart)) {
+          deme@metaepoch_since_restart <- deme@metaepoch_since_restart + 1
+        }
+      } else if (lsc(deme, metaepoch_snapshots)) {
         deme@is_active <- FALSE
         next_metaepoch_demes <- c(next_metaepoch_demes, deme)
         next
-      } else {
-        next_metaepoch_demes <- c(next_metaepoch_demes, deme)
       }
-
+      next_metaepoch_demes <- c(next_metaepoch_demes, deme)
       # Leaves cannot sprout
       if (deme@level >= tree_height) next
 

@@ -21,6 +21,7 @@ hms(
   with_gradient_method = FALSE,
   gradient_method_args = default_gradient_method_args,
   run_gradient_method,
+  with_restarts = FALSE,
   monitor_level = "basic",
   parallel = FALSE,
   use_memoise = FALSE
@@ -74,6 +75,8 @@ for all leaves at the end of the computation to refine their best solutions.}
 \item{gradient_method_args}{list of parameters that are passed to the gradient method}
 
 \item{run_gradient_method}{function - returns list with named fields: solution, population, value}
+
+\item{with_restarts}{logical - \code{TRUE} when root should be restarted if lcs is met.}
 
 \item{monitor_level}{string - one of: 'none', 'basic', 'basic_tree', 'verbose_tree'.}
 
