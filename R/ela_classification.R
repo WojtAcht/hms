@@ -56,20 +56,20 @@ calculate_ela_features <- function(fitness, lower, upper) {
 
 #' Classify optimization problem using selected ELA features and Random Forest model trained on BBOB dataset.
 #'
-#' @param fitness fitness function, that returns a numerical value, to be optimized by the strategy.
+#' @param fitness fitness function, that returns a numerical value, to be classified. The domain should be at least two dimensional.
 #' @param lower numeric - lower bound of the domain, a vector of length equal
 #' to the decision variables.
 #' @param upper numeric - upper bound of the domain, a vector of length equal
 #' to the decision variables.
 #'
-#' @return Returns one of c().
+#' @return Returns one of c("low-conditioning", "multimodal-adequate", "multimodal-weak", "separable", "unimodal").
 #' @export
 #'
 #' @examples
 #' f <- function(x) x
 #' result <- classify_optimization_problem(fitness = f, lower = -5, upper = 5)
 classify_optimization_problem <- function(fitness, lower, upper) {
-  model <- train_random_fores_model()
+  model <- train_random_forest_model()
   features <- calculate_ela_features(fitness, lower, upper)
   return(predict(model, features))
 }
