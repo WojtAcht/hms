@@ -48,6 +48,7 @@ Suggests:
     doParallel,
     grDevices,
     smoof,
-    cmaes
+    cmaes,
+    DEoptim
 BugReports: https://github.com/WojtAcht/hms/issues
 URL: https://wojtacht.github.io/hms/
