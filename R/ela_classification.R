@@ -2,7 +2,6 @@
 #'
 #' @return Returns a Random Forest model trained on data/ela_features.rda dataset.
 train_random_forest_model <- function() {
-  load("data/ela_features.rda")
   model <-
     randomForest::randomForest(type ~ .,
       data = ela_features,
@@ -21,13 +20,9 @@ train_random_forest_model <- function() {
 #' to the decision variables.
 #'
 #' @return Returns a named list with values of selected ELA features.
-#'
-#' @examples
-#' f <- function(x) x
-#' result <- calculate_ela_features(fitness = f, lower = -5, upper = 5)
 calculate_ela_features <- function(fitness, lower, upper) {
   N <- length(lower)
-  X <- createInitialSample(
+  X <- flacco::createInitialSample(
     n.obs = 100 * N,
     dim = N,
     list(
@@ -36,7 +31,7 @@ calculate_ela_features <- function(fitness, lower, upper) {
     )
   )
   y <- apply(X, 1, fitness)
-  feat.object <- createFeatureObject(X = X, y = y)
+  feat.object <- flacco::createFeatureObject(X = X, y = y)
   features <- list()
   for (set in c("ela_meta", "nbc", "ic")) {
     feature_values <-
@@ -66,10 +61,10 @@ calculate_ela_features <- function(fitness, lower, upper) {
 #' @export
 #'
 #' @examples
-#' f <- function(x) x
-#' result <- classify_optimization_problem(fitness = f, lower = -5, upper = 5)
+#' f <- function(x) x[[1]] + x[[2]]
+#' result <- classify_optimization_problem(fitness = f, lower = c(-5, -5), upper = c(5, 5))
 classify_optimization_problem <- function(fitness, lower, upper) {
   model <- train_random_forest_model()
   features <- calculate_ela_features(fitness, lower, upper)
-  return(predict(model, features))
+  return(stats::predict(model, features))
 }

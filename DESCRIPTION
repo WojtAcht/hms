@@ -48,6 +48,10 @@ Suggests:
     doParallel,
     grDevices,
     smoof,
-    cmaes
+    cmaes,
+    flacco,
+    randomForest
 BugReports: https://github.com/WojtAcht/hms/issues
 URL: https://wojtacht.github.io/hms/
+Depends: 
+    R (>= 2.10)
