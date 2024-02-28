@@ -7,7 +7,14 @@
 train_random_forest_model()
 }
 \value{
-Returns a Random Forest model trained on data/ela_features.rda dataset.
+Returns a Random Forest model trained on ela_features dataset which is
+stored internally in sysdata.rda.
+The ela_features dataset, created using the flacco package, includes ELA
+features for all BBOB functions (all available fids) across different
+dimensions (2, 5, 10, 20) and instances (1:20).
+Key features captured are ic.eps.ratio, nbc.nb_fitness.cor,
+ela_meta.quad_simple.adj_r2, and ela_meta.lin_simple.adj_r2, along with
+function type.
 }
 \description{
 Train Random Forest model on BBOB dataset (data/ela_features.rda).
