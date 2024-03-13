@@ -48,6 +48,7 @@ Suggests:
     grDevices,
     smoof,
     cmaes,
+    RANN,
     flacco,
     randomForest,
     DEoptim
