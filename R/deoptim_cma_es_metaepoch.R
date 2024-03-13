@@ -1,7 +1,7 @@
 #' Function that generates run_metaepoch function for two level HMS.
 #' First level: DE, second level: CMA-ES.
 #'
-#' @param deoptim_cma_es_metaepoch - list that consists of two lists: DEoptim params and CMA-ES params.
+#' @param deoptim_cma_es_config - list that consists of two lists: DEoptim params and CMA-ES params.
 #'
 #' @return list with named fields: solution, population, value. See
 #' \code{\link{ga_metaepoch}} for more details.

@@ -79,7 +79,7 @@ for all leaves at the end of the computation to refine their best solutions.}
 
 \item{parallel}{logical - \code{TRUE} when run_metaepoch runs in parallel.}
 
-\item{use_memoise}{logical - \code{TRUE} when memoise package shall be used to cache fitness function values.}
+\item{use_memoise}{logical - \code{FALSE} when memoise package shall be used to cache fitness function values.}
 }
 \value{
 Returns an object of class hms.
