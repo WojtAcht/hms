@@ -34,7 +34,7 @@
 #' @param monitor_level string - one of: 'none', 'basic', 'basic_tree', 'verbose_tree'.
 #' @param parallel logical - \code{TRUE} when run_metaepoch runs in parallel.
 #' @param minimize logical - \code{TRUE} when fitness shall be minimized.
-#' @param use_memoise logical - \code{TRUE} when memoise package shall be used to cache fitness function values.
+#' @param use_memoise logical - \code{FALSE} when memoise package shall be used to cache fitness function values.
 #'
 #' @return Returns an object of class hms.
 #' @export
