@@ -28,6 +28,12 @@
     <loc>https://wojtacht.github.io/hms/reference/default_run_gradient_method.html</loc>
   </url>
   <url>
+    <loc>https://wojtacht.github.io/hms/reference/deoptim_cma_es_metaepoch.html</loc>
+  </url>
+  <url>
+    <loc>https://wojtacht.github.io/hms/reference/deoptim_metaepoch.html</loc>
+  </url>
+  <url>
     <loc>https://wojtacht.github.io/hms/reference/ecr_metaepoch.html</loc>
   </url>
   <url>
