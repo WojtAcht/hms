@@ -22,6 +22,12 @@
     <loc>https://wojtacht.github.io/hms/reference/MetaepochSnapshot-class.html</loc>
   </url>
   <url>
+    <loc>https://wojtacht.github.io/hms/reference/calculate_ela_features.html</loc>
+  </url>
+  <url>
+    <loc>https://wojtacht.github.io/hms/reference/classify_optimization_problem.html</loc>
+  </url>
+  <url>
     <loc>https://wojtacht.github.io/hms/reference/cma_es_metaepoch.html</loc>
   </url>
   <url>
@@ -125,5 +131,8 @@
   </url>
   <url>
     <loc>https://wojtacht.github.io/hms/reference/summary-hms-method.html</loc>
+  </url>
+  <url>
+    <loc>https://wojtacht.github.io/hms/reference/train_random_forest_model.html</loc>
   </url>
 </urlset>
