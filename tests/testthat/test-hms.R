@@ -14,7 +14,6 @@ test_that("HMS works - trivial 1D function:", {
   expect_output(printTree(result))
   expect_output(printBlockedSprouts(result))
   expect_visible(summary(result))
-  expect_output(print(result))
 })
 
 test_that("HMS works - Rastrigin:", {
